@@ -1,6 +1,7 @@
 import { ShoppingOutlined } from "@ant-design/icons";
 import { Button, Card, Col, Space } from "antd";
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Infor = styled.div`
@@ -23,7 +24,7 @@ const Infor = styled.div`
 
 const Image = styled.img`
   height: 100%;
-  width: 100%;
+  width: 90%;
   cursor: pointer;
   :hover {
     transform: scale(1.1);
@@ -32,6 +33,7 @@ const Image = styled.img`
 const Price = styled.div`
   font-weight: 700;
   font-size: 20px;
+  margin-left: 30px;
 `;
 // xs: 8,
 // sm: 16,
@@ -47,28 +49,32 @@ const Product = ({ item }) => {
       lg={{ span: 6 }}
     >
       <Card style={{ width: 450, border: "none" }}>
-        <Image src={item.img} />
-        <Price>100,000₫</Price>
-        <Infor>
-          <Space wrap>
-            <Button
-              className="buttonBuy"
-              ghost
-              type="primary"
-              icon={<ShoppingOutlined />}
-              style={{
-                fontSize: "20px",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                color: "#1C2F7F",
-                border: "#38498f solid 2px",
-              }}
-            >
-              ORDER NOW
-            </Button>
-          </Space>
-        </Infor>
+        <Link to={`/product/${item._id}`}>
+          <Image src={item.img} />
+        </Link>
+        <Price>{item.price[0]}₫</Price>
+        <Link to={`/product/${item._id}`}>
+          <Infor>
+            <Space wrap>
+              <Button
+                className="buttonBuy"
+                ghost
+                type="primary"
+                icon={<ShoppingOutlined />}
+                style={{
+                  fontSize: "20px",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  color: "#1C2F7F",
+                  border: "#38498f solid 2px",
+                }}
+              >
+                ORDER NOW
+              </Button>
+            </Space>
+          </Infor>
+        </Link>
       </Card>
     </Col>
   );

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import Announcement from "../components/Announcement";
@@ -9,9 +10,11 @@ import PopularProduct from "../components/PopularProduct";
 
 const Container = styled.div``;
 const FilterContainer = styled.div`
-  display: flex;
   margin-left: 1200px;
   margin-top: 10px;
+  position: absolute;
+  top: 280px;
+  left: 80px;
 `;
 const Title = styled.h1`
   margin: 40px;
@@ -27,21 +30,28 @@ const Select = styled.select`
 `;
 const Option = styled.option``;
 const ProductList = () => {
+  const location = useLocation();
+  const cat = location.pathname.split("/")[2];
+  const [sort, setSort] = useState("newest");
+  const handleSort = (e) => {
+    setSort(e.target.value);
+  };
   return (
     <Container>
       <Announcement />
       <Navbar />
-      <Title>PHIN</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Sort</FilterText>
-          <Select>
-            <Option>Price (ASC)</Option>
-            <Option>Price (DESC)</Option>
+          <Select name="price" onChange={handleSort}>
+            <Option value="newest">Newest</Option>
+            <Option value="ASC">Price (ASC)</Option>
+            <Option value="DESC">Price (DESC)</Option>
           </Select>
         </Filter>
       </FilterContainer>
-      <PopularProduct />
+
+      <PopularProduct cat={cat} sort={sort} />
       <Newsletter />
       <Footer />
     </Container>

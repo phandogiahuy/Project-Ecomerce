@@ -1,5 +1,6 @@
 import { Button, Col, Space } from "antd";
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -34,23 +35,27 @@ const CategoriesItem = ({ item }) => {
       lg={{ span: 8 }}
     >
       <Container>
-        <Image src={item.img} />
+        <Link to={`products/${item.cat}`}>
+          <Image src={item.img} />
+        </Link>
         <Infor>
           <Title>{item.title}</Title>
           <Space wrap>
-            <Button
-              style={{
-                backgroundColor: "peachpuff",
-                letterSpacing: "1px",
-                fontSize: "20px",
-                marginLeft: "10px",
-                border: "none",
-                padding: "5px",
-                marginBottom: "20px",
-              }}
-            >
-              SEE MORE
-            </Button>
+            <Link to={`products/${item.cat}`}>
+              <Button
+                style={{
+                  backgroundColor: "peachpuff",
+                  letterSpacing: "1px",
+                  fontSize: "20px",
+                  marginLeft: "10px",
+                  border: "none",
+                  padding: "5px",
+                  marginBottom: "20px",
+                }}
+              >
+                SEE MORE
+              </Button>
+            </Link>
           </Space>
         </Infor>
       </Container>

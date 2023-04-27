@@ -8,11 +8,7 @@ import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 
 const App = () => {
-  return (
-    <div>
-      <Home />
-    </div>
-  );
+  return <div></div>;
 };
 
 export default App;
