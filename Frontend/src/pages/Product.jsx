@@ -1,6 +1,5 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, InputNumber, Select, Space } from "antd";
-import axios from "axios";
+import { Button, InputNumber, Radio, Select, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -10,6 +9,8 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import { publicRequest } from "../requestMethod";
+import { addProduct } from "../reduxToolkit/cartRedux";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -55,12 +56,15 @@ const AddContainer = styled.div`
 `;
 const { Option } = Select;
 const Product = () => {
+  const [type, setType] = useState("Bean");
+
   const location = useLocation();
-  const [quanity, setQuanity] = useState(1);
-  const [size, getSize] = useState(0);
+  const [quanityItem, setQuanityItem] = useState(1);
+  const [size, getSize] = useState(250);
   const [price, setPrice] = useState(0);
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
+  const dispatch = useDispatch();
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -80,9 +84,10 @@ const Product = () => {
       setPrice(product.price[0]);
     }
   };
+  const quanity = 0;
   const handleClick = () => {
-    const sum = quanity * price;
-    console.log(quanity, price, size, sum);
+    const total = price * quanityItem;
+    dispatch(addProduct({ product, quanity, total, type, size, quanityItem }));
   };
   return (
     <Container>
@@ -102,6 +107,7 @@ const Product = () => {
               <Select
                 defaultValue="250g"
                 style={{ width: 120 }}
+                value={size}
                 options={[
                   { value: 250, label: "250g" },
                   { value: 500, label: "500g" },
@@ -110,17 +116,25 @@ const Product = () => {
                 onSelect={(i) => getSize(i)}
                 onChange={handlePrice}
               />
+              <Radio.Group
+                size="large"
+                onChange={(e) => setType(e.target.value)}
+                defaultValue="Bean"
+              >
+                <Radio value={"Bean"}>Bean</Radio>
+                <Radio value={"Grind"}>Grind</Radio>
+              </Radio.Group>
             </Space>
           </FilterContainer>
           <AddContainer>
             <InputNumber
               min={1}
-              value={quanity}
-              defaultValue={1}
+              value={quanityItem}
               size="medium"
               style={{ marginRight: "10px", marginBottom: "1px" }}
-              onChange={(e) => setQuanity(e)}
+              onChange={(e) => setQuanityItem(e)}
             />
+            {}
             <Space wrap>
               <Button
                 icon={<PlusOutlined />}

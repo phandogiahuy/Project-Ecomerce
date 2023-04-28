@@ -8,8 +8,7 @@ import Product from "./newProduct";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
+  align-content: space-around;
   margin-top: 50px;
 `;
 const Title = styled.h1`
@@ -61,12 +60,20 @@ const PopularProduct = ({ cat, sort }) => {
           textTransform: "uppercase",
           fontWeight: 700,
           fontSize: "70px",
-          marginLeft: "-1000px",
+          marginLeft: 20,
         }}
       >
         {cat}
       </h1>
-      <Row gutter={[24, 8]} style={{ marginTop: 10 }}>
+      <Row
+        gutter={{
+          xs: 8,
+          sm: 16,
+          md: 24,
+          lg: 32,
+        }}
+        style={{ marginTop: 10 }}
+      >
         {cat
           ? filterProduct.map((item) => <Product item={item} key={item._id} />)
           : product
