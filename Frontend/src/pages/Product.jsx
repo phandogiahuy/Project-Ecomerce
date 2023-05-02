@@ -59,7 +59,7 @@ const Product = () => {
   const [type, setType] = useState("Bean");
 
   const location = useLocation();
-  const [quanityItem, setQuanityItem] = useState(1);
+  const [quanity, setQuanity] = useState(1);
   const [size, getSize] = useState(250);
   const [price, setPrice] = useState(0);
   const id = location.pathname.split("/")[2];
@@ -84,10 +84,18 @@ const Product = () => {
       setPrice(product.price[0]);
     }
   };
-  const quanity = 0;
   const handleClick = () => {
-    const total = price * quanityItem;
-    dispatch(addProduct({ product, quanity, total, type, size, quanityItem }));
+    const totalItem = price * quanity;
+    dispatch(
+      addProduct({
+        product,
+        price: price,
+        type: type,
+        size: size,
+        quanity: quanity,
+        totalItem: totalItem,
+      })
+    );
   };
   return (
     <Container>
@@ -129,10 +137,10 @@ const Product = () => {
           <AddContainer>
             <InputNumber
               min={1}
-              value={quanityItem}
+              value={quanity}
               size="medium"
               style={{ marginRight: "10px", marginBottom: "1px" }}
-              onChange={(e) => setQuanityItem(e)}
+              onChange={(e) => setQuanity(e)}
             />
             {}
             <Space wrap>

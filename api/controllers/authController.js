@@ -42,7 +42,7 @@ class AuthController {
         });
       }
     } catch (error) {
-      return res.status(500).json(error);
+      res.status(500).json(error);
     }
   }
 }

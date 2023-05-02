@@ -20,7 +20,8 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.5",
     "nodemon": "^2.0.22",
-    "react-stripe-checkout": "^2.6.3"
+    "react-stripe-checkout": "^2.6.3",
+    "stripe": "^12.3.0"
   },
   "devDependencies": {
     "eslint": "^8.38.0",

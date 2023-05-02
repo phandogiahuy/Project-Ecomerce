@@ -48,7 +48,7 @@ const Product = ({ item }) => {
       xs={{ span: 24 }}
       lg={{ span: 6 }}
     >
-      <Card style={{ width: 450, border: "none" }}>
+      <Card style={{ width: 550, border: "none" }}>
         <Link to={`/product/${item._id}`}>
           <Image src={item.img} />
         </Link>

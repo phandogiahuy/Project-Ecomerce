@@ -8,7 +8,7 @@ import { mobile } from "../responsive";
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   display: flex;
   position: relative;
   background-color: green;
@@ -16,7 +16,7 @@ const Container = styled.div`
   ${mobile({ display: "none" })}
 `;
 const Wrapper = styled.div`
-  height: 100%;
+  height: 90%;
   display: flex;
   transform: translateX(${(props) => props.slideIndex * -100}vw);
   transition: all 1.5s ease-out;
@@ -26,26 +26,32 @@ const Slide = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: #${(props) => props.bg};
 `;
 const ImgContainer = styled.div`
-  height: 100%;
   flex: 1;
+  margin-left: 70px;
+  margin-bottom: 10%;
 `;
 const Image = styled.img`
-  margin-left: 120px;
-  height: 80%;
+  max-width: 200%;
+  max-height: 100%;
+  object-fit: cover;
 `;
 const InforContainer = styled.div`
   flex: 1;
-  padding: 50px;
-  margin-left: 250px;
-  margin-bottom: 200px;
+  margin-bottom: 10%;
 `;
 const Title = styled.h1`
-  font-size: 70px;
+  font-size: 180px;
+  font-family: "Chicle", sans-serif;
 `;
-const Desc = styled.p``;
+const Desc = styled.p`
+  font-family: "Marmelad", sans-serif;
+  color: ${(props) => props.cl};
+  font-size: 25px;
+`;
 
 const Arrow = styled.div`
   width: 50px;
@@ -98,19 +104,7 @@ function Slider() {
             </ImgContainer>
             <InforContainer>
               <Title>{item.title}</Title>
-              <Desc>{item.desc}</Desc>
-              <Space wrap>
-                <Button
-                  type="primary"
-                  style={{
-                    backgroundColor: "GrayText",
-                    fontSize: "18px",
-                    cursor: "pointer",
-                  }}
-                >
-                  ORDER NOW
-                </Button>
-              </Space>
+              <Desc cl={item.color}>{item.desc}</Desc>
             </InforContainer>
           </Slide>
         ))}

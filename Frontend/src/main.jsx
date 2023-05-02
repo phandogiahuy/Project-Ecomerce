@@ -17,6 +17,7 @@ import Product from "./pages/Product";
 import ProductList from "./pages/ProductList";
 import { Provider } from "react-redux";
 import store from "./reduxToolkit/store";
+import Success from "./pages/Sucess";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
   {
     path: "/cart",
     element: <Cart />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/sucess",
+    element: <Success />,
     errorElement: <ErrorPage />,
   },
 ]);

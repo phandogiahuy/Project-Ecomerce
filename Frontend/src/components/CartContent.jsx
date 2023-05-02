@@ -1,13 +1,16 @@
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { DeleteOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Button, Divider, Space } from "antd";
 import Item from "antd/es/list/Item";
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-
+import { removeProduct } from "../reduxToolkit/cartRedux";
+import { Link } from "react-router-dom";
 const Container = styled.div`
   display: flex;
   width: 423px;
   flex-direction: column;
+  background-color: aliceblue;
 `;
 const Top = styled.div``;
 const Img = styled.img`
@@ -49,7 +52,7 @@ const Total = styled.p`
 const Bottom = styled.div``;
 const Price = styled.p`
   margin-left: 150px;
-  margin-top: 50px;
+  margin-top: 55px;
   font-weight: 600;
   font-family: "Quicksand", sans-serif;
 `;
@@ -65,28 +68,45 @@ const Type = styled.p`
 `;
 
 const Products = styled.div``;
-const CartContent = ({
-  products,
-  quanityItem,
-  total,
-  type,
-  size,
-  priceTotal,
-}) => {
+const CartContent = ({ products, total }) => {
+  const dispatch = useDispatch();
+  if (products.length === 0) {
+    return <div>No item in your cart</div>;
+  }
   return (
     <Container>
       <Top>
         <Products>
-          {products.map((item) => (
-            <Product key={item.title}>
-              <Img src={item.img} />
+          {products.map((i) => (
+            <Product key={i.product._id}>
+              <Img src={i.product.img} />
               <Content>
-                <Name>{item.title}</Name>
+                <Name>{i.product.title}</Name>
+                <DeleteOutlined
+                  onClick={() =>
+                    dispatch(
+                      removeProduct({
+                        id: i.product._id,
+                        totalItem: i.price * i.quanity,
+                        type: i.type,
+                        size: i.size,
+                      })
+                    )
+                  }
+                  style={{
+                    marginLeft: 20,
+                    marginTop: 10,
+                    fontSize: 20,
+                    cursor: "pointer",
+                    position: "absolute",
+                    left: 220,
+                  }}
+                />
                 <Type>
-                  {size} / {type}
+                  {i.size}gr / {i.type}
                 </Type>
-                <Quanity>Quanity: {quanityItem} </Quanity>
-                <Price> {total}</Price>
+                <Quanity>Quanity: {i.quanity} </Quanity>
+                <Price> {i.price}</Price>
               </Content>
               <hr width="100%" align="center" />
             </Product>
@@ -95,22 +115,25 @@ const CartContent = ({
       </Top>
       <Bottom>
         <Title>TOTAL</Title>
-        <Total>{priceTotal}</Total>
+        <Total>{total}</Total>
       </Bottom>
-      <Space wrap>
-        <Button
-          className="buttonBuy"
-          ghost
-          type="primary"
-          size="large"
-          style={{ marginTop: 150, marginRight: 70 }}
-        >
-          {" "}
-          Shopping Cart
-        </Button>
-      </Space>
+      <Link to={"/Cart/"}>
+        <Space wrap style={{ display: "flex", justifyContent: "center" }}>
+          <Button
+            className="buttonBuy"
+            ghost
+            type="primary"
+            size="large"
+            style={{ backgroundColor: "beige" }}
+          >
+            {" "}
+            Shopping Cart
+          </Button>
+        </Space>
+      </Link>
     </Container>
   );
 };
 
 export default CartContent;
+// dispatch(removeProduct(i.product._id))

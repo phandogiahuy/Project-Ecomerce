@@ -1,9 +1,21 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
 import styled from "styled-components";
+import { login } from "../reduxToolkit/callAPI";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Container = styled.div``;
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    login(dispatch, { username, password });
+  };
   return (
     <Container>
       <Form
@@ -25,6 +37,7 @@ const Login = () => {
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
           />
         </Form.Item>
         <Form.Item
@@ -40,6 +53,7 @@ const Login = () => {
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Item>
         <Form.Item>
@@ -57,9 +71,12 @@ const Login = () => {
             type="primary"
             htmlType="submit"
             className="login-form-button"
+            onClick={handleClick}
+            disabled={isFetching}
           >
             Log in
           </Button>
+          {error && <Error>Something went wrong...</Error>}
         </Form.Item>
       </Form>
     </Container>

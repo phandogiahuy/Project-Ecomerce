@@ -1,6 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Arvo:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,700;1,400&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,600;1,500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&family=Work+Sans:ital,wght@0,600;1,500&display=swap");
+@import url('https://fonts.cdnfonts.com/css/chicle');
+@import url('https://fonts.cdnfonts.com/css/marmelad-2');
+@import url('https://fonts.cdnfonts.com/css/youth-action');
+
 * {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
@@ -12,16 +16,21 @@
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   margin: 0;
+  font-family: ;
 }
+
 #components-form-demo-normal-login .login-form {
   max-width: 300px;
 }
+
 #components-form-demo-normal-login .login-form-forgot {
   float: right;
 }
+
 #components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
   float: left;
 }
+
 #components-form-demo-normal-login .login-form-button {
   width: 100%;
 }

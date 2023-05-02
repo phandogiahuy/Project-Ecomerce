@@ -5,32 +5,50 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: {
     products: [],
-    quanity: 0,
-    quanityItem: 0,
     total: 0,
-    type: "",
-    size: "",
   },
   reducers: {
     addProduct: (state, action) => {
-      const hasProduct = state.products.find(
-        (p) =>
-          p._id === action.payload.product._id &&
-          state.type === action.payload.type
+      state.total += action.payload.totalItem;
+      const existingItemIndex = state.products.findIndex(
+        (item) =>
+          item.product._id === action.payload.product._id &&
+          item.type === action.payload.type &&
+          item.size === action.payload.size
       );
-      if (hasProduct) {
-        state.quanityItem += 1;
+      if (existingItemIndex !== -1) {
+        state.products[existingItemIndex].quanity += action.payload.quanity;
       } else {
-        state.products.push(action.payload.product);
-        state.type = action.payload.type;
-        state.size = action.payload.size;
-        state.quanity += 1;
-        state.total += action.payload.total;
-        state.quanityItem += 1;
+        state.products.push(action.payload);
       }
+    },
+    updateProduct: (state, action) => {
+      const existingItemIndex = state.products.findIndex(
+        (item) =>
+          item.product._id === action.payload.products.product._id &&
+          item.type === action.payload.products.type &&
+          item.size === action.payload.products.size
+      );
+      state.products[existingItemIndex].quanity = action.payload.quanity;
+    },
+    removeProduct: (state, action) => {
+      const existingItemIndex = state.products.findIndex(
+        (item) =>
+          item.product._id === action.payload.id &&
+          item.type === action.payload.type &&
+          item.size === action.payload.size
+      );
+      if (existingItemIndex !== -1) {
+        state.total = state.total - action.payload.totalItem;
+        state.products.splice(existingItemIndex, 1);
+      }
+    },
+    clearCart: (state) => {
+      state.products = [];
+      state.total = 0;
     },
   },
 });
 
-export const { addProduct } = cartSlice.actions;
+export const { addProduct, removeProduct, updateProduct } = cartSlice.actions;
 export default cartSlice.reducer;

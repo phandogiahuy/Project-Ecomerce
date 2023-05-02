@@ -2,6 +2,6 @@ import { Router } from "express";
 
 import { stripeController } from "../controllers/stripeController.js";
 
-export const authRouter = Router();
+export const stripeRouter = Router();
 
-stripeController.get("/payment", stripeController.payment);
+stripeRouter.post("/payment", stripeController.payment);

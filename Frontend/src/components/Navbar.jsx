@@ -1,6 +1,10 @@
-import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Badge, Input, Popover, Space } from "antd";
-import React from "react";
+import {
+  AppstoreOutlined,
+  MailOutlined,
+  ShoppingCartOutlined,
+} from "@ant-design/icons";
+import { Badge, Input, Menu, Popover, Space } from "antd";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import Login from "../pages/Login";
@@ -10,7 +14,7 @@ import { useSelector } from "react-redux";
 import CartContent from "./CartContent";
 const { Search } = Input;
 const Container = styled.div`
-  height: 60px;
+  height: 150px;
   ${mobile({ height: "50px" })}
 `;
 const Wrapper = styled.div`
@@ -37,43 +41,42 @@ const Center = styled.div`
 const Right = styled.div`
   flex: 1;
   display: flex;
-  justify-content: space-around;
-  ${mobile({ justifyContent: "center" })}
+  justify-content: flex-end;
+  ${mobile({ justifyContent: "center" })};
 `;
 const Logo = styled.h1`
   font-weight: bold;
-  font-size: larger;
+  font-size: 100px;
+  font-family: "Youth Action", sans-serif;
   text-align: center;
   ${mobile({ fontSize: "24px", flex: 2 })}
 `;
 const MenuItem = styled.div`
-  font-size: 14px;
+  font-size: 30px;
   cursor: pointer;
-  margin-left: 15px;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
+  margin-top: 60px;
+  padding: 20px;
 `;
 const ContainerSearch = styled.div`
   ${mobile({ marginBottom: "30px", marginRight: 10 })}
 `;
+
 const Navbar = () => {
-  const { products, total, type, size, quanityItem, quanity } = useSelector(
-    (state) => state.cart
-  );
-  const priceTotal = quanityItem * total;
+  const { products, total } = useSelector((state) => state.cart);
   return (
     <Container>
       <Wrapper>
         <Left>
-          <Language>English</Language>
           <ContainerSearch>
             <Search
-              placeholder="input search text"
+              placeholder="search... "
               allowClear
               size="medium"
               enterButton
               style={{
-                marginLeft: 10,
-                backgroundColor: "coral",
+                marginLeft: 100,
+                marginTop: 20,
               }}
             />
           </ContainerSearch>
@@ -86,10 +89,11 @@ const Navbar = () => {
             content={<Register />}
             title="Welcome to Coffee World"
             trigger="click"
-            s
+            placement="bottomRight"
           >
             <MenuItem>REGISTER</MenuItem>
           </Popover>
+          
           <Popover
             content={<Login />}
             title="Welcome to Coffee World"
@@ -103,18 +107,9 @@ const Navbar = () => {
               placement="bottomRight"
               title="My cart"
               trigger="click"
-              content={
-                <CartContent
-                  products={products}
-                  total={total}
-                  type={type}
-                  size={size}
-                  quanityItem={quanityItem}
-                  priceTotal={priceTotal}
-                />
-              }
+              content={<CartContent products={products} total={total} />}
             >
-              <Badge count={quanity}>
+              <Badge count={products.length}>
                 <ShoppingCartOutlined style={{ fontSize: "30px" }} />
               </Badge>
             </Popover>

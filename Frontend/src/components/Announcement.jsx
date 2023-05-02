@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   height: 30px;
-  background-color: teal;
+  background-color: #5a152b;
   color: white;
   display: flex;
   align-items: center;
@@ -13,7 +13,7 @@ const Container = styled.div`
 `;
 
 function Announcement() {
-  return <Container>BLACK FRIDAY SALE 80% EVERY ITEMS</Container>;
+  return <Container>Mừng ngày 30/4 1/5</Container>;
 }
 
 export default Announcement;

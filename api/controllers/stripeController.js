@@ -1,3 +1,7 @@
+import Stripe from "stripe";
+const KEY = process.env.STRIPE_KEY;
+const stripe = new Stripe(KEY);
+
 class StripeController {
   payment(req, res) {
     stripe.charges.create(

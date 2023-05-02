@@ -4,7 +4,8 @@ export const sliderItems = [
     img: "/poster1.jpg",
     title: "BLACK FRIDAY",
     desc: "DON'T MISS THIS SALE SEASON! SALE 80% OFF FOR NEW ARRIVALS",
-    bg: "efe7e1",
+    bg: "5A152B",
+    color: "#3ad578",
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ export const sliderItems = [
     title: "SPECIALITY COFFEE",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "efe7e1",
+    color: "#f74f85",
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ export const sliderItems = [
     title: "SINGLE ORIGIN",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "efe7e1",
+    color: "#f74f85",
   },
 ];
 export const categories = [
