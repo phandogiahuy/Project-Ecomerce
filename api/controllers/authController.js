@@ -36,7 +36,7 @@ class AuthController {
       } else {
         const accessToken = generateAccessToken(user);
         res.status(200).json({
-          username: user.email,
+          email: user.email,
           isAdmin: user.isAdmin,
           accessToken,
         });

@@ -16,8 +16,10 @@ import Home from "./pages/Home";
 import Product from "./pages/Product";
 import ProductList from "./pages/ProductList";
 import { Provider } from "react-redux";
-import store from "./reduxToolkit/store";
+
 import Success from "./pages/Sucess";
+import { store, persistor } from "./reduxToolkit/store";
+import { PersistGate } from "redux-persist/integration/react";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,17 +41,13 @@ const router = createBrowserRouter([
     element: <Cart />,
     errorElement: <ErrorPage />,
   },
-  {
-    path: "/sucess",
-    element: <Success />,
-    errorElement: <ErrorPage />,
-  },
 ]);
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <RouterProvider router={router}>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </RouterProvider>
   </Provider>
 );

@@ -10,7 +10,7 @@ import styled from "styled-components";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import { mobile } from "../responsive";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CartContent from "./CartContent";
 const { Search } = Input;
 const Container = styled.div`
@@ -64,6 +64,9 @@ const ContainerSearch = styled.div`
 
 const Navbar = () => {
   const { products, total } = useSelector((state) => state.cart);
+  const { isFetching, error, currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   return (
     <Container>
       <Wrapper>
@@ -85,23 +88,29 @@ const Navbar = () => {
           <Logo>AROMA deLute.</Logo>
         </Center>
         <Right>
-          <Popover
-            content={<Register />}
-            title="Welcome to Coffee World"
-            trigger="click"
-            placement="bottomRight"
-          >
-            <MenuItem>REGISTER</MenuItem>
-          </Popover>
-          
-          <Popover
-            content={<Login />}
-            title="Welcome to Coffee World"
-            trigger="click"
-          >
-            <MenuItem>SIGN IN</MenuItem>
-          </Popover>
-
+          {currentUser ? (
+            <MenuItem>Log out</MenuItem>
+          ) : (
+            <Popover
+              content={<Register />}
+              title="Welcome to Coffee World"
+              trigger="click"
+              placement="bottomRight"
+            >
+              <MenuItem>REGISTER</MenuItem>
+            </Popover>
+          )}
+          {currentUser ? (
+            <MenuItem>{currentUser.email}</MenuItem>
+          ) : (
+            <Popover
+              content={<Login />}
+              title="Welcome to Coffee World"
+              trigger="click"
+            >
+              <MenuItem>SIGN IN</MenuItem>
+            </Popover>
+          )}
           <MenuItem>
             <Popover
               placement="bottomRight"

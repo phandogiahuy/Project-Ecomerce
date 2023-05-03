@@ -6,15 +6,16 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Container = styled.div``;
+const Error = styled.div``;
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
 
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch, { username, password });
+    login(dispatch, { email, password });
   };
   return (
     <Container>
@@ -26,18 +27,19 @@ const Login = () => {
         }}
       >
         <Form.Item
-          name="username"
+          name="email"
           rules={[
             {
               required: true,
-              message: "Please input your Username!",
+              message: "Please input your email!",
             },
           ]}
         >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="Username"
-            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Email"
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Item>
         <Form.Item
