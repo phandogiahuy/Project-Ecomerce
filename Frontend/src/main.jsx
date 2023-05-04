@@ -8,7 +8,9 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
+const queryClient = new QueryClient();
 import App from "./App.jsx";
 import ErrorPage from "./error-page";
 import Cart from "./pages/Cart";
@@ -20,6 +22,7 @@ import { Provider } from "react-redux";
 import Success from "./pages/Sucess";
 import { store, persistor } from "./reduxToolkit/store";
 import { PersistGate } from "redux-persist/integration/react";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -44,10 +47,12 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <RouterProvider router={router}>
-      <PersistGate loading={null} persistor={persistor}>
-        <App />
-      </PersistGate>
-    </RouterProvider>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router}>
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </RouterProvider>
+    </QueryClientProvider>
   </Provider>
 );

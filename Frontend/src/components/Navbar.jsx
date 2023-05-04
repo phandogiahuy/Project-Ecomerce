@@ -6,12 +6,13 @@ import {
 import { Badge, Input, Menu, Popover, Space } from "antd";
 import React, { useState } from "react";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
 import CartContent from "./CartContent";
+import { logout } from "../reduxToolkit/userSlice";
 const { Search } = Input;
 const Container = styled.div`
   height: 150px;
@@ -66,7 +67,6 @@ const Navbar = () => {
   const { products, total } = useSelector((state) => state.cart);
   const { isFetching, error, currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
   return (
     <Container>
       <Wrapper>
@@ -85,11 +85,13 @@ const Navbar = () => {
           </ContainerSearch>
         </Left>
         <Center>
-          <Logo>AROMA deLute.</Logo>
+          <Link to="/">
+            <Logo>AROMA deLute.</Logo>
+          </Link>
         </Center>
         <Right>
           {currentUser ? (
-            <MenuItem>Log out</MenuItem>
+            <MenuItem onClick={() => dispatch(logout())}>Log out</MenuItem>
           ) : (
             <Popover
               content={<Register />}
@@ -101,7 +103,7 @@ const Navbar = () => {
             </Popover>
           )}
           {currentUser ? (
-            <MenuItem>{currentUser.email}</MenuItem>
+            <MenuItem> {currentUser.email}</MenuItem>
           ) : (
             <Popover
               content={<Login />}

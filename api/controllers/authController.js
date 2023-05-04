@@ -26,13 +26,12 @@ class AuthController {
   async login(req, res) {
     try {
       const user = await User.findOne({ email: req.body.email });
-      !user && res.status(404).send("Email or Password is wrong");
-      const validPassword = await bcrypt.compare(
-        req.body.password,
-        user.password
-      );
+      if (!user) {
+        return res.status(500).json("user or password is wrong");
+      }
+      const validPassword = bcrypt.compare(req.body.password, user.password);
       if (!validPassword) {
-        res.status(404).send("Email or Password is wrong");
+        res.status(200).json("user or password is wrong");
       } else {
         const accessToken = generateAccessToken(user);
         res.status(200).json({

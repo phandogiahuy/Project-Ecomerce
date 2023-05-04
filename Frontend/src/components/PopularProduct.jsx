@@ -19,6 +19,7 @@ const Title = styled.h1`
 const PopularProduct = ({ cat, sort }) => {
   const [product, setProduct] = useState([]);
   const [filterProduct, setFilterProduct] = useState([]);
+
   useEffect(() => {
     const getProduct = async () => {
       try {

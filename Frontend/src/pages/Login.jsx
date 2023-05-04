@@ -78,7 +78,7 @@ const Login = () => {
           >
             Log in
           </Button>
-          {error && <Error>Something went wrong...</Error>}
+          {error && <Error>Your password or email is wrong</Error>}
         </Form.Item>
       </Form>
     </Container>

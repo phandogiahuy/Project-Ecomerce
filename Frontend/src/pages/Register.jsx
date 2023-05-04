@@ -1,5 +1,8 @@
 import { Button, Form, Input, message } from "antd";
 import styled from "styled-components";
+import { register } from "../reduxToolkit/callAPI";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div``;
 const Wrapper = styled.div``;
@@ -37,14 +40,20 @@ const formItemLayout = {
 
 const Register = () => {
   const [messageApi, contextHolder] = message.useMessage();
-
+  const [username, setUserName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const dispatch = useDispatch();
   const success = () => {
     messageApi.open({
       type: "success",
       content: "You create an account sucessfully",
     });
+    register(dispatch, { username, email, password });
   };
+  // register({ nickname, email, password });
   const [form] = Form.useForm();
+
   return (
     <Container>
       <Wrapper>
@@ -73,9 +82,9 @@ const Register = () => {
               style={{
                 width: "100%",
               }}
+              onChange={(e) => setUserName(e.target.value)}
             />
           </Form.Item>
-
           <Form.Item
             name="email"
             label="E-mail"
@@ -94,6 +103,8 @@ const Register = () => {
               style={{
                 width: "100%",
               }}
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Item>
           <Form.Item
@@ -111,6 +122,8 @@ const Register = () => {
               style={{
                 width: "100%",
               }}
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Item>
           <Form.Item
