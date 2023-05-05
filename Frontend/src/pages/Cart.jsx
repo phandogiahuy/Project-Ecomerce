@@ -1,5 +1,5 @@
 import { DeleteOutlined } from "@ant-design/icons";
-import { Affix, Button, Divider, InputNumber, Space } from "antd";
+import { Affix, Button, Divider, Form, Input, InputNumber, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -11,7 +11,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { removeProduct, updateProduct } from "../reduxToolkit/cartRedux";
 import StripeCheckout from "react-stripe-checkout";
-import { userRequest } from "../requestMethod";
+import { useDiscount } from "../hooks/detail/useDiscounByCode";
+import { AxiosInstance } from "../requestMethod";
+import axios from "axios";
 const KEY =
   "pk_test_51N15FaIul8LwwZP1lfPebnysBeq3X6VbETjXVtMBGDzUxso3Zc8Q5PCigXkhuigDkXgP8zpPOtqcJHE0VDiYplGO00PojfRw3e";
 const Container = styled.div``;
@@ -116,21 +118,42 @@ const SummaryItem = styled.span`
   padding: 10px;
 `;
 const SummaryTitle = styled.h1``;
+const SummaryDiscount = styled.span`
+  display: flex;
+  position: relative;
+  margin-bottom: 25px;
+`;
 const SummaryItemText = styled.span``;
 const SummaryItemPrice = styled.span``;
+const InforDiscount = styled.p`
+  position: absolute;
+  font-size: 16px;
+  top: 40px;
+`;
 const Cart = () => {
   const [top, setTop] = useState(10);
   const { products } = useSelector((state) => state.cart);
   const [stripeToken, setStripeToken] = useState(null);
+  const { currentUser } = useSelector((state) => state.user);
+  const [discount, setDiscount] = useState(0);
+  const [discounts, getDiscounts] = useState(0);
   const navigate = useNavigate();
 
   const onToken = (token) => {
     setStripeToken(token);
   };
+  const handleDiscount = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3000/api/discount/${discount}`
+      );
+      getDiscounts(res.data[0].sale);
+    } catch (error) {}
+  };
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        const res = await userRequest.post("/checkout/payment", {
+        const res = await AxiosInstance.post("/checkout/payment", {
           tokenId: stripeToken.id,
           amount: 500,
         });
@@ -142,7 +165,6 @@ const Cart = () => {
     };
     stripeToken && makeRequest();
   }, [stripeToken, products.total, navigate]);
-  console.log(stripeToken);
   const dispatch = useDispatch();
 
   const handleChange = (item, e) => {
@@ -161,7 +183,17 @@ const Cart = () => {
   x.map((i) => {
     priceTotal += i;
   });
-
+  let ship = 0;
+  if (priceTotal < 100) {
+    ship = 10;
+  } else {
+    ship = 0;
+  }
+  let priceAllProduct = (priceTotal + ship) * (1 - discounts / 100);
+  if (priceTotal === 0) {
+    priceAllProduct = 0;
+    ship = 0;
+  }
   return (
     <Container>
       <Navbar />
@@ -224,6 +256,31 @@ const Cart = () => {
         <Divider></Divider>
         <Bottom>
           <Summary>
+            <SummaryDiscount>
+              <Input
+                placeholder="Discount"
+                size="large"
+                style={{ marginRight: 10 }}
+                onChange={(e) => setDiscount(e.target.value)}
+              />
+              <Button
+                type="primary"
+                htmlType="submit"
+                size="large"
+                onClick={handleDiscount}
+              >
+                Submit
+              </Button>
+              {discounts ? (
+                <InforDiscount>
+                  You are discount about {discounts}% for total
+                </InforDiscount>
+              ) : (
+                <InforDiscount>
+                  Please input discount code in here
+                </InforDiscount>
+              )}
+            </SummaryDiscount>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>
@@ -248,10 +305,10 @@ const Cart = () => {
                     fontSize: 16,
                   }}
                 >
-                  Estimated Shipping:{" "}
+                  Estimated Shipping:
                 </b>
               </SummaryItemText>
-              <SummaryItemPrice>{priceTotal}</SummaryItemPrice>
+              <SummaryItemPrice>{ship}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>
@@ -265,7 +322,7 @@ const Cart = () => {
                   Discount:{" "}
                 </b>
               </SummaryItemText>
-              <SummaryItemPrice>{priceTotal}</SummaryItemPrice>
+              <SummaryItemPrice>{discounts}%</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>
@@ -279,34 +336,42 @@ const Cart = () => {
                   Total:{" "}
                 </b>
               </SummaryItemText>
-              <SummaryItemPrice>{priceTotal}</SummaryItemPrice>
+              <SummaryItemPrice>{priceAllProduct}</SummaryItemPrice>
             </SummaryItem>
-            <StripeCheckout
-              name="AROMA deLUTE"
-              image="/logo.jpeg"
-              billingAddress
-              shippingAddress
-              description={`Your total is $${priceTotal}`}
-              amount={priceTotal * 100}
-              token={onToken}
-              stripeKey={KEY}
-            >
-              <Space wrap>
-                <Button
-                  ghost
-                  type="primary"
-                  style={{
-                    backgroundColor: "#d6caa5",
-                    width: 349,
-                    height: 44,
-                    color: "#69410b",
-                    fontSize: 20,
-                  }}
-                >
-                  Check out{" "}
-                </Button>
+
+            {currentUser ? (
+              <StripeCheckout
+                name="AROMA deLUTE"
+                image="/logo.jpeg"
+                billingAddress
+                shippingAddress
+                description={`Your total is $${priceAllProduct}`}
+                amount={priceAllProduct * 100}
+                token={onToken}
+                stripeKey={KEY}
+              >
+                <Space wrap>
+                  <Button
+                    ghost
+                    type="primary"
+                    style={{
+                      backgroundColor: "#d6caa5",
+                      width: 349,
+                      height: 44,
+                      color: "#69410b",
+                      fontSize: 20,
+                    }}
+                  >
+                    Check out{" "}
+                  </Button>
+                </Space>
+              </StripeCheckout>
+            ) : (
+              <Space wrap style={{ display: "flex", flexDirection: "column" }}>
+                <Link to={"/login"}>Please login before buying products</Link>
+                <Link to={"/register"}>Click to register if no account</Link>
               </Space>
-            </StripeCheckout>
+            )}
           </Summary>
         </Bottom>
       </Wrapper>

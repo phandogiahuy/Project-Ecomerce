@@ -1,14 +1,22 @@
 import axios from "axios";
-
+import { store } from "./reduxToolkit/store";
 const BASE_URL = "http://localhost:3000/api/";
-const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NDhkNjljMjFhOTIxMTY0MjhiMmUwOCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4MzA5NTQ5NiwiZXhwIjoxNjgzMzU0Njk2fQ.9-nZJm3D82dbLMWuxM5bqfKF4pysSZSawIxxWtjG0ng";
 
-export const publicRequest = axios.create({
+export const AxiosInstance = axios.create({
   baseURL: BASE_URL,
 });
 
-export const userRequest = axios.create({
-  baseURL: BASE_URL,
-  headers: { token: `Bearer ${TOKEN} ` },
-});
+AxiosInstance.interceptors.request.use(
+  async (request) => {
+    const state = store.getState();
+    const accessToken = state.user.currentUser?.accessToken;
+    console.log(accessToken);
+    request.headers.Authorization = accessToken
+      ? `Bearer ${accessToken}`
+      : null;
+    request.baseURL = BASE_URL;
+
+    return request;
+  },
+  (error) => Promise.reject(error)
+);

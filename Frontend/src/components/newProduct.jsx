@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const Infor = styled.div`
   position: absolute;
-  bottom: 20px;
+  bottom: 26px;
   left: 130px;
   display: flex;
   align-items: center;
@@ -24,7 +24,7 @@ const Infor = styled.div`
 
 const Image = styled.img`
   height: 100%;
-  width: 90%;
+  width: 75%;
   cursor: pointer;
   :hover {
     transform: scale(1.1);
@@ -32,8 +32,8 @@ const Image = styled.img`
 `;
 const Price = styled.div`
   font-weight: 700;
-  font-size: 20px;
-  margin-left: 30px;
+  font-size: 30px;
+  margin-left: 50px;
 `;
 // xs: 8,
 // sm: 16,
@@ -52,7 +52,7 @@ const Product = ({ item }) => {
         <Link to={`/product/${item._id}`}>
           <Image src={item.img} />
         </Link>
-        <Price>{item.price[0]}₫</Price>
+        <Price>{item.price[0]}$</Price>
         <Link to={`/product/${item._id}`}>
           <Infor>
             <Space wrap>

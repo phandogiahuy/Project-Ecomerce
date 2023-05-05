@@ -22,6 +22,8 @@ import { Provider } from "react-redux";
 import Success from "./pages/Sucess";
 import { store, persistor } from "./reduxToolkit/store";
 import { PersistGate } from "redux-persist/integration/react";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,16 @@ const router = createBrowserRouter([
   {
     path: "/cart",
     element: <Cart />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
     errorElement: <ErrorPage />,
   },
 ]);

@@ -10,7 +10,6 @@ const Container = styled.div`
   display: flex;
   width: 423px;
   flex-direction: column;
-  background-color: aliceblue;
 `;
 const Top = styled.div``;
 const Img = styled.img`

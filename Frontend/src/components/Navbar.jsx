@@ -3,7 +3,7 @@ import {
   MailOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
-import { Badge, Input, Menu, Popover, Space } from "antd";
+import { Badge, Dropdown, Input, Menu, Popover, Space } from "antd";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -13,6 +13,8 @@ import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
 import CartContent from "./CartContent";
 import { logout } from "../reduxToolkit/userSlice";
+import { clearCart } from "../reduxToolkit/cartRedux";
+import { throttle } from "lodash";
 const { Search } = Input;
 const Container = styled.div`
   height: 150px;
@@ -47,13 +49,13 @@ const Right = styled.div`
 `;
 const Logo = styled.h1`
   font-weight: bold;
-  font-size: 100px;
+  font-size: 90px;
   font-family: "Youth Action", sans-serif;
   text-align: center;
   ${mobile({ fontSize: "24px", flex: 2 })}
 `;
 const MenuItem = styled.div`
-  font-size: 30px;
+  font-size: 20px;
   cursor: pointer;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
   margin-top: 60px;
@@ -66,7 +68,15 @@ const ContainerSearch = styled.div`
 const Navbar = () => {
   const { products, total } = useSelector((state) => state.cart);
   const { isFetching, error, currentUser } = useSelector((state) => state.user);
+
+  const [search, setSearch] = useState();
+  const [searchs, getSearch] = useState();
   const dispatch = useDispatch();
+  const handleLogOut = () => {
+    dispatch(logout());
+    dispatch(clearCart());
+  };
+  const handleSearch = (e) => {};
   return (
     <Container>
       <Wrapper>
@@ -76,12 +86,22 @@ const Navbar = () => {
               placeholder="search... "
               allowClear
               size="medium"
-              enterButton
               style={{
                 marginLeft: 100,
                 marginTop: 20,
               }}
+              loading
+              onChange={handleSearch}
             />
+            <ul
+              style={{
+                listStyle: "none",
+                backgroundColor: "#f4f6f2",
+                marginLeft: "30%",
+              }}
+            >
+              <li></li>
+            </ul>
           </ContainerSearch>
         </Left>
         <Center>
@@ -91,7 +111,7 @@ const Navbar = () => {
         </Center>
         <Right>
           {currentUser ? (
-            <MenuItem onClick={() => dispatch(logout())}>Log out</MenuItem>
+            <MenuItem onClick={handleLogOut}>Log out</MenuItem>
           ) : (
             <Popover
               content={<Register />}

@@ -8,7 +8,7 @@ import { mobile } from "../responsive";
 
 const Container = styled.div`
   width: 100%;
-  height: 80vh;
+  height: 90vh;
   display: flex;
   position: relative;
   background-color: green;
@@ -42,15 +42,16 @@ const Image = styled.img`
 const InforContainer = styled.div`
   flex: 1;
   margin-bottom: 10%;
+  margin-left: 20%;
 `;
 const Title = styled.h1`
-  font-size: 180px;
+  font-size: 150px;
   font-family: "Chicle", sans-serif;
 `;
 const Desc = styled.p`
   font-family: "Marmelad", sans-serif;
   color: ${(props) => props.cl};
-  font-size: 25px;
+  font-size: 20px;
 `;
 
 const Arrow = styled.div`

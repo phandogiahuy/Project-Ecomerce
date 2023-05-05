@@ -4,15 +4,18 @@ import styled from "styled-components";
 import { login } from "../reduxToolkit/callAPI";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-const Container = styled.div``;
+import { Link } from "react-router-dom";
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+`;
 const Error = styled.div``;
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
-
   const handleClick = (e) => {
     e.preventDefault();
     login(dispatch, { email, password });
@@ -67,7 +70,6 @@ const Login = () => {
             Forgot password
           </a>
         </Form.Item>
-
         <Form.Item>
           <Button
             type="primary"
@@ -76,8 +78,9 @@ const Login = () => {
             onClick={handleClick}
             disabled={isFetching}
           >
-            Log in
+            <Link to="/">Log in</Link>
           </Button>
+
           {error && <Error>Your password or email is wrong</Error>}
         </Form.Item>
       </Form>

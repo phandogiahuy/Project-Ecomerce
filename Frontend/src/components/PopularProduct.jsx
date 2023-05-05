@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Product from "./newProduct";
+import { useProducts } from "../hooks/useProducts";
+import { useProductByCat } from "../hooks/detail/useProductByCat";
 
 const Container = styled.div`
   display: flex;
@@ -19,40 +21,22 @@ const Title = styled.h1`
 const PopularProduct = ({ cat, sort }) => {
   const [product, setProduct] = useState([]);
   const [filterProduct, setFilterProduct] = useState([]);
+  // const getProductByCat = useProductByCat(cat);
+  // if (getProduct.isLoading) {
+  //   <div>...loading</div>;
+  // }
+  // if (getProduct.error) {
+  //   return <div>{getProduct.error.message}</div>;
+  // }
+  // setProduct(getProduct.data);
 
-  useEffect(() => {
-    const getProduct = async () => {
-      try {
-        const res = await axios.get(
-          cat
-            ? `http://localhost:3000/api/product?category=${cat}`
-            : `http://localhost:3000/api/product/`
-        );
-        setProduct(res.data);
-      } catch (err) {}
-    };
-    getProduct();
-  }, [cat]);
-  useEffect(() => {
-    // eslint-disable-next-line no-unused-expressions
-    cat && setFilterProduct(product);
-  }, [product, cat]);
-
-  useEffect(() => {
-    if (sort === "newest") {
-      setFilterProduct((prev) =>
-        [...prev].sort((a, b) => a.createdAt - b.createdAt)
-      );
-    } else if (sort === "ASC") {
-      setFilterProduct((prev) =>
-        [...prev].sort((a, b) => a.price[0] - b.price[0])
-      );
-    } else {
-      setFilterProduct((prev) =>
-        [...prev].sort((a, b) => b.price[0] - a.price[0])
-      );
-    }
-  }, [sort]);
+  const res = cat ? useProductByCat(cat) : useProducts();
+  if (res.isLoading) {
+    return <div>...loading</div>;
+  }
+  if (res.error) {
+    return <div>{res.error.message}</div>;
+  }
   return (
     <Container>
       <Title> Product </Title>
@@ -76,8 +60,8 @@ const PopularProduct = ({ cat, sort }) => {
         style={{ marginTop: 10 }}
       >
         {cat
-          ? filterProduct.map((item) => <Product item={item} key={item._id} />)
-          : product
+          ? res.data.map((item) => <Product item={item} key={item._id} />)
+          : res.data
               .slice(0, 8)
               .map((item) => <Product item={item} key={item._id} />)}
       </Row>

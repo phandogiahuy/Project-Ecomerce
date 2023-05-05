@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { register } from "../reduxToolkit/callAPI";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Container = styled.div``;
 const Wrapper = styled.div``;
@@ -156,11 +157,13 @@ const Register = () => {
               }}
             />
           </Form.Item>
-          <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit" onClick={success}>
-              Register
-            </Button>
-          </Form.Item>
+          <Link to="/">
+            <Form.Item {...tailFormItemLayout}>
+              <Button type="primary" htmlType="submit" onClick={success}>
+                Register
+              </Button>
+            </Form.Item>
+          </Link>
         </Form>
       </Wrapper>
     </Container>

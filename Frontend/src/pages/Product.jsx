@@ -8,9 +8,9 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
-import { publicRequest } from "../requestMethod";
 import { addProduct } from "../reduxToolkit/cartRedux";
 import { useDispatch } from "react-redux";
+import { AxiosInstance } from "../requestMethod";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -68,7 +68,7 @@ const Product = () => {
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const res = await publicRequest.get(`/product/find/${id}`);
+        const res = await AxiosInstance.get(`/product/find/${id}`);
         setProduct(res.data);
         setPrice(res.data.price[0]);
       } catch (error) {}
