@@ -42,7 +42,7 @@ const Image = styled.img`
 const InforContainer = styled.div`
   flex: 1;
   margin-bottom: 10%;
-  margin-left: 20%;
+  margin-left: 1%;
 `;
 const Title = styled.h1`
   font-size: 150px;

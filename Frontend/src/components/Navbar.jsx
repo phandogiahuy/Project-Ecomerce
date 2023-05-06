@@ -53,6 +53,7 @@ const Logo = styled.h1`
   font-family: "Youth Action", sans-serif;
   text-align: center;
   ${mobile({ fontSize: "24px", flex: 2 })}
+  cursor: pointer;
 `;
 const MenuItem = styled.div`
   font-size: 20px;
@@ -104,11 +105,11 @@ const Navbar = () => {
             </ul>
           </ContainerSearch>
         </Left>
-        <Center>
-          <Link to="/">
+        <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+          <Center>
             <Logo>AROMA deLute.</Logo>
-          </Link>
-        </Center>
+          </Center>
+        </Link>
         <Right>
           {currentUser ? (
             <MenuItem onClick={handleLogOut}>Log out</MenuItem>

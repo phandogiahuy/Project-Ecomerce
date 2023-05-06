@@ -21,22 +21,46 @@ const Title = styled.h1`
 const PopularProduct = ({ cat, sort }) => {
   const [product, setProduct] = useState([]);
   const [filterProduct, setFilterProduct] = useState([]);
-  // const getProductByCat = useProductByCat(cat);
-  // if (getProduct.isLoading) {
-  //   <div>...loading</div>;
-  // }
-  // if (getProduct.error) {
-  //   return <div>{getProduct.error.message}</div>;
-  // }
-  // setProduct(getProduct.data);
+  const getProduct = useProducts();
+  const getProductByCat = useProductByCat(cat);
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = cat ? getProductByCat : getProduct;
 
-  const res = cat ? useProductByCat(cat) : useProducts();
-  if (res.isLoading) {
-    return <div>...loading</div>;
-  }
-  if (res.error) {
-    return <div>{res.error.message}</div>;
-  }
+        if (res.isLoading) {
+          return <div>...loading</div>;
+        }
+        if (res.error) {
+          return <div>{res.error.message}</div>;
+        }
+        if (res.isSuccess) {
+          setProduct(res.data);
+        }
+      } catch (err) {}
+    };
+    getProducts();
+  });
+  useEffect(() => {
+    cat && setFilterProduct(product);
+  }, [product, cat]);
+
+  useEffect(() => {
+    if (sort === "newest") {
+      setFilterProduct((prev) =>
+        [...prev].sort((a, b) => a.createdAt - b.createdAt)
+      );
+    } else if (sort === "ASC") {
+      setFilterProduct((prev) =>
+        [...prev].sort((a, b) => a.price[0] - b.price[0])
+      );
+    } else {
+      setFilterProduct((prev) =>
+        [...prev].sort((a, b) => b.price[0] - a.price[0])
+      );
+    }
+  }, [sort]);
+
   return (
     <Container>
       <Title> Product </Title>
@@ -60,8 +84,8 @@ const PopularProduct = ({ cat, sort }) => {
         style={{ marginTop: 10 }}
       >
         {cat
-          ? res.data.map((item) => <Product item={item} key={item._id} />)
-          : res.data
+          ? filterProduct.map((item) => <Product item={item} key={item._id} />)
+          : product
               .slice(0, 8)
               .map((item) => <Product item={item} key={item._id} />)}
       </Row>
