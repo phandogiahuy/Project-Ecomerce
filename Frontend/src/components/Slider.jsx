@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
-import { Button, Space } from "antd";
+
 import React, { useState } from "react";
 import styled from "styled-components";
 
@@ -8,7 +8,7 @@ import { mobile } from "../responsive";
 
 const Container = styled.div`
   width: 100%;
-  height: 90vh;
+  height: 80vh;
   display: flex;
   position: relative;
   background-color: green;

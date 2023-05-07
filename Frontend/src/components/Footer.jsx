@@ -69,7 +69,7 @@ const Footer = () => {
           lg={{ span: 8 }}
         >
           <Left>
-            <Logo>ABOUT WE</Logo>
+            <Logo>ABOUT US</Logo>
             <Desc>
               HACCP certified coffee roaster, specializing in providing high
               quality roasted coffee and specialty coffees around the world. THE

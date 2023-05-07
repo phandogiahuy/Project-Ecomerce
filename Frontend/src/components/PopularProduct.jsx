@@ -6,12 +6,14 @@ import styled from "styled-components";
 import Product from "./newProduct";
 import { useProducts } from "../hooks/useProducts";
 import { useProductByCat } from "../hooks/detail/useProductByCat";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-content: space-around;
   margin-top: 50px;
+  ${mobile({ marginLeft: "100px" })};
 `;
 const Title = styled.h1`
   font-weight: 700;
@@ -85,9 +87,7 @@ const PopularProduct = ({ cat, sort }) => {
       >
         {cat
           ? filterProduct.map((item) => <Product item={item} key={item._id} />)
-          : product
-              .slice(0, 8)
-              .map((item) => <Product item={item} key={item._id} />)}
+          : product.map((item) => <Product item={item} key={item._id} />)}
       </Row>
     </Container>
   );

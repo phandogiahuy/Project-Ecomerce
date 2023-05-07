@@ -15,10 +15,12 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const [fail, setFail] = useState(0);
   const { isFetching, error } = useSelector((state) => state.user);
   const handleClick = (e) => {
     e.preventDefault();
     login(dispatch, { email, password });
+    setFail(fail + 1);
   };
   return (
     <Container>
@@ -81,7 +83,7 @@ const Login = () => {
             <Link to="/">Log in</Link>
           </Button>
 
-          {error && <Error>Your password or email is wrong</Error>}
+          {error && fail > 0 && <Error>Your password or email is wrong</Error>}
         </Form.Item>
       </Form>
     </Container>

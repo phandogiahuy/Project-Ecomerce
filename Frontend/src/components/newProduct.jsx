@@ -7,7 +7,7 @@ import styled from "styled-components";
 const Infor = styled.div`
   position: absolute;
   bottom: 26px;
-  left: 130px;
+  left: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,19 +21,39 @@ const Infor = styled.div`
     color: white;
   }
 `;
-
+const Name = styled.h1`
+  margin-left: 50px;
+  font-weight: 500;
+`;
 const Image = styled.img`
   height: 100%;
   width: 75%;
   cursor: pointer;
+  image-rendering: pixelated;
+
   :hover {
-    transform: scale(1.1);
+    animation: bounce2 1s ease infinite;
+  }
+  @keyframes bounce2 {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-30px);
+    }
+    60% {
+      transform: translateY(-15px);
+    }
   }
 `;
 const Price = styled.div`
   font-weight: 700;
   font-size: 30px;
-  margin-left: 50px;
+  margin-left: 20px;
 `;
 // xs: 8,
 // sm: 16,
@@ -43,15 +63,16 @@ const Product = ({ item }) => {
   return (
     <Col
       className="gutter-row"
-      md={{ span: 8 }}
+      md={{ span: 6 }}
       sm={{ span: 12 }}
       xs={{ span: 24 }}
-      lg={{ span: 6 }}
+      lg={{ span: 4 }}
     >
-      <Card style={{ width: 550, border: "none" }}>
+      <Card style={{ width: 400, border: "none" }}>
         <Link to={`/product/${item._id}`}>
           <Image src={item.img} />
         </Link>
+        <Name>{item.title}</Name>
         <Price>{item.price[0]}$</Price>
         <Link to={`/product/${item._id}`}>
           <Infor>
@@ -62,7 +83,7 @@ const Product = ({ item }) => {
                 type="primary"
                 icon={<ShoppingOutlined />}
                 style={{
-                  fontSize: "20px",
+                  fontSize: "15px",
                   cursor: "pointer",
                   display: "flex",
                   alignItems: "center",
