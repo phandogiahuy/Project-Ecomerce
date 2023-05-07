@@ -1,21 +1,19 @@
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  ShoppingCartOutlined,
-} from "@ant-design/icons";
-import { Badge, Dropdown, Input, Menu, Popover, Space } from "antd";
-import React, { useState } from "react";
+import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { Badge, Popover, Affix } from "antd";
+
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import { mobile } from "../responsive";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import CartContent from "./CartContent";
 import { logout } from "../reduxToolkit/userSlice";
 import { clearCart } from "../reduxToolkit/cartRedux";
-import { throttle } from "lodash";
-const { Search } = Input;
+
+import SearchInput from "./Search";
+import { useState } from "react";
+
 const Container = styled.div`
   height: 150px;
   ${mobile({ height: "50px" })}
@@ -56,54 +54,60 @@ const Logo = styled.h1`
   cursor: pointer;
 `;
 const MenuItem = styled.div`
-  font-size: 20px;
+  font-size: 25px;
   cursor: pointer;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
   margin-top: 60px;
   padding: 20px;
 `;
-const ContainerSearch = styled.div`
-  ${mobile({ marginBottom: "30px", marginRight: 10 })}
+const SearchComponent = styled.p`
+  font-size: 25px;
+  cursor: pointer;
+  ${mobile({ fontSize: "12px", marginLeft: "10px" })}
+  margin-top: 60px;
+  padding: 20px;
+  margin-left: 40px;
 `;
 
 const Navbar = () => {
   const { products, total } = useSelector((state) => state.cart);
   const { isFetching, error, currentUser } = useSelector((state) => state.user);
+  const [top, setTop] = useState(10);
+  // const [searchQuery, setSearchQuery] = useState("");
+  // const [type, setType] = useState(false);
+  // const dispatch = useDispatch();
 
-  const [search, setSearch] = useState();
-  const [searchs, getSearch] = useState();
-  const dispatch = useDispatch();
+  // // const [debouncedQuery] = useDebounce(searchQuery, 500);
+  // const debouncedSetQuery = debounce((value) => {
+  //   setSearchQuery(value);
+  // }, 5);
+  // const { data, isLoading, isError } = useSearch(searchQuery);
+
   const handleLogOut = () => {
     dispatch(logout());
     dispatch(clearCart());
   };
-  const handleSearch = (e) => {};
+  // const handleSearch = (e) => {
+  //   debouncedSetQuery(e.target.value);
+  //   setType(true);
+  //   if (!e.target.value) {
+  //     setType(false);
+  //   }
+  // };
   return (
     <Container>
       <Wrapper>
         <Left>
-          <ContainerSearch>
-            <Search
-              placeholder="search... "
-              allowClear
-              size="medium"
-              style={{
-                marginLeft: 100,
-                marginTop: 20,
-              }}
-              loading
-              onChange={handleSearch}
-            />
-            <ul
-              style={{
-                listStyle: "none",
-                backgroundColor: "#f4f6f2",
-                marginLeft: "30%",
-              }}
-            >
-              <li></li>
-            </ul>
-          </ContainerSearch>
+          <Popover
+            content={<SearchInput />}
+            title="Search input"
+            trigger="click"
+            placement="bottomRight"
+          >
+            <SearchComponent>
+              Search <SearchOutlined />
+            </SearchComponent>
+          </Popover>
         </Left>
         <Link to="/" style={{ textDecoration: "none", color: "black" }}>
           <Center>
