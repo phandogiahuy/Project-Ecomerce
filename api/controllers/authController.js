@@ -10,14 +10,20 @@ class AuthController {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(req.body.password, salt);
       //tạo tài khoản
-      const newUser = new User({
+      const user = User.findOne({ email: req.body.email });
+      if (user) {
+        console.log("asd");
+        return res.status(400).json({ message: "Email is existed" });
+      }
+
+      const newUser = User.create({
         username: req.body.username,
         email: req.body.email,
         password: hashedPassword,
       });
       //save user vào database and response
-      const user = await newUser.save();
-      res.status(200).json(user);
+
+      res.status(200).json(newUser);
     } catch (error) {
       return res.json(error);
     }
@@ -27,14 +33,14 @@ class AuthController {
     try {
       const user = await User.findOne({ email: req.body.email });
       if (!user) {
-        return res.status(500).json("user or password is wrong");
+        return res.status(500).json("Email or password is wrong");
       } else {
         const validPassword = await bcrypt.compare(
           req.body.password,
           user.password
         );
         if (!validPassword) {
-          return res.status(200).json("user or password is wrong");
+          return res.status(200).json("Email or password is wrong");
         } else {
           const accessToken = generateAccessToken(user);
           res.status(200).json({

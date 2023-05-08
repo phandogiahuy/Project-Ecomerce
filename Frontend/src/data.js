@@ -5,7 +5,6 @@ export const sliderItems = [
     title: "BLACK FRIDAY",
     desc: "DON'T MISS THIS SALE SEASON! SALE 80% OFF FOR NEW ARRIVALS",
     bg: "5A152B",
-    color: "#3ad578",
   },
   {
     id: 2,
@@ -13,7 +12,6 @@ export const sliderItems = [
     title: "SPECIALITY COFFEE",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "efe7e1",
-    color: "#f74f85",
   },
   {
     id: 3,
@@ -21,7 +19,6 @@ export const sliderItems = [
     title: "SINGLE ORIGIN",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "efe7e1",
-    color: "#f74f85",
   },
 ];
 export const categories = [
@@ -86,3 +83,13 @@ export const popularProducts = [
     cat: "Espresso",
   },
 ];
+
+// 100% Robusta Gia Lai <br />
+// <b style={{ fontWeight: "700" }}> Varieties: </b> Canephora Robusta
+// Preliminary <br /> <b style={{ fontWeight: "700" }}>processing: </b>{" "}
+// Natural (naturally dried embr/yos) <br />{" "}
+// <b style={{ fontWeight: "700" }}>Altitude: </b>600m - 800m <br />{" "}
+// <b style={{ fontWeight: "700" }}>Region: </b> Gia Lai - Vietnam
+// Roast <br />
+// <b style={{ fontWeight: "700" }}>level: </b>
+// Medium Dark

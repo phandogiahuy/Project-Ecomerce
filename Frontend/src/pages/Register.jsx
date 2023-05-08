@@ -46,21 +46,17 @@ const Register = () => {
   const [password, setPassword] = useState();
   const navigate = useNavigate();
 
-  const { mutate, data } = useMutation(useRegister);
+  const { mutate } = useRegister();
 
-  const success = () => {
+  const success = (e) => {
+    e.preventDefault();
     messageApi.open({
       type: "success",
       content: "You create an account sucessfully",
     });
     mutate({ username, email, password });
   };
-  if (data) {
-    if (data.email) {
-      localStorage.setItem("username", data.email);
-      return navigate("/");
-    }
-  }
+
   const [form] = Form.useForm();
   return (
     <Container>
@@ -164,13 +160,12 @@ const Register = () => {
               }}
             />
           </Form.Item>
-          <Link to="/">
-            <Form.Item {...tailFormItemLayout}>
-              <Button type="primary" htmlType="submit" onClick={success}>
-                Register
-              </Button>
-            </Form.Item>
-          </Link>
+
+          <Form.Item {...tailFormItemLayout}>
+            <Button type="primary" htmlType="submit" onClick={success}>
+              Register
+            </Button>
+          </Form.Item>
         </Form>
       </Wrapper>
     </Container>

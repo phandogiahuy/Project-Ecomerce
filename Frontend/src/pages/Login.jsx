@@ -6,7 +6,6 @@ import { useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 import { Link, redirect, useNavigate, useNavigation } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
-import { useMutation, useQueryClient } from "react-query";
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -18,20 +17,14 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fail, setFail] = useState(0);
-  const { mutate, isLoading, data } = useMutation(useLogin);
+  const { mutate, isLoading } = useLogin();
   const navigate = useNavigate();
 
   const handleClick = (e) => {
     e.preventDefault();
     mutate({ password, email });
   };
-  if (data) {
-    if (data.email) {
-      localStorage.setItem("token", data.accessToken);
-      localStorage.setItem("username", data.email);
-      return navigate("/");
-    }
-  }
+
   return (
     <Container>
       <Form
@@ -83,8 +76,6 @@ const Login = () => {
             disabled={isLoading}
           >
             {isLoading ? "Logging in..." : "Log in"}
-
-            {data && !data.email && <div>User or password is wrong</div>}
           </Button>
         </Form.Item>
       </Form>
