@@ -6,12 +6,14 @@ import styled from "styled-components";
 import Product from "./newProduct";
 import { useProducts } from "../hooks/useProducts";
 import { useProductByCat } from "../hooks/detail/useProductByCat";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-content: space-around;
   margin-top: 50px;
+  ${mobile({ marginLeft: "100px" })};
 `;
 const Title = styled.h1`
   font-weight: 700;
@@ -21,22 +23,46 @@ const Title = styled.h1`
 const PopularProduct = ({ cat, sort }) => {
   const [product, setProduct] = useState([]);
   const [filterProduct, setFilterProduct] = useState([]);
-  // const getProductByCat = useProductByCat(cat);
-  // if (getProduct.isLoading) {
-  //   <div>...loading</div>;
-  // }
-  // if (getProduct.error) {
-  //   return <div>{getProduct.error.message}</div>;
-  // }
-  // setProduct(getProduct.data);
+  const getProduct = useProducts();
+  const getProductByCat = useProductByCat(cat);
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = cat ? getProductByCat : getProduct;
 
-  const res = cat ? useProductByCat(cat) : useProducts();
-  if (res.isLoading) {
-    return <div>...loading</div>;
-  }
-  if (res.error) {
-    return <div>{res.error.message}</div>;
-  }
+        if (res.isLoading) {
+          return <div>...loading</div>;
+        }
+        if (res.error) {
+          return <div>{res.error.message}</div>;
+        }
+        if (res.isSuccess) {
+          setProduct(res.data);
+        }
+      } catch (err) {}
+    };
+    getProducts();
+  });
+  useEffect(() => {
+    cat && setFilterProduct(product);
+  }, [product, cat]);
+
+  useEffect(() => {
+    if (sort === "newest") {
+      setFilterProduct((prev) =>
+        [...prev].sort((a, b) => a.createdAt - b.createdAt)
+      );
+    } else if (sort === "ASC") {
+      setFilterProduct((prev) =>
+        [...prev].sort((a, b) => a.price[0] - b.price[0])
+      );
+    } else {
+      setFilterProduct((prev) =>
+        [...prev].sort((a, b) => b.price[0] - a.price[0])
+      );
+    }
+  }, [sort]);
+
   return (
     <Container>
       <Title> Product </Title>
@@ -60,10 +86,8 @@ const PopularProduct = ({ cat, sort }) => {
         style={{ marginTop: 10 }}
       >
         {cat
-          ? res.data.map((item) => <Product item={item} key={item._id} />)
-          : res.data
-              .slice(0, 8)
-              .map((item) => <Product item={item} key={item._id} />)}
+          ? filterProduct.map((item) => <Product item={item} key={item._id} />)
+          : product.map((item) => <Product item={item} key={item._id} />)}
       </Row>
     </Container>
   );

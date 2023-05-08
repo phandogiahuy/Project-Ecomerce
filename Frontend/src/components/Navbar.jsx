@@ -1,26 +1,30 @@
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  ShoppingCartOutlined,
-} from "@ant-design/icons";
-import { Badge, Dropdown, Input, Menu, Popover, Space } from "antd";
-import React, { useState } from "react";
+import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { Badge, Popover, Affix } from "antd";
+
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import { mobile } from "../responsive";
-import { useDispatch, useSelector } from "react-redux";
+
 import CartContent from "./CartContent";
 import { logout } from "../reduxToolkit/userSlice";
 import { clearCart } from "../reduxToolkit/cartRedux";
+<<<<<<< HEAD
 import { throttle } from "lodash";
 import axios from "axios";
 const { Search } = Input;
+=======
+import SearchInput from "./Search";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+>>>>>>> 5e53ff8cca34a028ca88bc5352dc852f3a6f1ac9
 const Container = styled.div`
-  height: 150px;
+  height: 130px;
   ${mobile({ height: "50px" })}
+  background-color: aliceblue;
 `;
+
 const Wrapper = styled.div`
   padding: 10px 20px;
   display: flex;
@@ -53,30 +57,37 @@ const Logo = styled.h1`
   font-size: 90px;
   font-family: "Youth Action", sans-serif;
   text-align: center;
-  ${mobile({ fontSize: "24px", flex: 2 })}
+  ${mobile({ fontSize: "20px", flex: 2 })}
+  cursor: pointer;
 `;
 const MenuItem = styled.div`
-  font-size: 20px;
+  font-size: 25px;
   cursor: pointer;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
   margin-top: 60px;
   padding: 20px;
 `;
-const ContainerSearch = styled.div`
-  ${mobile({ marginBottom: "30px", marginRight: 10 })}
+const SearchComponent = styled.p`
+  font-size: 25px;
+  cursor: pointer;
+  ${mobile({ fontSize: "12px", marginLeft: "10px" })}
+  margin-top: 60px;
+  padding: 20px;
+  margin-left: 40px;
 `;
 
 const Navbar = () => {
   const { products, total } = useSelector((state) => state.cart);
-  const { isFetching, error, currentUser } = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
+  const [top, setTop] = useState(10);
 
-  const [search, setSearch] = useState();
-  const [searchs, getSearch] = useState();
   const dispatch = useDispatch();
+
   const handleLogOut = () => {
     dispatch(logout());
     dispatch(clearCart());
   };
+<<<<<<< HEAD
   const handleSearch = async (e) => {
     try {
       throttle(function () {
@@ -86,77 +97,70 @@ const Navbar = () => {
       }, 2000);
     } catch (error) {}
   };
+=======
+
+>>>>>>> 5e53ff8cca34a028ca88bc5352dc852f3a6f1ac9
   return (
-    <Container>
-      <Wrapper>
-        <Left>
-          <ContainerSearch>
-            <Search
-              placeholder="search... "
-              allowClear
-              size="medium"
-              style={{
-                marginLeft: 100,
-                marginTop: 20,
-              }}
-              loading
-              onChange={handleSearch}
-            />
-            <ul
-              style={{
-                listStyle: "none",
-                backgroundColor: "#f4f6f2",
-                marginLeft: "30%",
-              }}
+    <Affix>
+      <Container>
+        <Wrapper>
+          <Left>
+            <Popover
+              content={<SearchInput />}
+              title="Search input"
+              trigger="click"
+              placement="bottomRight"
             >
-              <li></li>
-            </ul>
-          </ContainerSearch>
-        </Left>
-        <Center>
-          <Link to="/">
-            <Logo>AROMA deLute.</Logo>
+              <SearchComponent>
+                Search <SearchOutlined />
+              </SearchComponent>
+            </Popover>
+          </Left>
+          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+            <Center>
+              <Logo>AROMA deLute.</Logo>
+            </Center>
           </Link>
-        </Center>
-        <Right>
-          {currentUser ? (
-            <MenuItem onClick={handleLogOut}>Log out</MenuItem>
-          ) : (
-            <Popover
-              content={<Register />}
-              title="Welcome to Coffee World"
-              trigger="click"
-              placement="bottomRight"
-            >
-              <MenuItem>REGISTER</MenuItem>
-            </Popover>
-          )}
-          {currentUser ? (
-            <MenuItem> {currentUser.email}</MenuItem>
-          ) : (
-            <Popover
-              content={<Login />}
-              title="Welcome to Coffee World"
-              trigger="click"
-            >
-              <MenuItem>SIGN IN</MenuItem>
-            </Popover>
-          )}
-          <MenuItem>
-            <Popover
-              placement="bottomRight"
-              title="My cart"
-              trigger="click"
-              content={<CartContent products={products} total={total} />}
-            >
-              <Badge count={products.length}>
-                <ShoppingCartOutlined style={{ fontSize: "30px" }} />
-              </Badge>
-            </Popover>
-          </MenuItem>
-        </Right>
-      </Wrapper>
-    </Container>
+          <Right>
+            {currentUser ? (
+              <MenuItem onClick={handleLogOut}>Log out</MenuItem>
+            ) : (
+              <Popover
+                content={<Register />}
+                title="Welcome to Coffee World!"
+                trigger="click"
+                placement="bottomRight"
+              >
+                <MenuItem>REGISTER</MenuItem>
+              </Popover>
+            )}
+            {currentUser ? (
+              <MenuItem> {currentUser.email}</MenuItem>
+            ) : (
+              <Popover
+                content={<Login />}
+                title="Welcome to Coffee World!"
+                trigger="click"
+              >
+                <MenuItem>SIGN IN</MenuItem>
+              </Popover>
+            )}
+            <MenuItem>
+              <Popover
+                placement="bottomRight"
+                title="My cart"
+                trigger="click"
+                content={<CartContent products={products} total={total} />}
+              >
+                <Badge count={products.length}>
+                  <ShoppingCartOutlined style={{ fontSize: "30px" }} />
+                </Badge>
+              </Popover>
+            </MenuItem>
+          </Right>
+        </Wrapper>
+      </Container>
+    </Affix>
   );
 };
 

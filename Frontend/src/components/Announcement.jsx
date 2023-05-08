@@ -13,7 +13,7 @@ const Container = styled.div`
 `;
 
 function Announcement() {
-  return <Container>Mừng ngày 30/4 1/5</Container>;
+  return <Container>Free shipping on orders above 100$</Container>;
 }
 
 export default Announcement;

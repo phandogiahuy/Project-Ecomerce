@@ -10,7 +10,7 @@ AxiosInstance.interceptors.request.use(
   async (request) => {
     const state = store.getState();
     const accessToken = state.user.currentUser?.accessToken;
-    console.log(accessToken);
+
     request.headers.Authorization = accessToken
       ? `Bearer ${accessToken}`
       : null;

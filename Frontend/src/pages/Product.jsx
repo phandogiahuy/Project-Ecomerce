@@ -19,11 +19,12 @@ const Wrapper = styled.div`
 `;
 const ImgContainer = styled.div`
   flex: 1;
+  margin-left: 100px;
 `;
 const Img = styled.img`
-  width: 100%;
-  height: 90vh;
-  object-fit: cover;
+  width: 560px;
+  height: 558px;
+  image-rendering: pixelated;
 `;
 const InforContainer = styled.div`
   flex: 1;
@@ -31,6 +32,7 @@ const InforContainer = styled.div`
 `;
 const Title = styled.h1`
   font-weight: 500;
+  font-size: 70px;
 `;
 const Desc = styled.p`
   font-size: 20px;
@@ -38,8 +40,8 @@ const Desc = styled.p`
   margin: 20px 0px;
 `;
 const Price = styled.span`
-  font-weight: 100;
-  font-size: 40px;
+  font-weight: 400;
+  font-size: 50px;
 `;
 const FilterContainer = styled.div`
   display: flex;
@@ -108,7 +110,7 @@ const Product = () => {
         <InforContainer>
           <Title>{product.title}</Title>
           <Desc>{product.desc}</Desc>
-          <Price>{price}₫</Price>
+          <Price>{price}$</Price>
           <FilterContainer>
             <FilterTitle>Size</FilterTitle>
             <Space wrap>
@@ -123,6 +125,7 @@ const Product = () => {
                 ]}
                 onSelect={(i) => getSize(i)}
                 onChange={handlePrice}
+                style={{ marginLeft: 10 }}
               />
               <Radio.Group
                 size="large"

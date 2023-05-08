@@ -32,6 +32,7 @@ const Continue = styled.a`
   text-decoration: underline;
   margin-left: 1300px;
   transition: all 0.5s ease-out;
+  font-size: 20px;
   cursor: pointer;
   :hover {
     font-size: large;
@@ -43,7 +44,7 @@ const Middle = styled.div`
 `;
 
 const ProductImage = styled.img`
-  max-width: 20%;
+  max-width: 30%;
 `;
 
 const TopTexts = styled.div``;
@@ -51,11 +52,14 @@ const TopText = styled.span`
   text-decoration: underline;
   cursor: pointer;
   margin: 0px 10px;
+  font-size: 25px;
 `;
 const Type = styled.div`
   display: flex;
   justify-content: space-around;
   z-index: 1;
+  font-size: 30px;
+  font-family: "Times New Roman", Times, serif;
 `;
 const TypeProduct = styled.span`
   font-family: "Work Sans", sans-serif;
@@ -73,6 +77,7 @@ const Product = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-left: 45px;
 `;
 const ProductDetail = styled.span`
   display: flex;
@@ -85,6 +90,7 @@ const ProductName = styled.p`
   margin-left: 10px;
   font-weight: 400;
   font-family: "Arvo", serif;
+  font-size: 30px;
 `;
 
 const ProductQuanity = styled.p`
@@ -92,14 +98,14 @@ const ProductQuanity = styled.p`
 `;
 const TypeItem = styled.p`
   position: absolute;
-  top: 22%;
-  left: 22%;
-  font-size: 14px;
-  font-family: "Arvo", serif;
+  top: 40%;
+  left: 32%;
+  font-size: 20px;
 `;
 
 const ProductPrice = styled.p`
   font-family: "Work Sans", sans-serif;
+  font-size: 30px;
 `;
 const ProductType = styled.span`
   display: flex;
@@ -205,14 +211,14 @@ const Cart = () => {
             <Continue>Continue Shopping</Continue>
           </Link>
           <TopTexts>
-            <TopText>Shopping Bag({products.length})</TopText>
+            <TopText>Shopping Bag ({products.length})</TopText>
           </TopTexts>
         </Top>
         <Middle>
           <Affix offsetTop={top}>
             <Type>
               <TypeProduct>Product</TypeProduct>
-              <Quanity>Quanity</Quanity>
+              <Quanity>Quantity</Quanity>
               <Price>Price</Price>
             </Type>
           </Affix>
@@ -232,7 +238,7 @@ const Cart = () => {
                     min={1}
                     value={item.quanity}
                     size="medium"
-                    style={{ marginRight: "10px", marginBottom: "1px" }}
+                    style={{ marginBottom: "1px", width: "60%" }}
                     onChange={(e) => handleChange(item, e)}
                   />
                   <DeleteOutlined
@@ -248,7 +254,7 @@ const Cart = () => {
                     }
                   />
                 </ProductQuanity>
-                <ProductPrice>{item.price * item.quanity}</ProductPrice>
+                <ProductPrice>{item.price * item.quanity}$</ProductPrice>
               </ProductType>
             </Product>
           ))}
@@ -336,7 +342,7 @@ const Cart = () => {
                   Total:{" "}
                 </b>
               </SummaryItemText>
-              <SummaryItemPrice>{priceAllProduct}</SummaryItemPrice>
+              <SummaryItemPrice>{Math.round(priceAllProduct)}</SummaryItemPrice>
             </SummaryItem>
 
             {currentUser ? (
