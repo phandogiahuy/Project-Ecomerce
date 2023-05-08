@@ -14,6 +14,7 @@ const Infor = styled.div`
   cursor: pointer;
   transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   margin-left: 20px;
+  font-family: "g Guarantee", sans-serif;
 
   :hover {
     transform: scale(1.1);
@@ -54,6 +55,7 @@ const Price = styled.div`
   font-weight: 700;
   font-size: 30px;
   margin-left: 20px;
+  font-family: "AOK Buenos Aires", sans-serif;
 `;
 // xs: 8,
 // sm: 16,
@@ -89,6 +91,7 @@ const Product = ({ item }) => {
                   alignItems: "center",
                   color: "#1C2F7F",
                   border: "#38498f solid 2px",
+                  fontFamily: "g Guarantee', sans-serif",
                 }}
               >
                 ORDER NOW

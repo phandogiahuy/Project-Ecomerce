@@ -47,6 +47,7 @@ class AuthController {
             email: user.email,
             isAdmin: user.isAdmin,
             accessToken,
+            id: user._id,
           });
         }
       }
