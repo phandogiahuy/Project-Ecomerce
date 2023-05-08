@@ -15,6 +15,7 @@ import CartContent from "./CartContent";
 import { logout } from "../reduxToolkit/userSlice";
 import { clearCart } from "../reduxToolkit/cartRedux";
 import { throttle } from "lodash";
+import axios from "axios";
 const { Search } = Input;
 const Container = styled.div`
   height: 150px;
@@ -76,7 +77,15 @@ const Navbar = () => {
     dispatch(logout());
     dispatch(clearCart());
   };
-  const handleSearch = (e) => {};
+  const handleSearch = async (e) => {
+    try {
+      throttle(function () {
+        const res = axios.get(
+          `//localhost:3000/api/product?title=${e.target.value}`
+        );
+      }, 2000);
+    } catch (error) {}
+  };
   return (
     <Container>
       <Wrapper>
