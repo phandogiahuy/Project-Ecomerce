@@ -31,7 +31,7 @@ const Slide = styled.div`
 `;
 const ImgContainer = styled.div`
   flex: 1;
-  margin-left: 70px;
+  margin-left: 10px;
   margin-bottom: 10%;
 `;
 const Image = styled.img`
@@ -41,17 +41,17 @@ const Image = styled.img`
 `;
 const InforContainer = styled.div`
   flex: 1;
-  margin-bottom: 10%;
-  margin-left: 1%;
+  margin-bottom: 15%;
+  margin-left: 20%;
 `;
 const Title = styled.h1`
-  font-size: 150px;
+  font-size: 160px;
   font-family: "Chicle", sans-serif;
 `;
 const Desc = styled.p`
   font-family: "Marmelad", sans-serif;
   color: ${(props) => props.cl};
-  font-size: 20px;
+  font-size: 17px;
 `;
 
 const Arrow = styled.div`

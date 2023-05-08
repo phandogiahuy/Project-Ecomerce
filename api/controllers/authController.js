@@ -28,17 +28,21 @@ class AuthController {
       const user = await User.findOne({ email: req.body.email });
       if (!user) {
         return res.status(500).json("user or password is wrong");
-      }
-      const validPassword = bcrypt.compare(req.body.password, user.password);
-      if (!validPassword) {
-        res.status(200).json("user or password is wrong");
       } else {
-        const accessToken = generateAccessToken(user);
-        res.status(200).json({
-          email: user.email,
-          isAdmin: user.isAdmin,
-          accessToken,
-        });
+        const validPassword = await bcrypt.compare(
+          req.body.password,
+          user.password
+        );
+        if (!validPassword) {
+          return res.status(200).json("user or password is wrong");
+        } else {
+          const accessToken = generateAccessToken(user);
+          res.status(200).json({
+            email: user.email,
+            isAdmin: user.isAdmin,
+            accessToken,
+          });
+        }
       }
     } catch (error) {
       res.status(500).json(error);

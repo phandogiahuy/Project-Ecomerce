@@ -19,6 +19,7 @@ const Title = styled.h1`
   font-weight: 700;
   margin: 10px;
   font-size: 50px;
+  margin-left: 50px;
 `;
 const PopularProduct = ({ cat, sort }) => {
   const [product, setProduct] = useState([]);

@@ -4,7 +4,7 @@ import Item from "antd/es/list/Item";
 import React from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { removeProduct } from "../reduxToolkit/cartRedux";
+import { clearCart, removeProduct } from "../reduxToolkit/cartRedux";
 import { Link } from "react-router-dom";
 const Container = styled.div`
   display: flex;
@@ -48,7 +48,9 @@ const Total = styled.p`
   font-family: "Quicksand", sans-serif;
   font-size: 16px;
 `;
-const Bottom = styled.div``;
+const Bottom = styled.div`
+  position: relative;
+`;
 const Price = styled.p`
   margin-left: 150px;
   margin-top: 55px;
@@ -65,13 +67,31 @@ const Type = styled.p`
   font-weight: 400;
   font-family: "Quicksand", sans-serif;
 `;
-
+const Clear = styled.p`
+  font-size: 12px;
+  font-weight: 700;
+  position: absolute;
+  top: 0;
+  right: 3px;
+  cursor: pointer;
+`;
 const Products = styled.div``;
-const CartContent = ({ products, total }) => {
+const CartContent = ({ products }) => {
   const dispatch = useDispatch();
   if (products.length === 0) {
     return <div>No item in your cart</div>;
   }
+  const x = [];
+  products.map((i) => {
+    x.push(i.price * i.quanity);
+  });
+  let priceTotal = 0;
+  x.map((i) => {
+    priceTotal += i;
+  });
+  const handleClear = () => {
+    dispatch(clearCart());
+  };
   return (
     <Container>
       <Top>
@@ -114,7 +134,8 @@ const CartContent = ({ products, total }) => {
       </Top>
       <Bottom>
         <Title>TOTAL</Title>
-        <Total>{total}</Total>
+        <Total>{priceTotal}</Total>
+        <Clear onClick={handleClear}>Clear cart</Clear>
       </Bottom>
       <Link to={"/Cart/"}>
         <Space wrap style={{ display: "flex", justifyContent: "center" }}>

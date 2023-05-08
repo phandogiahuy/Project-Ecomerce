@@ -11,15 +11,15 @@ const ContainerSearch = styled.div`
 const InforSearch = styled.div`
   display: flex;
   padding: 10px;
+  height: 90px;
 `;
-const { Search } = Input;
 const SearchInput = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [type, setType] = useState(false);
 
   const debouncedSetQuery = debounce((value) => {
     setSearchQuery(value);
-  }, 5);
+  }, 50);
   const { data, isLoading, isError } = useSearch(searchQuery);
   const handleSearch = (e) => {
     debouncedSetQuery(e.target.value);

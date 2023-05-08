@@ -9,7 +9,11 @@ import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { removeProduct, updateProduct } from "../reduxToolkit/cartRedux";
+import {
+  clearCart,
+  removeProduct,
+  updateProduct,
+} from "../reduxToolkit/cartRedux";
 import StripeCheckout from "react-stripe-checkout";
 import { useDiscount } from "../hooks/detail/useDiscounByCode";
 import { AxiosInstance } from "../requestMethod";
@@ -30,7 +34,7 @@ const Top = styled.div``;
 const Continue = styled.a`
   font-family: "Work Sans", sans-serif;
   text-decoration: underline;
-  margin-left: 1300px;
+  margin-left: 1000px;
   transition: all 0.5s ease-out;
   font-size: 20px;
   cursor: pointer;
@@ -136,15 +140,26 @@ const InforDiscount = styled.p`
   font-size: 16px;
   top: 40px;
 `;
+const ClearCart = styled.div`
+  font-family: "Work Sans", sans-serif;
+  text-decoration: underline;
+  transition: all 0.5s ease-out;
+  font-size: 20px;
+  cursor: pointer;
+  :hover {
+    font-size: large;
+    text-decoration: none;
+  }
+`;
 const Cart = () => {
   const [top, setTop] = useState(10);
   const { products } = useSelector((state) => state.cart);
   const [stripeToken, setStripeToken] = useState(null);
-  const { currentUser } = useSelector((state) => state.user);
+  // const { currentUser } = useSelector((state) => state.user);
   const [discount, setDiscount] = useState(0);
   const [discounts, getDiscounts] = useState(0);
   const navigate = useNavigate();
-
+  const currentUser = localStorage.getItem("username");
   const onToken = (token) => {
     setStripeToken(token);
   };
@@ -200,10 +215,14 @@ const Cart = () => {
     priceAllProduct = 0;
     ship = 0;
   }
+  let freeShip = 100 - priceTotal;
+  const handleClear = () => {
+    dispatch(clearCart());
+  };
   return (
     <Container>
-      <Navbar />
       <Announcement />
+      <Navbar />
       <Wrapper>
         <Title>Your cart</Title>
         <Top>
@@ -215,13 +234,11 @@ const Cart = () => {
           </TopTexts>
         </Top>
         <Middle>
-          <Affix offsetTop={top}>
-            <Type>
-              <TypeProduct>Product</TypeProduct>
-              <Quanity>Quantity</Quanity>
-              <Price>Price</Price>
-            </Type>
-          </Affix>
+          <Type>
+            <TypeProduct>Product</TypeProduct>
+            <Quanity>Quantity</Quanity>
+            <Price>Price</Price>
+          </Type>
           <Divider></Divider>
           {products.map((item) => (
             <Product key={item.product._id}>
@@ -260,6 +277,7 @@ const Cart = () => {
           ))}
         </Middle>
         <Divider></Divider>
+        <ClearCart onClick={handleClear}>Clear cart</ClearCart>
         <Bottom>
           <Summary>
             <SummaryDiscount>
@@ -316,6 +334,20 @@ const Cart = () => {
               </SummaryItemText>
               <SummaryItemPrice>{ship}</SummaryItemPrice>
             </SummaryItem>
+
+            {freeShip > 0 && (
+              <SummaryItem>
+                <SummaryItemText>
+                  <b
+                    style={{
+                      fontSize: 15,
+                    }}
+                  >
+                    (Buying more {freeShip}$ to give free shipping)
+                  </b>
+                </SummaryItemText>
+              </SummaryItem>
+            )}
             <SummaryItem>
               <SummaryItemText>
                 <b
@@ -330,6 +362,7 @@ const Cart = () => {
               </SummaryItemText>
               <SummaryItemPrice>{discounts}%</SummaryItemPrice>
             </SummaryItem>
+
             <SummaryItem>
               <SummaryItemText>
                 <b
@@ -351,8 +384,8 @@ const Cart = () => {
                 image="/logo.jpeg"
                 billingAddress
                 shippingAddress
-                description={`Your total is $${priceAllProduct}`}
-                amount={priceAllProduct * 100}
+                description={`Your total is $${Math.round(priceAllProduct)}`}
+                amount={Math.round(priceAllProduct) * 100}
                 token={onToken}
                 stripeKey={KEY}
               >

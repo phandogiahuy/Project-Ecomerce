@@ -61,10 +61,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router}>
-        <PersistGate loading={null} persistor={persistor}>
-          <App />
-        </PersistGate>
+        <App />
       </RouterProvider>
     </QueryClientProvider>
   </Provider>
 );
+// <PersistGate loading={null} persistor={persistor}>
+// </PersistGate>

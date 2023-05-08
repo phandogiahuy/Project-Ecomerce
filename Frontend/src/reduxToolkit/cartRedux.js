@@ -4,11 +4,11 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: {
     products: [],
-    total: 0,
+    // total: 0,
   },
   reducers: {
     addProduct: (state, action) => {
-      state.total += action.payload.totalItem;
+      // state.total += action.payload.totalItem;
       const existingItemIndex = state.products.findIndex(
         (item) =>
           item.product._id === action.payload.product._id &&
@@ -38,13 +38,13 @@ const cartSlice = createSlice({
           item.size === action.payload.size
       );
       if (existingItemIndex !== -1) {
-        state.total = state.total - action.payload.totalItem;
+        // state.total = state.total - action.payload.totalItem;
         state.products.splice(existingItemIndex, 1);
       }
     },
     clearCart: (state) => {
       state.products = [];
-      state.total = 0;
+      // state.total = 0;
     },
   },
 });

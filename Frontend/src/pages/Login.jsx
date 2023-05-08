@@ -1,27 +1,37 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
 import styled from "styled-components";
-import { login } from "../reduxToolkit/callAPI";
+// import { login } from "../reduxToolkit/callAPI";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+import { Link, redirect, useNavigate, useNavigation } from "react-router-dom";
+import { useLogin } from "../hooks/useLogin";
+import { useMutation, useQueryClient } from "react-query";
 const Container = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 10%;
 `;
 const Error = styled.div``;
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
   const [fail, setFail] = useState(0);
-  const { isFetching, error } = useSelector((state) => state.user);
+  const { mutate, isLoading, data } = useMutation(useLogin);
+  const navigate = useNavigate();
+
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch, { email, password });
-    setFail(fail + 1);
+    mutate({ password, email });
   };
+  if (data) {
+    if (data.email) {
+      localStorage.setItem("token", data.accessToken);
+      localStorage.setItem("username", data.email);
+      return navigate("/");
+    }
+  }
   return (
     <Container>
       <Form
@@ -63,30 +73,57 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Item>
-        <Form.Item>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
 
-          <a className="login-form-forgot" href="">
-            Forgot password
-          </a>
-        </Form.Item>
         <Form.Item>
           <Button
             type="primary"
             htmlType="submit"
             className="login-form-button"
             onClick={handleClick}
-            disabled={isFetching}
+            disabled={isLoading}
           >
-            <Link to="/">Log in</Link>
-          </Button>
+            {isLoading ? "Logging in..." : "Log in"}
 
-          {error && fail > 0 && <Error>Your password or email is wrong</Error>}
+            {data && !data.email && <div>User or password is wrong</div>}
+          </Button>
         </Form.Item>
       </Form>
     </Container>
   );
 };
 export default Login;
+// import { useQueryClient } from 'react-query';
+// import Login from './Login';
+
+// function App() {
+//   const queryClient = useQueryClient();
+//   const user = queryClient.getQueryData('user');
+
+//   const handleLogout = () => {
+//     queryClient.setQueryData('user', null);
+//   };
+
+//   return (
+//     <div>
+//       {user ? (
+//         <div>
+//           <p>Welcome, {user.username}!</p>
+//           <button onClick={handleLogout}>Log out</button>
+//         </div>
+//       ) : (
+//         <Login />
+//       )}
+//     </div>
+//   );
+// }
+// <Form.Item>
+//   <Form.Item name="remember" valuePropName="checked" noStyle>
+//     <Checkbox>Remember me</Checkbox>
+//   </Form.Item>
+
+//   <a className="login-form-forgot" href="">
+//     Forgot password
+//   </a>
+// </Form.Item>
+
+// {error && fail > 0 && <Error>Your password or email is wrong</Error>}

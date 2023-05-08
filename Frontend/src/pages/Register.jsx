@@ -1,9 +1,9 @@
 import { Button, Form, Input, message } from "antd";
 import styled from "styled-components";
-import { register } from "../reduxToolkit/callAPI";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "react-query";
+import { useRegister } from "../hooks/useRegister";
 
 const Container = styled.div``;
 const Wrapper = styled.div``;
@@ -44,17 +44,24 @@ const Register = () => {
   const [username, setUserName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { mutate, data } = useMutation(useRegister);
+
   const success = () => {
     messageApi.open({
       type: "success",
       content: "You create an account sucessfully",
     });
-    register(dispatch, { username, email, password });
+    mutate({ username, email, password });
   };
-  // register({ nickname, email, password });
+  if (data) {
+    if (data.email) {
+      localStorage.setItem("username", data.email);
+      return navigate("/");
+    }
+  }
   const [form] = Form.useForm();
-
   return (
     <Container>
       <Wrapper>

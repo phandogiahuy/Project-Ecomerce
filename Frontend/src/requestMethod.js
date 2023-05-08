@@ -8,9 +8,7 @@ export const AxiosInstance = axios.create({
 
 AxiosInstance.interceptors.request.use(
   async (request) => {
-    const state = store.getState();
-    const accessToken = state.user.currentUser?.accessToken;
-
+    const accessToken = localStorage.getItem("token");
     request.headers.Authorization = accessToken
       ? `Bearer ${accessToken}`
       : null;

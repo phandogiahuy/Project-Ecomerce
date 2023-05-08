@@ -2,23 +2,18 @@ import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge, Popover, Affix } from "antd";
 
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import { mobile } from "../responsive";
 
 import CartContent from "./CartContent";
-import { logout } from "../reduxToolkit/userSlice";
 import { clearCart } from "../reduxToolkit/cartRedux";
-<<<<<<< HEAD
-import { throttle } from "lodash";
-import axios from "axios";
-const { Search } = Input;
-=======
+
 import SearchInput from "./Search";
+
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
->>>>>>> 5e53ff8cca34a028ca88bc5352dc852f3a6f1ac9
 const Container = styled.div`
   height: 130px;
   ${mobile({ height: "50px" })}
@@ -71,37 +66,28 @@ const SearchComponent = styled.p`
   font-size: 25px;
   cursor: pointer;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
-  margin-top: 60px;
+  margin-top: 20px;
   padding: 20px;
   margin-left: 40px;
 `;
 
 const Navbar = () => {
   const { products, total } = useSelector((state) => state.cart);
-  const { currentUser } = useSelector((state) => state.user);
-  const [top, setTop] = useState(10);
+  const token = localStorage.getItem("token");
+  const currentUser = localStorage.getItem("username");
 
+  const [top, setTop] = useState(10);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
-    dispatch(logout());
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
     dispatch(clearCart());
   };
-<<<<<<< HEAD
-  const handleSearch = async (e) => {
-    try {
-      throttle(function () {
-        const res = axios.get(
-          `//localhost:3000/api/product?title=${e.target.value}`
-        );
-      }, 2000);
-    } catch (error) {}
-  };
-=======
 
->>>>>>> 5e53ff8cca34a028ca88bc5352dc852f3a6f1ac9
   return (
-    <Affix>
+    <Affix offsetTop={30}>
       <Container>
         <Wrapper>
           <Left>
@@ -122,7 +108,7 @@ const Navbar = () => {
             </Center>
           </Link>
           <Right>
-            {currentUser ? (
+            {token || currentUser ? (
               <MenuItem onClick={handleLogOut}>Log out</MenuItem>
             ) : (
               <Popover
@@ -134,8 +120,8 @@ const Navbar = () => {
                 <MenuItem>REGISTER</MenuItem>
               </Popover>
             )}
-            {currentUser ? (
-              <MenuItem> {currentUser.email}</MenuItem>
+            {token || currentUser ? (
+              <MenuItem>{currentUser} </MenuItem>
             ) : (
               <Popover
                 content={<Login />}

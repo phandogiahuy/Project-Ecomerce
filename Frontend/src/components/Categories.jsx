@@ -20,6 +20,7 @@ const Title = styled.h1`
   font-size: 50px;
   ${mobile({ marginTop: "150px" })}
   padding: 5px;
+  margin-left: 50px;
 `;
 const Categories = () => {
   return (
