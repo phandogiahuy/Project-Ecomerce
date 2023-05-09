@@ -45,7 +45,7 @@ class UserController {
       res.status(500).json(error);
     }
   }
-  //show a user
+  //show all user
   async showAll(req, res) {
     const query = req.query.new;
     try {
