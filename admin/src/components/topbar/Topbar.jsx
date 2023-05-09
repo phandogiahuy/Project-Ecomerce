@@ -1,6 +1,4 @@
-import React from "react";
 import "./topbar.css";
-import { NotificationsNone, Language, Settings } from "@material-ui/icons";
 
 export default function Topbar() {
   return (
@@ -11,7 +9,6 @@ export default function Topbar() {
         </div>
         <div className="topRight">
           <div className="topbarIconContainer">
-            <NotificationsNone />
             <span className="topIconBadge">2</span>
           </div>
           <img src="/PopularProduct/1.jpg" alt="" className="topAvatar" />

@@ -4,7 +4,6 @@ import styled from "styled-components";
 // import { login } from "../reduxToolkit/callAPI";
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
-import { useUsertById } from "../hooks/detail/useUserbyId";
 const Container = styled.div`
   display: flex;
   justify-content: center;

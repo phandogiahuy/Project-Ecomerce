@@ -45,6 +45,9 @@ class UserController {
       res.status(500).json(error);
     }
   }
+  async getMe(req, res) {
+    res.json(req.user);
+  }
   //show all user
   async showAll(req, res) {
     const query = req.query.new;

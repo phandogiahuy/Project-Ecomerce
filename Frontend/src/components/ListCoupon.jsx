@@ -66,7 +66,7 @@ const ListCoupon = () => {
       <Title> Discount Code </Title>
       <Wrapper slideIndex={slideIndex}>
         {res.data.map((item) => (
-          <Coupon data={item} />
+          <Coupon data={item} key={item._id} />
         ))}
       </Wrapper>
       <Arrow direction="right" onClick={() => handleClick("right")}>

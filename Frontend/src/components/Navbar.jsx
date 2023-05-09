@@ -15,6 +15,7 @@ import SearchInput from "./Search";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useUsertById } from "../hooks/detail/useUserbyId";
+import { useUser } from "../hooks/useUser";
 const Container = styled.div`
   height: 130px;
   ${mobile({ height: "50px" })}
@@ -50,7 +51,7 @@ const Right = styled.div`
 `;
 const Logo = styled.h1`
   font-weight: bold;
-  font-size: 90px;
+  font-size: 70px;
   font-family: "Youth Action", sans-serif;
   text-align: center;
   ${mobile({ fontSize: "20px", flex: 2 })}
@@ -60,53 +61,50 @@ const LogoImage = styled.img`
   width: 10%;
 `;
 const MenuItem = styled.div`
-  font-size: 25px;
+  font-size: 20px;
   cursor: pointer;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
-  margin-top: 60px;
-  padding: 20px;
+  margin-top: 30px;
+  margin-left: 50px;
+  padding: 10px;
 `;
 const SearchComponent = styled.p`
   font-size: 25px;
   cursor: pointer;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
-  margin-top: 20px;
+  margin-top: 1px;
   padding: 20px;
   margin-left: 20px;
 `;
 
 const Navbar = () => {
   const { products, total } = useSelector((state) => state.cart);
-  const [currentUser, setCurrentUser] = useState("");
   const token = localStorage.getItem("token");
-  const id = localStorage.getItem("id");
-  const user = useUsertById(id);
+  const { data: user } = useUser();
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     try {
+  //       const res = user;
 
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        const res = user;
-
-        if (res.isLoading) {
-          return <div>...loading</div>;
-        }
-        if (res.error) {
-          return <div>{res.error.message}</div>;
-        }
-        if (res.isSuccess) {
-          setCurrentUser(res.data.email);
-        }
-      } catch (err) {}
-    };
-    getUser();
-  });
+  //       if (res.isLoading) {
+  //         return <div>...loading</div>;
+  //       }
+  //       if (res.error) {
+  //         return <div>{res.error.message}</div>;
+  //       }
+  //       if (res.isSuccess) {
+  //         console.log(res.data);
+  //       }
+  //     } catch (err) {}
+  //   };
+  //   getUser();
+  // });
   const [top, setTop] = useState(10);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("id");
     dispatch(clearCart());
   };
 
@@ -149,7 +147,7 @@ const Navbar = () => {
               </Popover>
             )}
             {token ? (
-              <MenuItem>{currentUser} </MenuItem>
+              <MenuItem>{user.email} </MenuItem>
             ) : (
               <Popover
                 content={<Login />}

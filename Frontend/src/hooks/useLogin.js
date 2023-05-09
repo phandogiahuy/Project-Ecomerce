@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { AxiosInstance } from "../requestMethod";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { message } from "antd";
+import { GET_USER } from "../constant/queryKey";
 
 const login = async ({ email, password }) => {
   const res = await AxiosInstance.post("/auth/login", {
@@ -12,12 +13,12 @@ const login = async ({ email, password }) => {
 };
 export const useLogin = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   return useMutation(login, {
     onSuccess: (data) => {
       if (data.email) {
         localStorage.setItem("token", data.accessToken);
-        // localStorage.setItem("username", data.email);
-        localStorage.setItem("id", data.id);
+        queryClient.setQueryData([GET_USER], (oldData) => data);
         navigate("/");
       }
     },

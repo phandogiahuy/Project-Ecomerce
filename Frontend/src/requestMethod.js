@@ -1,5 +1,4 @@
 import axios from "axios";
-import { store } from "./reduxToolkit/store";
 const BASE_URL = "http://localhost:3000/api/";
 
 export const AxiosInstance = axios.create({

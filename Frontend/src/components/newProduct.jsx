@@ -13,7 +13,8 @@ const Infor = styled.div`
   justify-content: center;
   cursor: pointer;
   transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  margin-left: 20px;
+  margin-left: 10px;
+  margin-bottom: 7px;
   font-family: "g Guarantee", sans-serif;
 
   :hover {
@@ -68,7 +69,7 @@ const Product = ({ item }) => {
       md={{ span: 6 }}
       sm={{ span: 12 }}
       xs={{ span: 24 }}
-      lg={{ span: 4 }}
+      lg={{ span: 6 }}
     >
       <Card style={{ width: 400, border: "none" }}>
         <Link to={`/product/${item._id}`}>

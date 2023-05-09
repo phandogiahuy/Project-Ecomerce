@@ -1,7 +1,6 @@
+import { AxiosInstance } from "../../requestMethods";
 import "./widgetSm.css";
-import { Visibility } from "@material-ui/icons";
 import { useEffect, useState } from "react";
-import { userRequest } from "../../requestMethods";
 
 export default function WidgetSm() {
   const [users, setUsers] = useState([]);
@@ -9,7 +8,7 @@ export default function WidgetSm() {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const res = await userRequest.get("user/?new=true");
+        const res = await AxiosInstance.get("user/?new=true");
         setUsers(res.data);
       } catch {}
     };
@@ -25,10 +24,7 @@ export default function WidgetSm() {
             <div className="widgetSmUser">
               <span className="widgetSmUsername">{user.username}</span>
             </div>
-            <button className="widgetSmButton">
-              <Visibility className="widgetSmIcon" />
-              Display
-            </button>
+            <button className="widgetSmButton">Display</button>
           </li>
         ))}
       </ul>

@@ -1,14 +1,19 @@
 import axios from "axios";
-
 const BASE_URL = "http://localhost:3000/api/";
-const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NDhkNjljMjFhOTIxMTY0MjhiMmUwOCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4MzI2MzUzMywiZXhwIjoxNjgzNTIyNzMzfQ.TpVT5YFWe00NfnPWcCMGGACINx6bs4FlU515gJu-0eU";
 
-export const publicRequest = axios.create({
+export const AxiosInstance = axios.create({
   baseURL: BASE_URL,
 });
 
-export const userRequest = axios.create({
-  baseURL: BASE_URL,
-  headers: { token: `Bearer ${TOKEN}` },
-});
+AxiosInstance.interceptors.request.use(
+  async (request) => {
+    const accessToken = localStorage.getItem("token");
+    request.headers.Authorization = accessToken
+      ? `Bearer ${accessToken}`
+      : null;
+    request.baseURL = BASE_URL;
+
+    return request;
+  },
+  (error) => Promise.reject(error)
+);
