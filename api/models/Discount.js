@@ -10,6 +10,9 @@ const DiscountShema = new mongoose.Schema(
     sale: {
       type: Number,
     },
+    limit: {
+      type: Number,
+    },
   },
   { timestamps: true }
 );

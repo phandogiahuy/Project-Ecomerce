@@ -56,6 +56,9 @@ const Logo = styled.h1`
   ${mobile({ fontSize: "20px", flex: 2 })}
   cursor: pointer;
 `;
+const LogoImage = styled.img`
+  width: 10%;
+`;
 const MenuItem = styled.div`
   font-size: 25px;
   cursor: pointer;
@@ -69,7 +72,7 @@ const SearchComponent = styled.p`
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
   margin-top: 20px;
   padding: 20px;
-  margin-left: 40px;
+  margin-left: 20px;
 `;
 
 const Navbar = () => {
@@ -125,7 +128,11 @@ const Navbar = () => {
           </Left>
           <Link to="/" style={{ textDecoration: "none", color: "black" }}>
             <Center>
-              <Logo>AROMA deLute.</Logo>
+              <Logo>
+                {" "}
+                <LogoImage src="vite.png" />
+                AROMA deLute.
+              </Logo>
             </Center>
           </Link>
           <Right>

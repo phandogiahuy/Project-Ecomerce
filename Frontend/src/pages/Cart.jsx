@@ -131,7 +131,7 @@ const SummaryTitle = styled.h1``;
 const SummaryDiscount = styled.span`
   display: flex;
   position: relative;
-  margin-bottom: 25px;
+  margin-bottom: 50px;
 `;
 const SummaryItemText = styled.span``;
 const SummaryItemPrice = styled.span``;
@@ -159,6 +159,7 @@ const Cart = () => {
   // const { currentUser } = useSelector((state) => state.user);
   const [discount, setDiscount] = useState(0);
   const [discounts, getDiscounts] = useState(0);
+  const [limit, getLimit] = useState(0);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const resDiscount = useDiscount(discount);
@@ -176,6 +177,7 @@ const Cart = () => {
       }
       if (res.isSuccess) {
         getDiscounts(res.data[0].sale);
+        getLimit(res.data[0].limit);
       }
     } catch (error) {}
   };
@@ -227,6 +229,7 @@ const Cart = () => {
   const handleClear = () => {
     dispatch(clearCart());
   };
+  console.log(priceTotal, limit);
   return (
     <Container>
       <Announcement />
@@ -303,9 +306,13 @@ const Cart = () => {
               >
                 Submit
               </Button>
-              {discounts ? (
+              {limit < priceTotal && discounts ? (
                 <InforDiscount>
                   You are discount about {discounts}% for total
+                </InforDiscount>
+              ) : limit >= priceTotal && discounts ? (
+                <InforDiscount>
+                  You are not eligible to apply this discount code
                 </InforDiscount>
               ) : (
                 <InforDiscount>

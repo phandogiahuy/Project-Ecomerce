@@ -43,6 +43,9 @@ const Coupon = ({ data }) => {
         <Discount>{data.sale}% off</Discount>
       </ContainerBody>
       <ContainerFooter>
+        <Code>
+          This discount code will apply with order above {data.limit}$
+        </Code>
         <Button
           type="primary"
           onClick={handleClick}
@@ -51,6 +54,7 @@ const Coupon = ({ data }) => {
             height: "50px",
             width: "150px",
             backgroundColor: "#141246",
+            marginTop: "10px",
           }}
         >
           Copy
@@ -59,6 +63,5 @@ const Coupon = ({ data }) => {
     </Card>
   );
 };
-// <Code>This discount code will decrease {data.sale}% on your total</Code>
 
 export default Coupon;

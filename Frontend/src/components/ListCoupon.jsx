@@ -19,8 +19,8 @@ const Title = styled.h1`
   margin-left: 50px;
 `;
 const Wrapper = styled.div`
-  height: 90%;
-  width: 150%;
+  height: 100%;
+  width: 200%;
   padding: 10px;
   display: flex;
   transform: translateX(${(props) => props.slideIndex * -100}vw);
@@ -42,7 +42,7 @@ const Arrow = styled.div`
   right: ${(props) => props.direction === "right" && "8px"};
   cursor: pointer;
   z-index: 2;
-  opacity: 4;
+  opacity: 0.5;
 `;
 const ListCoupon = () => {
   const [slideIndex, setSlideIndex] = useState(0);
@@ -53,9 +53,9 @@ const ListCoupon = () => {
   }
   const handleClick = (direction) => {
     if (direction === "left") {
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 1);
     } else {
-      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+      setSlideIndex(slideIndex < 1 ? slideIndex + 1 : 0);
     }
   };
   return (
