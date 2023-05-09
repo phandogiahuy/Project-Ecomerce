@@ -16,7 +16,11 @@ export const useLogin = () => {
     onSuccess: (data) => {
       if (data.email) {
         localStorage.setItem("token", data.accessToken);
+<<<<<<< HEAD
         // localStorage.setItem("username", data.email);
+=======
+        localStorage.setItem("id", data.id);
+>>>>>>> 3c9985865557899802894c5f562a61569e1db6a4
         navigate("/");
       }
     },

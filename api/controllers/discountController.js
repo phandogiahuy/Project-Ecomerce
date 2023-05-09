@@ -19,13 +19,21 @@ class DiscountController {
       res.status(500).json(err);
     }
   }
-  //GET PRODUCT
+  //GET Discount
   async get(req, res) {
     try {
       const discount = await Discount.find({ code: req.params.code });
       res.status(200).json(discount);
     } catch (err) {
       res.status(500);
+    }
+  }
+  async getAll(req, res) {
+    try {
+      const discount = await Discount.find();
+      res.status(200).json(discount);
+    } catch (err) {
+      res.status(500).json(err);
     }
   }
 }

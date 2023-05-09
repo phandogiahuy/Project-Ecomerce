@@ -7,6 +7,8 @@ import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import PopularProduct from "../components/PopularProduct";
 import SimpleSlider from "../components/Slider";
+import Coupon from "../components/Coupon";
+import ListCoupon from "../components/ListCoupon";
 
 const Home = () => {
   return (
@@ -16,6 +18,7 @@ const Home = () => {
       <SimpleSlider />
       <Categories />
       <PopularProduct />
+      <ListCoupon />
       <Newsletter />
       <Footer />
     </div>

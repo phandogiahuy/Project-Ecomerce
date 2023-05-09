@@ -5,9 +5,8 @@ import { GET_DISCOUNT_CODE } from "../../constant/queryKey";
 
 const getDiscount = async (code) => {
   const { data } = await axios.get(
-    `http://localhost:3000/api/discount/${code}`
+    `http://localhost:3000/api/discount/find/${code}`
   );
-  console.log(data);
   return data;
 };
 const useDiscount = (code) =>

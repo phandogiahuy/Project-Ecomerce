@@ -3,9 +3,8 @@ import { Button, Checkbox, Form, Input } from "antd";
 import styled from "styled-components";
 // import { login } from "../reduxToolkit/callAPI";
 import { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-import { Link, redirect, useNavigate, useNavigation } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
+import { useUsertById } from "../hooks/detail/useUserbyId";
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -16,9 +15,7 @@ const Error = styled.div``;
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fail, setFail] = useState(0);
   const { mutate, isLoading } = useLogin();
-  const navigate = useNavigate();
 
   const handleClick = (e) => {
     e.preventDefault();

@@ -12,8 +12,9 @@ import { clearCart } from "../reduxToolkit/cartRedux";
 
 import SearchInput from "./Search";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useUsertById } from "../hooks/detail/useUserbyId";
 const Container = styled.div`
   height: 130px;
   ${mobile({ height: "50px" })}
@@ -73,16 +74,36 @@ const SearchComponent = styled.p`
 
 const Navbar = () => {
   const { products, total } = useSelector((state) => state.cart);
+  const [currentUser, setCurrentUser] = useState("");
   const token = localStorage.getItem("token");
-  const currentUser = localStorage.getItem("username");
+  const id = localStorage.getItem("id");
+  const user = useUsertById(id);
 
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = user;
+
+        if (res.isLoading) {
+          return <div>...loading</div>;
+        }
+        if (res.error) {
+          return <div>{res.error.message}</div>;
+        }
+        if (res.isSuccess) {
+          setCurrentUser(res.data.email);
+        }
+      } catch (err) {}
+    };
+    getUser();
+  });
   const [top, setTop] = useState(10);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("username");
+    localStorage.removeItem("id");
     dispatch(clearCart());
   };
 
@@ -108,7 +129,7 @@ const Navbar = () => {
             </Center>
           </Link>
           <Right>
-            {token || currentUser ? (
+            {token ? (
               <MenuItem onClick={handleLogOut}>Log out</MenuItem>
             ) : (
               <Popover
@@ -120,7 +141,7 @@ const Navbar = () => {
                 <MenuItem>REGISTER</MenuItem>
               </Popover>
             )}
-            {token || currentUser ? (
+            {token ? (
               <MenuItem>{currentUser} </MenuItem>
             ) : (
               <Popover

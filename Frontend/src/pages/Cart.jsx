@@ -34,10 +34,11 @@ const Top = styled.div``;
 const Continue = styled.a`
   font-family: "Work Sans", sans-serif;
   text-decoration: underline;
-  margin-left: 1000px;
+  margin-left: 80%;
   transition: all 0.5s ease-out;
   font-size: 20px;
   cursor: pointer;
+  width: fit-content;
   :hover {
     font-size: large;
     text-decoration: none;
@@ -54,7 +55,6 @@ const ProductImage = styled.img`
 const TopTexts = styled.div``;
 const TopText = styled.span`
   text-decoration: underline;
-  cursor: pointer;
   margin: 0px 10px;
   font-size: 25px;
 `;
@@ -140,11 +140,12 @@ const InforDiscount = styled.p`
   font-size: 16px;
   top: 40px;
 `;
-const ClearCart = styled.div`
+const ClearCart = styled.p`
   font-family: "Work Sans", sans-serif;
   text-decoration: underline;
   transition: all 0.5s ease-out;
   font-size: 20px;
+  width: fit-content;
   cursor: pointer;
   :hover {
     font-size: large;
@@ -159,16 +160,23 @@ const Cart = () => {
   const [discount, setDiscount] = useState(0);
   const [discounts, getDiscounts] = useState(0);
   const navigate = useNavigate();
-  const currentUser = localStorage.getItem("username");
+  const token = localStorage.getItem("token");
+  const resDiscount = useDiscount(discount);
   const onToken = (token) => {
     setStripeToken(token);
   };
   const handleDiscount = async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:3000/api/discount/${discount}`
-      );
-      getDiscounts(res.data[0].sale);
+      const res = resDiscount;
+      if (res.isLoading) {
+        return <div>...loading</div>;
+      }
+      if (res.error) {
+        return <div>{res.error.message}</div>;
+      }
+      if (res.isSuccess) {
+        getDiscounts(res.data[0].sale);
+      }
     } catch (error) {}
   };
   useEffect(() => {
@@ -378,7 +386,7 @@ const Cart = () => {
               <SummaryItemPrice>{Math.round(priceAllProduct)}</SummaryItemPrice>
             </SummaryItem>
 
-            {currentUser ? (
+            {token ? (
               <StripeCheckout
                 name="AROMA deLUTE"
                 image="/logo.jpeg"
