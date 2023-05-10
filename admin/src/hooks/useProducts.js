@@ -6,7 +6,7 @@ import {
   useQueryClient,
 } from "react-query";
 
-import { GET_PRODUCTS } from "../constant/queryKey";
+import { GET_PRODUCTS, GET_PRODUCT_ID } from "../constant/queryKey";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { AxiosInstance } from "../requestMethods";
@@ -30,8 +30,7 @@ const useGetProducts = () => {
 
   return useMutation(postProducts, {
     onSuccess: (data) => {
-      console.log(data);
-      queryClient.invalidateQueries([GET_PRODUCTS]);
+      queryClient.invalidateQueries([GET_PRODUCT_ID]);
       navigate("/product");
     },
     onError: (e) => {

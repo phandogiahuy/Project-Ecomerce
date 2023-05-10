@@ -13,6 +13,7 @@ import Home from "./pages/home/Home";
 import UserList from "./pages/userList/UserList";
 import ProductList from "./pages/productList/ProductList";
 import NewProduct from "./pages/newProduct/NewProduct";
+import EditProduct from "./pages/product/editProduct";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/newProduct",
         element: <NewProduct />,
+      },
+      {
+        path: "/edit/:_id",
+        element: <EditProduct />,
       },
     ],
   },

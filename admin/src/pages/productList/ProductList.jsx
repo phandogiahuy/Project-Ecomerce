@@ -4,6 +4,7 @@ import { Table, Tag, Space, Button, Image } from "antd";
 import { useState } from "react";
 import { useProducts } from "../../hooks/useProducts";
 import { useDeleteProduct } from "../../hooks/detail/useDeleteProductById";
+import { Link } from "react-router-dom";
 
 export default function ProductList() {
   const { mutate } = useDeleteProduct();
@@ -69,7 +70,9 @@ export default function ProductList() {
       key: "_id",
       render: (_id) => (
         <Space size="middle">
-          <Button>Edit</Button>
+          <Link to={`/edit/` + _id}>
+            <Button>Edit</Button>
+          </Link>
           <Button onClick={() => handleDelete(_id)}>Delete</Button>
         </Space>
       ),
