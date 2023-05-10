@@ -69,7 +69,7 @@ const Product = ({ item }) => {
       md={{ span: 6 }}
       sm={{ span: 12 }}
       xs={{ span: 24 }}
-      lg={{ span: 6 }}
+      lg={{ span: 4 }}
     >
       <Card style={{ width: 400, border: "none" }}>
         <Link to={`/product/${item._id}`}>

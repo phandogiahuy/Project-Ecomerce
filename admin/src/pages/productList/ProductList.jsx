@@ -1,6 +1,6 @@
 import "./productList.css";
 
-import { Radio, Table, Tag, Space, Button } from "antd";
+import { Table, Tag, Space, Button, Image } from "antd";
 import { useState } from "react";
 import { useProducts } from "../../hooks/useProducts";
 import { useDeleteProduct } from "../../hooks/detail/useDeleteProductById";
@@ -8,7 +8,6 @@ import { useDeleteProduct } from "../../hooks/detail/useDeleteProductById";
 export default function ProductList() {
   const { mutate } = useDeleteProduct();
 
-  const [selectionType, setSelectionType] = useState("checkbox");
   const res = useProducts();
   if (res.isLoading) {
     return <div>...loading</div>;
@@ -17,7 +16,7 @@ export default function ProductList() {
     {
       title: "STT",
       dataIndex: "index",
-      render: (text, record, index) => index,
+      render: (text, record, index) => index + 1,
     },
     {
       title: "Name",
@@ -28,7 +27,7 @@ export default function ProductList() {
       title: "",
       dataIndex: "img",
       render: (img) => (
-        <img src={img} style={{ width: "20%", height: "20%" }} />
+        <Image src={img} style={{ width: "50%", height: "20%" }} />
       ),
     },
     {
@@ -81,34 +80,10 @@ export default function ProductList() {
   };
 
   // rowSelection object indicates the need for row selection
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
-    },
-  };
 
   return (
-    <div style={{ flex: 4 }}>
-      <Radio.Group
-        onChange={({ target: { value } }) => {
-          setSelectionType(value);
-        }}
-        value={selectionType}
-      ></Radio.Group>
-
-      <Table
-        rowSelection={{
-          type: selectionType,
-          ...rowSelection,
-        }}
-        bordered
-        columns={columns}
-        dataSource={res.data}
-      />
+    <div style={{ flex: 1 }}>
+      <Table bordered columns={columns} dataSource={res.data} />
     </div>
   );
 }

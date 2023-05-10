@@ -12,6 +12,7 @@ import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import UserList from "./pages/userList/UserList";
 import ProductList from "./pages/productList/ProductList";
+import NewProduct from "./pages/newProduct/NewProduct";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/product",
         element: <ProductList />,
+      },
+      {
+        path: "/newProduct",
+        element: <NewProduct />,
       },
     ],
   },

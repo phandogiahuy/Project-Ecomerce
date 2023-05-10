@@ -1,7 +1,7 @@
 import "./sidebar.css";
 
 import { Link } from "react-router-dom";
-
+import { Button } from "antd";
 export default function Sidebar() {
   return (
     <div className="sidebar">
@@ -24,6 +24,16 @@ export default function Sidebar() {
             </Link>
             <Link to="/product" className="link">
               <li className="sidebarListItem">Products</li>
+            </Link>
+            <Link to="/newProduct" className="link">
+              <li>
+                <Button
+                  size="larger"
+                  style={{ backgroundColor: "#67db6d", fontSize: "15px" }}
+                >
+                  CREATE PRODUCT
+                </Button>
+              </li>
             </Link>
           </ul>
         </div>

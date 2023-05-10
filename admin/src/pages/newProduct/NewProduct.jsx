@@ -1,126 +1,152 @@
-// import { useState } from "react";
-// import "./newProduct.css";
-// import {
-//   getStorage,
-//   ref,
-//   uploadBytesResumable,
-//   getDownloadURL,
-// } from "firebase/storage";
-// import app from "../../firebase";
-// import { addProduct } from "../../redux/apiCalls";
-// import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { Form, Input, Button, Upload, Select, Space } from "antd";
+import { storage } from "../../firebase";
+import { PlusOutlined } from "@ant-design/icons";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
+import { useGetProducts } from "../../hooks/useProducts";
+const options = [{ value: "phin" }, { value: "espresso" }, { value: "sale" }];
 
-// export default function NewProduct() {
-//   const [inputs, setInputs] = useState({});
-//   const [file, setFile] = useState(null);
-//   const [cat, setCat] = useState([]);
-//   const dispatch = useDispatch();
+const NewProduct = () => {
+  const [form] = Form.useForm();
+  const [images, setImage] = useState(null);
 
-//   const handleChange = (e) => {
-//     setInputs((prev) => {
-//       return { ...prev, [e.target.name]: e.target.value };
-//     });
-//   };
-//   const handleCat = (e) => {
-//     setCat(e.target.value.split(","));
-//   };
+  const handleImageUpload = (info) => {
+    console.log(info);
+    setImage(info.file.originFileObj);
+  };
+  const { mutate } = useGetProducts();
+  const handleFinsh = async (values) => {
+    const price = [];
+    price.push(form.getFieldValue("price250"));
+    price.push(form.getFieldValue("price500"));
+    price.push(form.getFieldValue("price1000"));
+    const imageRef = ref(storage, `images/${v4() + images.name}`);
+    const snap = await uploadBytes(imageRef, images);
+    const img = await getDownloadURL(snap.ref);
+    const { title, categories, description } = values;
+    const productData = {
+      title,
+      categories,
+      description,
+      price,
+      img,
+    };
+    console.log(img);
+    mutate(productData);
+  };
 
-//   const handleClick = (e) => {
-//     e.preventDefault();
-//     const fileName = new Date().getTime() + file.name;
-//     const storage = getStorage(app);
-//     const storageRef = ref(storage, fileName);
-//     const uploadTask = uploadBytesResumable(storageRef, file);
+  return (
+    <Form
+      form={form}
+      layout="vertical"
+      onFinish={handleFinsh}
+      style={{ width: "50%", padding: "30px" }}
+    >
+      <Form.Item
+        name="title"
+        label="Title"
+        rules={[{ required: true, message: "Please enter a title" }]}
+      >
+        <Input placeholder="Enter title" />
+      </Form.Item>
 
-//     // Register three observers:
-//     // 1. 'state_changed' observer, called any time the state changes
-//     // 2. Error observer, called on failure
-//     // 3. Completion observer, called on successful completion
-//     uploadTask.on(
-//       "state_changed",
-//       (snapshot) => {
-//         // Observe state change events such as progress, pause, and resume
-//         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-//         const progress =
-//           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-//         console.log("Upload is " + progress + "% done");
-//         switch (snapshot.state) {
-//           case "paused":
-//             console.log("Upload is paused");
-//             break;
-//           case "running":
-//             console.log("Upload is running");
-//             break;
-//         }
-//       },
-//       (error) => {
-//         // Handle unsuccessful uploads
-//       },
-//       () => {
-//         // Handle successful uploads on complete
-//         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-//         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-//           const product = { ...inputs, img: downloadURL, categories: cat };
-//           addProduct(product, dispatch);
-//         });
-//       }
-//     );
-//   };
+      <Form.Item
+        name="categories"
+        label="Category"
+        rules={[{ required: true, message: "Please select categories" }]}
+      >
+        <Select
+          mode="multiple"
+          showArrow
+          style={{ width: "100%" }}
+          options={options}
+        />
+      </Form.Item>
 
-//   return (
-//     <div className="newProduct">
-//       <h1 className="addProductTitle">New Product</h1>
-//       <form className="addProductForm">
-//         <div className="addProductItem">
-//           <label>Image</label>
-//           <input
-//             type="file"
-//             id="file"
-//             onChange={(e) => setFile(e.target.files[0])}
-//           />
-//         </div>
-//         <div className="addProductItem">
-//           <label>Title</label>
-//           <input
-//             name="title"
-//             type="text"
-//             placeholder="Apple Airpods"
-//             onChange={handleChange}
-//           />
-//         </div>
-//         <div className="addProductItem">
-//           <label>Description</label>
-//           <input
-//             name="desc"
-//             type="text"
-//             placeholder="description..."
-//             onChange={handleChange}
-//           />
-//         </div>
-//         <div className="addProductItem">
-//           <label>Price</label>
-//           <input
-//             name="price"
-//             type="text"
-//             placeholder="100"
-//             onChange={handleChange}
-//           />
-//         </div>
-//         <div className="addProductItem">
-//           <label>Categories</label>
-//           <input type="text" placeholder="jeans,skirts" onChange={handleCat} />
-//         </div>
-//         <div className="addProductItem">
-//           <label>Stock</label>
-//           <select name="inStock" onChange={handleChange}>
-//             <option value="true">Yes</option>
-//             <option value="false">No</option>
-//           </select>
-//         </div>
-//         <button onClick={handleClick} className="addProductButton">
-//           Create
-//         </button>
-//       </form>
-//     </div>
-//   );
-// }
+      <Form.Item
+        name="description"
+        label="Description"
+        rules={[{ required: true, message: "Please enter a description" }]}
+      >
+        <Input.TextArea placeholder="Enter description" />
+      </Form.Item>
+      <Form.Item
+        name="price250"
+        label="Price for 250 gram"
+        rules={[
+          { required: true, message: "Please enter a price" },
+          {
+            min: 0,
+            message: "Price must be a positive number",
+          },
+          { type: "string" },
+        ]}
+      >
+        <Input placeholder="Enter price for 250 gram" />
+      </Form.Item>
+      <Form.Item
+        name="price500"
+        label="Price for 500 gram"
+        rules={[
+          { required: true, message: "Please enter a price" },
+          {
+            min: 0,
+            message: "Price must be a positive number",
+          },
+          { type: "string" },
+        ]}
+      >
+        <Input placeholder="Enter price for 250 gram" />
+      </Form.Item>
+      <Form.Item
+        name="price1000"
+        label="Price for 1000 gram"
+        rules={[
+          { required: true, message: "Please enter a price" },
+          {
+            min: 0,
+            message: "Price must be a positive number",
+          },
+          { type: "string" },
+        ]}
+      >
+        <Input placeholder="Enter price for 250 gram" />
+      </Form.Item>
+      <Form.Item label="Upload">
+        <Upload
+          listType="picture-card"
+          onChange={handleImageUpload}
+          customRequest={({ onSuccess, file }) => {
+            onSuccess(null, file);
+          }}
+        >
+          <div>
+            <PlusOutlined />
+            <div
+              style={{
+                marginTop: 8,
+              }}
+            >
+              Upload
+            </div>
+          </div>
+        </Upload>
+      </Form.Item>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          <PlusOutlined /> Create product
+        </Button>
+      </Form.Item>
+    </Form>
+  );
+};
+
+export default NewProduct;
+// <Form.Item
+// name="categories"
+// label="Category"
+// rules={[{ required: true, message: "Please enter categories" }]}
+// >
+// <Input placeholder="Enter category" type="array" />
+// </Form.Item>

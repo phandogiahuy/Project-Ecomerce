@@ -84,7 +84,7 @@ const PopularProduct = ({ cat, sort }) => {
           md: 24,
           lg: 32,
         }}
-        style={{ marginTop: 10 }}
+        style={{ marginTop: 10, marginRight: "20px" }}
       >
         {cat
           ? filterProduct.map((item) => <Product item={item} key={item._id} />)

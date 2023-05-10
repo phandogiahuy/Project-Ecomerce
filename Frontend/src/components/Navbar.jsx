@@ -46,7 +46,8 @@ const Center = styled.div`
 const Right = styled.div`
   flex: 1;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   ${mobile({ justifyContent: "center" })};
 `;
 const Logo = styled.h1`
@@ -64,15 +65,12 @@ const MenuItem = styled.div`
   font-size: 20px;
   cursor: pointer;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
-  margin-top: 30px;
-  margin-left: 50px;
-  padding: 10px;
 `;
 const SearchComponent = styled.p`
   font-size: 25px;
   cursor: pointer;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
-  margin-top: 1px;
+
   padding: 20px;
   margin-left: 20px;
 `;
@@ -80,25 +78,26 @@ const SearchComponent = styled.p`
 const Navbar = () => {
   const { products, total } = useSelector((state) => state.cart);
   const token = localStorage.getItem("token");
-  const { data: user } = useUser();
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     try {
-  //       const res = user;
+  const [uses, setUser] = useState("");
+  const user = useUser();
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = user;
 
-  //       if (res.isLoading) {
-  //         return <div>...loading</div>;
-  //       }
-  //       if (res.error) {
-  //         return <div>{res.error.message}</div>;
-  //       }
-  //       if (res.isSuccess) {
-  //         console.log(res.data);
-  //       }
-  //     } catch (err) {}
-  //   };
-  //   getUser();
-  // });
+        if (res.isLoading) {
+          return <div>...loading</div>;
+        }
+        if (res.error) {
+          return <div>{res.error.message}</div>;
+        }
+        if (res.isSuccess) {
+          setUser(res.data.email);
+        }
+      } catch (err) {}
+    };
+    getUser();
+  }, [token]);
   const [top, setTop] = useState(10);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -128,7 +127,7 @@ const Navbar = () => {
             <Center>
               <Logo>
                 {" "}
-                <LogoImage src="vite.png" />
+                <LogoImage src="/vite.png" />
                 AROMA deLute.
               </Logo>
             </Center>
@@ -147,7 +146,7 @@ const Navbar = () => {
               </Popover>
             )}
             {token ? (
-              <MenuItem>{user.email} </MenuItem>
+              <MenuItem>{uses}</MenuItem>
             ) : (
               <Popover
                 content={<Login />}

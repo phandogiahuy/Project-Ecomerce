@@ -23,7 +23,6 @@ const Title = styled.h1`
   font-weight: bolder;
   font-size: 30px;
   margin-bottom: 20px;
-
 `;
 const CategoriesItem = ({ item }) => {
   return (

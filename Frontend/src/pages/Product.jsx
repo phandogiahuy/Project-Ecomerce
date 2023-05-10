@@ -1,5 +1,5 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, InputNumber, Radio, Select, Space } from "antd";
+import { Button, Image, InputNumber, Radio, Select, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -21,11 +21,7 @@ const ImgContainer = styled.div`
   flex: 1;
   margin-left: 100px;
 `;
-const Img = styled.img`
-  width: 560px;
-  height: 558px;
-  image-rendering: pixelated;
-`;
+const Img = styled.img``;
 const InforContainer = styled.div`
   flex: 1;
   padding: 0px 50px;
@@ -105,7 +101,15 @@ const Product = () => {
       <Announcement />
       <Wrapper>
         <ImgContainer>
-          <Img src={product.img}></Img>
+          <Image
+            style={{
+              width: "560px",
+              height: "558px",
+              imageRendering: "pixelated",
+            }}
+            width={500}
+            src={product.img}
+          ></Image>
         </ImgContainer>
         <InforContainer>
           <Title>{product.title}</Title>
