@@ -1,4 +1,11 @@
-import { Table, Tag, Space, Button, Image, Skeleton } from "antd";
+import { Table, Tag, Space, Button, Image, Skeleton, Affix } from "antd";
+import {
+  DeleteTwoTone,
+  DownSquareOutlined,
+  EditTwoTone,
+  PlusCircleTwoTone,
+} from "@ant-design/icons";
+
 import { useProducts } from "../../hooks/useProducts";
 import { useDeleteProduct } from "../../hooks/detail/useDeleteProductById";
 import { Link } from "react-router-dom";
@@ -17,7 +24,7 @@ export default function ProductList() {
       render: (text, record, index) => index + 1,
     },
     {
-      title: "Name",
+      title: " Name",
       dataIndex: "title",
       render: (text) => <h2>{text}</h2>,
     },
@@ -58,7 +65,7 @@ export default function ProductList() {
       title: "Price",
       dataIndex: "price",
       key: "price",
-      sorter: (a, b) => a.price - b.price,
+      sorter: (a, b) => a.price[0] - b.price[0],
       render: (array) => <h2>{array[0]}$</h2>,
     },
 
@@ -69,9 +76,15 @@ export default function ProductList() {
       render: (_id) => (
         <Space size="middle">
           <Link to={`/product/edit/${_id}`}>
-            <Button style={{ backgroundColor: "#c2bdec" }}>Edit</Button>
+            <Button
+              icon={<EditTwoTone />}
+              style={{ backgroundColor: "#c2bdec" }}
+            >
+              Edit
+            </Button>
           </Link>
           <Button
+            icon={<DeleteTwoTone />}
             style={{ backgroundColor: "#a8ffc8" }}
             onClick={() => handleDelete(_id)}
           >
@@ -89,21 +102,35 @@ export default function ProductList() {
 
   return (
     <div>
-      <div style={{ padding: "10px" }}>
-        <Link to="/newProduct" className="link">
-          <Button
-            size="larger"
-            style={{
-              backgroundColor: "rgb(86 233 36)",
-              fontSize: "20px",
-              width: "20%",
-              height: "20%",
-            }}
-          >
-            CREATE PRODUCT
-          </Button>
-        </Link>
-      </div>
+      <Affix>
+        <center
+          style={{
+            fontWeight: 700,
+            fontSize: "60px",
+            backgroundColor: "blanchedalmond",
+          }}
+        >
+          PRODUCT
+        </center>
+      </Affix>
+      <Affix offsetTop={20}>
+        <div style={{ padding: "10px" }}>
+          <Link to="/newProduct" className="link">
+            <Button
+              size="larger"
+              style={{
+                backgroundColor: "rgb(86 233 36)",
+                fontSize: "20px",
+                width: "15%",
+                height: "20%",
+              }}
+              icon={<PlusCircleTwoTone />}
+            >
+              CREATE PRODUCT
+            </Button>
+          </Link>
+        </div>
+      </Affix>
       <div style={{ flex: 1, padding: "5px" }}>
         <Table bordered columns={columns} dataSource={res.data} />
       </div>

@@ -1,6 +1,7 @@
-import { Table, Tag, Space, Button, Skeleton } from "antd";
+import { Table, Tag, Space, Button, Skeleton, Affix } from "antd";
 import { useUser } from "../../hooks/useUser";
 import { useDeleteUser } from "../../hooks/detail/useUserbyId";
+import { DeleteTwoTone } from "@ant-design/icons";
 
 export default function UserList() {
   const { mutate } = useDeleteUser();
@@ -50,6 +51,7 @@ export default function UserList() {
       render: (_id) => (
         <Space size="middle">
           <Button
+            icon={<DeleteTwoTone />}
             style={{ backgroundColor: "#a8ffc8" }}
             onClick={() => handleDelete(_id)}
           >
@@ -67,7 +69,18 @@ export default function UserList() {
 
   return (
     <div style={{ flex: 1 }}>
-      <Table bordered columns={columns} dataSource={res.data} />
+      <Affix>
+        <center
+          style={{
+            fontWeight: 700,
+            fontSize: "60px",
+            backgroundColor: "blanchedalmond",
+          }}
+        >
+          USER
+        </center>
+      </Affix>
+      <Table bordered columns={columns} dataSource={res.data} sticky />
     </div>
   );
 }

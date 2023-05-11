@@ -1,6 +1,6 @@
 import { Form, Input, Button, Upload, Select } from "antd";
 
-import { PlusOutlined } from "@ant-design/icons";
+import { EditFilled, PlusOutlined } from "@ant-design/icons";
 
 import { useParams } from "react-router-dom";
 import {
@@ -59,7 +59,7 @@ const EditDiscount = () => {
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          <PlusOutlined /> Update Discount
+          <EditFilled /> Update Discount
         </Button>
       </Form.Item>
     </Form>

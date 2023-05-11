@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Form, Input, Button, Upload, Select, Space } from "antd";
 import { storage } from "../../firebase";
-import { PlusOutlined } from "@ant-design/icons";
+import { EditFilled, PlusOutlined } from "@ant-design/icons";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import { useLocation, useParams } from "react-router-dom";
@@ -164,7 +164,7 @@ const EditProduct = () => {
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          <PlusOutlined /> Upload product
+          <EditFilled /> Upload product
         </Button>
       </Form.Item>
     </Form>

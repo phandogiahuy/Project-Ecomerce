@@ -1,7 +1,13 @@
-import { Table, Tag, Space, Button, Skeleton } from "antd";
+import { Table, Tag, Space, Button, Skeleton, Affix } from "antd";
 import { useDiscount } from "../../hooks/useDiscount";
 import { useDeleteDiscount } from "../../hooks/detail/useDiscounById";
 import { Link } from "react-router-dom";
+import {
+  DeleteTwoTone,
+  EditTwoTone,
+  PlusCircleTwoTone,
+} from "@ant-design/icons";
+
 export default function DiscountList() {
   const { mutate } = useDeleteDiscount();
 
@@ -44,9 +50,15 @@ export default function DiscountList() {
       render: (_id) => (
         <Space size="middle">
           <Link to={`/discount/edit/` + _id}>
-            <Button style={{ backgroundColor: "#c2bdec" }}>Edit</Button>
+            <Button
+              icon={<EditTwoTone />}
+              style={{ backgroundColor: "#c2bdec" }}
+            >
+              Edit
+            </Button>
           </Link>
           <Button
+            icon={<DeleteTwoTone />}
             style={{ backgroundColor: "#a8ffc8" }}
             onClick={() => handleDelete(_id)}
           >
@@ -64,21 +76,35 @@ export default function DiscountList() {
 
   return (
     <div>
-      <div style={{ padding: "10px" }}>
-        <Link to="/newDiscount" className="link">
-          <Button
-            size="larger"
-            style={{
-              backgroundColor: "rgb(86 233 36)",
-              fontSize: "20px",
-              width: "20%",
-              height: "20%",
-            }}
-          >
-            CREATE DISCOUNT
-          </Button>
-        </Link>
-      </div>
+      <Affix>
+        <center
+          style={{
+            fontWeight: 700,
+            fontSize: "60px",
+            backgroundColor: "blanchedalmond",
+          }}
+        >
+          DISCOUNT
+        </center>
+      </Affix>
+      <Affix offsetTop={20}>
+        <div style={{ padding: "10px" }}>
+          <Link to="/newDiscount" className="link">
+            <Button
+              size="larger"
+              style={{
+                backgroundColor: "rgb(86 233 36)",
+                fontSize: "20px",
+                width: "15%",
+                height: "20%",
+              }}
+              icon={<PlusCircleTwoTone />}
+            >
+              CREATE DISCOUNT
+            </Button>
+          </Link>
+        </div>
+      </Affix>
       <div style={{ flex: 1 }}>
         <Table bordered columns={columns} dataSource={res.data} />
       </div>
