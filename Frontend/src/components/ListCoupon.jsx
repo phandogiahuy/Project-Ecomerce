@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Coupon from "./Coupon";
 import { useCoupon } from "../hooks/useCoupon";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
+import { Skeleton } from "antd";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -49,7 +50,7 @@ const ListCoupon = () => {
 
   const res = useCoupon();
   if (res.isLoading) {
-    return <div>...loading</div>;
+    return <Skeleton active />;
   }
   const handleClick = (direction) => {
     if (direction === "left") {

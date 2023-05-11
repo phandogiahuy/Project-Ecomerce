@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
+import "./App.css";
 
 import { Layout, Space } from "antd";
 const { Header, Sider, Content } = Layout;

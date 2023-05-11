@@ -1,8 +1,12 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .container {
   display: flex;
   margin-top: 10px;
 }
-
 
 .link {
   text-decoration: none;

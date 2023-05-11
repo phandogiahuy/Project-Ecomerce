@@ -13,7 +13,7 @@ userRouter.put(
   verifyTokenAndAuthorization,
   userController.update
 );
-userRouter.delete("/:id", verifyTokenAndAuthorization, userController.delete);
+userRouter.delete("/:id", verifyTokenAndAdmin, userController.delete);
 userRouter.get("/find/:id", userController.show);
 userRouter.get("/", verifyTokenAndAdmin, userController.showAll);
 userRouter.get("/stats", verifyTokenAndAdmin, userController.showUserStats);

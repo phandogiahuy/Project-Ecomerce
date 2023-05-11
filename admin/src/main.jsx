@@ -14,6 +14,9 @@ import UserList from "./pages/userList/UserList";
 import ProductList from "./pages/productList/ProductList";
 import NewProduct from "./pages/newProduct/NewProduct";
 import EditProduct from "./pages/product/editProduct";
+import DiscountList from "./pages/discount/DiscountList";
+import EditDiscount from "./pages/discount/EditDiscount";
+import NewDiscount from "./pages/discount/NewDiscount";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -34,11 +37,23 @@ const router = createBrowserRouter([
         element: <ProductList />,
       },
       {
+        path: "/discount",
+        element: <DiscountList />,
+      },
+      {
+        path: "/newDiscount",
+        element: <NewDiscount />,
+      },
+      {
+        path: "/discount/edit/:_id",
+        element: <EditDiscount />,
+      },
+      {
         path: "/newProduct",
         element: <NewProduct />,
       },
       {
-        path: "/edit/:_id",
+        path: "/product/edit/:_id",
         element: <EditProduct />,
       },
     ],

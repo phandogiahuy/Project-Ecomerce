@@ -1,7 +1,9 @@
 import { AxiosInstance } from "../../requestMethods";
 import "./widgetSm.css";
 import { useEffect, useState } from "react";
-
+import { Popover } from "antd";
+import InFoNewUser from "../../pages/newUser/InFoNewUser";
+import InForNewUser from "../../pages/user/InforNewUser";
 export default function WidgetSm() {
   const [users, setUsers] = useState([]);
 
@@ -14,6 +16,7 @@ export default function WidgetSm() {
     };
     getUsers();
   }, []);
+  console.log(users);
 
   return (
     <div className="widgetSm">
@@ -24,7 +27,14 @@ export default function WidgetSm() {
             <div className="widgetSmUser">
               <span className="widgetSmUsername">{user.username}</span>
             </div>
-            <button className="widgetSmButton">Display</button>
+            <Popover
+              placement="topLeft"
+              // title={text}
+              content=<InForNewUser user={user} />
+              trigger="click"
+            >
+              <button className="widgetSmButton">Display</button>
+            </Popover>
           </li>
         ))}
       </ul>

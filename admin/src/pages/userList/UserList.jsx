@@ -1,64 +1,73 @@
-import "./userList.css";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Table, Tag, Space, Button, Skeleton } from "antd";
+import { useUser } from "../../hooks/useUser";
+import { useDeleteUser } from "../../hooks/detail/useUserbyId";
 
 export default function UserList() {
-  const [data, setData] = useState();
+  const { mutate } = useDeleteUser();
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
-
+  const res = useUser();
+  if (res.isLoading) {
+    return <Skeleton active />;
+  }
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
     {
-      field: "user",
-      headerName: "User",
-      width: 200,
-      renderCell: (params) => {
-        return <div className="userListUser">{params.row.username}</div>;
-      },
-    },
-    { field: "email", headerName: "Email", width: 200 },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 120,
+      title: "STT",
+      dataIndex: "index",
+      render: (text, record, index) => index + 1,
     },
     {
-      field: "transaction",
-      headerName: "Transaction Volume",
-      width: 160,
+      title: "Name",
+      dataIndex: "username",
+      render: (text) => <h1>{text}</h1>,
     },
     {
-      field: "action",
-      headerName: "Action",
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={"/user/" + params.row.id}>
-              <button className="userListEdit">Edit</button>
-            </Link>
-            <DeleteOutline
-              className="userListDelete"
-              onClick={() => handleDelete(params.row.id)}
-            />
-          </>
-        );
-      },
+      title: "Email",
+      dataIndex: "email",
+      render: (text) => <h1>{text}</h1>,
+    },
+    {
+      title: "Type",
+      dataIndex: "isAdmin",
+      render: (isAdmin) => (
+        <div>
+          {isAdmin ? (
+            <Tag color={"green"}>Admin </Tag>
+          ) : (
+            <Tag color={"blue"}>User </Tag>
+          )}
+        </div>
+      ),
+    },
+    {
+      title: "createdAt",
+      dataIndex: "createdAt",
+      render: (text) => <h1>{text.slice(0, 10)}</h1>,
+    },
+    {
+      title: "Action",
+      dataIndex: "_id",
+      key: "_id",
+      render: (_id) => (
+        <Space size="middle">
+          <Button
+            style={{ backgroundColor: "#a8ffc8" }}
+            onClick={() => handleDelete(_id)}
+          >
+            Delete
+          </Button>
+        </Space>
+      ),
     },
   ];
+  const handleDelete = async (_id) => {
+    mutate(_id);
+  };
+
+  // rowSelection object indicates the need for row selection
 
   return (
-    <div className="userList">
-      <DataGrid
-        rows={data}
-        disableSelectionOnClick
-        columns={columns}
-        pageSize={8}
-        checkboxSelection
-      />
+    <div style={{ flex: 1 }}>
+      <Table bordered columns={columns} dataSource={res.data} />
     </div>
   );
 }

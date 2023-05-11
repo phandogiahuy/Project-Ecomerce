@@ -2,6 +2,13 @@ import "./sidebar.css";
 
 import { Link } from "react-router-dom";
 import { Button } from "antd";
+import {
+  BankTwoTone,
+  DollarCircleTwoTone,
+  FundTwoTone,
+  ShopOutlined,
+  TeamOutlined,
+} from "@ant-design/icons";
 export default function Sidebar() {
   return (
     <div className="sidebar">
@@ -10,29 +17,40 @@ export default function Sidebar() {
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
             <Link to="/" className="link">
-              <li className="sidebarListItem ">Home</li>
+              <li className="sidebarListItem ">
+                {" "}
+                <BankTwoTone />
+                Home
+              </li>
             </Link>
-            <li className="sidebarListItem">Analytics</li>
-            <li className="sidebarListItem">Sales</li>
+            <li className="sidebarListItem">
+              {" "}
+              <FundTwoTone />
+              Analytics
+            </li>
           </ul>
         </div>
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
             <Link to="/user" className="link">
-              <li className="sidebarListItem">Users</li>
+              <li className="sidebarListItem">
+                {" "}
+                <TeamOutlined />
+                Users
+              </li>
             </Link>
             <Link to="/product" className="link">
-              <li className="sidebarListItem">Products</li>
+              <li className="sidebarListItem">
+                {" "}
+                <ShopOutlined /> Products
+              </li>
             </Link>
-            <Link to="/newProduct" className="link">
-              <li>
-                <Button
-                  size="larger"
-                  style={{ backgroundColor: "#67db6d", fontSize: "15px" }}
-                >
-                  CREATE PRODUCT
-                </Button>
+            <Link to="/discount" className="link">
+              <li className="sidebarListItem">
+                {" "}
+                <DollarCircleTwoTone />
+                Discounts
               </li>
             </Link>
           </ul>

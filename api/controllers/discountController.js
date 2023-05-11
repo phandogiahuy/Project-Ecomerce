@@ -19,13 +19,36 @@ class DiscountController {
       res.status(500).json(err);
     }
   }
-  //GET Discount
+  //find Discount
   async get(req, res) {
     try {
       const discount = await Discount.find({ code: req.params.code });
       res.status(200).json(discount);
     } catch (err) {
       res.status(500);
+    }
+  }
+  async update(req, res) {
+    try {
+      const updateDiscount = await Discount.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: req.body,
+        },
+        { new: true }
+      );
+      res.status(200).json(updateDiscount);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  //GET PRODUCT
+  async showDiscount(req, res) {
+    try {
+      const discount = await Discount.findById(req.params.id);
+      res.status(200).json(discount);
+    } catch (err) {
+      res.status(500).json(err);
     }
   }
   async getAll(req, res) {

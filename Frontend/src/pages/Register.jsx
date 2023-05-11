@@ -46,17 +46,12 @@ const Register = () => {
   const [password, setPassword] = useState();
   const navigate = useNavigate();
 
-  const { mutate } = useRegister();
+  const { mutate, data } = useRegister();
 
   const success = (e) => {
     e.preventDefault();
-    messageApi.open({
-      type: "success",
-      content: "You create an account sucessfully",
-    });
     mutate({ username, email, password });
   };
-
   const [form] = Form.useForm();
   return (
     <Container>

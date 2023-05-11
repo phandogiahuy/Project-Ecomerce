@@ -19,7 +19,7 @@ const EditProduct = () => {
 
   const [images, setImage] = useState();
   const handleImageUpload = (info) => {
-    setChange(!change);
+    setChange(true);
     setImage(info.file.originFileObj);
   };
   const res = useProductById(_id);
@@ -111,10 +111,9 @@ const EditProduct = () => {
             min: 0,
             message: "Price must be a positive number",
           },
-          { type: "string" },
         ]}
       >
-        <Input placeholder="Enter price for 250 gram" />
+        <Input placeholder="Enter price for 250 gram" type="number" min={0} />
       </Form.Item>
       <Form.Item
         name="price500"
@@ -125,10 +124,9 @@ const EditProduct = () => {
             min: 0,
             message: "Price must be a positive number",
           },
-          { type: "string" },
         ]}
       >
-        <Input placeholder="Enter price for 250 gram" />
+        <Input placeholder="Enter price for 500 gram" type="number" min={0} />
       </Form.Item>
       <Form.Item
         name="price1000"
@@ -139,10 +137,9 @@ const EditProduct = () => {
             min: 0,
             message: "Price must be a positive number",
           },
-          { type: "string" },
         ]}
       >
-        <Input placeholder="Enter price for 250 gram" />
+        <Input placeholder="Enter price for 250 gram" type="number" min={0} />
       </Form.Item>
       <Form.Item label="Upload" name="img">
         <Upload

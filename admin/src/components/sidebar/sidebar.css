@@ -6,8 +6,9 @@
 }
 
 .sidebarWrapper {
-  padding: 20px;
+  padding: 30px;
   color: #555;
+  font-size: 20px;
 }
 
 .sidebarMenu {
@@ -21,7 +22,7 @@
 
 .sidebarList {
   list-style: none;
-  padding: 5px;
+  padding: 1px;
   display: flex;
   flex-direction: column;
   justify-content: center;

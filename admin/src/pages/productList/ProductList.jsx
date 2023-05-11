@@ -1,7 +1,4 @@
-import "./productList.css";
-
-import { Table, Tag, Space, Button, Image } from "antd";
-import { useState } from "react";
+import { Table, Tag, Space, Button, Image, Skeleton } from "antd";
 import { useProducts } from "../../hooks/useProducts";
 import { useDeleteProduct } from "../../hooks/detail/useDeleteProductById";
 import { Link } from "react-router-dom";
@@ -11,7 +8,7 @@ export default function ProductList() {
 
   const res = useProducts();
   if (res.isLoading) {
-    return <div>...loading</div>;
+    return <Skeleton active />;
   }
   const columns = [
     {
@@ -22,7 +19,7 @@ export default function ProductList() {
     {
       title: "Name",
       dataIndex: "title",
-      render: (text) => <h1>{text}</h1>,
+      render: (text) => <h2>{text}</h2>,
     },
     {
       title: "",
@@ -61,6 +58,7 @@ export default function ProductList() {
       title: "Price",
       dataIndex: "price",
       key: "price",
+      sorter: (a, b) => a.price - b.price,
       render: (array) => <h2>{array[0]}$</h2>,
     },
 
@@ -70,10 +68,15 @@ export default function ProductList() {
       key: "_id",
       render: (_id) => (
         <Space size="middle">
-          <Link to={`/edit/` + _id}>
-            <Button>Edit</Button>
+          <Link to={`/product/edit/${_id}`}>
+            <Button style={{ backgroundColor: "#c2bdec" }}>Edit</Button>
           </Link>
-          <Button onClick={() => handleDelete(_id)}>Delete</Button>
+          <Button
+            style={{ backgroundColor: "#a8ffc8" }}
+            onClick={() => handleDelete(_id)}
+          >
+            Delete
+          </Button>
         </Space>
       ),
     },
@@ -85,8 +88,25 @@ export default function ProductList() {
   // rowSelection object indicates the need for row selection
 
   return (
-    <div style={{ flex: 1 }}>
-      <Table bordered columns={columns} dataSource={res.data} />
+    <div>
+      <div style={{ padding: "10px" }}>
+        <Link to="/newProduct" className="link">
+          <Button
+            size="larger"
+            style={{
+              backgroundColor: "rgb(86 233 36)",
+              fontSize: "20px",
+              width: "20%",
+              height: "20%",
+            }}
+          >
+            CREATE PRODUCT
+          </Button>
+        </Link>
+      </div>
+      <div style={{ flex: 1, padding: "5px" }}>
+        <Table bordered columns={columns} dataSource={res.data} />
+      </div>
     </div>
   );
 }

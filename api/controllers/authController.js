@@ -10,9 +10,8 @@ class AuthController {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(req.body.password, salt);
       //tạo tài khoản
-      const user = User.findOne({ email: req.body.email });
+      const user = await User.findOne({ email: req.body.email });
       if (user) {
-        console.log("asd");
         return res.status(400).json({ message: "Email is existed" });
       }
 

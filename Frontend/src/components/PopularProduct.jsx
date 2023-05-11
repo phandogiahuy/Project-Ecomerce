@@ -1,4 +1,4 @@
-import { Row } from "antd";
+import { Row, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -32,7 +32,7 @@ const PopularProduct = ({ cat, sort }) => {
         const res = cat ? getProductByCat : getProduct;
 
         if (res.isLoading) {
-          return <div>...loading</div>;
+          return <Skeleton active />;
         }
         if (res.error) {
           return <div>{res.error.message}</div>;
