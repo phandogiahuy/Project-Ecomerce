@@ -17,35 +17,41 @@ export default function DiscountList() {
   }
   const columns = [
     {
-      title: "STT",
+      title: "ID",
       dataIndex: "index",
+      align: "center",
       render: (text, record, index) => index + 1,
     },
     {
       title: "Code",
       dataIndex: "code",
+      align: "center",
       render: (text) => <h1>{text}</h1>,
     },
     {
       title: "Discount",
       dataIndex: "sale",
+      align: "center",
       defaultSortOrder: "descend",
       sorter: (a, b) => a.sale - b.sale,
       render: (text) => <h1>{text}%</h1>,
     },
     {
       title: "Limit",
+      align: "center",
       dataIndex: "limit",
       render: (text) => <h1>{text}$</h1>,
     },
     {
       title: "createdAt",
+      align: "center",
       dataIndex: "createdAt",
       render: (text) => <h1>{text.slice(0, 10)}</h1>,
     },
     {
       title: "Action",
       dataIndex: "_id",
+      align: "center",
       key: "_id",
       render: (_id) => (
         <Space size="middle">

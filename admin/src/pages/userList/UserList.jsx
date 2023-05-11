@@ -12,22 +12,26 @@ export default function UserList() {
   }
   const columns = [
     {
-      title: "STT",
+      title: "ID",
+      align: "center",
       dataIndex: "index",
       render: (text, record, index) => index + 1,
     },
     {
       title: "Name",
+      align: "center",
       dataIndex: "username",
       render: (text) => <h1>{text}</h1>,
     },
     {
       title: "Email",
+      align: "center",
       dataIndex: "email",
       render: (text) => <h1>{text}</h1>,
     },
     {
       title: "Type",
+      align: "center",
       dataIndex: "isAdmin",
       render: (isAdmin) => (
         <div>

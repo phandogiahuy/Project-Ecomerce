@@ -1,4 +1,13 @@
-import { Table, Tag, Space, Button, Image, Skeleton, Affix } from "antd";
+import {
+  Table,
+  Tag,
+  Space,
+  Button,
+  Image,
+  Skeleton,
+  Affix,
+  Switch,
+} from "antd";
 import {
   DeleteTwoTone,
   DownSquareOutlined,
@@ -9,9 +18,11 @@ import {
 import { useProducts } from "../../hooks/useProducts";
 import { useDeleteProduct } from "../../hooks/detail/useDeleteProductById";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function ProductList() {
   const { mutate } = useDeleteProduct();
+  const [fixedTop, setFixedTop] = useState(false);
 
   const res = useProducts();
   if (res.isLoading) {
@@ -19,17 +30,20 @@ export default function ProductList() {
   }
   const columns = [
     {
-      title: "STT",
+      title: "ID",
+      align: "center",
       dataIndex: "index",
       render: (text, record, index) => index + 1,
     },
     {
       title: " Name",
+      align: "center",
       dataIndex: "title",
       render: (text) => <h2>{text}</h2>,
     },
     {
-      title: "",
+      title: "Image",
+      align: "center",
       dataIndex: "img",
       render: (img) => (
         <Image src={img} style={{ width: "50%", height: "20%" }} />
@@ -37,6 +51,7 @@ export default function ProductList() {
     },
     {
       title: "Tags",
+      align: "center",
       key: "categories",
       dataIndex: "categories",
       render: (array) => (
@@ -63,15 +78,39 @@ export default function ProductList() {
     },
     {
       title: "Price",
-      dataIndex: "price",
-      key: "price",
-      sorter: (a, b) => a.price[0] - b.price[0],
-      render: (array) => <h2>{array[0]}$</h2>,
+      align: "center",
+      children: [
+        {
+          title: "250g",
+          dataIndex: "price",
+          width: 100,
+          align: "center",
+          sorter: (a, b) => a.price[0] - b.price[0],
+          render: (array) => <h2>{array[0]}$</h2>,
+        },
+        {
+          title: "500g",
+          dataIndex: "price",
+          width: 100,
+          align: "center",
+          sorter: (a, b) => a.price[1] - b.price[1],
+          render: (array) => <h2>{array[1]}$</h2>,
+        },
+        {
+          title: "1000g",
+          dataIndex: "price",
+          width: 100,
+          align: "center",
+          sorter: (a, b) => a.price[2] - b.price[2],
+          render: (array) => <h2>{array[2]}$</h2>,
+        },
+      ],
     },
 
     {
       title: "Action",
       dataIndex: "_id",
+      align: "center",
       key: "_id",
       render: (_id) => (
         <Space size="middle">
