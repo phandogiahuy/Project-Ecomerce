@@ -38,18 +38,21 @@ const formItemLayout = {
 
 const Register = () => {
   const [messageApi, contextHolder] = message.useMessage();
-  const [username, setUserName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+
   const navigate = useNavigate();
+  const [form] = Form.useForm();
 
   const { mutate, data } = useRegister();
-
-  const success = (e) => {
-    e.preventDefault();
+  const onFinishRegister = async (values) => {
+    const { username, email, password } = values;
     mutate({ username, email, password });
   };
-  const [form] = Form.useForm();
+  const validateEmail = (_, value) => {
+    if (!value || /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+      return Promise.resolve();
+    }
+    return Promise.reject("Invalid email format");
+  };
   return (
     <Container>
       <Wrapper>
@@ -57,10 +60,12 @@ const Register = () => {
         <Form
           {...formItemLayout}
           form={form}
+          name="register"
+          onFinish={onFinishRegister}
           style={{
-            maxWidth: 700,
-            marginTop: 40,
+            maxWidth: 600,
           }}
+          scrollToFirstError
         >
           <Form.Item
             name="nickname"
@@ -78,7 +83,6 @@ const Register = () => {
               style={{
                 width: "100%",
               }}
-              onChange={(e) => setUserName(e.target.value)}
             />
           </Form.Item>
           <Form.Item
@@ -89,6 +93,7 @@ const Register = () => {
                 type: "email",
                 message: "The input is not valid E-mail!",
               },
+              { validator: validateEmail },
               {
                 required: true,
                 message: "Please input your E-mail!",
@@ -100,7 +105,6 @@ const Register = () => {
                 width: "100%",
               }}
               type="email"
-              onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Item>
           <Form.Item
@@ -119,7 +123,6 @@ const Register = () => {
                 width: "100%",
               }}
               type="password"
-              onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Item>
           <Form.Item
@@ -154,7 +157,7 @@ const Register = () => {
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit" onClick={success}>
+            <Button type="primary" htmlType="submit">
               Register
             </Button>
           </Form.Item>

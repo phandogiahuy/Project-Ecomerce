@@ -6,29 +6,16 @@ import { useLogin } from "../../hooks/Mutation/useSetLogin";
 import { Container } from "./Style-Login";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const { mutate, isLoading } = useLogin();
 
-  const handleClickSignIn = (e) => {
-    e.preventDefault();
-    mutate({ password, email });
+  const onFinishLogIn = async (values) => {
+    const { email, password } = values;
+    mutate({ email, password });
   };
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
+
   return (
     <Container>
-      <Form
-        name="normal_login"
-        className="login-form"
-        initialValues={{
-          remember: true,
-        }}
-      >
+      <Form name="normal_login" className="login-form" onFinish={onFinishLogIn}>
         <Form.Item
           name="email"
           rules={[
@@ -42,7 +29,6 @@ const Login = () => {
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Email"
             type="email"
-            onChange={onChangeEmail}
           />
         </Form.Item>
         <Form.Item
@@ -58,7 +44,6 @@ const Login = () => {
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
-            onChange={onChangePassword}
           />
         </Form.Item>
 
@@ -67,8 +52,6 @@ const Login = () => {
             type="primary"
             htmlType="submit"
             className="login-form-button"
-            onClick={handleClickSignIn}
-            disabled={isLoading}
           >
             {isLoading ? "Logging in..." : "Log in"}
           </Button>
@@ -78,38 +61,3 @@ const Login = () => {
   );
 };
 export default Login;
-// import { useQueryClient } from 'react-query';
-// import Login from './Login';
-
-// function App() {
-//   const queryClient = useQueryClient();
-//   const user = queryClient.getQueryData('user');
-
-//   const handleLogout = () => {
-//     queryClient.setQueryData('user', null);
-//   };
-
-//   return (
-//     <div>
-//       {user ? (
-//         <div>
-//           <p>Welcome, {user.username}!</p>
-//           <button onClick={handleLogout}>Log out</button>
-//         </div>
-//       ) : (
-//         <Login />
-//       )}
-//     </div>
-//   );
-// }
-// <Form.Item>
-//   <Form.Item name="remember" valuePropName="checked" noStyle>
-//     <Checkbox>Remember me</Checkbox>
-//   </Form.Item>
-
-//   <a className="login-form-forgot" href="">
-//     Forgot password
-//   </a>
-// </Form.Item>
-
-// {error && fail > 0 && <Error>Your password or email is wrong</Error>}
