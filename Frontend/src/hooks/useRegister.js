@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { AxiosInstance } from "../requestMethod";
 import { useMutation } from "react-query";
 import { message } from "antd";
 import axios from "axios";

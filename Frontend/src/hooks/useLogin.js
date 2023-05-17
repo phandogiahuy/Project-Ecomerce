@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { AxiosInstance } from "../requestMethod";
+import {  axiosInstance } from "../api/requestMethod";
 import { useMutation, useQueryClient } from "react-query";
 import { message } from "antd";
 import { GET_USER } from "../constant/queryKey";
 
 const login = async ({ email, password }) => {
-  const res = await AxiosInstance.post("/auth/login", {
+  const res = await axiosInstance.post("/auth/login", {
     email,
     password,
   });
