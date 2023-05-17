@@ -75,7 +75,9 @@ const PopularProduct = ({ cat, sort }) => {
       >
         {cat
           ? filterProduct.map((item) => <Product item={item} key={item._id} />)
-          : product.map((item) => <Product item={item} key={item._id} />)}
+          : product
+              .slice(0, 12)
+              .map((item) => <Product item={item} key={item._id} />)}
       </Row>
     </Container>
   );

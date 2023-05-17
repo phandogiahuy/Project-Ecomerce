@@ -13,7 +13,7 @@ const route = [
     element: <Home />,
   },
   {
-    path: "/products/:categories",
+    path: "/products/:cat",
     element: <ProductList />,
   },
   {

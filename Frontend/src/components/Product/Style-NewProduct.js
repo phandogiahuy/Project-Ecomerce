@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Infor = styled.div`
   position: absolute;
   bottom: 26px;
-  left: 90px;
+  left: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +15,7 @@ export const Infor = styled.div`
 
   :hover {
     transform: scale(1.1);
-    box-shadow: inset 180px 0 0 0 #54b3d6;
+    box-shadow: inset 150px 0 0 0 #54b3d6;
     color: white;
   }
 `;
@@ -52,6 +52,6 @@ export const Image = styled.img`
 export const Price = styled.div`
   font-weight: 700;
   font-size: 30px;
-  margin-left: 20px;
+  margin-left: 40px;
   font-family: "AOK Buenos Aires", sans-serif;
 `;

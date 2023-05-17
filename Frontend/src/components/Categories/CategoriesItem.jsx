@@ -22,14 +22,14 @@ const CategoriesItem = ({ item }) => {
             <Link to={`products/${item.cat}`}>
               <Button
                 style={{
-                  backgroundColor: "#1677ff",
+                  display: "flex",
+                  backgroundColor: "#e6f7ff",
                   letterSpacing: "1px",
                   fontSize: "20px",
                   marginLeft: "10px",
-                  border: "none",
-                  padding: "5px",
                   marginBottom: "20px",
-                  color: "white",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 SEE MORE

@@ -13,7 +13,7 @@ export const Img = styled.img`
 export const Title = styled.p`
   font-weight: 500;
   font-family: "Quicksand", sans-serif;
-  font-size: 14px;
+  font-size: 10px;
   line-height: 20px;
 `;
 export const Content = styled.div`
@@ -26,15 +26,15 @@ export const Name = styled.p`
   font-size: 13px;
   font-family: "Quicksand", sans-serif;
   font-weight: 600;
-  line-height: 19px;
 `;
 export const Quanity = styled.p`
   position: absolute;
   top: 50px;
-  font-size: 15px;
+  font-size: 13px;
   font-family: "Quicksand", sans-serif;
   font-weight: 500;
   line-height: 24px;
+  left: 150px;
 `;
 
 export const Total = styled.p`
@@ -57,9 +57,10 @@ export const Product = styled.div`
 `;
 export const Type = styled.p`
   position: absolute;
-  top: 15px;
+  top: 50px;
   font-weight: 400;
   font-family: "Quicksand", sans-serif;
+  padding: 10px;
 `;
 export const Clear = styled.p`
   font-size: 12px;

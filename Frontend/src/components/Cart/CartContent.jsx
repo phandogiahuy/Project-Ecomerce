@@ -35,7 +35,8 @@ const CartContent = ({ products }) => {
   x.map((i) => {
     priceTotal += i;
   });
-  const ClickHandleClearCart = () => {
+  const ClickHandleClearCart = (e) => {
+    e.preventDefault();
     dispatch(clearCart());
   };
   return (

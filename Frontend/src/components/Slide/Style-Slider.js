@@ -37,7 +37,7 @@ export const Image = styled.img`
 export const InforContainer = styled.div`
   flex: 1;
   margin-bottom: 15%;
-  margin-left: 20%;
+  margin-left: 10%;
 `;
 export const Title = styled.h1`
   font-size: 160px;

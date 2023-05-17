@@ -13,12 +13,13 @@ import {
   FilterText,
   Select,
   Option,
-} from "../Style-ProductList";
+} from "./Style-ProductList";
 
 const ProductList = () => {
   // const location = useLocation();
   // const cat = location.pathname.split("/")[2];
   const { cat } = useParams();
+  console.log(cat);
   const [sort, setSort] = useState("newest");
   const handleSort = (e) => {
     setSort(e.target.value);

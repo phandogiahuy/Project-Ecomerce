@@ -10,6 +10,7 @@ import {
   TeamOutlined,
 } from "@ant-design/icons";
 export default function Sidebar() {
+  const token = localStorage.getItem("token");
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -53,6 +54,13 @@ export default function Sidebar() {
                 Discounts
               </li>
             </Link>
+            {!token ? (
+              <Link to="/login" className="link">
+                <li className="sidebarListItem"> Sign in</li>
+              </Link>
+            ) : (
+              <li className="sidebarListItem"> ADMIN</li>
+            )}
           </ul>
         </div>
       </div>

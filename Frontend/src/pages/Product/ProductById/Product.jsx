@@ -21,7 +21,7 @@ import {
   Price,
   Title,
   Wrapper,
-} from "../Style-Product";
+} from "./Style-Product";
 
 const Product = () => {
   const [type, setType] = useState("Bean");
@@ -76,8 +76,8 @@ const Product = () => {
         <ImgContainer>
           <Image
             style={{
-              width: "560px",
-              height: "558px",
+              width: "850px",
+              height: " 700px",
               imageRendering: "pixelated",
             }}
             width={500}

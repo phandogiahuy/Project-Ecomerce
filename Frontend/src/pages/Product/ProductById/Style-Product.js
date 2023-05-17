@@ -7,7 +7,6 @@ export const Wrapper = styled.div`
 `;
 export const ImgContainer = styled.div`
   flex: 1;
-  margin-left: 100px;
 `;
 export const Img = styled.img``;
 export const InforContainer = styled.div`
@@ -16,7 +15,7 @@ export const InforContainer = styled.div`
 `;
 export const Title = styled.h1`
   font-weight: 500;
-  font-size: 70px;
+  font-size: 50px;
 `;
 export const Desc = styled.p`
   font-size: 20px;
