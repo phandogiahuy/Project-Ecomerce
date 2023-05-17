@@ -1,6 +1,6 @@
 import { Table, Tag, Space, Button, Skeleton, Affix } from "antd";
-import { useUser } from "../../hooks/useUser";
-import { useDeleteUser } from "../../hooks/detail/useUserbyId";
+import { useUser } from "../../hooks/Queries/User/useGetUser";
+import { useDeleteUser } from "../../hooks/Mutation/User/useDeleteUserbyId";
 import { DeleteTwoTone } from "@ant-design/icons";
 
 export default function UserList() {

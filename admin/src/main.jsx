@@ -1,13 +1,8 @@
 import ReactDOM from "react-dom";
 import App from "./App";
 import { QueryClient, QueryClientProvider } from "react-query";
-import {
-  createBrowserRouter,
-  Link,
-  Route,
-  RouterProvider,
-} from "react-router-dom";
-import ErrorPage from "./error-page";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ErrorPage from "./pages/error/error-page";
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import UserList from "./pages/userList/UserList";

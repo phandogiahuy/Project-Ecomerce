@@ -1,11 +1,12 @@
 import { Form, Input, Button, Upload, Select, Space } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { usePostDiscount } from "../../hooks/detail/useDiscounById";
+
+import { useCreateDiscount } from "../../hooks/Mutation/Discount/useCreateDiscount";
 
 const NewDiscount = () => {
   const [form] = Form.useForm();
 
-  const { mutate } = usePostDiscount();
+  const { mutate } = useCreateDiscount();
   const handleFinsh = async (values) => {
     mutate({ ...values });
   };

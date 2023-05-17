@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Form, Input, Button, Upload, Select, Space } from "antd";
-import { storage } from "../../firebase";
+import { storage } from "../../service-api/firebase";
 import { PlusOutlined } from "@ant-design/icons";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
-import { useGetProducts } from "../../hooks/useProducts";
+import { useCreateProducts } from "../../hooks/Mutation/Product/useCreateProduct";
 const options = [{ value: "phin" }, { value: "espresso" }, { value: "sale" }];
 
 const NewProduct = () => {
@@ -15,7 +15,7 @@ const NewProduct = () => {
     console.log(info);
     setImage(info.file.originFileObj);
   };
-  const { mutate } = useGetProducts();
+  const { mutate } = useCreateProducts();
   const handleFinsh = async (values) => {
     const price = [];
     price.push(form.getFieldValue("price250"));
@@ -24,11 +24,11 @@ const NewProduct = () => {
     const imageRef = ref(storage, `images/${v4() + images.name}`);
     const snap = await uploadBytes(imageRef, images);
     const img = await getDownloadURL(snap.ref);
-    const { title, categories, description } = values;
+    const { title, categories, desc } = values;
     const productData = {
       title,
       categories,
-      description,
+      desc,
       price,
       img,
     };
@@ -65,7 +65,7 @@ const NewProduct = () => {
       </Form.Item>
 
       <Form.Item
-        name="description"
+        name="desc"
         label="Description"
         rules={[{ required: true, message: "Please enter a description" }]}
       >

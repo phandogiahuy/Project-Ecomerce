@@ -1,17 +1,17 @@
 import { Table, Tag, Space, Button, Skeleton, Affix } from "antd";
-import { useDiscount } from "../../hooks/useDiscount";
-import { useDeleteDiscount } from "../../hooks/detail/useDiscounById";
+import { useGetDiscount } from "../../hooks/Queries/Discount/useGetDiscount";
 import { Link } from "react-router-dom";
 import {
   DeleteTwoTone,
   EditTwoTone,
   PlusCircleTwoTone,
 } from "@ant-design/icons";
+import { useDeleteDiscount } from "../../hooks/Mutation/Discount/useDeleteDiscountById";
 
 export default function DiscountList() {
   const { mutate } = useDeleteDiscount();
 
-  const res = useDiscount();
+  const res = useGetDiscount();
   if (res.isLoading) {
     return <Skeleton active />;
   }
@@ -101,7 +101,7 @@ export default function DiscountList() {
               style={{
                 backgroundColor: "rgb(86 233 36)",
                 fontSize: "20px",
-                width: "15%",
+                width: "20%",
                 height: "20%",
               }}
               icon={<PlusCircleTwoTone />}

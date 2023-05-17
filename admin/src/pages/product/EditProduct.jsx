@@ -1,20 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Form, Input, Button, Upload, Select, Space } from "antd";
-import { storage } from "../../firebase";
+import { storage } from "../../service-api/firebase";
 import { EditFilled, PlusOutlined } from "@ant-design/icons";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
-import { useLocation, useParams } from "react-router-dom";
-import {
-  editProductById,
-  useProductById,
-} from "../../hooks/detail/useProductById";
+import { useParams } from "react-router-dom";
+import { useEditProductById } from "../../hooks/Mutation/Product/useEditProductById";
+import { useGetProductById } from "../../hooks/Queries/Product/useGetProductById";
 const options = [{ value: "phin" }, { value: "espresso" }, { value: "sale" }];
 
 const EditProduct = () => {
   let { _id } = useParams();
   const [form] = Form.useForm();
-  const { mutate } = editProductById();
+  const { mutate } = useEditProductById(_id);
   const [change, setChange] = useState(false);
 
   const [images, setImage] = useState();
@@ -22,7 +20,7 @@ const EditProduct = () => {
     setChange(true);
     setImage(info.file.originFileObj);
   };
-  const res = useProductById(_id);
+  const res = useGetProductById(_id);
 
   if (res.isLoading) {
     return <div>...loading</div>;

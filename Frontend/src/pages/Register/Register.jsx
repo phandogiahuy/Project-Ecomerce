@@ -2,7 +2,7 @@ import { Button, Form, Input, message } from "antd";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
-import { useRegister } from "../../hooks/useRegister";
+import { useRegister } from "../../hooks/Mutation/useSetRegister";
 import { Container, Title, Wrapper } from "./Style-Register";
 
 const tailFormItemLayout = {

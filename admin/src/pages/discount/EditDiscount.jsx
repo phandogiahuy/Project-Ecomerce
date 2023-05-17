@@ -3,15 +3,13 @@ import { Form, Input, Button, Upload, Select } from "antd";
 import { EditFilled, PlusOutlined } from "@ant-design/icons";
 
 import { useParams } from "react-router-dom";
-import {
-  useDiscountById,
-  useEditDiscountById,
-} from "../../hooks/detail/useDiscounById";
+import { useEditDiscountById } from "../../hooks/Mutation/Discount/useEditDiscountById";
+import { useDiscountById } from "../../hooks/Queries/Discount/useGetDiscountById";
 
 const EditDiscount = () => {
   let { _id } = useParams();
   const [form] = Form.useForm();
-  const { mutate } = useEditDiscountById();
+  const { mutate } = useEditDiscountById(_id);
 
   const res = useDiscountById(_id);
 

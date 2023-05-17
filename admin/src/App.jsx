@@ -6,27 +6,29 @@ import "./App.css";
 import { Layout, Space } from "antd";
 const { Header, Sider, Content } = Layout;
 
-const App = () => (
-  <Space
-    direction="vertical"
-    style={{
-      width: "100%",
-    }}
-    size={[0, 48]}
-  >
-    <Layout>
-      <Header style={{ backgroundColor: "lavender" }}>
-        <Topbar />
-      </Header>
+const App = () => {
+  return (
+    <Space
+      direction="vertical"
+      style={{
+        width: "100%",
+      }}
+      size={[0, 48]}
+    >
       <Layout>
-        <Sider style={{ backgroundColor: "white" }}>
-          <Sidebar />
-        </Sider>
-        <Content>
-          <Outlet />{" "}
-        </Content>
+        <Header style={{ backgroundColor: "lavender" }}>
+          <Topbar />
+        </Header>
+        <Layout>
+          <Sider style={{ backgroundColor: "white" }}>
+            <Sidebar />
+          </Sider>
+          <Content>
+            <Outlet />{" "}
+          </Content>
+        </Layout>
       </Layout>
-    </Layout>
-  </Space>
-);
+    </Space>
+  );
+};
 export default App;

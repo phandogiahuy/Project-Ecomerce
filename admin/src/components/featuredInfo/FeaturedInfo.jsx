@@ -1,6 +1,6 @@
 import "./featuredInfo.css";
 import { useEffect, useState } from "react";
-import { AxiosInstance } from "../../requestMethods";
+import { AxiosInstance } from "../../service-api/requestMethods";
 
 export default function FeaturedInfo() {
   const [income, setIncome] = useState([]);

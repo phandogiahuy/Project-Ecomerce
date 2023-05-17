@@ -15,16 +15,16 @@ import {
   PlusCircleTwoTone,
 } from "@ant-design/icons";
 
-import { useProducts } from "../../hooks/useProducts";
-import { useDeleteProduct } from "../../hooks/detail/useDeleteProductById";
+import { useGetProducts } from "../../hooks/Queries/Product/useGetProducts";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useDeleteProduct } from "../../hooks/Mutation/Product/useDeleteProductById";
 
 export default function ProductList() {
   const { mutate } = useDeleteProduct();
   const [fixedTop, setFixedTop] = useState(false);
 
-  const res = useProducts();
+  const res = useGetProducts();
   if (res.isLoading) {
     return <Skeleton active />;
   }
@@ -160,7 +160,7 @@ export default function ProductList() {
               style={{
                 backgroundColor: "rgb(86 233 36)",
                 fontSize: "20px",
-                width: "15%",
+                width: "20%",
                 height: "20%",
               }}
               icon={<PlusCircleTwoTone />}

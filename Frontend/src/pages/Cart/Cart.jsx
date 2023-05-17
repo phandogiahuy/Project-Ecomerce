@@ -3,9 +3,9 @@ import { Affix, Button, Divider, Form, Input, InputNumber, Space } from "antd";
 import React, { useEffect, useState } from "react";
 
 import Announcement from "../../components/Annoucement/Annoucement";
-import Footer from "../../components/Bottom/Footer";
-import Navbar from "../../components/Top/Navbar";
-import Newsletter from "../../components/Bottom/Newsletter";
+import Footer from "../../components/Footer/Footer";
+import Navbar from "../../components/NavBar/Navbar";
+import Newsletter from "../../components/Footer/Newsletter";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -14,8 +14,8 @@ import {
   updateProduct,
 } from "../../reduxToolkit/cartRedux";
 import StripeCheckout from "react-stripe-checkout";
-import { useDiscount } from "../../hooks/detail/useDiscounByCode";
-import { axiosInstance } from "../../api/requestMethod";
+import { useGetDiscountByCode } from "../../hooks/Queries/Discount/useGetDiscounByCode";
+import { axiosInstance } from "../../Service-api/requestMethod";
 import {
   Bottom,
   ClearCart,
@@ -60,7 +60,7 @@ const Cart = () => {
   const [limit, setLimit] = useState(0);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const resDiscount = useDiscount(discount);
+  const resDiscount = useGetDiscountByCode(discount);
   const onToken = (token) => {
     setStripeToken(token);
   };
@@ -118,16 +118,23 @@ const Cart = () => {
   } else {
     ship = 0;
   }
-  let priceAllProduct = (priceTotal + ship) * (1 - discounts / 100);
-  if (priceTotal === 0) {
-    priceAllProduct = 0;
-    ship = 0;
-  }
+
   let freeShip = 100 - priceTotal;
   const handleClear = () => {
     dispatch(clearCart());
   };
-  console.log(priceTotal, limit);
+  const onChangeDiscount = (e) => {
+    setDiscount(e.target.value);
+  };
+  let discountApply = 0;
+  if (limit < priceTotal) {
+    discountApply = discounts;
+  }
+  let priceAllProduct = (priceTotal + ship) * (1 - discountApply / 100);
+  if (priceTotal === 0) {
+    priceAllProduct = 0;
+    ship = 0;
+  }
   return (
     <Container>
       <Announcement />
@@ -194,7 +201,7 @@ const Cart = () => {
                 placeholder="Discount"
                 size="large"
                 style={{ marginRight: 10 }}
-                onChange={(e) => setDiscount(e.target.value)}
+                onChange={onChangeDiscount}
               />
               <Button
                 type="primary"
@@ -273,7 +280,7 @@ const Cart = () => {
                   Discount:{" "}
                 </b>
               </SummaryItemText>
-              <SummaryItemPrice>{discounts}%</SummaryItemPrice>
+              <SummaryItemPrice>{discountApply}%</SummaryItemPrice>
             </SummaryItem>
 
             <SummaryItem>

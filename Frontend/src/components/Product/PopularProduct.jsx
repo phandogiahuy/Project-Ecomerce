@@ -3,15 +3,16 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 import Product from "./newProduct";
-import { useProducts } from "../../hooks/useProducts";
-import { useProductByCat } from "../../hooks/detail/useProductByCat";
+
 import { Container, Title } from "./Style-PopularProduct";
+import { useGetProducts } from "../../hooks/Queries/Product/useGetProducts";
+import { useGetProductByCat } from "../../hooks/Queries/Product/useGetProductByCat";
 
 const PopularProduct = ({ cat, sort }) => {
   const [product, setProduct] = useState([]);
   const [filterProduct, setFilterProduct] = useState([]);
-  const getProduct = useProducts();
-  const getProductByCat = useProductByCat(cat);
+  const getProduct = useGetProducts();
+  const getProductByCat = useGetProductByCat(cat);
   useEffect(() => {
     const getProducts = async () => {
       try {

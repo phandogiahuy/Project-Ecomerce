@@ -22,6 +22,7 @@ export const Code = styled.span`
 `;
 export const ContainerCard = styled.div`
   margin-left: 25px;
+  cursor: pointer;
   :hover {
     transform-origin: top center;
     animation: swing 2s ease infinite;

@@ -15,7 +15,7 @@ const Coupon = ({ data }) => {
   };
 
   return (
-    <ContainerCard>
+    <ContainerCard onClick={handleClickCoupon}>
       <Card
         className="coupon-card"
         style={{
@@ -32,7 +32,6 @@ const Coupon = ({ data }) => {
           </Code>
           <Button
             type="primary"
-            onClick={handleClickCoupon}
             style={{
               fontSize: "25px",
               height: "50px",

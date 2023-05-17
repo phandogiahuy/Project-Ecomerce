@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Coupon from "./Coupon";
-import { useCoupon } from "../../hooks/useCoupon";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import { Skeleton } from "antd";
 import { Arrow, Container, Title, Wrapper } from "./Style-CoponList";
+import { useGetCoupon } from "../../hooks/Queries/Discount/useGetCoupon";
 
 const ListCoupon = () => {
   const [slideIndex, setSlideIndex] = useState(0);
 
-  const res = useCoupon();
+  const res = useGetCoupon();
   if (res.isLoading) {
     return <Skeleton active />;
   }

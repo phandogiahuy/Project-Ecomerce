@@ -1,4 +1,4 @@
-import { AxiosInstance } from "../../requestMethods";
+import { AxiosInstance } from "../../service-api/requestMethods";
 import "./widgetSm.css";
 import { useEffect, useState } from "react";
 import { Popover } from "antd";

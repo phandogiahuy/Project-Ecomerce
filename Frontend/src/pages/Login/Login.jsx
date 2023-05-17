@@ -2,7 +2,7 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
 // import { login } from "../reduxToolkit/callAPI";
 import { useState } from "react";
-import { useLogin } from "../../hooks/useLogin";
+import { useLogin } from "../../hooks/Mutation/useSetLogin";
 import { Container } from "./Style-Login";
 
 const Login = () => {
@@ -10,11 +10,16 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const { mutate, isLoading } = useLogin();
 
-  const handleClick = (e) => {
+  const handleClickSignIn = (e) => {
     e.preventDefault();
     mutate({ password, email });
   };
-
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
   return (
     <Container>
       <Form
@@ -37,7 +42,7 @@ const Login = () => {
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Email"
             type="email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={onChangeEmail}
           />
         </Form.Item>
         <Form.Item
@@ -53,7 +58,7 @@ const Login = () => {
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={onChangePassword}
           />
         </Form.Item>
 
@@ -62,7 +67,7 @@ const Login = () => {
             type="primary"
             htmlType="submit"
             className="login-form-button"
-            onClick={handleClick}
+            onClick={handleClickSignIn}
             disabled={isLoading}
           >
             {isLoading ? "Logging in..." : "Log in"}

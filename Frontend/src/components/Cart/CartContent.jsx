@@ -35,7 +35,7 @@ const CartContent = ({ products }) => {
   x.map((i) => {
     priceTotal += i;
   });
-  const handleClear = () => {
+  const ClickHandleClearCart = () => {
     dispatch(clearCart());
   };
   return (
@@ -81,7 +81,7 @@ const CartContent = ({ products }) => {
       <Bottom>
         <Title>TOTAL</Title>
         <Total>{priceTotal}</Total>
-        <Clear onClick={handleClear}>Clear cart</Clear>
+        <Clear onClick={ClickHandleClearCart}>Clear cart</Clear>
       </Bottom>
       <Link to={"/Cart/"}>
         <Space wrap style={{ display: "flex", justifyContent: "center" }}>

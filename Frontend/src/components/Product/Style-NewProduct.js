@@ -22,10 +22,11 @@ export const Infor = styled.div`
 export const Name = styled.h1`
   margin-left: 50px;
   font-weight: 500;
+  font-size: 20px;
 `;
 export const Image = styled.img`
   height: 100%;
-  width: 75%;
+  width: 100%;
   cursor: pointer;
   image-rendering: pixelated;
 

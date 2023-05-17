@@ -2,19 +2,19 @@ import React from "react";
 
 import Announcement from "../../components/Annoucement/Annoucement";
 import Categories from "../../components/Categories/Categories";
-import Footer from "../../components/Bottom/Footer";
-import Navbar from "../../components/Top/Navbar";
-import Newsletter from "../../components/Bottom/Newsletter";
+import Footer from "../../components/Footer/Footer";
+import Navbar from "../../components/NavBar/Navbar";
+import Newsletter from "../../components/Footer/Newsletter";
 import PopularProduct from "../../components/Product/PopularProduct";
-import SimpleSlider from "../../components/Middle/Slider";
 import ListCoupon from "../../components/Coupon/ListCoupon";
+import Slider from "../../components/Slide/Slider";
 
 const Home = () => {
   return (
     <div>
       <Announcement />
       <Navbar />
-      <SimpleSlider />
+      <Slider />
       <Categories />
       <PopularProduct />
       <ListCoupon />
