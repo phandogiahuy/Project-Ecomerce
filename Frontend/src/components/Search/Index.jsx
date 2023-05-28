@@ -3,7 +3,7 @@ import { Input, Spin } from "antd";
 
 import { debounce } from "lodash";
 import { Link } from "react-router-dom";
-import { ContainerSearch, InforSearch } from "./Style-Search";
+import { ContainerSearch, InforSearch } from "./style-search";
 import { useGetProductBySearch } from "../../hooks/Queries/Product/useGetProductBySearch";
 
 const SearchInput = () => {

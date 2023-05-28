@@ -1,6 +1,6 @@
 import { Affix } from "antd";
 import React from "react";
-import { Container } from "./Style-Annoucement";
+import { Container } from "./style-annoucement";
 
 function Announcement() {
   return (

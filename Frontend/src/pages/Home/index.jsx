@@ -1,15 +1,14 @@
 import React from "react";
 
-import Announcement from "../../components/Annoucement/Annoucement";
-import Categories from "../../components/Categories/Categories";
-import Footer from "../../components/Footer/Footer";
-import Navbar from "../../components/NavBar/Navbar";
-import Newsletter from "../../components/Footer/Newsletter";
-import PopularProduct from "../../components/Product/PopularProduct";
-import ListCoupon from "../../components/Coupon/ListCoupon";
-import Slider from "../../components/Slide/Slider";
 import { Button, ConfigProvider, theme } from "antd";
-
+import Announcement from "../../components/Annoucement/Index";
+import Categories from "../../components/Categories/Index";
+import Navbar from "../../components/NavBar/Index";
+import ListCoupon from "../../components/Coupon/coupon-list";
+import Newsletter from "../../components/Footer/Newsletter";
+import Footer from "../../components/Footer/Footer";
+import PopularProduct from "../../components/Product/PopularProduct";
+import Slider from "../../components/Slide/Index";
 const Home = () => {
   return (
     <div>

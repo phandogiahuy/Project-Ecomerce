@@ -2,10 +2,6 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { Affix, Button, Divider, Form, Input, InputNumber, Space } from "antd";
 import React, { useEffect, useState } from "react";
 
-import Announcement from "../../components/Annoucement/Annoucement";
-import Footer from "../../components/Footer/Footer";
-import Navbar from "../../components/NavBar/Navbar";
-import Newsletter from "../../components/Footer/Newsletter";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -46,7 +42,11 @@ import {
   TypeItem,
   TypeProduct,
   Wrapper,
-} from "./Style-Cart";
+} from "./style-cart";
+import Announcement from "../../components/Annoucement/Index";
+import Navbar from "../../components/NavBar/Index";
+import Newsletter from "../../components/Footer/Newsletter";
+import Footer from "../../components/Footer/Footer";
 const KEY =
   "pk_test_51N15FaIul8LwwZP1lfPebnysBeq3X6VbETjXVtMBGDzUxso3Zc8Q5PCigXkhuigDkXgP8zpPOtqcJHE0VDiYplGO00PojfRw3e";
 

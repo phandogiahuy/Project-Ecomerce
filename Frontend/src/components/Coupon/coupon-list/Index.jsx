@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Coupon from "./Coupon";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import { Skeleton } from "antd";
-import { Arrow, Container, Title, Wrapper } from "./Style-CoponList";
-import { useGetCoupon } from "../../hooks/Queries/Discount/useGetCoupon";
+import { Arrow, Container, Title, Wrapper } from "./style-coponList";
+import { useGetCoupon } from "../../../hooks/Queries/Discount/useGetCoupon";
+import Coupon from "..";
 
 const ListCoupon = () => {
   const [slideIndex, setSlideIndex] = useState(0);

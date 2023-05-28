@@ -3,10 +3,6 @@ import { Button, Image, InputNumber, Radio, Select, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
-import Announcement from "../../../components/Annoucement/Annoucement";
-import Footer from "../../../components/Footer/Footer";
-import Navbar from "../../../components/NavBar/Navbar";
-import Newsletter from "../../../components/Footer/Newsletter";
 import { addProduct } from "../../../reduxToolkit/cartRedux";
 import { useDispatch } from "react-redux";
 import { axiosInstance } from "../../../Service-api/requestMethod";
@@ -21,7 +17,11 @@ import {
   Price,
   Title,
   Wrapper,
-} from "./Style-Product";
+} from "./style-product";
+import Navbar from "../../../components/NavBar/Index";
+import Announcement from "../../../components/Annoucement/Index";
+import Newsletter from "../../../components/Footer/Newsletter";
+import Footer from "../../../components/Footer/Footer";
 
 const Product = () => {
   const [type, setType] = useState("Bean");

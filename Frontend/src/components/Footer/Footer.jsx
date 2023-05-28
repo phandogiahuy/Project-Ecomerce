@@ -18,7 +18,7 @@ import {
   Right,
   SocialIcon,
   Title,
-} from "./Style-Footer";
+} from "./style-footer";
 
 const Footer = () => {
   return (

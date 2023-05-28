@@ -6,7 +6,7 @@ export const generateAccessToken = (user) => {
     { id: user._id, isAdmin: user.isAdmin },
     process.env.JWT_KEY,
     {
-      expiresIn: "3d",
+      expiresIn: "60m",
     }
   );
 };

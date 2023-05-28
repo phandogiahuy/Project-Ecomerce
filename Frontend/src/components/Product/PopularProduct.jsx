@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import Product from "./newProduct";
 
-import { Container, Title } from "./Style-PopularProduct";
+import { Container, Title } from "./style-popularProduct";
 import { useGetProducts } from "../../hooks/Queries/Product/useGetProducts";
 import { useGetProductByCat } from "../../hooks/Queries/Product/useGetProductByCat";
 

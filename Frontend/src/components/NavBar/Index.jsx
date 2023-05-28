@@ -2,13 +2,10 @@ import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge, Popover, Affix } from "antd";
 
 import { Link, useNavigate } from "react-router-dom";
-import Login from "../../pages/Login/Login";
+import Login from "../../pages/Login";
 import Register from "../../pages/Register/Register";
 
-import CartContent from "../Cart/CartContent";
 import { clearCart } from "../../reduxToolkit/cartRedux";
-
-import SearchInput from "../Search/Search";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,12 +19,15 @@ import {
   Right,
   SearchComponent,
   Wrapper,
-} from "./Style-Nav";
+} from "./style-nav";
 import { useGetUser } from "../../hooks/Queries/User/useGetUser";
+import CartContent from "../Cart";
+import SearchInput from "../Search";
 
 const Navbar = () => {
   const { products, total } = useSelector((state) => state.cart);
   const token = localStorage.getItem("token");
+  const email = localStorage.getItem("email");
   const [uses, setUser] = useState("");
   const user = useGetUser();
   useEffect(() => {
@@ -96,7 +96,7 @@ const Navbar = () => {
               </Popover>
             )}
             {token ? (
-              <MenuItem>{uses}</MenuItem>
+              <MenuItem>{uses || email}</MenuItem>
             ) : (
               <Popover
                 content={<Login />}

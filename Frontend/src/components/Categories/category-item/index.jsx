@@ -1,7 +1,7 @@
 import { Button, Col, Space } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Image, Infor, Title } from "./Style-CategoryItem";
+import { Container, Image, Infor, Title } from "./style-categoryItem";
 
 const CategoriesItem = ({ item }) => {
   return (
