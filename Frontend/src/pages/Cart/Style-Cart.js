@@ -65,16 +65,14 @@ export const Product = styled.div`
 `;
 export const ProductDetail = styled.span`
   display: flex;
-  width: 30%;
-  margin-left: 100px;
-  margin-top: 20px;
+  width: 40%;
   position: relative;
 `;
 export const ProductName = styled.p`
-  margin-left: 10px;
   font-weight: 400;
   font-family: "Arvo", serif;
-  font-size: 30px;
+  font-size: 15px;
+  margin-top: 50px;
 `;
 
 export const ProductQuanity = styled.p`
@@ -83,7 +81,7 @@ export const ProductQuanity = styled.p`
 export const TypeItem = styled.p`
   position: absolute;
   top: 40%;
-  left: 32%;
+  left: 62%;
   font-size: 20px;
 `;
 

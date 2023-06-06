@@ -18,6 +18,7 @@ export const useLogin = () => {
     onSuccess: (data) => {
       if (data.email) {
         localStorage.setItem("token", data.accessToken);
+        localStorage.setItem("email", data.email);
         queryClient.setQueryData([GET_USER], (oldData) => data);
         navigate("/");
       }

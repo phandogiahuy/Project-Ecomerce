@@ -1,5 +1,14 @@
 import { DeleteOutlined } from "@ant-design/icons";
-import { Affix, Button, Divider, Form, Input, InputNumber, Space } from "antd";
+import {
+  Affix,
+  Button,
+  Divider,
+  Form,
+  Image,
+  Input,
+  InputNumber,
+  Space,
+} from "antd";
 import React, { useEffect, useState } from "react";
 
 import Announcement from "../../components/Annoucement/Annoucement";
@@ -47,9 +56,9 @@ import {
   TypeProduct,
   Wrapper,
 } from "./Style-Cart";
+import axios from "axios";
 const KEY =
   "pk_test_51N15FaIul8LwwZP1lfPebnysBeq3X6VbETjXVtMBGDzUxso3Zc8Q5PCigXkhuigDkXgP8zpPOtqcJHE0VDiYplGO00PojfRw3e";
-
 const Cart = () => {
   const [top, setTop] = useState(10);
   const { products } = useSelector((state) => state.cart);
@@ -82,7 +91,7 @@ const Cart = () => {
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        const res = await axiosInstance.post("/checkout/payment", {
+        const res = await axios.post("localhost:3000/api/checkout/payment", {
           tokenId: stripeToken.id,
           amount: 500,
         });
@@ -90,6 +99,7 @@ const Cart = () => {
           stripeData: res.data,
           products: products,
         });
+        console.log(res);
       } catch {}
     };
     stripeToken && makeRequest();
@@ -159,7 +169,7 @@ const Cart = () => {
           {products.map((item) => (
             <Product key={item.product._id}>
               <ProductDetail>
-                <ProductImage src={item.product.img}></ProductImage>
+                <Image src={item.product.img}></Image>
                 <ProductName>{item.product.title}</ProductName>
                 <TypeItem>
                   {item.size}gr/{item.type}

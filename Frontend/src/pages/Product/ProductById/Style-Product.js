@@ -39,3 +39,4 @@ export const FilterTitle = styled.span`
 export const AddContainer = styled.div`
   display: flex;
 `;
+export const Comment = styled.div``;

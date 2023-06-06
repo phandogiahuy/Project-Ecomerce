@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { axiosInstance } from "../../../Service-api/requestMethod";
 import {
   AddContainer,
+  Comment,
   Container,
   Desc,
   FilterContainer,
@@ -76,8 +77,7 @@ const Product = () => {
         <ImgContainer>
           <Image
             style={{
-              width: "850px",
-              height: " 700px",
+              width: "120%",
               imageRendering: "pixelated",
             }}
             width={500}
@@ -135,6 +135,10 @@ const Product = () => {
           </AddContainer>
         </InforContainer>
       </Wrapper>
+      <Comment>
+        <h1>Comment</h1>
+        <CommentComponent />
+      </Comment>
       <Newsletter />
       <Footer />
     </Container>

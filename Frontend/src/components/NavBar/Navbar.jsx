@@ -28,6 +28,7 @@ import { useGetUser } from "../../hooks/Queries/User/useGetUser";
 const Navbar = () => {
   const { products, total } = useSelector((state) => state.cart);
   const token = localStorage.getItem("token");
+  const email = localStorage.getItem("email");
   const [uses, setUser] = useState("");
   const user = useGetUser();
   useEffect(() => {
@@ -96,7 +97,7 @@ const Navbar = () => {
               </Popover>
             )}
             {token ? (
-              <MenuItem>{uses}</MenuItem>
+              <MenuItem>{uses || email}</MenuItem>
             ) : (
               <Popover
                 content={<Login />}
