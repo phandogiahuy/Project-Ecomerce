@@ -1,34 +1,70 @@
-import { Comment, Avatar, Form, Button, List, Input } from "antd";
-import { UserOutlined, SendOutlined } from "@ant-design/icons";
+import {
+  Avatar,
+  Form,
+  Button,
+  List,
+  Input,
+  Card,
+  Rate,
+  Typography,
+  Progress,
+} from "antd";
 
-const { TextArea } = Input;
-const CommentComponent = () => {
-  //   const CommentList = () => (
-  //     <List
-  //       dataSource={[]}
-  //       itemLayout="horizontal"
-  //       renderItem={() => (
-  //         <Comment
-  //           author={<span style={{ fontWeight: "bold" }}>John Doe</span>}
-  //           avatar={<Avatar icon={<UserOutlined />} />}
-  //           content={<p>This is a comment.</p>}
-  //           datetime={<span>2 hours ago</span>}
-  //         />
-  //       )}
-  //     />
-  //   );
+import {
+  UserOutlined,
+  SendOutlined,
+  UserAddOutlined,
+  UsergroupAddOutlined,
+} from "@ant-design/icons";
+import CommentList from "./CommentList";
+const { Text } = Typography;
+
+const CommentComponent = ({ reviews }) => {
+  // const ratings = reviews.rating;
+  const rate = [];
+
+  reviews.forEach((reviews) => rate.push(reviews.rating));
+  const sumOfRatings = rate.reduce((acc, rate) => acc + rate, 0);
+
+  // // Calculate the average rating
+  const averageRating = sumOfRatings / rate.length;
+
+  // // Round the average rating to a specific decimal place (e.g., 1 decimal place)
+  const totalRating = averageRating.toFixed(1);
+
   return (
-    <Form>
-      <Form.Item>
-        <TextArea rows={4} placeholder="Add a comment" />
-      </Form.Item>
-      <Form.Item>
-        <Button type="primary" icon={<SendOutlined />} htmlType="submit">
-          Add Comment
-        </Button>
-      </Form.Item>
-    </Form>
+    <div className="mr-10 p-4">
+      <Card
+        title={
+          <div>
+            <h1> Review From User</h1>
+            {totalRating > 0 && (
+              <div>
+                <Rate disabled defaultValue={totalRating} allowHalf />
+                {" " + totalRating}
+              </div>
+            )}
+          </div>
+        }
+      >
+        <div className="mr-5 flex flex-col">
+          {reviews.length > 0 ? (
+            reviews.map((review) => <CommentList review={review} />)
+          ) : (
+            <div className="ml-[50%]  ">
+              <UserOutlined className="text-[50px]" />
+              <p className="">No review</p>
+            </div>
+          )}
+        </div>
+      </Card>
+    </div>
   );
 };
 
-export default Comment;
+export default CommentComponent;
+{
+  /* <div>
+              <Rate disabled defaultValue={reviews.rating} allowHalf />
+            </div> */
+}

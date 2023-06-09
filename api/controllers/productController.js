@@ -1,4 +1,5 @@
 import { Product } from "../models/Product.js";
+import { Review } from "../models/Review.js";
 class ProductController {
   //create product
   async create(req, res) {
@@ -36,7 +37,7 @@ class ProductController {
   //GET PRODUCT
   async showProduct(req, res) {
     try {
-      const product = await Product.findById(req.params.id);
+      const product = await Product.findById(req.params.id).populate("reviews");
       res.status(200).json(product);
     } catch (err) {
       res.status(500).json(err);
@@ -58,11 +59,11 @@ class ProductController {
           categories: {
             $in: [qCategory],
           },
-        });
+        }).populate("reviews");
       } else if (qtitle) {
         products = await Product.find({ title: { $in: re } }).limit(4);
       } else {
-        products = await Product.find();
+        products = await Product.find().populate("reviews");
       }
       res.status(200).json(products);
     } catch (err) {

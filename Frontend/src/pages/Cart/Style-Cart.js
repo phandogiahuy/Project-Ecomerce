@@ -83,6 +83,7 @@ export const TypeItem = styled.p`
   top: 40%;
   left: 62%;
   font-size: 20px;
+  margin-top: 20px;
 `;
 
 export const ProductPrice = styled.p`
@@ -94,13 +95,16 @@ export const ProductType = styled.span`
   width: 80%;
   justify-content: space-around;
 `;
-export const Bottom = styled.div``;
+export const Bottom = styled.div`
+  display: flex;
+`;
 export const Summary = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   font-size: 20px;
   padding: 20px;
+  width: 100%;
 `;
 export const SummaryItem = styled.span`
   padding: 10px;
@@ -130,3 +134,9 @@ export const ClearCart = styled.p`
     text-decoration: none;
   }
 `;
+export const Step = styled.div`
+  width: 90%;
+  margin-top: 30px;
+  padding-bottom: 50px;
+`;
+export const Checkout = styled.div``;

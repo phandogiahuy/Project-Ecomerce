@@ -4,11 +4,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const queryClient = new QueryClient();
 import App from "./App.jsx";
 
 import { Provider } from "react-redux";
+import "./styles/tailwind.css";
 
 import { store } from "./reduxToolkit/store";
 
@@ -20,6 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <RouterProvider router={router}>
         <App />
       </RouterProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </Provider>
 );

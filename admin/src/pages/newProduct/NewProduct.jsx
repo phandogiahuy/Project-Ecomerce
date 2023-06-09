@@ -12,7 +12,6 @@ const NewProduct = () => {
   const [images, setImage] = useState(null);
 
   const handleImageUpload = (info) => {
-    console.log(info);
     setImage(info.file.originFileObj);
   };
   const { mutate } = useCreateProducts();

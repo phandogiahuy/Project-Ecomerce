@@ -11,10 +11,6 @@ import {
 } from "antd";
 import React, { useEffect, useState } from "react";
 
-import Announcement from "../../components/Annoucement/Annoucement";
-import Footer from "../../components/Footer/Footer";
-import Navbar from "../../components/NavBar/Navbar";
-import Newsletter from "../../components/Footer/Newsletter";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -27,6 +23,7 @@ import { useGetDiscountByCode } from "../../hooks/Queries/Discount/useGetDiscoun
 import { axiosInstance } from "../../Service-api/requestMethod";
 import {
   Bottom,
+  Checkout,
   ClearCart,
   Container,
   Continue,
@@ -41,6 +38,7 @@ import {
   ProductQuanity,
   ProductType,
   Quanity,
+  Step,
   Summary,
   SummaryDiscount,
   SummaryItem,
@@ -57,6 +55,11 @@ import {
   Wrapper,
 } from "./Style-Cart";
 import axios from "axios";
+import Announcement from "../../components/Annoucement/Index";
+import Navbar from "../../components/NavBar/Index";
+import Newsletter from "../../components/Footer/Newsletter";
+import Footer from "../../components/Footer/Footer";
+import MySteps from "../../components/Steps";
 const KEY =
   "pk_test_51N15FaIul8LwwZP1lfPebnysBeq3X6VbETjXVtMBGDzUxso3Zc8Q5PCigXkhuigDkXgP8zpPOtqcJHE0VDiYplGO00PojfRw3e";
 const Cart = () => {
@@ -88,22 +91,22 @@ const Cart = () => {
       }
     } catch (error) {}
   };
-  useEffect(() => {
-    const makeRequest = async () => {
-      try {
-        const res = await axios.post("localhost:3000/api/checkout/payment", {
-          tokenId: stripeToken.id,
-          amount: 500,
-        });
-        navigate("/success", {
-          stripeData: res.data,
-          products: products,
-        });
-        console.log(res);
-      } catch {}
-    };
-    stripeToken && makeRequest();
-  }, [stripeToken, products.total, navigate]);
+  // useEffect(() => {
+  //   const makeRequest = async () => {
+  //     try {
+  //       const res = await axios.post("localhost:3000/api/checkout/payment", {
+  //         tokenId: stripeToken.id,
+  //         amount: 500,
+  //       });
+  //       navigate("/success", {
+  //         stripeData: res.data,
+  //         products: products,
+  //       });
+  //       console.log(res);
+  //     } catch {}
+  //   };
+  //   stripeToken && makeRequest();
+  // }, [stripeToken, products.total, navigate]);
   const dispatch = useDispatch();
 
   const handleChange = (item, e) => {
@@ -158,6 +161,9 @@ const Cart = () => {
           <TopTexts>
             <TopText>Shopping Bag ({products.length})</TopText>
           </TopTexts>
+          <Step>
+            <MySteps step={0} />
+          </Step>
         </Top>
         <Middle>
           <Type>
@@ -183,9 +189,15 @@ const Cart = () => {
                     size="medium"
                     style={{ marginBottom: "1px", width: "60%" }}
                     onChange={(e) => handleChange(item, e)}
+                    type="number"
+                    onKeyDown={(evt) => {
+                      if (["e", "E", "+", "-"].includes(evt.key)) {
+                        evt.preventDefault();
+                      }
+                    }}
                   />
                   <DeleteOutlined
-                    style={{ cursor: "pointer" }}
+                    className="ml-[10px] mt-3 cursor-pointer text-2xl"
                     onClick={() =>
                       dispatch(
                         removeProduct({
@@ -308,18 +320,9 @@ const Cart = () => {
               <SummaryItemPrice>{Math.round(priceAllProduct)}</SummaryItemPrice>
             </SummaryItem>
 
-            {token ? (
-              <StripeCheckout
-                name="AROMA deLUTE"
-                image="/logo.jpeg"
-                billingAddress
-                shippingAddress
-                description={`Your total is $${Math.round(priceAllProduct)}`}
-                amount={Math.round(priceAllProduct) * 100}
-                token={onToken}
-                stripeKey={KEY}
-              >
-                <Space wrap>
+            <Checkout>
+              <Space wrap>
+                <Link to={"checkout"}>
                   <Button
                     ghost
                     type="primary"
@@ -333,14 +336,9 @@ const Cart = () => {
                   >
                     Check out{" "}
                   </Button>
-                </Space>
-              </StripeCheckout>
-            ) : (
-              <Space wrap style={{ display: "flex", flexDirection: "column" }}>
-                <Link to={"/login"}>Please login before buying products</Link>
-                <Link to={"/register"}>Click to register if no account</Link>
+                </Link>
               </Space>
-            )}
+            </Checkout>
           </Summary>
         </Bottom>
       </Wrapper>
@@ -351,3 +349,31 @@ const Cart = () => {
 };
 
 export default Cart;
+{
+  /* <StripeCheckout
+name="AROMA deLUTE"
+image="/logo.jpeg"
+billingAddress
+shippingAddress
+description={`Your total is $${Math.round(priceAllProduct)}`}
+amount={Math.round(priceAllProduct) * 100}
+token={onToken}
+stripeKey={KEY}
+>
+<Space wrap>
+  <Button
+    ghost
+    type="primary"
+    style={{
+      backgroundColor: "#d6caa5",
+      width: 349,
+      height: 44,
+      color: "#69410b",
+      fontSize: 20,
+    }}
+  >
+    Check out{" "}
+  </Button>
+</Space>
+</StripeCheckout> */
+}

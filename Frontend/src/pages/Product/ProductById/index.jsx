@@ -1,12 +1,17 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Image, InputNumber, Radio, Select, Space } from "antd";
-import React, { useEffect, useState } from "react";
+import {
+  Button,
+  Divider,
+  Image,
+  InputNumber,
+  Radio,
+  Rate,
+  Select,
+  Space,
+} from "antd";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
-import Announcement from "../../../components/Annoucement/Annoucement";
-import Footer from "../../../components/Footer/Footer";
-import Navbar from "../../../components/NavBar/Navbar";
-import Newsletter from "../../../components/Footer/Newsletter";
 import { addProduct } from "../../../reduxToolkit/cartRedux";
 import { useDispatch } from "react-redux";
 import { axiosInstance } from "../../../Service-api/requestMethod";
@@ -20,9 +25,19 @@ import {
   ImgContainer,
   InforContainer,
   Price,
+  ProductFeature,
+  Recommend,
   Title,
   Wrapper,
-} from "./Style-Product";
+} from "./style";
+import Navbar from "../../../components/NavBar/Index";
+import Announcement from "../../../components/Annoucement/Index";
+import Newsletter from "../../../components/Footer/Newsletter";
+import Footer from "../../../components/Footer/Footer";
+import CommentComponent from "../../../components/Comment";
+import PopularProduct from "../../../components/Product/PopularProduct";
+import RecommendProduct from "../../../components/Recommend";
+import ProductInfor from "../../../components/ProductFeature";
 
 const Product = () => {
   const [type, setType] = useState("Bean");
@@ -34,6 +49,9 @@ const Product = () => {
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
   const dispatch = useDispatch();
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  });
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -69,10 +87,13 @@ const Product = () => {
   const onChangeQuanity = (e) => {
     setQuanity(e);
   };
+  if (product.reviews) {
+    console.log();
+  }
   return (
     <Container>
-      <Navbar />
       <Announcement />
+      <Navbar />
       <Wrapper>
         <ImgContainer>
           <Image
@@ -84,6 +105,7 @@ const Product = () => {
             src={product.img}
           ></Image>
         </ImgContainer>
+
         <InforContainer>
           <Title>{product.title}</Title>
           <Desc>{product.desc}</Desc>
@@ -118,10 +140,16 @@ const Product = () => {
               min={1}
               value={quanity}
               size="medium"
-              style={{ marginRight: "10px", marginBottom: "1px" }}
+              className="mb-[1px] mr-[10px]"
               onChange={onChangeQuanity}
+              type="number"
+              onKeyDown={(evt) => {
+                if (["e", "E", "+", "-", "0"].includes(evt.key)) {
+                  evt.preventDefault();
+                }
+              }}
             />
-            {}
+
             <Space wrap>
               <Button
                 icon={<PlusOutlined />}
@@ -135,10 +163,26 @@ const Product = () => {
           </AddContainer>
         </InforContainer>
       </Wrapper>
-      <Comment>
-        <h1>Comment</h1>
-        <CommentComponent />
-      </Comment>
+      <Divider />
+      <div className="flex w-[100%] p-4">
+        <ProductFeature>
+          <h1>Product Feature</h1>
+          <ProductInfor
+            place={product.place}
+            flavor={product.flavor}
+            process={product.process}
+          />
+        </ProductFeature>
+        <Comment>
+          {product.reviews && <CommentComponent reviews={product.reviews} />}
+        </Comment>
+      </div>
+      <Divider />
+      <Recommend className="p-2">
+        {product.categories && (
+          <RecommendProduct products={product.categories[0]} />
+        )}
+      </Recommend>
       <Newsletter />
       <Footer />
     </Container>

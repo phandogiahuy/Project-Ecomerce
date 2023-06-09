@@ -35,21 +35,27 @@ const EditProduct = () => {
       const imageRef = ref(storage, `images/${v4() + images.name}`);
       const snap = await uploadBytes(imageRef, images);
       const img = await getDownloadURL(snap.ref);
-      const { title, categories, desc } = values;
+      const { title, categories, desc, process, flavor, place } = values;
       const productData = {
         title,
         categories,
         desc,
+        process,
+        flavor,
+        place,
         price,
         img,
       };
       mutate({ productData, id: _id });
     } else {
-      const { title, categories, desc, img } = values;
+      const { title, categories, desc, process, flavor, place, img } = values;
       const productData = {
         title,
         categories,
         desc,
+        process,
+        flavor,
+        place,
         img,
         price,
       };
@@ -70,6 +76,9 @@ const EditProduct = () => {
         price250: res.data.price[0],
         price500: res.data.price[1],
         price1000: res.data.price[2],
+        process: res.data.process,
+        place: res.data.place,
+        flavor: res.data.flavor,
       }}
     >
       <Form.Item
@@ -126,6 +135,7 @@ const EditProduct = () => {
       >
         <Input placeholder="Enter price for 500 gram" type="number" min={0} />
       </Form.Item>
+
       <Form.Item
         name="price1000"
         label="Price for 1000 gram"
@@ -138,6 +148,29 @@ const EditProduct = () => {
         ]}
       >
         <Input placeholder="Enter price for 250 gram" type="number" min={0} />
+      </Form.Item>
+      <Form.Item
+        name="process"
+        label="Process"
+        rules={[
+          { required: true, message: "Please enter a process of coffee" },
+        ]}
+      >
+        <Input placeholder="Please enter a process of coffee" type="string" />
+      </Form.Item>
+      <Form.Item
+        name="place"
+        label="Place"
+        rules={[{ required: true, message: "Please enter a place of coffee" }]}
+      >
+        <Input placeholder="Enter a place of coffee" type="string" />
+      </Form.Item>
+      <Form.Item
+        name="flavor"
+        label="Flavor"
+        rules={[{ required: true, message: "Please enter a flavor" }]}
+      >
+        <Input placeholder="Please enter a flavor" type="string" />
       </Form.Item>
       <Form.Item label="Upload" name="img">
         <Upload

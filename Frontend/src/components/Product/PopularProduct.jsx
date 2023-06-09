@@ -1,10 +1,10 @@
-import { Row, Skeleton } from "antd";
+import { Pagination, Row, Skeleton } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 import Product from "./newProduct";
 
-import { Container, Title } from "./Style-PopularProduct";
+import { Container, Title } from "./style-popularProduct";
 import { useGetProducts } from "../../hooks/Queries/Product/useGetProducts";
 import { useGetProductByCat } from "../../hooks/Queries/Product/useGetProductByCat";
 
@@ -12,7 +12,11 @@ const PopularProduct = ({ cat, sort }) => {
   const [product, setProduct] = useState([]);
   const [filterProduct, setFilterProduct] = useState([]);
   const getProduct = useGetProducts();
+  const [currentPage, setCurrentPage] = useState(1);
   const getProductByCat = useGetProductByCat(cat);
+  const itemsPerPage = 8;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -34,7 +38,6 @@ const PopularProduct = ({ cat, sort }) => {
   useEffect(() => {
     cat && setFilterProduct(product);
   }, [product, cat]);
-
   useEffect(() => {
     if (sort === "newest") {
       setFilterProduct((prev) =>
@@ -50,7 +53,6 @@ const PopularProduct = ({ cat, sort }) => {
       );
     }
   }, [sort]);
-
   return (
     <Container>
       <Title> Product </Title>
@@ -76,8 +78,16 @@ const PopularProduct = ({ cat, sort }) => {
         {cat
           ? filterProduct.map((item) => <Product item={item} key={item._id} />)
           : product
-              .slice(0, 12)
+              .slice(startIndex, endIndex)
               .map((item) => <Product item={item} key={item._id} />)}
+        {product && !cat && (
+          <Pagination
+            className="ml-[80%]"
+            onChange={(e) => setCurrentPage(e)}
+            defaultCurrent={1}
+            total={product.length}
+          />
+        )}
       </Row>
     </Container>
   );

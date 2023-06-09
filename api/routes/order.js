@@ -7,7 +7,7 @@ import {
 } from "../middleware/JWT.js";
 
 export const orderRouter = Router();
-orderRouter.post("/", verifyToken, orderController.create);
+orderRouter.post("/", orderController.create);
 orderRouter.put("/:id", verifyTokenAndAdmin, orderController.update);
 orderRouter.delete("/:id", verifyTokenAndAdmin, orderController.delete);
 orderRouter.get(

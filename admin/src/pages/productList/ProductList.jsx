@@ -39,15 +39,13 @@ export default function ProductList() {
       title: " Name",
       align: "center",
       dataIndex: "title",
-      render: (text) => <h2>{text}</h2>,
+      render: (text) => <h1>{text}</h1>,
     },
     {
       title: "Image",
       align: "center",
       dataIndex: "img",
-      render: (img) => (
-        <Image src={img} style={{ width: "50%", height: "20%" }} />
-      ),
+      render: (img) => <Image src={img} style={{ width: "100%" }} />,
     },
     {
       title: "Tags",
@@ -77,6 +75,33 @@ export default function ProductList() {
       ),
     },
     {
+      title: "Information",
+      align: "center",
+      children: [
+        {
+          title: "Process",
+          dataIndex: "process",
+          width: 100,
+          align: "center",
+          render: (process) => <h1>{process}</h1>,
+        },
+        {
+          title: "Place",
+          dataIndex: "place",
+          width: 100,
+          align: "center",
+          render: (place) => <h1>{place}</h1>,
+        },
+        {
+          title: "Flavor",
+          dataIndex: "flavor",
+          width: 100,
+          align: "center",
+          render: (flavor) => <h1>{flavor}</h1>,
+        },
+      ],
+    },
+    {
       title: "Price",
       align: "center",
       children: [
@@ -86,7 +111,7 @@ export default function ProductList() {
           width: 100,
           align: "center",
           sorter: (a, b) => a.price[0] - b.price[0],
-          render: (array) => <h2>{array[0]}$</h2>,
+          render: (array) => <h1>{array[0]}$</h1>,
         },
         {
           title: "500g",
@@ -94,7 +119,7 @@ export default function ProductList() {
           width: 100,
           align: "center",
           sorter: (a, b) => a.price[1] - b.price[1],
-          render: (array) => <h2>{array[1]}$</h2>,
+          render: (array) => <h1>{array[1]}$</h1>,
         },
         {
           title: "1000g",
@@ -102,7 +127,7 @@ export default function ProductList() {
           width: 100,
           align: "center",
           sorter: (a, b) => a.price[2] - b.price[2],
-          render: (array) => <h2>{array[2]}$</h2>,
+          render: (array) => <h1>{array[2]}$</h1>,
         },
       ],
     },

@@ -1,23 +1,15 @@
-import { useEffect, useState } from "react";
 import "./widgetLg.css";
 import { format } from "timeago.js";
-import { AxiosInstance } from "../../service-api/requestMethods";
+import { useGetOrder } from "../../hooks/Queries/User/Order/useGetOrder";
 
 export default function WidgetLg() {
-  const [orders, setOrders] = useState([]);
+  const { isLoading, data } = useGetOrder();
 
-  useEffect(() => {
-    const getOrders = async () => {
-      try {
-        const res = await AxiosInstance.get("order");
-        setOrders(res.data);
-      } catch {}
-    };
-    getOrders();
-  }, []);
-  const Button = ({ type }) => {
-    return <button className={"widgetLgButton " + type}>{type}</button>;
-  };
+  if (isLoading) {
+    return <div>...loading</div>;
+  }
+  const orders = data;
+  console.log(orders);
   return (
     <div className="widgetLg">
       <h3 className="widgetLgTitle">Latest transactions</h3>
@@ -26,26 +18,18 @@ export default function WidgetLg() {
           <th className="widgetLgTh">Customer</th>
           <th className="widgetLgTh">Date</th>
           <th className="widgetLgTh">Amount</th>
-          <th className="widgetLgTh">Size</th>
           <th className="widgetLgTh">Type</th>
           <th className="widgetLgTh">Status</th>
         </tr>
         {orders.map((order) => (
           <tr className="widgetLgTr" key={order._id}>
             <td className="widgetLgUser">
-              <span className="widgetLgName">{order.userId}</span>
+              <span className="widgetLgName">{order.name}</span>
             </td>
             <td className="widgetLgDate">{format(order.createdAt)}</td>
-            <td className="widgetLgAmount">${order.amount}</td>
-            <td className="widgetLgType">
-              <Button type={order.type} />
-            </td>
-            <td className="widgetLgSize">
-              <Button type={order.size} />
-            </td>
-            <td className="widgetLgStatus">
-              <Button type={order.status} />
-            </td>
+            <td className="widgetLgAmount">0{order.phone}</td>
+            <td className="widgetLgType">{order.payment}</td>
+            <td className="widgetLgStatus">{order.status}</td>
           </tr>
         ))}
       </table>

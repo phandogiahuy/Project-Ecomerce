@@ -2,8 +2,8 @@ import { Row } from "antd";
 import React from "react";
 
 import { categories } from "../../data";
-import CategoriesItem from "./CategoriesItem";
-import { Container, ContainerCategories, Title } from "./Style-Category";
+import CategoriesItem from "./category-item";
+import { Container, ContainerCategories, Title } from "./style-category";
 
 const Categories = () => {
   return (

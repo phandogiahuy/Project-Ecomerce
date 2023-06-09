@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
-import Announcement from "../../../components/Annoucement/Annoucement";
 import Footer from "../../../components/Footer/Footer";
-import Navbar from "../../../components/NavBar/Navbar";
 import Newsletter from "../../../components/Footer/Newsletter";
-import PopularProduct from "../../../components/Product/PopularProduct";
 import {
   Container,
   Filter,
@@ -13,7 +10,10 @@ import {
   FilterText,
   Select,
   Option,
-} from "./Style-ProductList";
+} from "./style-productList";
+import Announcement from "../../../components/Annoucement/Index";
+import Navbar from "../../../components/NavBar/Index";
+import PopularProduct from "../../../components/Product/PopularProduct";
 
 const ProductList = () => {
   // const location = useLocation();
@@ -38,7 +38,6 @@ const ProductList = () => {
           </Select>
         </Filter>
       </FilterContainer>
-
       <PopularProduct cat={cat} sort={sort} />
       <Newsletter />
       <Footer />

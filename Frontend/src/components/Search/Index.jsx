@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Input, Spin } from "antd";
+import { Empty, Input, Spin } from "antd";
 
 import { debounce } from "lodash";
 import { Link } from "react-router-dom";
-import { ContainerSearch, InforSearch } from "./Style-Search";
+import { ContainerSearch, InforSearch } from "./style-search";
 import { useGetProductBySearch } from "../../hooks/Queries/Product/useGetProductBySearch";
 
 const SearchInput = () => {
@@ -31,11 +31,18 @@ const SearchInput = () => {
           size="medium"
           value={searchQuery}
           onChange={onChangeHandleSearch}
+          onKeyDown={(evt) => {
+            if (["[", "]"].includes(evt.key)) {
+              evt.preventDefault();
+            }
+          }}
         />
         {isLoading ? (
-          <Spin style={{}} />
+          <Spin className="mr-[50%] mt-2" />
         ) : isError ? (
-          <div>Error fetching search results</div>
+          <div>
+            <Empty />
+          </div>
         ) : data && type ? (
           <ul
             style={{
@@ -79,7 +86,9 @@ const SearchInput = () => {
             ))}
           </ul>
         ) : (
-          <p style={{ padding: 20 }}> No item</p>
+          <p style={{ padding: 20 }}>
+            <Empty />
+          </p>
         )}
       </ContainerSearch>
     </div>

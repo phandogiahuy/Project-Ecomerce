@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Review } from "./Review.js";
 
 const ProductSchema = new mongoose.Schema(
   {
@@ -11,9 +12,22 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
+    sale: {
+      type: Number,
+      default: 1,
+    },
     img: {
       type: String,
       require: true,
+    },
+    process: {
+      type: String,
+    },
+    place: {
+      type: String,
+    },
+    flavor: {
+      type: String,
     },
     categories: {
       type: Array,
@@ -22,6 +36,12 @@ const ProductSchema = new mongoose.Schema(
     price: {
       type: Array,
     },
+    reviews: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
   },
   { timestamps: true }
 );

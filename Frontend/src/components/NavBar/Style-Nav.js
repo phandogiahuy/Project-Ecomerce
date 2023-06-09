@@ -2,15 +2,17 @@ import styled from "styled-components";
 
 import { mobile } from "../../responsive";
 export const Container = styled.div`
-  height: 130px;
-  ${mobile({ height: "50px" })}
+  height: 1%;
   background-color: aliceblue;
+  ${mobile({ height: "50px" })};
 `;
 
 export const Wrapper = styled.div`
-  padding: 10px 20px;
+  padding: 1px 20px;
   display: flex;
   justify-content: space-between;
+  background-color: aliceblue;
+
   ${mobile({ padding: "10px" })}
 `;
 
