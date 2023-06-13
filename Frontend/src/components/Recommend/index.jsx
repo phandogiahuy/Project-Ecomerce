@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { useGetProductByCat } from "../../hooks/Queries/Product/useGetProductByCat";
 import { Carousel, Skeleton } from "antd";
 import RecommendList from "./RecommendList";

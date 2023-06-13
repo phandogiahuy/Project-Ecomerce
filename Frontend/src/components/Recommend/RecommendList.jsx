@@ -1,17 +1,19 @@
 import { Card, Image, Rate } from "antd";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useLayoutEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 const { Meta } = Card;
 
 const RecommendList = (products) => {
   const rate = [];
+  const url = useLocation();
   products.products.reviews.forEach((review) => rate.push(review.rating));
-  console.log(products.products.reviews);
   const sumOfRatings = rate.reduce((acc, rate) => acc + rate, 0);
 
   // // Calculate the average rating
   const averageRating = sumOfRatings / rate.length;
-
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [url]);
   // // Round the average rating to a specific decimal place (e.g., 1 decimal place)
   const totalRating = averageRating.toFixed(1);
   return (

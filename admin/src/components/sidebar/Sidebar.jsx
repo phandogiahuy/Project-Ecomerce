@@ -6,11 +6,14 @@ import {
   BankTwoTone,
   DollarCircleTwoTone,
   FundTwoTone,
-  ShopOutlined,
-  TeamOutlined,
+  ShoppingTwoTone,
+  CrownTwoTone,
+  SkinTwoTone,
+  InfoCircleTwoTone,
 } from "@ant-design/icons";
+import { useState } from "react";
 export default function Sidebar() {
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState(localStorage.getItem("token"));
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -34,32 +37,39 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
-            <Link to="/user" className="link">
-              <li className="sidebarListItem">
-                {" "}
-                <TeamOutlined />
-                Users
-              </li>
-            </Link>
-            <Link to="/product" className="link">
-              <li className="sidebarListItem">
-                {" "}
-                <ShopOutlined /> Products
-              </li>
-            </Link>
-            <Link to="/discount" className="link">
-              <li className="sidebarListItem">
-                {" "}
-                <DollarCircleTwoTone />
-                Discounts
-              </li>
-            </Link>
             {!token ? (
               <Link to="/login" className="link">
                 <li className="sidebarListItem"> Sign in</li>
               </Link>
             ) : (
-              <li className="sidebarListItem"> ADMIN</li>
+              <div>
+                <li className="sidebarListItem"> ADMIN</li>
+                <Link to="/user" className="link">
+                  <li className="sidebarListItem">
+                    <CrownTwoTone />
+                    Users
+                  </li>
+                </Link>
+                <Link to="/product" className="link">
+                  <li className="sidebarListItem">
+                    {" "}
+                    <ShoppingTwoTone /> Products
+                  </li>
+                </Link>
+                <Link to="/discount" className="link">
+                  <li className="sidebarListItem">
+                    {" "}
+                    <DollarCircleTwoTone />
+                    Discounts
+                  </li>
+                </Link>
+                <Button
+                  className="sidebarListItem"
+                  onClick={(e) => setToken(localStorage.removeItem("token"))}
+                >
+                  <InfoCircleTwoTone /> Sign out
+                </Button>
+              </div>
             )}
           </ul>
         </div>

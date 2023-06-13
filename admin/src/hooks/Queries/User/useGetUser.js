@@ -8,4 +8,5 @@ const getUser = async () => {
   return data;
 };
 const useUser = () => useQuery([GET_USER], () => getUser());
+
 export { useUser };

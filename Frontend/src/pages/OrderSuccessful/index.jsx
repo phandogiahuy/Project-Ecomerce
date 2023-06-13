@@ -31,7 +31,7 @@ const OrderSuccesful = () => {
               Address: <span>{order.address} </span>
             </h2>
             <h2 className="font-bold">
-              Total: <span>{order.priceTotal}$ </span>
+              Total: <span>{order.total}$ </span>
             </h2>
             <h2 className="font-bold">
               Payment: <span>{order.payment} </span>

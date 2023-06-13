@@ -10,17 +10,20 @@ import { useGetProductByCat } from "../../hooks/Queries/Product/useGetProductByC
 
 const PopularProduct = ({ cat, sort }) => {
   const [product, setProduct] = useState([]);
+  const [pagination, setPagination] = useState({
+    pageSize: 8,
+    page: 1,
+  });
   const [filterProduct, setFilterProduct] = useState([]);
-  const getProduct = useGetProducts();
-  const [currentPage, setCurrentPage] = useState(1);
+  const { data, isSuccess, isLoading } = useGetProducts(pagination);
   const getProductByCat = useGetProductByCat(cat);
-  const itemsPerPage = 8;
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
+
+  // const startIndex = (currentPage - 1) * itemsPerPage;
+  // const endIndex = startIndex + itemsPerPage;
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = cat ? getProductByCat : getProduct;
+        const res = cat && getProductByCat;
 
         if (res.isLoading) {
           return <Skeleton active />;
@@ -53,6 +56,13 @@ const PopularProduct = ({ cat, sort }) => {
       );
     }
   }, [sort]);
+  if (isLoading) {
+    return (
+      <div>
+        <Skeleton />
+      </div>
+    );
+  }
   return (
     <Container>
       <Title> Product </Title>
@@ -77,15 +87,18 @@ const PopularProduct = ({ cat, sort }) => {
       >
         {cat
           ? filterProduct.map((item) => <Product item={item} key={item._id} />)
-          : product
-              .slice(startIndex, endIndex)
-              .map((item) => <Product item={item} key={item._id} />)}
-        {product && !cat && (
+          : data.data.map((item) => <Product item={item} key={item._id} />)}
+
+        {!cat && isSuccess && (
           <Pagination
             className="ml-[80%]"
-            onChange={(e) => setCurrentPage(e)}
-            defaultCurrent={1}
-            total={product.length}
+            onChange={(currentPage) =>
+              setPagination({ ...pagination, page: currentPage })
+            }
+            pageSize={data?.pagination.pageSize}
+            pageSizeOptions={[8, 20]}
+            current={data?.pagination?.page}
+            total={data?.pagination.total}
           />
         )}
       </Row>

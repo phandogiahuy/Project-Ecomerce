@@ -11,21 +11,22 @@ const order = async ({
   mail,
   address,
   products,
-  priceTotal,
+  total,
   payment,
 }) => {
+  console.log(products);
   const res = await axios.post("http://localhost:3000/api/order/", {
     name,
     phone,
     mail,
-    address,
     products,
-    priceTotal,
+    address,
+    total,
     payment,
   });
   return res.data;
 };
-("product/:id ");
+
 export const useSetOrder = () => {
   const navigate = useNavigate();
   return useMutation(order, {

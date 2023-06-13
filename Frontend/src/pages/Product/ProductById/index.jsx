@@ -49,9 +49,7 @@ const Product = () => {
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
   const dispatch = useDispatch();
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  });
+
   useEffect(() => {
     const getProduct = async () => {
       try {
