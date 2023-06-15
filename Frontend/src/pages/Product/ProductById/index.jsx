@@ -193,7 +193,6 @@ const Product = () => {
             {/* <h1>Product Feature</h1>
              */}
             <Collapse
-              defaultActiveKey={["1"]}
               style={{ width: "180%", backgroundColor: "white" }}
               bordered={false}
               expandIcon={({ isActive }) => (
