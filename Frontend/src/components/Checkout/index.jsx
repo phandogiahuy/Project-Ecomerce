@@ -14,15 +14,9 @@ const CheckoutComponent = () => {
   const dispatch = useDispatch();
 
   const [payment, setPayment] = useState();
-  const { products } = useSelector((state) => state.cart);
+  const { products, pricetotal } = useSelector((state) => state.cart);
   const { mutate } = useSetOrder();
 
-  const calculateTotal = () => {
-    return products.reduce((pre, cur) => {
-      return pre + cur.price * cur.quanity;
-    }, 0);
-  };
-  console.log(products);
   const handleFinsh = async (values) => {
     const { name, phone, mail, address } = values;
     dispatch(
@@ -32,7 +26,7 @@ const CheckoutComponent = () => {
         mail,
         address,
         products,
-        total: calculateTotal(),
+        total: pricetotal,
         payment,
       })
     );
@@ -42,7 +36,7 @@ const CheckoutComponent = () => {
       mail,
       address,
       products,
-      total: calculateTotal(),
+      total: pricetotal,
       payment,
     });
   };
@@ -129,7 +123,7 @@ const CheckoutComponent = () => {
           </Card>
           <Divider />
           <div>
-            <h1 className="ml-10 font-bold"> Total: {calculateTotal()}$ </h1>
+            <h1 className="ml-10 font-bold"> Total: {pricetotal}$ </h1>
           </div>
         </InforProduct>
       </div>

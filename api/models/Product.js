@@ -36,6 +36,10 @@ const ProductSchema = new mongoose.Schema(
     price: {
       type: Array,
     },
+    sale: {
+      type: Number,
+      default: 0,
+    },
     reviews: [
       {
         type: mongoose.Schema.Types.ObjectId,

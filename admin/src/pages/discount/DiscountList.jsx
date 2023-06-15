@@ -109,6 +109,7 @@ export default function DiscountList() {
               CREATE DISCOUNT
             </Button>
           </Link>
+          <span>({res.data.length} items)</span>
         </div>
       </Affix>
       <div style={{ flex: 1 }}>

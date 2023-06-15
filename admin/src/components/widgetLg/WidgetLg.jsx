@@ -1,82 +1,123 @@
-import "./widgetLg.css";
 import { format } from "timeago.js";
 import { useGetOrder } from "../../hooks/Queries/User/Order/useGetOrder";
-import { Empty, Skeleton, Spin, Button, Popover, Modal } from "antd";
+import {
+  Empty,
+  Skeleton,
+  Spin,
+  Button,
+  Popover,
+  Modal,
+  Table,
+  Tag,
+} from "antd";
 import { FrownTwoTone } from "@ant-design/icons";
 import Content from "../contentTransaction";
 import { useState } from "react";
-export default function WidgetLg() {
-  const { isLoading, data: orders, isError } = useGetOrder();
+import { useUpdateOrder } from "../../hooks/Mutation/Order/useUpdateOrder";
+const token = localStorage.getItem("token");
+
+export default function WidgetLg({ orders }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [content, setContent] = useState();
+  const { mutate } = useUpdateOrder();
+  const [id, setId] = useState();
   const showModal = (order) => {
     setContent(order);
     setIsModalOpen(true);
   };
   const handleOk = () => {
+    mutate({ status: "success", id });
     setIsModalOpen(false);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  if (isLoading) {
-    return (
-      <div>
-        <Spin />
-      </div>
-    );
-  }
-  if (isError) {
-    return (
-      <h1 style={{ fontSize: "30px" }}>
-        {" "}
-        <FrownTwoTone />
-        You don't sign in
-      </h1>
-    );
-  }
-  console.log(orders);
+
+  const columns = [
+    {
+      title: "ID",
+      align: "center",
+      dataIndex: "index",
+      render: (text, record, index) => <h1>{index + 1}</h1>,
+    },
+    {
+      title: " Customer",
+      align: "center",
+      dataIndex: "name",
+      render: (name) => <p>{name}</p>,
+    },
+    {
+      title: " Date",
+      align: "center",
+      dataIndex: "createdAt",
+      render: (createdAt) => <p>{format(createdAt)}</p>,
+    },
+    {
+      title: " Phone",
+      align: "center",
+      dataIndex: "phone",
+      render: (phone) => <p>0{phone}</p>,
+    },
+    {
+      title: " Payment",
+      align: "center",
+      dataIndex: "payment",
+      render: (payment) => <p>{payment}</p>,
+    },
+    {
+      title: " Total",
+      align: "center",
+      dataIndex: "total",
+      sorter: (a, b) => a.total - b.total,
+      render: (total) => <p>{total}$</p>,
+    },
+    {
+      title: " Status",
+      align: "center",
+      dataIndex: "status",
+      render: (status) => {
+        let color;
+        if (status === "success") {
+          color = "#87d068";
+        } else {
+          color = "#f50";
+        }
+        return <Tag color={color}>{status.toUpperCase()}</Tag>;
+      },
+    },
+    {
+      title: "Action",
+      align: "center",
+      dataIndex: "",
+      render: (order) => {
+        return (
+          <Button
+            type="primary"
+            onClick={() => {
+              setId(order._id);
+              showModal(order);
+            }}
+          >
+            Show Transaction
+          </Button>
+        );
+      },
+    },
+  ];
+
   return (
-    <div className="widgetLg">
-      <h3 className="widgetLgTitle">Transactions</h3>
+    <div style={{ flex: 1, padding: "5px" }}>
+      <h1>Transaction</h1>
       {orders.length == 0 ? (
         <div>
           <Empty />
         </div>
       ) : (
-        <table className="widgetLgTable">
-          <tr className="widgetLgTr">
-            <th className="widgetLgTh">Customer</th>
-            <th className="widgetLgTh">Date</th>
-            <th className="widgetLgTh">Phone</th>
-            <th className="widgetLgTh">Type</th>
-            <th className="widgetLgTh">Total</th>
-            <th className="widgetLgTh">Status</th>
-          </tr>
-          {orders.map((order) => (
-            <tr className="widgetLgTr" key={order._id}>
-              <td className="widgetLgUser">{order.name}</td>
-              <td className="widgetLgDate">{format(order.createdAt)}</td>
-              <td className="widgetLgAmount">0{order.phone}</td>
-              <td className="widgetLgType">{order.payment}</td>
-              <td className="widgetLgStatus">{order.total} $</td>
-              <td className="widgetLgStatus">{order.status}</td>
-              <td className="widgetLgStatus">
-                <Button
-                  type="primary"
-                  onClick={() => {
-                    showModal(order);
-                  }}
-                >
-                  Show Transaction
-                </Button>
-              </td>
-            </tr>
-          ))}
-        </table>
+        <Table bordered columns={columns} dataSource={orders} />
       )}
+
       <Modal
-        title="Basic Modal"
+        title="Order"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}

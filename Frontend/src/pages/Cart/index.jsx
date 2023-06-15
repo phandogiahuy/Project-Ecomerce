@@ -8,6 +8,7 @@ import {
   Input,
   InputNumber,
   Space,
+  message,
 } from "antd";
 import React, { useEffect, useState } from "react";
 
@@ -16,6 +17,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   clearCart,
   removeProduct,
+  updateCart,
   updateProduct,
 } from "../../reduxToolkit/cartRedux";
 import StripeCheckout from "react-stripe-checkout";
@@ -82,14 +84,14 @@ const Cart = () => {
       if (res.isLoading) {
         return <div>...loading</div>;
       }
-      if (res.error) {
-        return <div>{res.error.message}</div>;
-      }
+
       if (res.isSuccess) {
         setDiscounts(res.data[0].sale);
         setLimit(res.data[0].limit);
       }
-    } catch (error) {}
+    } catch (error) {
+      return message.error("Code Discount is Wrong");
+    }
   };
   // useEffect(() => {
   //   const makeRequest = async () => {
@@ -148,10 +150,19 @@ const Cart = () => {
     priceAllProduct = 0;
     ship = 0;
   }
+  const handleClickCheckout = (e) => {
+    dispatch(
+      updateCart({
+        priceProduct: priceAllProduct,
+      })
+    );
+  };
+  const handleClickEmpty = (e) => {
+    return message.error("Your Cart Is Empty");
+  };
   return (
     <Container>
       <Announcement />
-      <Navbar />
       <Wrapper>
         <Title>Your cart</Title>
         <Top>
@@ -322,21 +333,39 @@ const Cart = () => {
 
             <Checkout>
               <Space wrap>
-                <Link to={"checkout"}>
+                {priceAllProduct > 0 ? (
+                  <Link to={"checkout"}>
+                    <Button
+                      ghost
+                      type="primary"
+                      style={{
+                        backgroundColor: "#fff9e7",
+                        width: 349,
+                        height: 44,
+                        color: "#69410b",
+                        fontSize: 20,
+                      }}
+                      onClick={handleClickCheckout}
+                    >
+                      Check out{" "}
+                    </Button>
+                  </Link>
+                ) : (
                   <Button
                     ghost
                     type="primary"
                     style={{
-                      backgroundColor: "#d6caa5",
+                      backgroundColor: "#b0ab9b",
                       width: 349,
                       height: 44,
-                      color: "#69410b",
+                      color: "#11110d",
                       fontSize: 20,
                     }}
+                    onClick={handleClickEmpty}
                   >
-                    Check out{" "}
+                    Your cart is empty
                   </Button>
-                </Link>
+                )}
               </Space>
             </Checkout>
           </Summary>

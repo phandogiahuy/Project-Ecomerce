@@ -8,6 +8,7 @@ import {
   Rate,
   Typography,
   Progress,
+  Collapse,
 } from "antd";
 
 import {
@@ -15,8 +16,11 @@ import {
   SendOutlined,
   UserAddOutlined,
   UsergroupAddOutlined,
+  PlusOutlined,
+  HeartOutlined,
 } from "@ant-design/icons";
 import CommentList from "./CommentList";
+import CollapsePanel from "antd/es/collapse/CollapsePanel";
 const { Text } = Typography;
 
 const CommentComponent = ({ reviews }) => {
@@ -33,32 +37,44 @@ const CommentComponent = ({ reviews }) => {
   const totalRating = averageRating.toFixed(1);
 
   return (
-    <div className="mr-10 p-4">
-      <Card
-        title={
-          <div>
-            <h1> Review From User</h1>
-            {totalRating > 0 && (
-              <div>
+    // <Collapse
+    //   defaultActiveKey={["1"]}
+    //   style={{ width: "180%", backgroundColor: "white" }}
+    //   bordered={false}
+    //   expandIcon={({ isActive }) => (
+    //     <PlusOutlined rotate={isActive ? 70 : 0} style={{ fontSize: "30px" }} />
+    //   )}
+    //   expandIconPosition={"end"}
+    // >
+
+    <Card
+      title={
+        <div>
+          {totalRating > 0 && (
+            <div className="flex">
+              <h1 className="font-bold">{" " + totalRating}</h1>
+              <div className="ml-3">
                 <Rate disabled defaultValue={totalRating} allowHalf />
-                {" " + totalRating}
+                <p>{reviews.length} Reviews</p>
               </div>
-            )}
-          </div>
-        }
-      >
-        <div className="mr-5 flex flex-col">
-          {reviews.length > 0 ? (
-            reviews.map((review) => <CommentList review={review} />)
-          ) : (
-            <div className="ml-[50%]  ">
-              <UserOutlined className="text-[50px]" />
-              <p className="">No review</p>
             </div>
           )}
         </div>
-      </Card>
-    </div>
+      }
+    >
+      <div className="mr-5 flex flex-col">
+        {reviews.length > 0 ? (
+          reviews.map((review) => <CommentList review={review} />)
+        ) : (
+          <div className="ml-[50%]  ">
+            <UserOutlined className="text-[49px]" />
+            <p className="">No review</p>
+          </div>
+        )}
+      </div>
+    </Card>
+
+    // </Collapse>
   );
 };
 

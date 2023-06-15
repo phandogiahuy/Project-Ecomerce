@@ -24,7 +24,15 @@ export const Desc = styled.p`
 `;
 export const Price = styled.span`
   font-weight: 400;
-  font-size: 50px;
+  font-size: 45px;
+
+  color: #f62400;
+`;
+export const PriceFirst = styled.span`
+  font-size: 45px;
+  text-decoration: line-through;
+  color: #afafaf;
+  margin-left: 3%;
 `;
 export const FilterContainer = styled.div`
   display: flex;
@@ -41,10 +49,12 @@ export const AddContainer = styled.div`
   display: flex;
 `;
 export const Comment = styled.div`
-  margin-top: 2%;
   width: 50%;
+  margin-top: 5px;
 `;
-
+export const Sale = styled.div`
+  color: #f62400;
+`;
 export const Recommend = styled.div`
   width: 100%;
   height: 20%;

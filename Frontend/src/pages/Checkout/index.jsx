@@ -8,7 +8,6 @@ const Checkout = () => {
   return (
     <div>
       <Announcement />
-      <Navbar />
       <CheckoutComponent />
       <Footer />
     </div>

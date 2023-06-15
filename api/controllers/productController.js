@@ -62,7 +62,7 @@ class ProductController {
         }).populate("reviews");
       } else if (qtitle) {
         products = await Product.find({ title: { $in: re } }).limit(4);
-      } else {
+      } else if (req.query.pageSize) {
         const { pageSize = 10, page = 1 } = req.query;
         const totalProducts = await Product.countDocuments({});
         const pageCount = Math.ceil(totalProducts / pageSize);
@@ -79,6 +79,8 @@ class ProductController {
             page: +page,
           },
         });
+      } else {
+        products = await Product.find();
       }
       res.status(200).json(products);
     } catch (err) {

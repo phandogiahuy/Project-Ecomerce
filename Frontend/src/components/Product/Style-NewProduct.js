@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 export const Infor = styled.div`
-  position: absolute;
-  bottom: 26px;
-  left: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,4 +51,15 @@ export const Price = styled.div`
   font-size: 30px;
   margin-left: 40px;
   font-family: "AOK Buenos Aires", sans-serif;
+`;
+
+export const PriceFirst = styled.div`
+  font-weight: 700;
+  font-size: 30px;
+  font-family: "AOK Buenos Aires", sans-serif;
+`;
+export const Title = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

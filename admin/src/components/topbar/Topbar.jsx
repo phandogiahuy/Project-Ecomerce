@@ -1,20 +1,9 @@
-import { Affix } from "antd";
-import "./topbar.css";
-
-export default function Topbar() {
+export const Topbar = () => {
   return (
-    <div className="topbar">
-      <div className="topbarWrapper">
-        <div className="topLeft">
-          <span className="logo">AromaAdmin</span>
-        </div>
-        <div className="topRight">
-          <div className="topbarIconContainer">
-            <span className="topIconBadge">2</span>
-          </div>
-          <img src="/PopularProduct/1.jpg" alt="" className="topAvatar" />
-        </div>
-      </div>
+    <div>
+      <center style={{ fontSize: "40px", fontWeight: "600" }}>
+        Aroma Admin
+      </center>
     </div>
   );
-}
+};

@@ -1,51 +1,34 @@
-import Chart from "../../components/chart/Chart";
-import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
 import "./home.css";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
-import { useEffect, useMemo, useState } from "react";
-import { AxiosInstance } from "../../service-api/requestMethods";
+import { FeaturedInfo } from "../../components/featuredInfo";
+import { useGetOrder } from "../../hooks/Queries/User/Order/useGetOrder";
+import { FrownTwoTone } from "@ant-design/icons";
+import { Skeleton, Spin } from "antd";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [userStats, setUserStats] = useState([]);
-
-  const MONTHS = useMemo(
-    () => [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Agu",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    []
-  );
-
-  useEffect(() => {
-    const getStats = async () => {
-      try {
-        const res = await AxiosInstance.get("/user/stats");
-        res.data.map((item) =>
-          setUserStats((prev) => [
-            ...prev,
-            { name: MONTHS[item._id - 1], "Active User": item.total },
-          ])
-        );
-      } catch {}
-    };
-    getStats();
-  }, [MONTHS]);
-
+  const { isLoading, data: orders, isError } = useGetOrder();
+  if (isLoading) {
+    return (
+      <div>
+        <Skeleton />
+      </div>
+    );
+  }
+  if (isError) {
+    return (
+      <h1 style={{ fontSize: "30px" }}>
+        {" "}
+        <FrownTwoTone />
+        You don't sign in
+      </h1>
+    );
+  }
   return (
     <div className="home">
-      <FeaturedInfo />
+      <FeaturedInfo orders={orders} />
       <div className="homeWidgets">
-        <WidgetLg />
+        <WidgetLg orders={orders} />
       </div>
     </div>
   );

@@ -1,5 +1,14 @@
 import { useState } from "react";
-import { Form, Input, Button, Upload, Select, Space } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Upload,
+  Select,
+  Space,
+  InputNumber,
+  message,
+} from "antd";
 import { storage } from "../../service-api/firebase";
 import { PlusOutlined } from "@ant-design/icons";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -10,7 +19,7 @@ const options = [{ value: "phin" }, { value: "espresso" }, { value: "sale" }];
 const NewProduct = () => {
   const [form] = Form.useForm();
   const [images, setImage] = useState(null);
-
+  const [sale, setSale] = useState();
   const handleImageUpload = (info) => {
     setImage(info.file.originFileObj);
   };
@@ -23,18 +32,23 @@ const NewProduct = () => {
     const imageRef = ref(storage, `images/${v4() + images.name}`);
     const snap = await uploadBytes(imageRef, images);
     const img = await getDownloadURL(snap.ref);
-    const { title, categories, desc } = values;
+    const { title, categories, desc, sale } = values;
     const productData = {
       title,
       categories,
       desc,
+      sale,
       price,
       img,
     };
     console.log(img);
     mutate(productData);
   };
-
+  const handleValueSale = (e) => {
+    if (e > 50) {
+      message.error("Value of sale is bigger than 50%");
+    }
+  };
   return (
     <Form
       form={form}
@@ -60,9 +74,23 @@ const NewProduct = () => {
           showArrow
           style={{ width: "100%" }}
           options={options}
+          onChange={(e) => setSale(e)}
         />
       </Form.Item>
-
+      {sale == "sale" && (
+        <Form.Item
+          name="sale"
+          label="Sale"
+          rules={[{ required: true, message: "Please enter a sale" }]}
+        >
+          <InputNumber
+            type="number"
+            placeholder="Enter sale"
+            max={100}
+            onChange={(e) => handleValueSale(e)}
+          />
+        </Form.Item>
+      )}
       <Form.Item
         name="desc"
         label="Description"

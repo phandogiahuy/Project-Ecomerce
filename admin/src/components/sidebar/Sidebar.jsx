@@ -14,6 +14,11 @@ import {
 import { useState } from "react";
 export default function Sidebar() {
   const [token, setToken] = useState(localStorage.getItem("token"));
+
+  const handleLogOut = () => {
+    setToken(localStorage.removeItem("token"));
+    window.location.reload(false);
+  };
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -52,7 +57,6 @@ export default function Sidebar() {
                 </Link>
                 <Link to="/product" className="link">
                   <li className="sidebarListItem">
-                    {" "}
                     <ShoppingTwoTone /> Products
                   </li>
                 </Link>
@@ -65,7 +69,7 @@ export default function Sidebar() {
                 </Link>
                 <Button
                   className="sidebarListItem"
-                  onClick={(e) => setToken(localStorage.removeItem("token"))}
+                  onClick={(e) => handleLogOut()}
                 >
                   <InfoCircleTwoTone /> Sign out
                 </Button>

@@ -83,6 +83,7 @@ export default function UserList() {
         >
           USER
         </center>
+        <span>({res.data.length} user)</span>
       </Affix>
       <Table bordered columns={columns} dataSource={res.data} sticky />
     </div>

@@ -37,10 +37,10 @@ export const Image = styled.img`
 export const InforContainer = styled.div`
   flex: 1;
   margin-bottom: 15%;
-  margin-left: 10%;
+  margin-left: 15%;
 `;
 export const Title = styled.h1`
-  font-size: 160px;
+  font-size: 140px;
   font-family: "Chicle", sans-serif;
 `;
 export const Desc = styled.p`

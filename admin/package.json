@@ -28,6 +28,8 @@
     "recharts": "^2.0.9",
     "redux-persist": "^6.0.0",
     "styled-components": "^5.3.9",
+    "suneditor": "^2.44.12",
+    "suneditor-react": "^3.5.0",
     "timeago.js": "^4.0.2",
     "uuidv4": "^6.2.13",
     "web-vitals": "^1.0.1"

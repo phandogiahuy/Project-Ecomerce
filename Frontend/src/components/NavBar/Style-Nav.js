@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 import { mobile } from "../../responsive";
 export const Container = styled.div`
-  height: 1%;
-  background-color: aliceblue;
   ${mobile({ height: "50px" })};
 `;
 
@@ -12,7 +10,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: aliceblue;
-
+  height: 100px;
   ${mobile({ padding: "10px" })}
 `;
 

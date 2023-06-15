@@ -7,6 +7,8 @@ import {
   Skeleton,
   Affix,
   Switch,
+  Popconfirm,
+  message,
 } from "antd";
 import {
   DeleteTwoTone,
@@ -25,9 +27,14 @@ export default function ProductList() {
   const [fixedTop, setFixedTop] = useState(false);
 
   const res = useGetProducts();
-  if (res.isLoading) {
-    return <Skeleton active />;
-  }
+
+  const confirm = (e) => {
+    message.success("You deleted product successfully");
+  };
+  const cancel = (e) => {
+    message.error("Product don't delete");
+  };
+  console.log(res.data);
   const columns = [
     {
       title: "ID",
@@ -73,6 +80,12 @@ export default function ProductList() {
           })}
         </div>
       ),
+    },
+    {
+      title: "Sale",
+      align: "center",
+      dataIndex: "sale",
+      render: (sale) => <p>{sale}%</p>,
     },
     {
       title: "Information",
@@ -147,13 +160,22 @@ export default function ProductList() {
               Edit
             </Button>
           </Link>
-          <Button
-            icon={<DeleteTwoTone />}
-            style={{ backgroundColor: "#a8ffc8" }}
-            onClick={() => handleDelete(_id)}
+          <Popconfirm
+            title="Delete product"
+            description="Are you sure to delete this product?"
+            onConfirm={confirm}
+            onCancel={cancel}
+            okText="Yes"
+            cancelText="No"
           >
-            Delete
-          </Button>
+            <Button
+              icon={<DeleteTwoTone />}
+              style={{ backgroundColor: "#a8ffc8" }}
+              onClick={() => handleDelete(_id)}
+            >
+              Delete
+            </Button>
+          </Popconfirm>
         </Space>
       ),
     },
@@ -193,10 +215,16 @@ export default function ProductList() {
               CREATE PRODUCT
             </Button>
           </Link>
+          <span>({res.data?.length} items)</span>
         </div>
       </Affix>
-      <div style={{ flex: 1, padding: "5px" }}>
-        <Table bordered columns={columns} dataSource={res.data} />
+      <div style={{ padding: "5px" }}>
+        <Table
+          bordered
+          columns={columns}
+          dataSource={res.data}
+          loading={res.isLoading}
+        />
       </div>
     </div>
   );

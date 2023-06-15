@@ -1,5 +1,14 @@
 import { useState } from "react";
-import { Form, Input, Button, Upload, Select, Space } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Upload,
+  Select,
+  Space,
+  InputNumber,
+  message,
+} from "antd";
 import { storage } from "../../service-api/firebase";
 import { EditFilled, PlusOutlined } from "@ant-design/icons";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -7,14 +16,18 @@ import { v4 } from "uuid";
 import { useParams } from "react-router-dom";
 import { useEditProductById } from "../../hooks/Mutation/Product/useEditProductById";
 import { useGetProductById } from "../../hooks/Queries/Product/useGetProductById";
+import { useQueryClient } from "react-query";
+import { GET_PRODUCT_ID } from "../../constant/queryKey";
+
 const options = [{ value: "phin" }, { value: "espresso" }, { value: "sale" }];
 
 const EditProduct = () => {
   let { _id } = useParams();
   const [form] = Form.useForm();
+
   const { mutate } = useEditProductById(_id);
   const [change, setChange] = useState(false);
-
+  const queryClient = useQueryClient();
   const [images, setImage] = useState();
   const handleImageUpload = (info) => {
     setChange(true);
@@ -25,21 +38,22 @@ const EditProduct = () => {
   if (res.isLoading) {
     return <div>...loading</div>;
   }
-
   const handleFinsh = async (values) => {
     const price = [];
     price.push(form.getFieldValue("price250"));
     price.push(form.getFieldValue("price500"));
     price.push(form.getFieldValue("price1000"));
+
     if (change) {
       const imageRef = ref(storage, `images/${v4() + images.name}`);
       const snap = await uploadBytes(imageRef, images);
       const img = await getDownloadURL(snap.ref);
-      const { title, categories, desc, process, flavor, place } = values;
+      const { title, categories, sale, desc, process, flavor, place } = values;
       const productData = {
         title,
         categories,
         desc,
+        sale,
         process,
         flavor,
         place,
@@ -48,12 +62,14 @@ const EditProduct = () => {
       };
       mutate({ productData, id: _id });
     } else {
-      const { title, categories, desc, process, flavor, place, img } = values;
+      const { title, categories, desc, sale, process, flavor, place, img } =
+        values;
       const productData = {
         title,
         categories,
         desc,
         process,
+        sale,
         flavor,
         place,
         img,
@@ -62,7 +78,16 @@ const EditProduct = () => {
       mutate({ productData, id: _id });
     }
   };
-
+  const handleValueSale = (e) => {
+    if (e > 50) {
+      message.error("Value of sale is bigger than 50%");
+    }
+  };
+  const handleSale = (values) => {
+    queryClient.setQueryData([GET_PRODUCT_ID, { id: _id }], (old) => {
+      return { ...old, categories: values };
+    });
+  };
   return (
     <Form
       form={form}
@@ -73,6 +98,7 @@ const EditProduct = () => {
         title: res.data.title,
         categories: res.data.categories,
         desc: res.data.desc,
+        sale: res.data.sale,
         price250: res.data.price[0],
         price500: res.data.price[1],
         price1000: res.data.price[2],
@@ -99,9 +125,23 @@ const EditProduct = () => {
           showArrow
           style={{ width: "100%" }}
           options={options}
+          onChange={handleSale}
         />
       </Form.Item>
-
+      {res.data.categories.includes("sale") && (
+        <Form.Item
+          name="sale"
+          label="Sale"
+          rules={[{ required: true, message: "Please enter a sale" }]}
+        >
+          <InputNumber
+            type="number"
+            placeholder="Enter sale"
+            max={100}
+            onChange={handleValueSale}
+          />
+        </Form.Item>
+      )}
       <Form.Item
         name="desc"
         label="Description"

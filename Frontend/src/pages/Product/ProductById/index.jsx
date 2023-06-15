@@ -1,6 +1,14 @@
-import { PlusOutlined } from "@ant-design/icons";
 import {
+  AuditOutlined,
+  BulbOutlined,
+  HeartOutlined,
+  OneToOneOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
+import {
+  Affix,
   Button,
+  Collapse,
   Divider,
   Image,
   InputNumber,
@@ -25,8 +33,10 @@ import {
   ImgContainer,
   InforContainer,
   Price,
+  PriceFirst,
   ProductFeature,
   Recommend,
+  Sale,
   Title,
   Wrapper,
 } from "./style";
@@ -38,6 +48,9 @@ import CommentComponent from "../../../components/Comment";
 import PopularProduct from "../../../components/Product/PopularProduct";
 import RecommendProduct from "../../../components/Recommend";
 import ProductInfor from "../../../components/ProductFeature";
+import CollapsePanel from "antd/es/collapse/CollapsePanel";
+import { Instruction } from "../../../components/Instruction";
+import AboutProduct from "../../../components/AboutProduct";
 
 const Product = () => {
   const [type, setType] = useState("Bean");
@@ -74,7 +87,7 @@ const Product = () => {
     dispatch(
       addProduct({
         product,
-        price: price,
+        price: Math.ceil(price * (1 - product.sale / 100)),
         type: type,
         size: size,
         quanity: quanity,
@@ -85,9 +98,13 @@ const Product = () => {
   const onChangeQuanity = (e) => {
     setQuanity(e);
   };
-  if (product.reviews) {
-    console.log();
-  }
+  const items = [
+    {
+      key: "1",
+      label: "This is panel header 1",
+      children: <p>text</p>,
+    },
+  ];
   return (
     <Container>
       <Announcement />
@@ -96,10 +113,9 @@ const Product = () => {
         <ImgContainer>
           <Image
             style={{
-              width: "120%",
               imageRendering: "pixelated",
             }}
-            width={500}
+            width={550}
             src={product.img}
           ></Image>
         </ImgContainer>
@@ -107,7 +123,16 @@ const Product = () => {
         <InforContainer>
           <Title>{product.title}</Title>
           <Desc>{product.desc}</Desc>
-          <Price>{price}$</Price>
+          <Price>{Math.ceil(price * (1 - product.sale / 100))}$</Price>
+          {product.sale > 0 && (
+            <>
+              <PriceFirst>{price}$</PriceFirst>
+              <Sale>
+                Sale {product.sale}% (
+                {price - Math.ceil(price * (1 - product.sale / 100))}$)
+              </Sale>
+            </>
+          )}
           <FilterContainer>
             <FilterTitle>Size</FilterTitle>
             <Space wrap>
@@ -162,18 +187,111 @@ const Product = () => {
         </InforContainer>
       </Wrapper>
       <Divider />
-      <div className="flex w-[100%] p-4">
-        <ProductFeature>
-          <h1>Product Feature</h1>
-          <ProductInfor
-            place={product.place}
-            flavor={product.flavor}
-            process={product.process}
-          />
-        </ProductFeature>
-        <Comment>
-          {product.reviews && <CommentComponent reviews={product.reviews} />}
-        </Comment>
+      <div className=" flex w-[100%] p-5 ">
+        <div className="w-[50%]">
+          <ProductFeature>
+            {/* <h1>Product Feature</h1>
+             */}
+            <Collapse
+              defaultActiveKey={["1"]}
+              style={{ width: "180%", backgroundColor: "white" }}
+              bordered={false}
+              expandIcon={({ isActive }) => (
+                <PlusOutlined
+                  rotate={isActive ? 70 : 0}
+                  style={{ fontSize: "30px" }}
+                />
+              )}
+              expandIconPosition={"end"}
+              accordion
+            >
+              <CollapsePanel
+                header={
+                  <h1
+                    className="mt-[-3%] text-[35px] font-normal "
+                    style={{ fontFamily: "'Cantora One', sans-serif" }}
+                  >
+                    <BulbOutlined /> Product Feature
+                  </h1>
+                }
+                key="1"
+              >
+                <ProductInfor
+                  place={product.place}
+                  flavor={product.flavor}
+                  process={product.process}
+                />
+              </CollapsePanel>
+              <CollapsePanel
+                header={
+                  <h1
+                    className=" mt-[-3%] text-[35px] font-normal "
+                    style={{ fontFamily: "'Cantora One', sans-serif" }}
+                  >
+                    <AuditOutlined /> Instruction
+                  </h1>
+                }
+                key="2"
+                style={{ marginTop: "5%" }}
+              >
+                <Instruction />
+              </CollapsePanel>
+              <CollapsePanel
+                header={
+                  <h1
+                    className="mt-[-3%] text-[35px] font-normal"
+                    style={{ fontFamily: "'Cantora One', sans-serif" }}
+                  >
+                    <HeartOutlined /> Review From User
+                  </h1>
+                }
+                key="3"
+                style={{ marginTop: "5%" }}
+              >
+                {product.reviews && (
+                  <CommentComponent reviews={product.reviews} />
+                )}
+              </CollapsePanel>
+            </Collapse>
+          </ProductFeature>
+
+          {/* <div className="w-[50%] self-start ">
+            <Collapse
+              defaultActiveKey={["1"]}
+              style={{ width: "180%", backgroundColor: "white" }}
+              bordered={false}
+              expandIcon={({ isActive }) => (
+                <PlusOutlined
+                  rotate={isActive ? 70 : 0}
+                  style={{ fontSize: "30px" }}
+                />
+              )}
+              expandIconPosition={"end"}
+            >
+              <CollapsePanel
+                header={
+                  <h1 className="mt-[-3%] text-[35px] font-normal ">
+                    <AuditOutlined /> Instruction
+                  </h1>
+                }
+                key="1"
+              >
+                <Instruction />
+              </CollapsePanel>
+            </Collapse>
+            <Divider style={{ width: "180%", backgroundColor: "#e4e4e4" }} />
+          </div> */}
+          {/* <Comment>
+            {product.reviews && <CommentComponent reviews={product.reviews} />}
+          </Comment> */}
+        </div>
+
+        <div className="flex w-[46%] flex-col items-center">
+          <h1 className="mt-[-3%] text-[50px] font-normal ">
+            <OneToOneOutlined /> About Our Coffee
+          </h1>
+          <AboutProduct />
+        </div>
       </div>
       <Divider />
       <Recommend className="p-2">
@@ -181,6 +299,7 @@ const Product = () => {
           <RecommendProduct products={product.categories[0]} />
         )}
       </Recommend>
+
       <Newsletter />
       <Footer />
     </Container>

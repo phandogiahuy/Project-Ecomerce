@@ -12,6 +12,8 @@ import EditProduct from "./pages/product/editProduct";
 import DiscountList from "./pages/discount/DiscountList";
 import EditDiscount from "./pages/discount/EditDiscount";
 import NewDiscount from "./pages/discount/NewDiscount";
+import { ReactQueryDevtools } from "react-query/devtools";
+
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -64,6 +66,7 @@ ReactDOM.render(
     <RouterProvider router={router}>
       <App />
     </RouterProvider>
+    <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>,
   document.getElementById("root")
 );

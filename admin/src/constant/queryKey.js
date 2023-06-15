@@ -9,3 +9,4 @@ export const GET_DISCOUNT_ID = "getDiscountId";
 export const POST_DISCOUNT = "postDiscount";
 export const GET_NEW_USER = "getNewUser";
 export const GET_ORDER = "getOrder";
+export const UPDATE_ORDER = "updateOrder";
