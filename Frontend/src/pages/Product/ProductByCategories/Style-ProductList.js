@@ -2,11 +2,10 @@ import styled from "styled-components";
 
 export const Container = styled.div``;
 export const FilterContainer = styled.div`
-  margin-left: 1200px;
-  margin-top: 10px;
   position: absolute;
-  top: 280px;
-  left: 80px;
+  top: 20%;
+  left: 75%;
+  z-index: 1;
 `;
 export const Title = styled.h1`
   margin: 40px;

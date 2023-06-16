@@ -21,6 +21,7 @@ const CategoriesItem = ({ item }) => {
                 fontSize: "20px",
                 alignItems: "center",
                 justifyContent: "center",
+                marginLeft: "20px",
               }}
             >
               SEE MORE

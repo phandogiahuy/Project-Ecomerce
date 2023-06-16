@@ -9,18 +9,17 @@ import { Link } from "react-router-dom";
 const Categories = () => {
   return (
     <ContainerCategories>
-      <div className="flex w-[50%] flex-col">
+      <div className="flex w-[50%] flex-col ">
         {categories.map((item) => (
           <CategoriesItem item={item} key={item.id} />
         ))}
       </div>
-      <div className="relative w-[50%] ">
+      <div className="relative w-[50%]  ">
         <Link to={`products/phin`}>
-          <img src="/Categories/Phin.jpg" className="h-[98%] w-[99%]" />
+          <img src="/Categories/Phin.jpg" className="h-[90%] w-[100%]" />
         </Link>
-        <div className="absolute left-32 top-[170px]">
-          <h1 className="ml-6 font-bold">PHIN</h1>
-
+        <div className="absolute left-[200px] top-[290px]">
+          <h1 className="ml-2 font-bold text-[50px]">PHIN</h1>
           <Space wrap>
             <Link to={`products/phin`}>
               <Button

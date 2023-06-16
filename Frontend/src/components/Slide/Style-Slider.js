@@ -2,8 +2,9 @@ import styled from "styled-components";
 import { mobile } from "../../responsive";
 
 export const Container = styled.div`
+  padding: 10px;
   width: 100%;
-  height: 80vh;
+  height: 75vh;
   ${mobile({ display: "none" })}
   display: flex;
 `;
@@ -14,7 +15,7 @@ export const Wrapper = styled.div`
 `;
 
 export const InforContainer = styled.div`
-  margin-top: 100px;
+  margin-top: 25%;
   width: 100%;
 `;
 export const Title = styled.h1`

@@ -1,22 +1,21 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 98%;
+  width: 100%;
   margin-left: 5px;
-  margin-right: 5px;
+
   position: relative;
 `;
 export const Image = styled.img`
-  width: 100%;
+  width: 98%;
 `;
 export const Infor = styled.div`
   position: absolute;
   z-index: 1;
-  top: 80px;
-  left: 120px;
+  left: 150px;
+  top: 100px;
 `;
 export const Title = styled.h1`
   font-weight: bolder;
-  font-size: 30px;
-  margin-bottom: 20px;
+  font-size: 40px;
 `;

@@ -16,7 +16,7 @@ import { Carousel, Image } from "antd";
 import Categories from "../Categories/Index";
 const contentStyle = {
   margin: 0,
-  height: "500px",
+  height: "625px",
   lineHeight: "160px",
   textAlign: "center",
   background: "#efe7e1",
