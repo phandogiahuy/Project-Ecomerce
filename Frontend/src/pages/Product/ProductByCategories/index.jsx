@@ -14,6 +14,8 @@ import {
 import Announcement from "../../../components/Annoucement/Index";
 import Navbar from "../../../components/NavBar/Index";
 import PopularProduct from "../../../components/Product/PopularProduct";
+import { FloatButton } from "antd";
+import { UpCircleFilled } from "@ant-design/icons";
 
 const ProductList = () => {
   // const location = useLocation();
@@ -41,6 +43,7 @@ const ProductList = () => {
       <PopularProduct cat={cat} sort={sort} />
       <Newsletter />
       <Footer />
+      <FloatButton.BackTop icon={<UpCircleFilled />} />
     </Container>
   );
 };

@@ -30,7 +30,16 @@ class OrderController {
   //DELETE
   async delete(req, res) {
     try {
-      await Order.findByIdAndDelete(req.params.id);
+      await Order.deleteMany({ status: "success" });
+      res.status(200).json("Order has been deleted with type success");
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  //DELETE
+  async deleteAll(req, res) {
+    try {
+      await Order.deleteMany();
       res.status(200).json("Order has been deleted...");
     } catch (err) {
       res.status(500).json(err);

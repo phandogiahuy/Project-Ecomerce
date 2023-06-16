@@ -14,7 +14,7 @@ const CheckoutComponent = () => {
   const dispatch = useDispatch();
 
   const [payment, setPayment] = useState();
-  const { products, pricetotal } = useSelector((state) => state.cart);
+  const { products, pricetotal, shipping } = useSelector((state) => state.cart);
   const { mutate } = useSetOrder();
 
   const handleFinsh = async (values) => {
@@ -36,6 +36,7 @@ const CheckoutComponent = () => {
       mail,
       address,
       products,
+      shipping,
       total: pricetotal,
       payment,
     });
@@ -123,7 +124,11 @@ const CheckoutComponent = () => {
           </Card>
           <Divider />
           <div>
-            <h1 className="ml-10 font-bold"> Total: {pricetotal}$ </h1>
+            <h4 className="ml-10 font-bold"> Shipping: {shipping}$</h4>
+            <center className="text-2xl font-bold">
+              {" "}
+              Total: {pricetotal}${" "}
+            </center>
           </div>
         </InforProduct>
       </div>

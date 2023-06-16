@@ -9,7 +9,8 @@ import {
 export const orderRouter = Router();
 orderRouter.post("/", orderController.create);
 orderRouter.put("/:id", verifyTokenAndAdmin, orderController.update);
-orderRouter.delete("/:id", verifyTokenAndAdmin, orderController.delete);
+orderRouter.delete("/", verifyTokenAndAdmin, orderController.deleteAll);
+orderRouter.delete("/success", verifyTokenAndAdmin, orderController.delete);
 orderRouter.get(
   "/find/:userId",
   verifyTokenAndAuthorization,

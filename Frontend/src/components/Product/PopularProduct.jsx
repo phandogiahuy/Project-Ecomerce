@@ -65,7 +65,6 @@ const PopularProduct = ({ cat, sort }) => {
   }
   return (
     <Container>
-      <Title> Product </Title>
       <h1
         style={{
           textTransform: "uppercase",

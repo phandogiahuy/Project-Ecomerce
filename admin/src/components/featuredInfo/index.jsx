@@ -11,24 +11,28 @@ import {
   AlertOutlined,
   DollarOutlined,
   SlidersOutlined,
-  SlidersTwoTone,
 } from "@ant-design/icons";
 
 export const FeaturedInfo = ({ orders }) => {
   const pending = [];
-  const revenue = [];
-  orders.forEach((i) => {
-    if (i.status === "success") {
-      revenue.push(i.total);
-    } else {
-      pending.push(i);
-    }
-  });
-  let total;
-  revenue.reduce((pre, cur) => {
-    total = pre + cur;
-  });
+  const revenueDay = [];
+  let total = 0;
+  if (orders.length > 0) {
+    const revenue = [];
 
+    orders.forEach((i) => {
+      if (i.status === "success") {
+        revenue.push(i.total);
+      } else {
+        pending.push(i);
+      }
+    });
+
+    revenue.forEach((item) => {
+      total += item;
+    });
+    revenueDay.push(total);
+  }
   return (
     <Container>
       <Wrapper>

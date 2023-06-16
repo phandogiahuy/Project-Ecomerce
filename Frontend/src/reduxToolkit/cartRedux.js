@@ -5,6 +5,7 @@ const cartSlice = createSlice({
   initialState: {
     products: [],
     pricetotal: 0,
+    shipping: 0,
   },
   reducers: {
     addProduct: (state, action) => {
@@ -49,6 +50,7 @@ const cartSlice = createSlice({
     },
     updateCart: (state, action) => {
       state.pricetotal = action.payload.priceProduct;
+      state.shipping = action.payload.shipping;
       // state.total = 0;
     },
   },

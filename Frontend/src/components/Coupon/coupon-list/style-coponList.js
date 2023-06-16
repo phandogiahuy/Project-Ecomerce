@@ -11,13 +11,12 @@ export const Container = styled.div`
 `;
 export const Title = styled.h1`
   font-weight: 700;
-  margin: 10px;
-  font-size: 50px;
+  margin: 5px;
+  font-size: 40px;
   margin-left: 50px;
 `;
 export const Wrapper = styled.div`
-  height: 100%;
-  width: 200%;
+  width: 225%;
   padding: 10px;
   display: flex;
   transform: translateX(${(props) => props.slideIndex * -100}vw);

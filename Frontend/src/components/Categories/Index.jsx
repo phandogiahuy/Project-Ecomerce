@@ -1,21 +1,44 @@
-import { Row } from "antd";
+import { Button, Row, Space } from "antd";
 import React from "react";
 
 import { categories } from "../../data";
 import CategoriesItem from "./category-item";
 import { Container, ContainerCategories, Title } from "./style-category";
+import { Link } from "react-router-dom";
 
 const Categories = () => {
   return (
     <ContainerCategories>
-      <Title>Categories</Title>
-      <Container>
-        <Row gutter={[24, 8]} style={{ marginTop: "10px" }}>
-          {categories.map((item) => (
-            <CategoriesItem item={item} key={item.id} />
-          ))}
-        </Row>
-      </Container>
+      <div className="flex w-[50%] flex-col">
+        {categories.map((item) => (
+          <CategoriesItem item={item} key={item.id} />
+        ))}
+      </div>
+      <div className="relative w-[50%] ">
+        <Link to={`products/phin`}>
+          <img src="/Categories/Phin.jpg" className="h-[98%] w-[99%]" />
+        </Link>
+        <div className="absolute left-32 top-[170px]">
+          <h1 className="ml-6 font-bold">PHIN</h1>
+
+          <Space wrap>
+            <Link to={`products/phin`}>
+              <Button
+                style={{
+                  display: "flex",
+                  backgroundColor: "#68c42e",
+                  letterSpacing: "1px",
+                  fontSize: "20px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                SEE MORE
+              </Button>
+            </Link>
+          </Space>
+        </div>
+      </div>
     </ContainerCategories>
   );
 };

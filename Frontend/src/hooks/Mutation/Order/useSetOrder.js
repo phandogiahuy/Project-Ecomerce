@@ -11,6 +11,7 @@ const order = async ({
   mail,
   address,
   products,
+  shipping,
   total,
   payment,
 }) => {
@@ -20,6 +21,7 @@ const order = async ({
     phone,
     mail,
     products,
+    shipping,
     address,
     total,
     payment,

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, ConfigProvider, theme } from "antd";
+import { Button, ConfigProvider, theme, FloatButton, Divider } from "antd";
 import Announcement from "../../components/Annoucement/Index";
 import Categories from "../../components/Categories/Index";
 import Navbar from "../../components/NavBar/Index";
@@ -23,13 +23,16 @@ const Home = () => {
         <Announcement />
         <Navbar />
         <Slider />
-        <Categories />
+
+        <Divider>
+          <h1 className="text-6xl font-bold">PRODUCT</h1>
+        </Divider>
         <PopularProduct />
         <ListCoupon />
         <Newsletter />
         <Footer />
+        <FloatButton.BackTop />
       </ConfigProvider>
-      ;
     </div>
   );
 };

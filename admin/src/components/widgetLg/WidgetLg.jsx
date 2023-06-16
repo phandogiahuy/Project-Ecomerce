@@ -10,10 +10,15 @@ import {
   Table,
   Tag,
 } from "antd";
-import { FrownTwoTone } from "@ant-design/icons";
+import {
+  FrownTwoTone,
+  MinusCircleOutlined,
+  PlusCircleTwoTone,
+} from "@ant-design/icons";
 import Content from "../contentTransaction";
 import { useState } from "react";
 import { useUpdateOrder } from "../../hooks/Mutation/Order/useUpdateOrder";
+import { useDeleteOrder } from "../../hooks/Mutation/Order/useDeleteOrder";
 const token = localStorage.getItem("token");
 
 export default function WidgetLg({ orders }) {
@@ -21,6 +26,7 @@ export default function WidgetLg({ orders }) {
   const [content, setContent] = useState();
   const { mutate } = useUpdateOrder();
   const [id, setId] = useState();
+  const res = useDeleteOrder();
   const showModal = (order) => {
     setContent(order);
     setIsModalOpen(true);
@@ -32,7 +38,9 @@ export default function WidgetLg({ orders }) {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
+  const handleClickDelete = () => {
+    res.mutate();
+  };
   const columns = [
     {
       title: "ID",
@@ -108,12 +116,30 @@ export default function WidgetLg({ orders }) {
   return (
     <div style={{ flex: 1, padding: "5px" }}>
       <h1>Transaction</h1>
+
       {orders.length == 0 ? (
         <div>
           <Empty />
         </div>
       ) : (
-        <Table bordered columns={columns} dataSource={orders} />
+        <>
+          <Button
+            size="larger"
+            style={{
+              backgroundColor: "#4ddb1d",
+              fontSize: "20px",
+              width: "25%",
+              height: "20%",
+              padding: "10px",
+              marginBottom: "10px",
+            }}
+            onClick={handleClickDelete}
+            icon={<MinusCircleOutlined />}
+          >
+            Delete Success Transaction
+          </Button>
+          <Table bordered columns={columns} dataSource={orders} />
+        </>
       )}
 
       <Modal

@@ -52,7 +52,7 @@ export default function ProductList() {
       title: "Image",
       align: "center",
       dataIndex: "img",
-      render: (img) => <Image src={img} style={{ width: "100%" }} />,
+      render: (img) => <Image src={img} width={150} />,
     },
     {
       title: "Tags",

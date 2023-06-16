@@ -154,6 +154,7 @@ const Cart = () => {
     dispatch(
       updateCart({
         priceProduct: priceAllProduct,
+        shipping: ship,
       })
     );
   };

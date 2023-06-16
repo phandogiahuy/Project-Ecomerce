@@ -12,8 +12,6 @@ const OrderSuccesful = () => {
   const { order } = useSelector((state) => state.order);
   return (
     <div>
-      <Announcement />
-      <Navbar />
       <div className="p-10">
         <MySteps step={2} />
         <div className="flex">

@@ -78,16 +78,35 @@ const Content = ({ order }) => {
                       width: "10%",
                     }}
                   >
-                    <h5 style={{ fontSize: "20px" }}>
-                      {" "}
-                      {productItem.product.price[0]} $
-                    </h5>
+                    {productItem.size === 250 ? (
+                      <h5 style={{ fontSize: "20px" }}>
+                        {productItem.product.price[0] *
+                          (1 - productItem.product.sale / 100) *
+                          productItem.quantity}
+                        $
+                      </h5>
+                    ) : productItem.size === 500 ? (
+                      <h5 style={{ fontSize: "20px" }}>
+                        {productItem.product.price[1] *
+                          (1 - productItem.product.sale / 100) *
+                          productItem.quantity}
+                        $
+                      </h5>
+                    ) : (
+                      <h5 style={{ fontSize: "20px" }}>
+                        {productItem.product.price[2] *
+                          (1 - productItem.product.sale / 100) *
+                          productItem.quantity}
+                        $
+                      </h5>
+                    )}
                   </div>
                 </div>
               ))}
           </div>
         </ImageProduct>
         <Total>
+          <h4>Shipping: {order.shipping}$</h4>
           <span style={{ fontSize: "20px", fontWeight: "700" }}>Total: </span>
           <span style={{ fontSize: "20px" }}>{order.total} $</span>
         </Total>

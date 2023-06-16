@@ -27,6 +27,7 @@ export default function Home() {
   return (
     <div className="home">
       <FeaturedInfo orders={orders} />
+
       <div className="homeWidgets">
         <WidgetLg orders={orders} />
       </div>

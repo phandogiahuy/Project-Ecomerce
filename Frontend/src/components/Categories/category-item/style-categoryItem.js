@@ -1,20 +1,19 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  flex: 1;
-  margin: 3px;
-  height: 70vh;
-  margin-bottom: 5px;
+  width: 98%;
+  margin-left: 5px;
+  margin-right: 5px;
+  position: relative;
 `;
 export const Image = styled.img`
   width: 100%;
-  height: 100%;
-  object-fit: contain;
 `;
 export const Infor = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  z-index: 1;
+  top: 80px;
+  left: 120px;
 `;
 export const Title = styled.h1`
   font-weight: bolder;

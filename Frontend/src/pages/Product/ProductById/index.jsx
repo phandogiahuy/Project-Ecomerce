@@ -4,12 +4,14 @@ import {
   HeartOutlined,
   OneToOneOutlined,
   PlusOutlined,
+  UpCircleFilled,
 } from "@ant-design/icons";
 import {
   Affix,
   Button,
   Collapse,
   Divider,
+  FloatButton,
   Image,
   InputNumber,
   Radio,
@@ -301,6 +303,7 @@ const Product = () => {
 
       <Newsletter />
       <Footer />
+      <FloatButton.BackTop icon={<UpCircleFilled />} />
     </Container>
   );
 };
