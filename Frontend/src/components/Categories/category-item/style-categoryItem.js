@@ -8,6 +8,7 @@ export const Container = styled.div`
 `;
 export const Image = styled.img`
   width: 98%;
+  height: 309px;
 `;
 export const Infor = styled.div`
   position: absolute;

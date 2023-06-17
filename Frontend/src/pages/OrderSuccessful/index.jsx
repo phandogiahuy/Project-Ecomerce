@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import Announcement from "../../components/Annoucement/Index";
 import Navbar from "../../components/NavBar/Index";
 import Footer from "../../components/Footer/Footer";
@@ -12,10 +12,27 @@ const OrderSuccesful = () => {
   const { order } = useSelector((state) => state.order);
   return (
     <div>
-      <div className="p-10">
+      <div style={{ height: "120px", backgroundColor: "bisque" }}>
+        <center>
+          <span>
+            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+              <p className="font-bold text-[50px]">
+                <img src="/vite.png" style={{ width: "5%" }} />
+                Aroma Delute
+              </p>
+            </Link>
+          </span>
+        </center>
+      </div>
+      <div className="p-10 mt-[20px]">
         <MySteps step={2} />
-        <div className="flex">
-          <Card hoverable style={{}} title="Order Information" className="mt-5">
+        <div className="flex h-[500px]" style={{ alignItems: "flex-start" }}>
+          <Card
+            hoverable
+            style={{ fontSize: "20px" }}
+            title="Order Information"
+            className="mt-5 "
+          >
             <h2 className="font-bold">
               Name: <span>{order.name} </span>
             </h2>
@@ -41,7 +58,6 @@ const OrderSuccesful = () => {
               title="Successfully Purchased Your Order On Aroma Delute"
               subTitle=" Thanks you for buying our product, we will ship for you immediately"
             />
-            <div className="text-[25px] font-bold"></div>
           </div>
         </div>
       </div>
