@@ -63,6 +63,6 @@ export const Recommend = styled.div`
 `;
 
 export const ProductFeature = styled.div`
-  width: 50%;
+  /* width: 50%; */
   align-self: flex-start;
 `;

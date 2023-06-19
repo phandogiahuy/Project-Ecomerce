@@ -8,31 +8,24 @@ import ListCoupon from "../../components/Coupon/coupon-list";
 import Newsletter from "../../components/Footer/Newsletter";
 import Footer from "../../components/Footer/Footer";
 import PopularProduct from "../../components/Product/PopularProduct";
-import Slider from "../../components/Slide/Index";
+import Slider from "../../components/Slide/index";
+import FlashScreen from "../../components/FlashScreen";
 const Home = () => {
   return (
-    <div>
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: "#0052CC",
-            colorPrimaryBg: "#e6f7ff",
-          },
-        }}
-      >
-        <Announcement />
-        <Navbar />
-        <Slider />
+    <div className="overflow-x-hidden">
+      <Announcement />
+      <Navbar />
+      <Slider />
 
-        <Divider>
-          <h1 className="text-6xl font-bold">PRODUCT</h1>
-        </Divider>
-        <PopularProduct />
-        <ListCoupon />
-        <Newsletter />
-        <Footer />
-        <FloatButton.BackTop />
-      </ConfigProvider>
+      <Divider>
+        <h1 className="text-6xl font-bold">PRODUCT</h1>
+      </Divider>
+      <PopularProduct />
+      <ListCoupon />
+      <Newsletter />
+      <Footer />
+      <FloatButton.BackTop />
+      {/* <FlashScreen /> */}
     </div>
   );
 };

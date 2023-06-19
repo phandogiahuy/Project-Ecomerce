@@ -4,9 +4,10 @@ import { mobile } from "../../responsive";
 export const Container = styled.div`
   padding: 10px;
   width: 100%;
-  height: 75vh;
+  height: 60vh;
   ${mobile({ display: "none" })}
   display: flex;
+  margin-bottom: 180px;
 `;
 export const Slide = styled.div``;
 export const ImgContainer = styled.div``;
@@ -15,8 +16,9 @@ export const Wrapper = styled.div`
 `;
 
 export const InforContainer = styled.div`
-  margin-top: 25%;
+  margin-top: 20%;
   width: 100%;
+  padding: 5px;
 `;
 export const Title = styled.h1`
   font-family: "Chicle", sans-serif;

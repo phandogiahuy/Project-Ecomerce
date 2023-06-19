@@ -17,6 +17,7 @@ import {
   Radio,
   Rate,
   Select,
+  Skeleton,
   Space,
 } from "antd";
 import React, { useEffect, useLayoutEffect, useState } from "react";
@@ -50,10 +51,11 @@ import CommentComponent from "../../../components/Comment";
 import PopularProduct from "../../../components/Product/PopularProduct";
 import RecommendProduct from "../../../components/Recommend";
 import ProductInfor from "../../../components/ProductFeature";
-import CollapsePanel from "antd/es/collapse/CollapsePanel";
+// import Panel from "antd/es/collapse/Panel";
 import { Instruction } from "../../../components/Instruction";
 import AboutProduct from "../../../components/AboutProduct";
-
+import { useGetProductById } from "../../../hooks/Queries/Product/useGetProductById";
+const { Panel } = Collapse;
 const Product = () => {
   const [type, setType] = useState("Bean");
 
@@ -61,10 +63,9 @@ const Product = () => {
   const [quanity, setQuanity] = useState(1);
   const [size, setSize] = useState(250);
   const [price, setPrice] = useState(0);
+  const [product, setProduct] = useState([]);
   const id = location.pathname.split("/")[2];
-  const [product, setProduct] = useState({});
   const dispatch = useDispatch();
-
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -75,6 +76,7 @@ const Product = () => {
     };
     getProduct();
   }, [id]);
+
   const onSelectProductSizeChange = (e) => {
     if (e === 500) {
       setPrice(product.price[1]);
@@ -108,7 +110,7 @@ const Product = () => {
     },
   ];
   return (
-    <Container>
+    <Container className="overflow-x-hidden">
       <Announcement />
       <Navbar />
       <Wrapper>
@@ -125,7 +127,9 @@ const Product = () => {
         <InforContainer>
           <Title>{product.title}</Title>
           <Desc>{product.desc}</Desc>
+
           <Price>{Math.ceil(price * (1 - product.sale / 100))}$</Price>
+
           {product.sale > 0 && (
             <>
               <PriceFirst>{price}$</PriceFirst>
@@ -195,7 +199,8 @@ const Product = () => {
             {/* <h1>Product Feature</h1>
              */}
             <Collapse
-              style={{ width: "180%", backgroundColor: "white" }}
+              style={{ width: "100%", backgroundColor: "white" }}
+              // style={{ backgroundColor: "white" }}
               bordered={false}
               expandIcon={({ isActive }) => (
                 <PlusOutlined
@@ -206,7 +211,7 @@ const Product = () => {
               expandIconPosition={"end"}
               accordion
             >
-              <CollapsePanel
+              <Panel
                 header={
                   <h1
                     className="mt-[-3%] text-[35px] font-normal "
@@ -222,8 +227,8 @@ const Product = () => {
                   flavor={product.flavor}
                   process={product.process}
                 />
-              </CollapsePanel>
-              <CollapsePanel
+              </Panel>
+              <Panel
                 header={
                   <h1
                     className=" mt-[-3%] text-[35px] font-normal "
@@ -236,8 +241,8 @@ const Product = () => {
                 style={{ marginTop: "5%" }}
               >
                 <Instruction />
-              </CollapsePanel>
-              <CollapsePanel
+              </Panel>
+              <Panel
                 header={
                   <h1
                     className="mt-[-3%] text-[35px] font-normal"
@@ -250,9 +255,13 @@ const Product = () => {
                 style={{ marginTop: "5%" }}
               >
                 {product.reviews && (
-                  <CommentComponent reviews={product.reviews} />
+                  <CommentComponent
+                    reviews={product.reviews}
+                    id={product._id}
+                    name={product.title}
+                  />
                 )}
-              </CollapsePanel>
+              </Panel>
             </Collapse>
           </ProductFeature>
 
@@ -269,7 +278,7 @@ const Product = () => {
               )}
               expandIconPosition={"end"}
             >
-              <CollapsePanel
+              <Panel
                 header={
                   <h1 className="mt-[-3%] text-[35px] font-normal ">
                     <AuditOutlined /> Instruction
@@ -278,7 +287,7 @@ const Product = () => {
                 key="1"
               >
                 <Instruction />
-              </CollapsePanel>
+              </Panel>
             </Collapse>
             <Divider style={{ width: "180%", backgroundColor: "#e4e4e4" }} />
           </div> */}

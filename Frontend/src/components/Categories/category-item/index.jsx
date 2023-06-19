@@ -2,6 +2,7 @@ import { Button, Col, Space } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Image, Infor, Title } from "./style-categoryItem";
+import { ArrowRightOutlined } from "@ant-design/icons";
 
 const CategoriesItem = ({ item }) => {
   return (
@@ -16,7 +17,7 @@ const CategoriesItem = ({ item }) => {
             <Button
               style={{
                 display: "flex",
-                backgroundColor: "#68c42e",
+                backgroundColor: "#add892",
                 letterSpacing: "1px",
                 fontSize: "20px",
                 alignItems: "center",
@@ -25,6 +26,7 @@ const CategoriesItem = ({ item }) => {
               }}
             >
               SEE MORE
+              <ArrowRightOutlined />
             </Button>
           </Link>
         </Space>

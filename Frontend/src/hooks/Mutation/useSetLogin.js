@@ -16,10 +16,11 @@ export const useLogin = () => {
   const queryClient = useQueryClient();
   return useMutation(login, {
     onSuccess: (data) => {
-      console.log(data);
       if (data.email) {
         localStorage.setItem("token", data.accessToken);
         localStorage.setItem("email", data.email);
+        localStorage.setItem("name", data.name);
+
         queryClient.setQueryData([GET_USER], (oldData) => data);
       }
     },

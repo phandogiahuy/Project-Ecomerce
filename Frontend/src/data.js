@@ -15,7 +15,7 @@ export const sliderItems = [
     id: 3,
     img: "/poster3.jpg",
     title: "SINGLE ORIGIN",
-    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+    desc: "DON'T COMPROMISE ON STYLE! GET DISCOUNT 50% OFF FOR OLD ARRIVALS.",
   },
 ];
 export const categories = [

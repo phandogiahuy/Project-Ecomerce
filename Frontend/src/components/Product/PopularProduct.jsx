@@ -24,13 +24,6 @@ const PopularProduct = ({ cat, sort }) => {
     const getProducts = async () => {
       try {
         const res = cat && getProductByCat;
-
-        if (res.isLoading) {
-          return <Skeleton active />;
-        }
-        if (res.error) {
-          return <div>{res.error.message}</div>;
-        }
         if (res.isSuccess) {
           setProduct(res.data);
         }
@@ -48,11 +41,19 @@ const PopularProduct = ({ cat, sort }) => {
       );
     } else if (sort === "ASC") {
       setFilterProduct((prev) =>
-        [...prev].sort((a, b) => a.price[0] - b.price[0])
+        [...prev].sort(
+          (a, b) =>
+            Math.ceil(a.price[0] * (1 - a.sale / 100)) -
+            Math.ceil(b.price[0] * (1 - b.sale / 100))
+        )
       );
     } else {
       setFilterProduct((prev) =>
-        [...prev].sort((a, b) => b.price[0] - a.price[0])
+        [...prev].sort(
+          (a, b) =>
+            Math.ceil(b.price[0] * (1 - b.sale / 100)) -
+            Math.ceil(a.price[0] * (1 - a.sale / 100))
+        )
       );
     }
   }, [sort]);

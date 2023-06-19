@@ -9,6 +9,8 @@ import {
   Typography,
   Progress,
   Collapse,
+  Space,
+  Modal,
 } from "antd";
 
 import {
@@ -18,15 +20,28 @@ import {
   UsergroupAddOutlined,
   PlusOutlined,
   HeartOutlined,
+  ArrowRightOutlined,
+  FormOutlined,
 } from "@ant-design/icons";
 import CommentList from "./CommentList";
 import CollapsePanel from "antd/es/collapse/CollapsePanel";
+import { useState } from "react";
+import ReviewModal from "../Review";
 const { Text } = Typography;
 
-const CommentComponent = ({ reviews }) => {
+const CommentComponent = ({ reviews, id, name }) => {
   // const ratings = reviews.rating;
   const rate = [];
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   reviews.forEach((reviews) => rate.push(reviews.rating));
   const sumOfRatings = rate.reduce((acc, rate) => acc + rate, 0);
 
@@ -51,11 +66,30 @@ const CommentComponent = ({ reviews }) => {
       title={
         <div>
           {totalRating > 0 && (
-            <div className="flex">
+            <div className="flex ">
               <h1 className="font-bold">{" " + totalRating}</h1>
               <div className="ml-3">
                 <Rate disabled defaultValue={totalRating} allowHalf />
                 <p>{reviews.length} Reviews</p>
+              </div>
+              <div className="ml-[25%] mt-[1%]">
+                <Space wrap>
+                  <Button
+                    style={{
+                      display: "flex",
+                      backgroundColor: "#dcffc6",
+                      letterSpacing: "1px",
+                      fontSize: "30px",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: "200px",
+                    }}
+                    onClick={showModal}
+                  >
+                    Review
+                    <FormOutlined />
+                  </Button>
+                </Space>
               </div>
             </div>
           )}
@@ -69,9 +103,36 @@ const CommentComponent = ({ reviews }) => {
           <div className="ml-[50%]  ">
             <UserOutlined className="text-[49px]" />
             <p className="">No review</p>
+            <div className="ml-[-20%] mt-[1%] p-2">
+              <Space wrap>
+                <Button
+                  style={{
+                    display: "flex",
+                    backgroundColor: "#dcffc6",
+                    letterSpacing: "1px",
+                    fontSize: "30px",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "200px",
+                  }}
+                  onClick={showModal}
+                >
+                  Review
+                  <FormOutlined />
+                </Button>
+              </Space>
+            </div>
           </div>
         )}
       </div>
+      <Modal
+        title="New Review"
+        open={isModalOpen}
+        footer={null}
+        onCancel={handleCancel}
+      >
+        <ReviewModal id={id} name={name} handleCancel={handleCancel} />
+      </Modal>
     </Card>
 
     // </Collapse>

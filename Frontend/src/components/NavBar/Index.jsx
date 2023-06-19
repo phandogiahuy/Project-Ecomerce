@@ -35,12 +35,6 @@ const Navbar = () => {
       try {
         const res = user;
 
-        if (res.isLoading) {
-          return <div>...loading</div>;
-        }
-        if (res.error) {
-          return <div>{res.error.message}</div>;
-        }
         if (res.isSuccess) {
           setUser(res.data.email);
         }
@@ -48,6 +42,7 @@ const Navbar = () => {
     };
     getUser();
   }, [token]);
+
   const [top, setTop] = useState(10);
   const navigate = useNavigate();
   const dispatch = useDispatch();

@@ -26,8 +26,9 @@ const ProductList = () => {
   const handleSort = (e) => {
     setSort(e.target.value);
   };
+
   return (
-    <Container>
+    <Container className="overflow-x-hidden">
       <Announcement />
       <Navbar />
       <FilterContainer>

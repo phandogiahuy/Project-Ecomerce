@@ -37,8 +37,8 @@ const RecommendList = (products) => {
             <Card
               hoverable
               style={{
-                maxWidth: 330,
-                minHeight: 420,
+                maxWidth: 400,
+                minHeight: 500,
                 maxHeight: 420,
               }}
               cover={
@@ -62,7 +62,7 @@ const RecommendList = (products) => {
                     ({products.products.price[0]}$)
                   </span>
                 </div>
-                <div className=" justify-item-end  text-[15px] ">
+                <div className=" justify-item-end  text-[10px] ">
                   <Rate
                     disabled
                     value={totalRating}

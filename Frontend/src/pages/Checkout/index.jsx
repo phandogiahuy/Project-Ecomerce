@@ -6,7 +6,7 @@ import CheckoutComponent from "../../components/Checkout";
 
 const Checkout = () => {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Announcement />
       <CheckoutComponent />
       <Footer />

@@ -44,6 +44,7 @@ class AuthController {
           const accessToken = generateAccessToken(user);
           res.status(200).json({
             email: user.email,
+            name: user.username,
             isAdmin: user.isAdmin,
             accessToken,
             id: user._id,

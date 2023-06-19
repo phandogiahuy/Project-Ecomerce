@@ -162,7 +162,7 @@ const Cart = () => {
     return message.error("Your Cart Is Empty");
   };
   return (
-    <Container>
+    <Container className="overflow-x-hidden">
       <Announcement />
       <Wrapper>
         <Title>Your cart</Title>

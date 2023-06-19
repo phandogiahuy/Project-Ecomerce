@@ -3,17 +3,16 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   margin-left: 5px;
-
   position: relative;
 `;
 export const Image = styled.img`
   width: 98%;
-  height: 309px;
+  height: 267px;
 `;
 export const Infor = styled.div`
   position: absolute;
   z-index: 1;
-  left: 150px;
+  left: 100px;
   top: 100px;
 `;
 export const Title = styled.h1`

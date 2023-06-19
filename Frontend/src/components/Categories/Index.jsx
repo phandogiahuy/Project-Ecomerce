@@ -5,27 +5,33 @@ import { categories } from "../../data";
 import CategoriesItem from "./category-item";
 import { Container, ContainerCategories, Title } from "./style-category";
 import { Link } from "react-router-dom";
+import { ArrowRightOutlined } from "@ant-design/icons";
 
 const Categories = () => {
+  const cat = "phin";
   return (
     <ContainerCategories>
-      <div className="flex w-[50%]  flex-col ">
+      <div className="flex w-[50%] flex-col ">
         {categories.map((item) => (
           <CategoriesItem item={item} key={item.id} />
         ))}
       </div>
-      <div className="relative w-[50%]  ">
-        <Link to={`products/phin`}>
-          <img src="/Categories/Phin.jpg" className="h-[624px] w-[100%]" />
+      <div className="relative mr-4 w-[50%]  ">
+        <Link to={`products/${cat}`}>
+          <img
+            src="/Categories/Phin.jpg"
+            className="  h-[539px] w-[100%]"
+            style={{ imageRendering: "pixelated" }}
+          />
         </Link>
-        <div className="absolute left-[200px] top-[290px]">
-          <h1 className="ml-2 font-bold text-[50px]">PHIN</h1>
+        <div className="absolute left-[130px] top-[200px]">
+          <h1 className="ml-2 text-[50px] font-bold">PHIN</h1>
           <Space wrap>
             <Link to={`products/phin`}>
               <Button
                 style={{
                   display: "flex",
-                  backgroundColor: "#68c42e",
+                  backgroundColor: "#add892",
                   letterSpacing: "1px",
                   fontSize: "20px",
                   alignItems: "center",
@@ -33,6 +39,7 @@ const Categories = () => {
                 }}
               >
                 SEE MORE
+                <ArrowRightOutlined />
               </Button>
             </Link>
           </Space>

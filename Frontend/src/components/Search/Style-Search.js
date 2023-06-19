@@ -6,5 +6,5 @@ export const ContainerSearch = styled.div`
 export const InforSearch = styled.div`
   display: flex;
   padding: 10px;
-  height: 90px;
+  height: 120px;
 `;

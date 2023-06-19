@@ -23,5 +23,13 @@ class ReviewController {
       res.status(500).json(err);
     }
   }
+  async deleteAll(req, res) {
+    try {
+      const review = await Review.deleteMany();
+      res.status(200).json(review);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
 }
 export const reviewController = new ReviewController();

@@ -11,12 +11,12 @@ import {
   Slide,
   Title,
   Wrapper,
-} from "./Style-Slider";
+} from "./Style";
 import { Carousel, Image } from "antd";
-import Categories from "../Categories/Index";
+import Categories from "../Categories";
 const contentStyle = {
   margin: 0,
-  height: "625px",
+  height: "540px",
   lineHeight: "160px",
   textAlign: "center",
   background: "#efe7e1",
@@ -24,12 +24,16 @@ const contentStyle = {
 function Slider() {
   return (
     <Container>
-      <div className="w-[50%]">
+      <div className=" w-[50%]">
         <Carousel autoplay effect="fade">
           {sliderItems.map((item) => (
             <Slide>
               <div style={contentStyle} className="flex">
-                <img src={item.img} className="w-[60%] " />
+                <img
+                  src={item.img}
+                  className=" h-[550px] w-[60%]  "
+                  style={{ imageRendering: "pixelated" }}
+                />
                 <InforContainer>
                   <Title>{item.title}</Title>
                   <Desc cl={item.color}>{item.desc}</Desc>

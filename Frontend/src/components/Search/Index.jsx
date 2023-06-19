@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Empty, Input, Spin } from "antd";
+import { Badge, Empty, Input, Spin } from "antd";
 
 import { debounce } from "lodash";
 import { Link } from "react-router-dom";
@@ -14,6 +14,7 @@ const SearchInput = () => {
     setSearchQuery(value);
   }, 50);
   const { data, isLoading, isError } = useGetProductBySearch(searchQuery);
+  console.log(data);
   const onChangeHandleSearch = (e) => {
     debouncedSetQuery(e.target.value);
     setType(true);
@@ -53,36 +54,58 @@ const SearchInput = () => {
             }}
           >
             {data.map((result) => (
-              <li key={result._id}>
-                <Link
-                  to={`/product/${result._id}`}
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  <InforSearch>
-                    <img src={result.img} style={{ width: "40%" }} />
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      <h1
+              <Badge
+                count={"-" + result.sale + "%"}
+                style={{
+                  zIndex: "1",
+                  marginRight: "250px",
+                  marginTop: "20px",
+                  fontSize: "10px",
+                  color: "yellow",
+                }}
+                color="black"
+              >
+                <li key={result._id}>
+                  <Link
+                    to={`/product/${result._id}`}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <InforSearch>
+                      <img src={result.img} style={{ width: "100%" }} />
+                      <div
                         style={{
-                          fontSize: "15px",
-                          padding: 5,
-                          fontWeight: "500",
+                          display: "flex",
+                          flexDirection: "column",
+                          marginTop: "10px",
                         }}
                       >
-                        {result.title}
-                      </h1>
-                      <h1
-                        style={{
-                          fontSize: "15px",
-                          padding: 5,
-                          fontWeight: "500",
-                        }}
-                      >
-                        {result.price[0]}$
-                      </h1>
-                    </div>
-                  </InforSearch>
-                </Link>
-              </li>
+                        <h1
+                          style={{
+                            fontSize: "12px",
+                            padding: 2,
+                            fontWeight: "500",
+                          }}
+                        >
+                          {result.title}
+                        </h1>
+                        <h1
+                          style={{
+                            fontSize: "15px",
+                            padding: 5,
+                            fontWeight: "500",
+                          }}
+                        >
+                          {Math.ceil(result.price[0] * (1 - result.sale / 100))}
+                          $
+                          <span className="text-slate-300 line-through">
+                            ({result.price[0]}$)
+                          </span>
+                        </h1>
+                      </div>
+                    </InforSearch>
+                  </Link>
+                </li>
+              </Badge>
             ))}
           </ul>
         ) : (
