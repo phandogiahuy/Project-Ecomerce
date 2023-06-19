@@ -9,31 +9,20 @@ import { useGetProducts } from "../../hooks/Queries/Product/useGetProducts";
 import { useGetProductByCat } from "../../hooks/Queries/Product/useGetProductByCat";
 
 const PopularProduct = ({ cat, sort }) => {
-  const [product, setProduct] = useState([]);
+  const [filterProduct, setFilterProduct] = useState([]);
+
   const [pagination, setPagination] = useState({
     pageSize: 8,
     page: 1,
   });
-  const [filterProduct, setFilterProduct] = useState([]);
-  const { data, isSuccess, isLoading } = useGetProducts(pagination);
-  const getProductByCat = useGetProductByCat(cat);
 
-  // const startIndex = (currentPage - 1) * itemsPerPage;
-  // const endIndex = startIndex + itemsPerPage;
+  const { data, isSuccess, isLoading, isError } = useGetProducts(pagination);
+  const getProductByCat = useGetProductByCat(cat);
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = cat && getProductByCat;
-        if (res.isSuccess) {
-          setProduct(res.data);
-        }
-      } catch (err) {}
-    };
-    getProducts();
+    if (getProductByCat.data) {
+      setFilterProduct(getProductByCat.data);
+    }
   });
-  useEffect(() => {
-    cat && setFilterProduct(product);
-  }, [product, cat]);
   useEffect(() => {
     if (sort === "newest") {
       setFilterProduct((prev) =>
@@ -56,7 +45,22 @@ const PopularProduct = ({ cat, sort }) => {
         )
       );
     }
-  }, [sort]);
+  });
+  if (getProductByCat.isLoading) {
+    return (
+      <div>
+        <Skeleton />
+      </div>
+    );
+  }
+
+  // useEffect(() => {
+  //   if (getProductByCat.isSuccess) {
+  //     // setFilterProduct(getProductByCat.data);
+  //     console.log(getProductByCat.data);
+  //   }
+  // }, [cat, getProductByCat.data]);
+
   if (isLoading) {
     return (
       <div>
@@ -64,6 +68,29 @@ const PopularProduct = ({ cat, sort }) => {
       </div>
     );
   }
+
+  // if (getProductByCat.) {
+  //   if (getProductByCat.isLoading) {
+  //     return (
+  //       <div>
+  //         <Skeleton />
+  //       </div>
+  //     );
+  //   }
+  //   dataProductByCat = getProductByCat.data;
+  //   console.log(dataProductByCat);
+  // } else {
+  //   if (isLoading) {
+  //     return (
+  //       <div>
+  //         <Skeleton />
+  //       </div>
+  //     );
+  //   }
+  //   dataProductAll = data;
+  //   console.log(dataProductAll);
+  // }
+
   return (
     <Container>
       <h1
@@ -85,8 +112,12 @@ const PopularProduct = ({ cat, sort }) => {
         }}
         style={{ marginTop: 10, marginRight: "20px" }}
       >
-        {cat
+        {cat && filterProduct.length > 0
           ? filterProduct.map((item) => <Product item={item} key={item._id} />)
+          : cat
+          ? getProductByCat.data.map((item) => (
+              <Product item={item} key={item._id} />
+            ))
           : data.data.map((item) => <Product item={item} key={item._id} />)}
 
         {!cat && isSuccess && (

@@ -55,29 +55,29 @@ import ProductInfor from "../../../components/ProductFeature";
 import { Instruction } from "../../../components/Instruction";
 import AboutProduct from "../../../components/AboutProduct";
 import { useGetProductById } from "../../../hooks/Queries/Product/useGetProductById";
+import { QueryClient } from "react-query";
 const { Panel } = Collapse;
 const Product = () => {
   const [type, setType] = useState("Bean");
-
   const location = useLocation();
+  const [first, setFirst] = useState(false);
   const [quanity, setQuanity] = useState(1);
   const [size, setSize] = useState(250);
   const [price, setPrice] = useState(0);
-  const [product, setProduct] = useState([]);
   const id = location.pathname.split("/")[2];
   const dispatch = useDispatch();
-  useEffect(() => {
-    const getProduct = async () => {
-      try {
-        const res = await axiosInstance.get(`/product/find/${id}`);
-        setProduct(res.data);
-        setPrice(res.data.price[0]);
-      } catch (error) {}
-    };
-    getProduct();
-  }, [id]);
+  const res = useGetProductById(id);
+  if (res.isLoading) {
+    return (
+      <div>
+        <Skeleton />
+      </div>
+    );
+  }
+  const product = res.data;
 
   const onSelectProductSizeChange = (e) => {
+    setFirst(true);
     if (e === 500) {
       setPrice(product.price[1]);
     } else if (e === 1000) {
@@ -88,16 +88,28 @@ const Product = () => {
   };
   const onAddToCartBtnClick = () => {
     const totalItem = price * quanity;
-    dispatch(
-      addProduct({
-        product,
-        price: Math.ceil(price * (1 - product.sale / 100)),
-        type: type,
-        size: size,
-        quanity: quanity,
-        totalItem: totalItem,
-      })
-    );
+    if (!first) {
+      dispatch(
+        addProduct({
+          product,
+          price: Math.ceil(product.price[0] * (1 - product.sale / 100)),
+          type: type,
+          size: size,
+          quanity: quanity,
+          totalItem: totalItem,
+        })
+      );
+    } else
+      dispatch(
+        addProduct({
+          product,
+          price: Math.ceil(price * (1 - product.sale / 100)),
+          type: type,
+          size: size,
+          quanity: quanity,
+          totalItem: totalItem,
+        })
+      );
   };
   const onChangeQuanity = (e) => {
     setQuanity(e);
@@ -128,17 +140,38 @@ const Product = () => {
           <Title>{product.title}</Title>
           <Desc>{product.desc}</Desc>
 
-          <Price>{Math.ceil(price * (1 - product.sale / 100))}$</Price>
-
-          {product.sale > 0 && (
-            <>
-              <PriceFirst>{price}$</PriceFirst>
-              <Sale>
-                Sale {product.sale}% (
-                {price - Math.ceil(price * (1 - product.sale / 100))}$)
-              </Sale>
-            </>
+          {!first ? (
+            <div>
+              <Price>
+                {Math.ceil(product.price[0] * (1 - product.sale / 100))}$
+              </Price>
+              {product.sale > 0 && (
+                <>
+                  <PriceFirst>{product.price[0]}$</PriceFirst>
+                  <Sale>
+                    Sale {product.sale}% (
+                    {product.price[0] -
+                      Math.ceil(product.price[0] * (1 - product.sale / 100))}
+                    $)
+                  </Sale>
+                </>
+              )}
+            </div>
+          ) : (
+            <div>
+              <Price>{Math.ceil(price * (1 - product.sale / 100))}$</Price>
+              {product.sale > 0 && (
+                <>
+                  <PriceFirst>{price}$</PriceFirst>
+                  <Sale>
+                    Sale {product.sale}% (
+                    {price - Math.ceil(price * (1 - product.sale / 100))}$)
+                  </Sale>
+                </>
+              )}
+            </div>
           )}
+
           <FilterContainer>
             <FilterTitle>Size</FilterTitle>
             <Space wrap>
