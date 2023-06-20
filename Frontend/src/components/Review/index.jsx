@@ -13,12 +13,12 @@ const ReviewModal = ({ id, name, handleCancel }) => {
   const nameUser = localStorage.getItem("name");
   const [form] = Form.useForm();
   const [rating, setRate] = useState(0);
-  const { mutate } = useCreateReview();
+  const { mutate } = useCreateReview(handleCancel);
 
   const handleFinsh = async (values) => {
     const { content } = values;
     mutate({ content, rating, id, nameUser });
-    handleCancel();
+
     // window.location.reload(false);
   };
 

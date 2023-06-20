@@ -49,7 +49,7 @@ class MomoController {
         requestBody
       );
       // res.json(data.qrCodeUrl);
-      console.log(data);
+
       res.json(data.payUrl);
     } catch (error) {}
   }

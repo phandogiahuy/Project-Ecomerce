@@ -11,11 +11,12 @@ const postReview = async ({ id, nameUser, rating, content }) => {
   );
   return data;
 };
-const useCreateReview = () => {
+const useCreateReview = (handleCancel) => {
   const queryClient = useQueryClient();
 
   return useMutation(postReview, {
     onSuccess: (data) => {
+      handleCancel();
       queryClient.invalidateQueries([GET_PRODUCT_ID], data._id);
     },
     onError: (e) => {
