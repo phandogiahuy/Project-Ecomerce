@@ -20,9 +20,27 @@ export const useLogin = () => {
         localStorage.setItem("token", data.accessToken);
         localStorage.setItem("email", data.email);
         localStorage.setItem("name", data.name);
-
         queryClient.setQueryData([GET_USER], (oldData) => data);
       }
+    },
+    onError: (e) => {
+      message.error(e.response.data);
+    },
+  });
+};
+
+export const useLoginPageProduct = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  return useMutation(login, {
+    onSuccess: (data) => {
+      if (data.email) {
+        localStorage.setItem("token", data.accessToken);
+        localStorage.setItem("email", data.email);
+        localStorage.setItem("name", data.name);
+        queryClient.setQueryData([GET_USER], (oldData) => data);
+      }
+      navigate(-1);
     },
     onError: (e) => {
       message.error(e.response.data);

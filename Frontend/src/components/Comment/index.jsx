@@ -27,10 +27,12 @@ import CommentList from "./CommentList";
 import CollapsePanel from "antd/es/collapse/CollapsePanel";
 import { useState } from "react";
 import ReviewModal from "../Review";
+import { useNavigate } from "react-router-dom";
 const { Text } = Typography;
 
 const CommentComponent = ({ reviews, id, name }) => {
   // const ratings = reviews.rating;
+  const token = localStorage.getItem("token");
   const rate = [];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -47,10 +49,12 @@ const CommentComponent = ({ reviews, id, name }) => {
 
   // // Calculate the average rating
   const averageRating = sumOfRatings / rate.length;
-
+  const navigate = useNavigate();
   // // Round the average rating to a specific decimal place (e.g., 1 decimal place)
   const totalRating = averageRating.toFixed(1);
-
+  const handleClickNavigate = () => {
+    navigate("/login");
+  };
   return (
     // <Collapse
     //   defaultActiveKey={["1"]}
@@ -74,21 +78,39 @@ const CommentComponent = ({ reviews, id, name }) => {
               </div>
               <div className="ml-[25%] mt-[1%]">
                 <Space wrap>
-                  <Button
-                    style={{
-                      display: "flex",
-                      backgroundColor: "#dcffc6",
-                      letterSpacing: "1px",
-                      fontSize: "30px",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: "200px",
-                    }}
-                    onClick={showModal}
-                  >
-                    Review
-                    <FormOutlined />
-                  </Button>
+                  {token ? (
+                    <Button
+                      style={{
+                        display: "flex",
+                        backgroundColor: "#dcffc6",
+                        letterSpacing: "1px",
+                        fontSize: "30px",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: "200px",
+                      }}
+                      onClick={showModal}
+                    >
+                      Review
+                      <FormOutlined />
+                    </Button>
+                  ) : (
+                    <Button
+                      style={{
+                        display: "flex",
+                        backgroundColor: "#dcffc6",
+                        letterSpacing: "1px",
+                        fontSize: "30px",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: "200px",
+                      }}
+                      onClick={showModal}
+                    >
+                      Sign in to review
+                      <FormOutlined />
+                    </Button>
+                  )}
                 </Space>
               </div>
             </div>
@@ -105,21 +127,40 @@ const CommentComponent = ({ reviews, id, name }) => {
             <p className="">No review</p>
             <div className="ml-[-20%] mt-[1%] p-2">
               <Space wrap>
-                <Button
-                  style={{
-                    display: "flex",
-                    backgroundColor: "#dcffc6",
-                    letterSpacing: "1px",
-                    fontSize: "30px",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "200px",
-                  }}
-                  onClick={showModal}
-                >
-                  Review
-                  <FormOutlined />
-                </Button>
+                {token ? (
+                  <Button
+                    style={{
+                      display: "flex",
+                      backgroundColor: "#dcffc6",
+                      letterSpacing: "1px",
+                      fontSize: "30px",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: "200px",
+                    }}
+                    onClick={handleClickNavigate}
+                  >
+                    Review
+                    <FormOutlined />
+                  </Button>
+                ) : (
+                  <Button
+                    style={{
+                      display: "flex",
+                      backgroundColor: "#dcffc6",
+                      letterSpacing: "1px",
+                      fontSize: "30px",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: "300px",
+                      marginLeft: "-50px",
+                    }}
+                    onClick={handleClickNavigate}
+                  >
+                    Sign in to review
+                    <FormOutlined />
+                  </Button>
+                )}
               </Space>
             </div>
           </div>

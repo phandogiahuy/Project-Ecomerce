@@ -11,8 +11,8 @@ import {
   Select,
   Option,
 } from "./style-productList";
-import Announcement from "../../../components/Annoucement/Index";
-import Navbar from "../../../components/NavBar/Index";
+import Announcement from "../../../components/Annoucement";
+import Navbar from "../../../components/NavBar";
 import PopularProduct from "../../../components/Product/PopularProduct";
 import { FloatButton } from "antd";
 import { UpCircleFilled } from "@ant-design/icons";

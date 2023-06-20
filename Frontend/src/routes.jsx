@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Product from "./pages/Product/ProductById";
 import Checkout from "./pages/Checkout";
 import OrderSuccesful from "./pages/OrderSuccessful";
+import LoginProduct from "./pages/Login/Product";
 
 const route = [
   {
@@ -28,7 +29,7 @@ const route = [
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <LoginProduct />,
   },
   {
     path: "/register",

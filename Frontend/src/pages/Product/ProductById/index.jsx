@@ -43,8 +43,8 @@ import {
   Title,
   Wrapper,
 } from "./style";
-import Navbar from "../../../components/NavBar/Index";
-import Announcement from "../../../components/Annoucement/Index";
+import Navbar from "../../../components/NavBar";
+import Announcement from "../../../components/Annoucement";
 import Newsletter from "../../../components/Footer/Newsletter";
 import Footer from "../../../components/Footer/Footer";
 import CommentComponent from "../../../components/Comment";

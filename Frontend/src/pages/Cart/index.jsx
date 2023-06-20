@@ -57,8 +57,8 @@ import {
   Wrapper,
 } from "./Style-Cart";
 import axios from "axios";
-import Announcement from "../../components/Annoucement/Index";
-import Navbar from "../../components/NavBar/Index";
+import Announcement from "../../components/Annoucement";
+import Navbar from "../../components/NavBar";
 import Newsletter from "../../components/Footer/Newsletter";
 import Footer from "../../components/Footer/Footer";
 import MySteps from "../../components/Steps";

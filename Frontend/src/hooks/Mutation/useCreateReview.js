@@ -13,7 +13,6 @@ const postReview = async ({ id, nameUser, rating, content }) => {
 };
 const useCreateReview = () => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
 
   return useMutation(postReview, {
     onSuccess: (data) => {

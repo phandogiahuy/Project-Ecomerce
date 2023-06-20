@@ -7,7 +7,6 @@ import Register from "../../pages/Register/Register";
 
 import { clearCart } from "../../reduxToolkit/cartRedux";
 
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Center,
@@ -25,31 +24,16 @@ import CartContent from "../Cart";
 import SearchInput from "../Search";
 
 const Navbar = () => {
-  const { products, total } = useSelector((state) => state.cart);
-  const token = localStorage.getItem("token");
-  const email = localStorage.getItem("email");
-  const [uses, setUser] = useState("");
+  const products = useSelector((state) => state.cart.products);
+  const total = useSelector((state) => state.cart.total);
   const user = useGetUser();
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        const res = user;
 
-        if (res.isSuccess) {
-          setUser(res.data.email);
-        }
-      } catch (err) {}
-    };
-    getUser();
-  }, [token]);
-
-  const [top, setTop] = useState(10);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const ClickHandleLogOut = () => {
+  const handleLogOut = () => {
     localStorage.removeItem("token");
     dispatch(clearCart());
+    window.location.reload(false);
   };
 
   return (
@@ -78,8 +62,8 @@ const Navbar = () => {
             </Center>
           </Link>
           <Right>
-            {token ? (
-              <MenuItem onClick={ClickHandleLogOut}>Log out</MenuItem>
+            {user.data ? (
+              <MenuItem onClick={handleLogOut}>Log out</MenuItem>
             ) : (
               <Popover
                 content={<Register />}
@@ -90,8 +74,8 @@ const Navbar = () => {
                 <MenuItem>REGISTER</MenuItem>
               </Popover>
             )}
-            {token ? (
-              <MenuItem>{uses || email}</MenuItem>
+            {user.data ? (
+              <MenuItem>{user.data.email}</MenuItem>
             ) : (
               <Popover
                 content={<Login />}

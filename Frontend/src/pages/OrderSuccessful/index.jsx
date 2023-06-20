@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams, useSearchParams } from "react-router-dom";
-import Announcement from "../../components/Annoucement/Index";
-import Navbar from "../../components/NavBar/Index";
+import Announcement from "../../components/Annoucement";
+import Navbar from "../../components/NavBar";
 import Footer from "../../components/Footer/Footer";
 import MySteps from "../../components/Steps";
 import { Card, Result } from "antd";
@@ -16,7 +16,7 @@ const OrderSuccesful = () => {
         <center>
           <span>
             <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-              <p className="font-bold text-[50px]">
+              <p className="text-[50px] font-bold">
                 <img src="/vite.png" style={{ width: "5%" }} />
                 Aroma Delute
               </p>
@@ -24,7 +24,7 @@ const OrderSuccesful = () => {
           </span>
         </center>
       </div>
-      <div className="p-10 mt-[20px]">
+      <div className="mt-[20px] p-10">
         <MySteps step={2} />
         <div className="flex h-[500px]" style={{ alignItems: "flex-start" }}>
           <Card

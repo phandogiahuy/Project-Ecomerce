@@ -7,9 +7,11 @@ import Product from "./newProduct";
 import { Container, Title } from "./style-popularProduct";
 import { useGetProducts } from "../../hooks/Queries/Product/useGetProducts";
 import { useGetProductByCat } from "../../hooks/Queries/Product/useGetProductByCat";
+import { useQueryClient } from "react-query";
+import { GET_PRODUCT_CAT } from "../../constant/queryKey";
 
 const PopularProduct = ({ cat, sort }) => {
-  const [filterProduct, setFilterProduct] = useState([]);
+  const queryClient = useQueryClient();
 
   const [pagination, setPagination] = useState({
     pageSize: 8,
@@ -18,34 +20,36 @@ const PopularProduct = ({ cat, sort }) => {
 
   const { data, isSuccess, isLoading, isError } = useGetProducts(pagination);
   const getProductByCat = useGetProductByCat(cat);
+  console.log(
+    "🚀 ~ file: PopularProduct.jsx:23 ~ PopularProduct ~ getProductByCat:",
+    getProductByCat
+  );
+
   useEffect(() => {
-    if (getProductByCat.data) {
-      setFilterProduct(getProductByCat.data);
+    if (getProductByCat.data?.length) {
+      if (sort === "newest") {
+        queryClient.setQueryData([GET_PRODUCT_CAT, { cat }], (prev) =>
+          [...prev].sort((a, b) => a.createdAt - b.createdAt)
+        );
+      } else if (sort === "ASC") {
+        queryClient.setQueryData([GET_PRODUCT_CAT, { cat }], (prev) =>
+          [...prev].sort(
+            (a, b) =>
+              Math.ceil(a.price[0] * (1 - a.sale / 100)) -
+              Math.ceil(b.price[0] * (1 - b.sale / 100))
+          )
+        );
+      } else {
+        queryClient.setQueryData([GET_PRODUCT_CAT, { cat }], (prev) =>
+          [...prev].sort(
+            (a, b) =>
+              Math.ceil(b.price[0] * (1 - b.sale / 100)) -
+              Math.ceil(a.price[0] * (1 - a.sale / 100))
+          )
+        );
+      }
     }
-  });
-  useEffect(() => {
-    if (sort === "newest") {
-      setFilterProduct((prev) =>
-        [...prev].sort((a, b) => a.createdAt - b.createdAt)
-      );
-    } else if (sort === "ASC") {
-      setFilterProduct((prev) =>
-        [...prev].sort(
-          (a, b) =>
-            Math.ceil(a.price[0] * (1 - a.sale / 100)) -
-            Math.ceil(b.price[0] * (1 - b.sale / 100))
-        )
-      );
-    } else {
-      setFilterProduct((prev) =>
-        [...prev].sort(
-          (a, b) =>
-            Math.ceil(b.price[0] * (1 - b.sale / 100)) -
-            Math.ceil(a.price[0] * (1 - a.sale / 100))
-        )
-      );
-    }
-  });
+  }, [sort]);
   if (getProductByCat.isLoading) {
     return (
       <div>
@@ -112,8 +116,10 @@ const PopularProduct = ({ cat, sort }) => {
         }}
         style={{ marginTop: 10, marginRight: "20px" }}
       >
-        {cat && filterProduct.length > 0
-          ? filterProduct.map((item) => <Product item={item} key={item._id} />)
+        {cat && getProductByCat.data.length > 0
+          ? getProductByCat.data.map((item) => (
+              <Product item={item} key={item._id} />
+            ))
           : cat
           ? getProductByCat.data.map((item) => (
               <Product item={item} key={item._id} />

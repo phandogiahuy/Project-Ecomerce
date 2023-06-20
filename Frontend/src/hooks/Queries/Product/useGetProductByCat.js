@@ -7,6 +7,7 @@ const getProductByCat = async (cat) => {
   const { data } = await axios.get(
     `http://localhost:3000/api/product?category=${cat}`
   );
+
   return data;
 };
 const useGetProductByCat = (cat) =>

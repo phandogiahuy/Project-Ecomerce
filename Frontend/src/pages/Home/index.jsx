@@ -1,15 +1,13 @@
 import React from "react";
 
-import { Button, ConfigProvider, theme, FloatButton, Divider } from "antd";
-import Announcement from "../../components/Annoucement/Index";
-import Categories from "../../components/Categories/Index";
-import Navbar from "../../components/NavBar/Index";
+import { FloatButton, Divider } from "antd";
+import Announcement from "../../components/Annoucement";
+import Navbar from "../../components/NavBar";
 import ListCoupon from "../../components/Coupon/coupon-list";
 import Newsletter from "../../components/Footer/Newsletter";
 import Footer from "../../components/Footer/Footer";
 import PopularProduct from "../../components/Product/PopularProduct";
 import Slider from "../../components/Slide/index";
-import FlashScreen from "../../components/FlashScreen";
 const Home = () => {
   return (
     <div className="overflow-x-hidden">

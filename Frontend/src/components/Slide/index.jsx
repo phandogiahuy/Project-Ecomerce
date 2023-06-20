@@ -1,17 +1,5 @@
-import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
-
-import React, { useState } from "react";
-
 import { sliderItems } from "../../data";
-import {
-  Container,
-  Desc,
-  ImgContainer,
-  InforContainer,
-  Slide,
-  Title,
-  Wrapper,
-} from "./Style";
+import { Container, Desc, InforContainer, Slide, Title } from "./Style";
 import { Carousel, Image } from "antd";
 import Categories from "../Categories";
 const contentStyle = {
@@ -27,7 +15,7 @@ function Slider() {
       <div className=" w-[50%]">
         <Carousel autoplay effect="fade">
           {sliderItems.map((item) => (
-            <Slide>
+            <Slide key={item.id}>
               <div style={contentStyle} className="flex">
                 <img
                   src={item.img}

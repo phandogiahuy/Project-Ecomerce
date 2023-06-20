@@ -8,5 +8,5 @@ const getUser = async () => {
   const { data } = await axiosInstance.get(`http://localhost:3000/api/user/me`);
   return data;
 };
-const useGetUser = () => useQuery([GET_USER], getUser);
+const useGetUser = () => useQuery([GET_USER], getUser, {});
 export { useGetUser };
