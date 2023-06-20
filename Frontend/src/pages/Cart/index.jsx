@@ -1,28 +1,29 @@
+/* eslint-disable no-nested-ternary */
 import { DeleteOutlined } from "@ant-design/icons";
 import {
-  Affix,
   Button,
   Divider,
-  Form,
   Image,
   Input,
   InputNumber,
-  Space,
   message,
+  Space,
 } from "antd";
-import React, { useEffect, useState } from "react";
-
+import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import Announcement from "../../components/Annoucement";
+import Footer from "../../components/Footer/Footer";
+import Newsletter from "../../components/Footer/Newsletter";
+import MySteps from "../../components/Steps";
+import { useGetDiscountByCode } from "../../hooks/Queries/Discount/useGetDiscounByCode";
 import {
   clearCart,
   removeProduct,
   updateCart,
   updateProduct,
 } from "../../reduxToolkit/cartRedux";
-import StripeCheckout from "react-stripe-checkout";
-import { useGetDiscountByCode } from "../../hooks/Queries/Discount/useGetDiscounByCode";
-import { axiosInstance } from "../../Service-api/requestMethod";
 import {
   Bottom,
   Checkout,
@@ -34,7 +35,6 @@ import {
   Price,
   Product,
   ProductDetail,
-  ProductImage,
   ProductName,
   ProductPrice,
   ProductQuanity,
@@ -56,28 +56,14 @@ import {
   TypeProduct,
   Wrapper,
 } from "./Style-Cart";
-import axios from "axios";
-import Announcement from "../../components/Annoucement";
-import Navbar from "../../components/NavBar";
-import Newsletter from "../../components/Footer/Newsletter";
-import Footer from "../../components/Footer/Footer";
-import MySteps from "../../components/Steps";
-const KEY =
-  "pk_test_51N15FaIul8LwwZP1lfPebnysBeq3X6VbETjXVtMBGDzUxso3Zc8Q5PCigXkhuigDkXgP8zpPOtqcJHE0VDiYplGO00PojfRw3e";
+
 const Cart = () => {
-  const [top, setTop] = useState(10);
   const { products } = useSelector((state) => state.cart);
-  const [stripeToken, setStripeToken] = useState(null);
-  // const { currentUser } = useSelector((state) => state.user);
   const [discount, setDiscount] = useState(0);
   const [discounts, setDiscounts] = useState(0);
   const [limit, setLimit] = useState(0);
-  const navigate = useNavigate();
-  const token = localStorage.getItem("token");
   const resDiscount = useGetDiscountByCode(discount);
-  const onToken = (token) => {
-    setStripeToken(token);
-  };
+
   const handleDiscount = async () => {
     try {
       const res = resDiscount;
@@ -93,22 +79,7 @@ const Cart = () => {
       return message.error("Code Discount is Wrong");
     }
   };
-  // useEffect(() => {
-  //   const makeRequest = async () => {
-  //     try {
-  //       const res = await axios.post("localhost:3000/api/checkout/payment", {
-  //         tokenId: stripeToken.id,
-  //         amount: 500,
-  //       });
-  //       navigate("/success", {
-  //         stripeData: res.data,
-  //         products: products,
-  //       });
-  //       console.log(res);
-  //     } catch {}
-  //   };
-  //   stripeToken && makeRequest();
-  // }, [stripeToken, products.total, navigate]);
+
   const dispatch = useDispatch();
 
   const handleChange = (item, e) => {
@@ -119,14 +90,15 @@ const Cart = () => {
       })
     );
   };
-  const x = [];
-  products.map((i) => {
-    x.push(i.price * i.quanity);
-  });
-  let priceTotal = 0;
-  x.map((i) => {
-    priceTotal += i;
-  });
+  const priceTotal = useMemo(() => {
+    let result = 0;
+    products.forEach((item) => {
+      result += item.price * item.quanity;
+    });
+
+    return result;
+  }, [products.quanity]);
+
   let ship = 0;
   if (priceTotal < 100) {
     ship = 10;
@@ -134,7 +106,7 @@ const Cart = () => {
     ship = 0;
   }
 
-  let freeShip = 100 - priceTotal;
+  const freeShip = 100 - priceTotal;
   const handleClear = () => {
     dispatch(clearCart());
   };
@@ -150,7 +122,7 @@ const Cart = () => {
     priceAllProduct = 0;
     ship = 0;
   }
-  const handleClickCheckout = (e) => {
+  const handleClickCheckout = () => {
     dispatch(
       updateCart({
         priceProduct: priceAllProduct,
@@ -158,7 +130,7 @@ const Cart = () => {
       })
     );
   };
-  const handleClickEmpty = (e) => {
+  const handleClickEmpty = () => {
     return message.error("Your Cart Is Empty");
   };
   return (
@@ -379,31 +351,3 @@ const Cart = () => {
 };
 
 export default Cart;
-{
-  /* <StripeCheckout
-name="AROMA deLUTE"
-image="/logo.jpeg"
-billingAddress
-shippingAddress
-description={`Your total is $${Math.round(priceAllProduct)}`}
-amount={Math.round(priceAllProduct) * 100}
-token={onToken}
-stripeKey={KEY}
->
-<Space wrap>
-  <Button
-    ghost
-    type="primary"
-    style={{
-      backgroundColor: "#d6caa5",
-      width: 349,
-      height: 44,
-      color: "#69410b",
-      fontSize: 20,
-    }}
-  >
-    Check out{" "}
-  </Button>
-</Space>
-</StripeCheckout> */
-}

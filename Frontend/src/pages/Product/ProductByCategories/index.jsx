@@ -1,21 +1,21 @@
+import { UpCircleFilled } from "@ant-design/icons";
+import { FloatButton } from "antd";
 import React, { useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
+import Announcement from "../../../components/Annoucement";
 import Footer from "../../../components/Footer/Footer";
 import Newsletter from "../../../components/Footer/Newsletter";
+import Navbar from "../../../components/NavBar";
+import PopularProduct from "../../../components/Product/PopularProduct";
 import {
   Container,
   Filter,
   FilterContainer,
   FilterText,
-  Select,
   Option,
+  Select,
 } from "./style-productList";
-import Announcement from "../../../components/Annoucement";
-import Navbar from "../../../components/NavBar";
-import PopularProduct from "../../../components/Product/PopularProduct";
-import { FloatButton } from "antd";
-import { UpCircleFilled } from "@ant-design/icons";
 
 const ProductList = () => {
   // const location = useLocation();

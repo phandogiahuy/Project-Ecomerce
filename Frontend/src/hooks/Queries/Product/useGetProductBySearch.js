@@ -2,7 +2,6 @@ import axios from "axios";
 import { useQuery } from "react-query";
 
 import { GET_SEARCH_PRODUCT } from "../../../constant/queryKey";
-import { debounce, throttle } from "lodash";
 
 const searchQuery = async (debouncedQuery) => {
   const { data } = await axios.get(

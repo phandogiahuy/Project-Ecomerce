@@ -1,46 +1,20 @@
-import {
-  Avatar,
-  Form,
-  Button,
-  List,
-  Input,
-  Card,
-  Rate,
-  Typography,
-  Progress,
-  Collapse,
-  Space,
-  Modal,
-} from "antd";
-
-import {
-  UserOutlined,
-  SendOutlined,
-  UserAddOutlined,
-  UsergroupAddOutlined,
-  PlusOutlined,
-  HeartOutlined,
-  ArrowRightOutlined,
-  FormOutlined,
-} from "@ant-design/icons";
-import CommentList from "./CommentList";
-import CollapsePanel from "antd/es/collapse/CollapsePanel";
+/* eslint-disable no-shadow */
+import { FormOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Card, Modal, Rate, Space } from "antd";
 import { useState } from "react";
-import ReviewModal from "../Review";
 import { useNavigate } from "react-router-dom";
-const { Text } = Typography;
+
+import ReviewModal from "../Review";
+import CommentList from "./CommentList";
 
 const CommentComponent = ({ reviews, id, name }) => {
-  // const ratings = reviews.rating;
   const token = localStorage.getItem("token");
   const rate = [];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
   };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
+
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -56,22 +30,12 @@ const CommentComponent = ({ reviews, id, name }) => {
     navigate("/login");
   };
   return (
-    // <Collapse
-    //   defaultActiveKey={["1"]}
-    //   style={{ width: "180%", backgroundColor: "white" }}
-    //   bordered={false}
-    //   expandIcon={({ isActive }) => (
-    //     <PlusOutlined rotate={isActive ? 70 : 0} style={{ fontSize: "30px" }} />
-    //   )}
-    //   expandIconPosition={"end"}
-    // >
-
     <Card
       title={
         <div>
           {totalRating > 0 && (
             <div className="flex ">
-              <h1 className="font-bold">{" " + totalRating}</h1>
+              <h1 className="font-bold">{` ${totalRating}`}</h1>
               <div className="ml-3">
                 <Rate disabled defaultValue={totalRating} allowHalf />
                 <p>{reviews.length} Reviews</p>
@@ -105,7 +69,7 @@ const CommentComponent = ({ reviews, id, name }) => {
                         justifyContent: "center",
                         width: "200px",
                       }}
-                      onClick={showModal}
+                      onClick={handleClickNavigate}
                     >
                       Sign in to review
                       <FormOutlined />
@@ -120,7 +84,9 @@ const CommentComponent = ({ reviews, id, name }) => {
     >
       <div className="mr-5 flex flex-col">
         {reviews.length > 0 ? (
-          reviews.map((review) => <CommentList review={review} />)
+          reviews.map((review) => (
+            <CommentList review={review} key={review._id} />
+          ))
         ) : (
           <div className="ml-[50%]  ">
             <UserOutlined className="text-[49px]" />
@@ -138,7 +104,7 @@ const CommentComponent = ({ reviews, id, name }) => {
                       justifyContent: "center",
                       width: "200px",
                     }}
-                    onClick={handleClickNavigate}
+                    onClick={showModal}
                   >
                     Review
                     <FormOutlined />
@@ -181,8 +147,3 @@ const CommentComponent = ({ reviews, id, name }) => {
 };
 
 export default CommentComponent;
-{
-  /* <div>
-              <Rate disabled defaultValue={reviews.rating} allowHalf />
-            </div> */
-}

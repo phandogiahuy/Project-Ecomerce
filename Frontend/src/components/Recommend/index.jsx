@@ -1,11 +1,9 @@
-import React, { useLayoutEffect, useState } from "react";
+import { Skeleton } from "antd";
+
 import { useGetProductByCat } from "../../hooks/Queries/Product/useGetProductByCat";
-import { Carousel, Skeleton } from "antd";
 import RecommendList from "./RecommendList";
-import { Breadcrumb, Card, Slider } from "antd";
 import { Wrapper } from "./style-recommend";
 
-const { Meta } = Card;
 const RecommendProduct = ({ products }) => {
   const res = useGetProductByCat(products);
   if (res.isLoading) {
@@ -20,7 +18,7 @@ const RecommendProduct = ({ products }) => {
       <h1>Related Products</h1>
       <Wrapper>
         {res.data.slice(0, 5).map((product) => (
-          <RecommendList products={product} />
+          <RecommendList products={product} key={product._id} />
         ))}
       </Wrapper>
     </div>

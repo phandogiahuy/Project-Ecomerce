@@ -1,10 +1,10 @@
-import { DeleteOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Button, Divider, Space } from "antd";
-import Item from "antd/es/list/Item";
-import React from "react";
+import { DeleteOutlined } from "@ant-design/icons";
+import { Button, Space } from "antd";
+import React, { useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { clearCart, removeProduct } from "../../reduxToolkit/cartRedux";
 import { Link } from "react-router-dom";
+
+import { clearCart, removeProduct } from "../../reduxToolkit/cartRedux";
 import {
   Bottom,
   Clear,
@@ -27,14 +27,27 @@ const CartContent = ({ products }) => {
   if (products.length === 0) {
     return <div>No item in your cart</div>;
   }
-  const x = [];
-  products.map((i) => {
-    x.push(i.price * i.quanity);
-  });
-  let priceTotal = 0;
-  x.map((i) => {
-    priceTotal += i;
-  });
+
+  // products.map((i) => {
+  //   x.push(i.price * i.quanity);
+  //   return x;
+  // });
+  // let priceTotal = 0;
+  // x.map((i) => {
+  //   priceTotal += i;
+  //   return x;
+  // });
+  const priceTotal = useMemo(() => {
+    const priceEveryItem = [];
+    products.forEach((item) => {
+      priceEveryItem.push(item.price * item.quanity);
+    });
+    let result = 0;
+    priceEveryItem.forEach((i) => {
+      result += i;
+    });
+    return result;
+  }, [products.quanity]);
   const ClickHandleClearCart = (e) => {
     e.preventDefault();
     dispatch(clearCart());

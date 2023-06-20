@@ -1,7 +1,9 @@
-import { Divider, Rate, Typography } from "antd";
-import React from "react";
-import dayjs from "dayjs";
 import "dayjs/locale/vi";
+
+import { Divider, Rate, Typography } from "antd";
+import dayjs from "dayjs";
+import React from "react";
+
 const { Text } = Typography;
 
 const CommentList = ({ review }) => {

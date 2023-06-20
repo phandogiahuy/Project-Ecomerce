@@ -1,13 +1,12 @@
-import { Badge, Card, Image, Rate } from "antd";
-import React, { useLayoutEffect, useState } from "react";
+import { Badge, Card, Rate } from "antd";
+import React, { useLayoutEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-const { Meta } = Card;
 
 const RecommendList = (products) => {
   const rate = [];
   const url = useLocation();
   products.products.reviews.forEach((review) => rate.push(review.rating));
-  const sumOfRatings = rate.reduce((acc, rate) => acc + rate, 0);
+  const sumOfRatings = rate.reduce((acc, r) => acc + r, 0);
 
   // // Calculate the average rating
   const averageRating = sumOfRatings / rate.length;
@@ -24,7 +23,7 @@ const RecommendList = (products) => {
       >
         {products.products.sale > 0 ? (
           <Badge
-            count={"-" + products.products.sale + "%"}
+            count={`-${products.products.sale}%`}
             style={{
               zIndex: "1",
               marginRight: "100px",
@@ -91,7 +90,7 @@ const RecommendList = (products) => {
             </div>
             <div className="mt-[5%] flex justify-around text-base ">
               <div className="text-lg font-bold">
-                {products.products.price[0] + "$"}
+                {`${products.products.price[0]}$`}
               </div>
               <Rate
                 disabled

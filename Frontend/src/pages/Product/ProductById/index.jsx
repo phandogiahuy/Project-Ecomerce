@@ -7,7 +7,6 @@ import {
   UpCircleFilled,
 } from "@ant-design/icons";
 import {
-  Affix,
   Button,
   Collapse,
   Divider,
@@ -15,20 +14,28 @@ import {
   Image,
   InputNumber,
   Radio,
-  Rate,
   Select,
   Skeleton,
   Space,
 } from "antd";
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-
-import { addProduct } from "../../../reduxToolkit/cartRedux";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { axiosInstance } from "../../../Service-api/requestMethod";
+import { useLocation } from "react-router-dom";
+
+import AboutProduct from "../../../components/AboutProduct";
+import Announcement from "../../../components/Annoucement";
+import CommentComponent from "../../../components/Comment";
+import Footer from "../../../components/Footer/Footer";
+import Newsletter from "../../../components/Footer/Newsletter";
+// import Panel from "antd/es/collapse/Panel";
+import { Instruction } from "../../../components/Instruction";
+import Navbar from "../../../components/NavBar";
+import ProductInfor from "../../../components/ProductFeature";
+import RecommendProduct from "../../../components/Recommend";
+import { useGetProductById } from "../../../hooks/Queries/Product/useGetProductById";
+import { addProduct } from "../../../reduxToolkit/cartRedux";
 import {
   AddContainer,
-  Comment,
   Container,
   Desc,
   FilterContainer,
@@ -43,19 +50,7 @@ import {
   Title,
   Wrapper,
 } from "./style";
-import Navbar from "../../../components/NavBar";
-import Announcement from "../../../components/Annoucement";
-import Newsletter from "../../../components/Footer/Newsletter";
-import Footer from "../../../components/Footer/Footer";
-import CommentComponent from "../../../components/Comment";
-import PopularProduct from "../../../components/Product/PopularProduct";
-import RecommendProduct from "../../../components/Recommend";
-import ProductInfor from "../../../components/ProductFeature";
-// import Panel from "antd/es/collapse/Panel";
-import { Instruction } from "../../../components/Instruction";
-import AboutProduct from "../../../components/AboutProduct";
-import { useGetProductById } from "../../../hooks/Queries/Product/useGetProductById";
-import { QueryClient } from "react-query";
+
 const { Panel } = Collapse;
 const Product = () => {
   const [type, setType] = useState("Bean");
@@ -93,34 +88,29 @@ const Product = () => {
         addProduct({
           product,
           price: Math.ceil(product.price[0] * (1 - product.sale / 100)),
-          type: type,
-          size: size,
-          quanity: quanity,
-          totalItem: totalItem,
+          type,
+          size,
+          quanity,
+          totalItem,
         })
       );
-    } else
+    } else {
       dispatch(
         addProduct({
           product,
           price: Math.ceil(price * (1 - product.sale / 100)),
-          type: type,
-          size: size,
-          quanity: quanity,
-          totalItem: totalItem,
+          type,
+          size,
+          quanity,
+          totalItem,
         })
       );
+    }
   };
   const onChangeQuanity = (e) => {
     setQuanity(e);
   };
-  const items = [
-    {
-      key: "1",
-      label: "This is panel header 1",
-      children: <p>text</p>,
-    },
-  ];
+
   return (
     <Container className="overflow-x-hidden">
       <Announcement />
@@ -297,36 +287,6 @@ const Product = () => {
               </Panel>
             </Collapse>
           </ProductFeature>
-
-          {/* <div className="w-[50%] self-start ">
-            <Collapse
-              defaultActiveKey={["1"]}
-              style={{ width: "180%", backgroundColor: "white" }}
-              bordered={false}
-              expandIcon={({ isActive }) => (
-                <PlusOutlined
-                  rotate={isActive ? 70 : 0}
-                  style={{ fontSize: "30px" }}
-                />
-              )}
-              expandIconPosition={"end"}
-            >
-              <Panel
-                header={
-                  <h1 className="mt-[-3%] text-[35px] font-normal ">
-                    <AuditOutlined /> Instruction
-                  </h1>
-                }
-                key="1"
-              >
-                <Instruction />
-              </Panel>
-            </Collapse>
-            <Divider style={{ width: "180%", backgroundColor: "#e4e4e4" }} />
-          </div> */}
-          {/* <Comment>
-            {product.reviews && <CommentComponent reviews={product.reviews} />}
-          </Comment> */}
         </div>
 
         <div className="flex w-[46%] flex-col items-center">

@@ -1,8 +1,8 @@
 import React from "react";
+
 import Announcement from "../../components/Annoucement";
-import Navbar from "../../components/NavBar";
-import Footer from "../../components/Footer/Footer";
 import CheckoutComponent from "../../components/Checkout";
+import Footer from "../../components/Footer/Footer";
 
 const Checkout = () => {
   return (

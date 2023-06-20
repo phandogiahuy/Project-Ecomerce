@@ -1,8 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import { useMutation } from "react-query";
 import { message } from "antd";
 import axios from "axios";
-import { useLogin } from "./useSetLogin";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 
 const register = async ({ username, email, password }) => {
   const res = await axios.post(`http://localhost:3000/api/auth/register/`, {
@@ -15,7 +14,7 @@ const register = async ({ username, email, password }) => {
 export const useRegister = () => {
   const navigate = useNavigate();
   return useMutation(register, {
-    onSuccess: (data) => {
+    onSuccess: () => {
       message.success("You created successfully");
       navigate("/");
     },

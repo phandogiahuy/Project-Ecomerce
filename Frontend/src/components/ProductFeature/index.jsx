@@ -1,10 +1,12 @@
-import React from "react";
-import { Data, Head, Row, Table } from "./style";
 import {
   CoffeeOutlined,
   DeploymentUnitOutlined,
   RadarChartOutlined,
 } from "@ant-design/icons";
+import React from "react";
+
+import { Data, Head, Row, Table } from "./style";
+
 const ProductInfor = ({ place, process, flavor }) => {
   return (
     <Table className=" border-collapse">

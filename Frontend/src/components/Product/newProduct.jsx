@@ -2,12 +2,13 @@ import { ShoppingOutlined } from "@ant-design/icons";
 import { Badge, Button, Card, Col, Rate, Space } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
+
 import { Image, Infor, Name, PriceFirst, Title } from "./style-newProduct";
 
 const Product = ({ item }) => {
   const rate = [];
   item.reviews.forEach((review) => rate.push(review.rating));
-  const sumOfRatings = rate.reduce((acc, rate) => acc + rate, 0);
+  const sumOfRatings = rate.reduce((acc, r) => acc + r, 0);
 
   // // Calculate the average rating
   const averageRating = sumOfRatings / rate.length;
@@ -24,7 +25,7 @@ const Product = ({ item }) => {
     >
       {item.sale > 0 ? (
         <Badge
-          count={"-" + item.sale + "%"}
+          count={`-${item.sale}%`}
           style={{
             zIndex: "1",
             marginRight: "100px",

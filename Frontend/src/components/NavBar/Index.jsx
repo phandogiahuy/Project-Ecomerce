@@ -1,13 +1,14 @@
 import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Badge, Popover, Affix } from "antd";
+import { Badge, Popover } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useGetUser } from "../../hooks/Queries/User/useGetUser";
 import Login from "../../pages/Login";
 import Register from "../../pages/Register/Register";
-
 import { clearCart } from "../../reduxToolkit/cartRedux";
-
-import { useDispatch, useSelector } from "react-redux";
+import CartContent from "../Cart";
+import SearchInput from "../Search";
 import {
   Center,
   Container,
@@ -19,9 +20,6 @@ import {
   SearchComponent,
   Wrapper,
 } from "./style-nav";
-import { useGetUser } from "../../hooks/Queries/User/useGetUser";
-import CartContent from "../Cart";
-import SearchInput from "../Search";
 
 const Navbar = () => {
   const products = useSelector((state) => state.cart.products);
@@ -37,70 +35,68 @@ const Navbar = () => {
   };
 
   return (
-    <Affix offsetTop={30}>
-      <Container>
-        <Wrapper>
-          <Left>
+    <Container>
+      <Wrapper>
+        <Left>
+          <Popover
+            content={<SearchInput />}
+            title="Search input"
+            trigger="click"
+            placement="bottomRight"
+          >
+            <SearchComponent>
+              Search <SearchOutlined />
+            </SearchComponent>
+          </Popover>
+        </Left>
+        <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+          <Center>
+            <Logo>
+              {" "}
+              <LogoImage src="/vite.png" />
+              AROMA deLute.
+            </Logo>
+          </Center>
+        </Link>
+        <Right>
+          {user.data ? (
+            <MenuItem onClick={handleLogOut}>Log out</MenuItem>
+          ) : (
             <Popover
-              content={<SearchInput />}
-              title="Search input"
+              content={<Register />}
+              title="Welcome to Coffee World!"
               trigger="click"
               placement="bottomRight"
             >
-              <SearchComponent>
-                Search <SearchOutlined />
-              </SearchComponent>
+              <MenuItem>REGISTER</MenuItem>
             </Popover>
-          </Left>
-          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-            <Center>
-              <Logo>
-                {" "}
-                <LogoImage src="/vite.png" />
-                AROMA deLute.
-              </Logo>
-            </Center>
-          </Link>
-          <Right>
-            {user.data ? (
-              <MenuItem onClick={handleLogOut}>Log out</MenuItem>
-            ) : (
-              <Popover
-                content={<Register />}
-                title="Welcome to Coffee World!"
-                trigger="click"
-                placement="bottomRight"
-              >
-                <MenuItem>REGISTER</MenuItem>
-              </Popover>
-            )}
-            {user.data ? (
-              <MenuItem>{user.data.email}</MenuItem>
-            ) : (
-              <Popover
-                content={<Login />}
-                title="Welcome to Coffee World!"
-                trigger="click"
-              >
-                <MenuItem>SIGN IN</MenuItem>
-              </Popover>
-            )}
-            <MenuItem>
-              <Popover
-                placement="bottomRight"
-                title="My cart"
-                trigger="click"
-                content={<CartContent products={products} total={total} />}
-              >
-                <Badge count={products.length}>
-                  <ShoppingCartOutlined style={{ fontSize: "30px" }} />
-                </Badge>
-              </Popover>
-            </MenuItem>
-          </Right>
-        </Wrapper>
-      </Container>
-    </Affix>
+          )}
+          {user.data ? (
+            <MenuItem>{user.data.email}</MenuItem>
+          ) : (
+            <Popover
+              content={<Login />}
+              title="Welcome to Coffee World!"
+              trigger="click"
+            >
+              <MenuItem>SIGN IN</MenuItem>
+            </Popover>
+          )}
+          <MenuItem>
+            <Popover
+              placement="bottomRight"
+              title="My cart"
+              trigger="click"
+              content={<CartContent products={products} total={total} />}
+            >
+              <Badge count={products.length}>
+                <ShoppingCartOutlined style={{ fontSize: "30px" }} />
+              </Badge>
+            </Popover>
+          </MenuItem>
+        </Right>
+      </Wrapper>
+    </Container>
   );
 };
 

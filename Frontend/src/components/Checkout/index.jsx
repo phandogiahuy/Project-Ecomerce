@@ -1,13 +1,13 @@
-import { Form, Input, Button, Space, List, Card, Divider, Radio } from "antd";
+import { Button, Card, Divider, Form, Input, Radio, Space } from "antd";
 import React, { useState } from "react";
-import { InforProduct, InforUser } from "./style";
 import { useDispatch, useSelector } from "react-redux";
-import ProductDetailCheckOut from "../ProductDetail";
-import MySteps from "../Steps";
-import { useGetUser } from "../../hooks/Queries/User/useGetUser";
-import { Link } from "react-router-dom";
+
+import { useMoMo } from "../../hooks/Mutation/Momo/useMomo";
 import { useSetOrder } from "../../hooks/Mutation/Order/useSetOrder";
 import { showOrder } from "../../reduxToolkit/orderRedux";
+import ProductDetailCheckOut from "../ProductDetail";
+import MySteps from "../Steps";
+import { InforProduct, InforUser } from "./style";
 
 const CheckoutComponent = () => {
   const [form] = Form.useForm();
@@ -16,31 +16,58 @@ const CheckoutComponent = () => {
   const [payment, setPayment] = useState();
   const { products, pricetotal, shipping } = useSelector((state) => state.cart);
   const { mutate } = useSetOrder();
+  const momo = useMoMo();
 
   const handleFinsh = async (values) => {
     const { name, phone, mail, address } = values;
-    dispatch(
-      showOrder({
+
+    if (payment === "COD") {
+      dispatch(
+        showOrder({
+          name,
+          phone,
+          mail,
+          address,
+          products,
+          total: pricetotal,
+          payment,
+        })
+      );
+      mutate({
         name,
         phone,
         mail,
         address,
         products,
+        shipping,
         total: pricetotal,
         payment,
-      })
-    );
-    mutate({
-      name,
-      phone,
-      mail,
-      address,
-      products,
-      shipping,
-      total: pricetotal,
-      payment,
-    });
+      });
+    } else {
+      dispatch(
+        showOrder({
+          name,
+          phone,
+          mail,
+          address,
+          products,
+          total: pricetotal,
+          payment,
+        })
+      );
+      momo.mutate({
+        name,
+        phone,
+        mail,
+        address,
+        products,
+        shipping,
+        total: pricetotal,
+        payment,
+      });
+    }
   };
+
   return (
     <div className=" p-5">
       <h1 className="p-6">Checkout Product</h1>
@@ -119,7 +146,7 @@ const CheckoutComponent = () => {
             className="h-[60vh] overflow-scroll overflow-x-hidden "
           >
             {products.map((product) => (
-              <ProductDetailCheckOut product={product} />
+              <ProductDetailCheckOut product={product} key={product._id} />
             ))}
           </Card>
           <Divider />

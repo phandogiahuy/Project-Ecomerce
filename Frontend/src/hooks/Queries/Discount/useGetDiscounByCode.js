@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query";
+
 import { GET_DISCOUNT_CODE } from "../../../constant/queryKey";
 
 const getDiscount = async (code) => {

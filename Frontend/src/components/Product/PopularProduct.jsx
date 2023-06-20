@@ -1,14 +1,13 @@
+/* eslint-disable no-nested-ternary */
 import { Pagination, Row, Skeleton } from "antd";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-
-import Product from "./newProduct";
-
-import { Container, Title } from "./style-popularProduct";
-import { useGetProducts } from "../../hooks/Queries/Product/useGetProducts";
-import { useGetProductByCat } from "../../hooks/Queries/Product/useGetProductByCat";
 import { useQueryClient } from "react-query";
+
 import { GET_PRODUCT_CAT } from "../../constant/queryKey";
+import { useGetProductByCat } from "../../hooks/Queries/Product/useGetProductByCat";
+import { useGetProducts } from "../../hooks/Queries/Product/useGetProducts";
+import Product from "./newProduct";
+import { Container } from "./style-popularProduct";
 
 const PopularProduct = ({ cat, sort }) => {
   const queryClient = useQueryClient();
@@ -18,12 +17,8 @@ const PopularProduct = ({ cat, sort }) => {
     page: 1,
   });
 
-  const { data, isSuccess, isLoading, isError } = useGetProducts(pagination);
+  const { data, isSuccess, isLoading } = useGetProducts(pagination);
   const getProductByCat = useGetProductByCat(cat);
-  console.log(
-    "🚀 ~ file: PopularProduct.jsx:23 ~ PopularProduct ~ getProductByCat:",
-    getProductByCat
-  );
 
   useEffect(() => {
     if (getProductByCat.data?.length) {
@@ -58,13 +53,6 @@ const PopularProduct = ({ cat, sort }) => {
     );
   }
 
-  // useEffect(() => {
-  //   if (getProductByCat.isSuccess) {
-  //     // setFilterProduct(getProductByCat.data);
-  //     console.log(getProductByCat.data);
-  //   }
-  // }, [cat, getProductByCat.data]);
-
   if (isLoading) {
     return (
       <div>
@@ -72,28 +60,6 @@ const PopularProduct = ({ cat, sort }) => {
       </div>
     );
   }
-
-  // if (getProductByCat.) {
-  //   if (getProductByCat.isLoading) {
-  //     return (
-  //       <div>
-  //         <Skeleton />
-  //       </div>
-  //     );
-  //   }
-  //   dataProductByCat = getProductByCat.data;
-  //   console.log(dataProductByCat);
-  // } else {
-  //   if (isLoading) {
-  //     return (
-  //       <div>
-  //         <Skeleton />
-  //       </div>
-  //     );
-  //   }
-  //   dataProductAll = data;
-  //   console.log(dataProductAll);
-  // }
 
   return (
     <Container>

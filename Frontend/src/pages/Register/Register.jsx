@@ -1,7 +1,5 @@
 import { Button, Form, Input, message } from "antd";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useMutation } from "react-query";
+
 import { useRegister } from "../../hooks/Mutation/useSetRegister";
 import { Container, Title, Wrapper } from "./Style-Register";
 
@@ -37,21 +35,17 @@ const formItemLayout = {
 };
 
 const Register = () => {
-  const [messageApi, contextHolder] = message.useMessage();
-
-  const navigate = useNavigate();
   const [form] = Form.useForm();
 
-  const { mutate, data } = useRegister();
+  const { mutate } = useRegister();
   const onFinishRegister = async (values) => {
     const { username, email, password } = values;
     mutate({ username, email, password });
   };
   const validateEmail = (_, value) => {
-    if (!value || /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
-      return Promise.resolve();
+    if (value || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+      message.error("Invalid email format");
     }
-    return Promise.reject("Invalid email format");
   };
   return (
     <Container>

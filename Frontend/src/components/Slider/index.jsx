@@ -1,7 +1,9 @@
+import { Carousel } from "antd";
+
 import { sliderItems } from "../../data";
-import { Container, Desc, InforContainer, Slide, Title } from "./Style";
-import { Carousel, Image } from "antd";
 import Categories from "../Categories";
+import { Container, Desc, InforContainer, Slide, Title } from "./Style";
+
 const contentStyle = {
   margin: 0,
   height: "540px",
@@ -9,7 +11,7 @@ const contentStyle = {
   textAlign: "center",
   background: "#efe7e1",
 };
-function Slider() {
+const Slider = () => {
   return (
     <Container>
       <div className=" w-[50%]">
@@ -34,6 +36,5 @@ function Slider() {
       <Categories />
     </Container>
   );
-}
-
+};
 export default Slider;

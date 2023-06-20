@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useQuery } from "react-query";
 
 import { GET_PRODUCT_ID } from "../../../constant/queryKey";

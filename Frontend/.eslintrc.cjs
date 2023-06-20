@@ -23,9 +23,17 @@ module.exports = {
     "import",
     "prettier",
     "simple-import-sort",
+    "unused-imports",
   ],
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
   rules: {
     "simple-import-sort/imports": 2,
+    "no-param-reassign": 0,
+    "no-underscore-dangle": 0,
     "no-restricted-imports": [
       "error",
       {
@@ -37,14 +45,14 @@ module.exports = {
         ],
       },
     ],
-    "no-restricted-syntax": [
-      "warn",
-      {
-        selector:
-          "CallExpression[callee.object.name='console'][callee.property.name=/^(debug|log|time|timeEnd|trace)$/]",
-        message: "Unexpected property on console object was called",
-      },
-    ],
+    // "no-restricted-syntax": [
+    //   "warn",
+    //   {
+    //     selector:
+    //       "CallExpression[callee.object.name='console'][callee.property.name=/^(debug|log|time|timeEnd|trace)$/]",
+    //     message: "Unexpected property on console object was called",
+    //   },
+    // ],
     "object-curly-spacing": ["error", "always"],
     "no-multi-spaces": ["error"],
     "arrow-body-style": 0,
@@ -130,13 +138,14 @@ module.exports = {
     "no-plusplus": "off",
     "no-await-in-loop": "off",
     "prettier/prettier": "off",
-    "no-unused-vars": "warn",
+    "no-unused-vars": 2,
     "react/react-in-jsx-scope": 0,
     "import/extensions": 0,
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": 0,
     "import/prefer-default-export": 0,
     "react/prop-types": 0,
-    "no-restricted-syntax": "disabled",
+    "unused-imports/no-unused-imports": "error",
+    // "no-restricted-syntax": "disabled",
   },
 };

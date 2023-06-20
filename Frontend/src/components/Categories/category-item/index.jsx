@@ -1,8 +1,9 @@
-import { Button, Col, Space } from "antd";
+import { ArrowRightOutlined } from "@ant-design/icons";
+import { Button, Space } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
+
 import { Container, Image, Infor, Title } from "./style-categoryItem";
-import { ArrowRightOutlined } from "@ant-design/icons";
 
 const CategoriesItem = ({ item }) => {
   return (

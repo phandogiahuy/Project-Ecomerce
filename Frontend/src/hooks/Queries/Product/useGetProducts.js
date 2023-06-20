@@ -10,7 +10,6 @@ const getProducts = async ({ pageSize, page }) => {
       page,
     },
   });
-  console.log("🚀 ~ file: useGetProducts.js:9 ~ getProducts ~ data:", data);
   return data;
 };
 const useGetProducts = ({ pageSize, page }) =>

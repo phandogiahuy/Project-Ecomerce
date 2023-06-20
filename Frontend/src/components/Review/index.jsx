@@ -1,17 +1,14 @@
-import { Button, Divider, Form, Input, Rate, Skeleton } from "antd";
-import React, { useState } from "react";
-import { useCreateReview } from "../../hooks/Mutation/useCreateReview";
-import { useGetUser } from "../../hooks/Queries/User/useGetUser";
 import { PlusOutlined } from "@ant-design/icons";
-import { QueryClient, useQueryClient } from "react-query";
-import { GET_PRODUCT_ID } from "../../constant/queryKey";
+import { Button, Divider, Form, Input, Rate } from "antd";
+import React, { useState } from "react";
+
+import { useCreateReview } from "../../hooks/Mutation/useCreateReview";
 
 const ReviewModal = ({ id, name, handleCancel }) => {
   // const user = useGetUser();
   // if (user.isLoading) {
   //   return <Skeleton />;
   // }
-  const query = useQueryClient();
 
   const nameUser = localStorage.getItem("name");
   const [form] = Form.useForm();

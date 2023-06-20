@@ -1,14 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
-import Login from "./pages/Login";
-import Register from "./pages/Register/Register";
-import ProductList from "./pages/Product/ProductByCategories";
-import ErrorPage from "./pages/Error/defaut-error-page.jsx";
+
 import Cart from "./pages/Cart";
-import Home from "./pages/Home";
-import Product from "./pages/Product/ProductById";
 import Checkout from "./pages/Checkout";
-import OrderSuccesful from "./pages/OrderSuccessful";
+import ErrorPage from "./pages/Error/defaut-error-page.jsx";
+import Home from "./pages/Home";
 import LoginProduct from "./pages/Login/Product";
+import OrderSuccesful from "./pages/OrderSuccessful";
+import ProductList from "./pages/Product/ProductByCategories";
+import Product from "./pages/Product/ProductById";
+import Register from "./pages/Register/Register";
 
 const route = [
   {

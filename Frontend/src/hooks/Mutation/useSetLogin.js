@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import { axiosInstance } from "../../Service-api/requestMethod";
-import { useMutation, useQueryClient } from "react-query";
 import { message } from "antd";
-import { GET_USER } from "../../constant/queryKey";
+import { useMutation, useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
+
+import { GET_PRODUCT_ID, GET_USER } from "../../constant/queryKey";
+import { axiosInstance } from "../../Service-api/requestMethod";
 
 const login = async ({ email, password }) => {
   const res = await axiosInstance.post("/auth/login", {
@@ -12,7 +13,6 @@ const login = async ({ email, password }) => {
   return res.data;
 };
 export const useLogin = () => {
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
   return useMutation(login, {
     onSuccess: (data) => {
@@ -20,7 +20,8 @@ export const useLogin = () => {
         localStorage.setItem("token", data.accessToken);
         localStorage.setItem("email", data.email);
         localStorage.setItem("name", data.name);
-        queryClient.setQueryData([GET_USER], (oldData) => data);
+        queryClient.setQueryData([GET_USER], () => data);
+        queryClient.invalidateQueries([GET_PRODUCT_ID]);
       }
     },
     onError: (e) => {
@@ -38,7 +39,7 @@ export const useLoginPageProduct = () => {
         localStorage.setItem("token", data.accessToken);
         localStorage.setItem("email", data.email);
         localStorage.setItem("name", data.name);
-        queryClient.setQueryData([GET_USER], (oldData) => data);
+        queryClient.setQueryData([GET_USER], () => data);
       }
       navigate(-1);
     },

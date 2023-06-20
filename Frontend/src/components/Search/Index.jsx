@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+/* eslint-disable no-nested-ternary */
 import { Badge, Empty, Input, Spin } from "antd";
-
 import { debounce } from "lodash";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ContainerSearch, InforSearch } from "./style-search";
+
 import { useGetProductBySearch } from "../../hooks/Queries/Product/useGetProductBySearch";
+import { ContainerSearch, InforSearch } from "./style-search";
 
 const SearchInput = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -14,7 +15,6 @@ const SearchInput = () => {
     setSearchQuery(value);
   }, 50);
   const { data, isLoading, isError } = useGetProductBySearch(searchQuery);
-  console.log(data);
   const onChangeHandleSearch = (e) => {
     debouncedSetQuery(e.target.value);
     setType(true);
@@ -55,7 +55,7 @@ const SearchInput = () => {
           >
             {data.map((result) => (
               <Badge
-                count={"-" + result.sale + "%"}
+                count={`-${result.sale}%`}
                 style={{
                   zIndex: "1",
                   marginRight: "250px",
@@ -64,6 +64,7 @@ const SearchInput = () => {
                   color: "yellow",
                 }}
                 color="black"
+                key={result._id}
               >
                 <li key={result._id}>
                   <Link

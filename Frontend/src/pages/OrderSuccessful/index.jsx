@@ -1,12 +1,10 @@
+import { Card, Result } from "antd";
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link, useParams, useSearchParams } from "react-router-dom";
-import Announcement from "../../components/Annoucement";
-import Navbar from "../../components/NavBar";
+import { Link } from "react-router-dom";
+
 import Footer from "../../components/Footer/Footer";
 import MySteps from "../../components/Steps";
-import { Card, Result } from "antd";
-import { DropboxOutlined, ShopTwoTone } from "@ant-design/icons";
 
 const OrderSuccesful = () => {
   const { order } = useSelector((state) => state.order);

@@ -1,11 +1,11 @@
-import { Button, Row, Space } from "antd";
+import { ArrowRightOutlined } from "@ant-design/icons";
+import { Button, Space } from "antd";
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { categories } from "../../data";
 import CategoriesItem from "./category-item";
-import { Container, ContainerCategories, Title } from "./style-category";
-import { Link } from "react-router-dom";
-import { ArrowRightOutlined } from "@ant-design/icons";
+import { ContainerCategories } from "./style-category";
 
 const Categories = () => {
   const cat = "phin";

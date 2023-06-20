@@ -1,13 +1,15 @@
+
+import { Divider,FloatButton } from "antd";
 import React from "react";
 
-import { FloatButton, Divider } from "antd";
 import Announcement from "../../components/Annoucement";
-import Navbar from "../../components/NavBar";
 import ListCoupon from "../../components/Coupon/coupon-list";
-import Newsletter from "../../components/Footer/Newsletter";
 import Footer from "../../components/Footer/Footer";
+import Newsletter from "../../components/Footer/Newsletter";
+import Navbar from "../../components/NavBar";
 import PopularProduct from "../../components/Product/PopularProduct";
-import Slider from "../../components/Slide/index";
+import Slider from "../../components/Slider";
+
 const Home = () => {
   return (
     <div className="overflow-x-hidden">
