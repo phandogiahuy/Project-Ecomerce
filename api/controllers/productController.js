@@ -47,19 +47,53 @@ class ProductController {
   //GET ALL PRODUCTS
   async showAllProduct(req, res) {
     const qNew = req.query.new;
-    const qCategory = req.query.category;
+    const { category, sort } = req.query;
     const qtitle = req.query.title;
     const re = new RegExp(qtitle, "i");
     try {
       let products;
+
       if (qNew) {
         products = await Product.find().sort({ createdAt: -1 }).limit(1);
-      } else if (qCategory) {
-        products = await Product.find({
-          categories: {
-            $in: [qCategory],
-          },
-        }).populate("reviews");
+      } else if (category) {
+        if (["ASC", "DESC"].includes(sort.toUpperCase())) {
+          products = await Product.aggregate([
+            {
+              $addFields: {
+                currentPrice: {
+                  $multiply: [
+                    {
+                      $first: "$price",
+                    },
+                    {
+                      $subtract: [
+                        1,
+                        {
+                          $divide: ["$sale", 100],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              },
+            },
+            {
+              $sort: {
+                currentPrice: sort.toUpperCase() === "ASC" ? 1 : -1,
+              },
+            },
+            {
+              $limit: 8,
+            },
+          ]);
+        } else {
+          products = await Product.find({
+            categories: category,
+          })
+            .populate("reviews")
+            .limit(8)
+            .sort({ createdAt: -1 });
+        }
       } else if (qtitle) {
         products = await Product.find({ title: { $in: re } }).limit(4);
       } else if (req.query.pageSize) {

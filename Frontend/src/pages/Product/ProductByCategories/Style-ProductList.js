@@ -14,6 +14,7 @@ export const Title = styled.h1`
 export const Filter = styled.div``;
 export const FilterText = styled.span`
   font-weight: 700;
+  margin-right: 10px;
 `;
 export const Select = styled.select`
   margin-left: 10px;

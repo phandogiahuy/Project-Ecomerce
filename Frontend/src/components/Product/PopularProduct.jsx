@@ -1,16 +1,14 @@
 /* eslint-disable no-nested-ternary */
 import { Pagination, Row, Skeleton } from "antd";
-import React, { useEffect, useState } from "react";
-import { useQueryClient } from "react-query";
+import React, { useState } from "react";
 
-import { GET_PRODUCT_CAT } from "../../constant/queryKey";
 import { useGetProductByCat } from "../../hooks/Queries/Product/useGetProductByCat";
 import { useGetProducts } from "../../hooks/Queries/Product/useGetProducts";
 import Product from "./newProduct";
 import { Container } from "./style-popularProduct";
 
 const PopularProduct = ({ cat, sort }) => {
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
   const [pagination, setPagination] = useState({
     pageSize: 8,
@@ -18,33 +16,8 @@ const PopularProduct = ({ cat, sort }) => {
   });
 
   const { data, isSuccess, isLoading } = useGetProducts(pagination);
-  const getProductByCat = useGetProductByCat(cat);
+  const getProductByCat = useGetProductByCat(cat, sort);
 
-  useEffect(() => {
-    if (getProductByCat.data?.length) {
-      if (sort === "newest") {
-        queryClient.setQueryData([GET_PRODUCT_CAT, { cat }], (prev) =>
-          [...prev].sort((a, b) => a.createdAt - b.createdAt)
-        );
-      } else if (sort === "ASC") {
-        queryClient.setQueryData([GET_PRODUCT_CAT, { cat }], (prev) =>
-          [...prev].sort(
-            (a, b) =>
-              Math.ceil(a.price[0] * (1 - a.sale / 100)) -
-              Math.ceil(b.price[0] * (1 - b.sale / 100))
-          )
-        );
-      } else {
-        queryClient.setQueryData([GET_PRODUCT_CAT, { cat }], (prev) =>
-          [...prev].sort(
-            (a, b) =>
-              Math.ceil(b.price[0] * (1 - b.sale / 100)) -
-              Math.ceil(a.price[0] * (1 - a.sale / 100))
-          )
-        );
-      }
-    }
-  }, [sort]);
   if (getProductByCat.isLoading) {
     return (
       <div>
@@ -52,7 +25,6 @@ const PopularProduct = ({ cat, sort }) => {
       </div>
     );
   }
-
   if (isLoading) {
     return (
       <div>

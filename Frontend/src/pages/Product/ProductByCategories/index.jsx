@@ -1,5 +1,5 @@
 import { UpCircleFilled } from "@ant-design/icons";
-import { FloatButton } from "antd";
+import { FloatButton, Select } from "antd";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -13,8 +13,6 @@ import {
   Filter,
   FilterContainer,
   FilterText,
-  Option,
-  Select,
 } from "./style-productList";
 
 const ProductList = () => {
@@ -22,8 +20,8 @@ const ProductList = () => {
   // const cat = location.pathname.split("/")[2];
   const { cat } = useParams();
   const [sort, setSort] = useState("newest");
-  const handleSort = (e) => {
-    setSort(e.target.value);
+  const handleSort = (value) => {
+    setSort(value);
   };
 
   return (
@@ -33,11 +31,32 @@ const ProductList = () => {
       <FilterContainer>
         <Filter>
           <FilterText>Sort</FilterText>
-          <Select name="price" onChange={handleSort}>
+          {/* <Select name="price" onChange={handleSort}>
             <Option value="newest">Newest</Option>
             <Option value="ASC">Price (ASC)</Option>
             <Option value="DESC">Price (DESC)</Option>
-          </Select>
+          </Select> */}
+          <Select
+            defaultValue="Newest"
+            style={{
+              width: 120,
+            }}
+            onChange={handleSort}
+            options={[
+              {
+                value: "newest",
+                label: "Newest",
+              },
+              {
+                value: "ASC",
+                label: "Price (ASC)",
+              },
+              {
+                value: "DESC",
+                label: "Price (DESC)",
+              },
+            ]}
+          />
         </Filter>
       </FilterContainer>
       <PopularProduct cat={cat} sort={sort} />
