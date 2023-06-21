@@ -13,6 +13,7 @@ const RecommendProduct = ({ products }) => {
       </div>
     );
   }
+
   return (
     <div style={{ position: "relative" }}>
       <h1>Related Products</h1>

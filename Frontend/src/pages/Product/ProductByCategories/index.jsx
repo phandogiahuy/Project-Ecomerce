@@ -62,6 +62,7 @@ const ProductList = () => {
       <PopularProduct cat={cat} sort={sort} />
       <Newsletter />
       <Footer />
+
       <FloatButton.BackTop icon={<UpCircleFilled />} />
     </Container>
   );

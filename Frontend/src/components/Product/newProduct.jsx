@@ -3,7 +3,14 @@ import { Badge, Button, Card, Col, Rate, Space } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Image, Infor, Name, PriceFirst, Title } from "./style-newProduct";
+import {
+  Image,
+  Infor,
+  InforButton,
+  Name,
+  PriceFirst,
+  Title,
+} from "./style-newProduct";
 
 const Product = ({ item }) => {
   const rate = [];
@@ -52,9 +59,52 @@ const Product = ({ item }) => {
                   ({item.price[0]}$)
                 </span>
               </PriceFirst>
-              <Link to={`/product/${item._id}`}>
-                <Infor>
-                  <Space wrap>
+
+              <Infor>
+                <Space wrap>
+                  <Link to={`/product/${item._id}`}>
+                    <InforButton>
+                      <Button
+                        className="buttonBuy"
+                        ghost
+                        type="primary"
+                        icon={<ShoppingOutlined />}
+                        style={{
+                          fontSize: "15px",
+                          cursor: "pointer",
+                          display: "flex",
+                          alignItems: "center",
+                          color: "#1C2F7F",
+                          border: "#38498f solid 2px",
+                          fontFamily: "g Guarantee', sans-serif",
+                        }}
+                      >
+                        ORDER NOW
+                      </Button>
+                    </InforButton>
+                  </Link>
+                </Space>
+              </Infor>
+            </Title>
+          </Card>
+        </Badge>
+      ) : (
+        <Card style={{ width: 400, border: "none" }}>
+          <Link to={`/product/${item._id}`}>
+            <Image src={item.img} />
+          </Link>
+          <Title>
+            <div>
+              <Rate disabled value={totalRating} allowHalf />(
+              {item.reviews.length} reviews)
+            </div>
+            <Name>{item.title}</Name>
+            <PriceFirst>{item.price[0]}$</PriceFirst>
+
+            <Infor>
+              <Space wrap>
+                <Link to={`/product/${item._id}`}>
+                  <InforButton>
                     <Button
                       className="buttonBuy"
                       ghost
@@ -72,47 +122,10 @@ const Product = ({ item }) => {
                     >
                       ORDER NOW
                     </Button>
-                  </Space>
-                </Infor>
-              </Link>
-            </Title>
-          </Card>
-        </Badge>
-      ) : (
-        <Card style={{ width: 400, border: "none" }}>
-          <Link to={`/product/${item._id}`}>
-            <Image src={item.img} />
-          </Link>
-          <Title>
-            <div>
-              <Rate disabled value={totalRating} allowHalf />(
-              {item.reviews.length} reviews)
-            </div>
-            <Name>{item.title}</Name>
-            <PriceFirst>{item.price[0]}$</PriceFirst>
-            <Link to={`/product/${item._id}`}>
-              <Infor>
-                <Space wrap>
-                  <Button
-                    className="buttonBuy"
-                    ghost
-                    type="primary"
-                    icon={<ShoppingOutlined />}
-                    style={{
-                      fontSize: "15px",
-                      cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
-                      color: "#1C2F7F",
-                      border: "#38498f solid 2px",
-                      fontFamily: "g Guarantee', sans-serif",
-                    }}
-                  >
-                    ORDER NOW
-                  </Button>
-                </Space>
-              </Infor>
-            </Link>
+                  </InforButton>
+                </Link>
+              </Space>
+            </Infor>
           </Title>
         </Card>
       )}

@@ -2,11 +2,13 @@ import {
   AuditOutlined,
   BulbOutlined,
   HeartOutlined,
+  HomeOutlined,
   OneToOneOutlined,
   PlusOutlined,
   UpCircleFilled,
 } from "@ant-design/icons";
 import {
+  Breadcrumb,
   Button,
   Collapse,
   Divider,
@@ -20,7 +22,7 @@ import {
 } from "antd";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import AboutProduct from "../../../components/AboutProduct";
 import Announcement from "../../../components/Annoucement";
@@ -115,6 +117,22 @@ const Product = () => {
     <Container className="overflow-x-hidden">
       <Announcement />
       <Navbar />
+      <Breadcrumb
+        items={[
+          {
+            title: (
+              <Link to="/">
+                <HomeOutlined style={{ fontSize: "25px" }} />
+                Home
+              </Link>
+            ),
+          },
+          {
+            title: <p>Product</p>,
+          },
+        ]}
+        className="ml-4 text-[30px]"
+      />
       <Wrapper>
         <ImgContainer>
           <Image

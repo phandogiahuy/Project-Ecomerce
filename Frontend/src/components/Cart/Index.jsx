@@ -47,7 +47,7 @@ const CartContent = ({ products }) => {
       result += i;
     });
     return result;
-  }, [products.quanity]);
+  }, [products]);
   const ClickHandleClearCart = (e) => {
     e.preventDefault();
     dispatch(clearCart());

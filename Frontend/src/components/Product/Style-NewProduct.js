@@ -5,14 +5,15 @@ export const Infor = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   margin-left: 10px;
   margin-bottom: 7px;
   font-family: "g Guarantee", sans-serif;
-
+`;
+export const InforButton = styled.div`
+  cursor: pointer;
+  transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   :hover {
-    transform: scale(1.1);
-    box-shadow: inset 150px 0 0 0 #54b3d6;
+    box-shadow: inset 200px 0 0px 0px #54b3d6;
     color: white;
   }
 `;

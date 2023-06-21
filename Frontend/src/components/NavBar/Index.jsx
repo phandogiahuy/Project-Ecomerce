@@ -1,4 +1,8 @@
-import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import {
+  ExportOutlined,
+  SearchOutlined,
+  ShoppingCartOutlined,
+} from "@ant-design/icons";
 import { Badge, Popover } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -49,6 +53,7 @@ const Navbar = () => {
             </SearchComponent>
           </Popover>
         </Left>
+
         <Link to="/" style={{ textDecoration: "none", color: "black" }}>
           <Center>
             <Logo>
@@ -60,7 +65,11 @@ const Navbar = () => {
         </Link>
         <Right>
           {user.data ? (
-            <MenuItem onClick={handleLogOut}>Log out</MenuItem>
+            <MenuItem onClick={handleLogOut}>
+              {" "}
+              <ExportOutlined />
+              Log out
+            </MenuItem>
           ) : (
             <Popover
               content={<Register />}
@@ -82,6 +91,7 @@ const Navbar = () => {
               <MenuItem>SIGN IN</MenuItem>
             </Popover>
           )}
+
           <MenuItem>
             <Popover
               placement="bottomRight"

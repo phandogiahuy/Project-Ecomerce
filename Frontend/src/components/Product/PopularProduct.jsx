@@ -1,6 +1,8 @@
 /* eslint-disable no-nested-ternary */
-import { Pagination, Row, Skeleton } from "antd";
+import { HomeOutlined } from "@ant-design/icons";
+import { Breadcrumb, Pagination, Row, Skeleton } from "antd";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { useGetProductByCat } from "../../hooks/Queries/Product/useGetProductByCat";
 import { useGetProducts } from "../../hooks/Queries/Product/useGetProducts";
@@ -45,6 +47,26 @@ const PopularProduct = ({ cat, sort }) => {
       >
         {cat}
       </h1>
+      {cat && (
+        <div className="ml-[20px]">
+          <Breadcrumb
+            items={[
+              {
+                title: (
+                  <Link to="/">
+                    <HomeOutlined style={{ fontSize: "25px" }} />
+                    Home
+                  </Link>
+                ),
+              },
+              {
+                title: <p>{cat.toUpperCase()}</p>,
+              },
+            ]}
+            className="text-[30px]"
+          />
+        </div>
+      )}
       <Row
         gutter={{
           xs: 8,

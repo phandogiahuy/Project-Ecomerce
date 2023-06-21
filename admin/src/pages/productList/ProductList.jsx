@@ -59,9 +59,10 @@ export default function ProductList() {
       align: "center",
       key: "categories",
       dataIndex: "categories",
-      render: (array) => (
+
+      render: (record) => (
         <div>
-          {array.map((tag) => {
+          {record.map((tag) => {
             let color;
             if (tag === "sale") {
               color = "red";
@@ -80,6 +81,23 @@ export default function ProductList() {
           })}
         </div>
       ),
+      filters: [
+        {
+          text: "Sale",
+          value: "sale",
+        },
+        {
+          text: "Phin",
+          value: "phin",
+        },
+        {
+          text: "Espresso",
+          value: "espresso",
+        },
+      ],
+      onFilter: (value, record) => {
+        return record.categories.includes(value);
+      },
     },
     {
       title: "Sale",
@@ -96,6 +114,25 @@ export default function ProductList() {
           dataIndex: "process",
           width: 100,
           align: "center",
+          filters: [
+            {
+              text: "Fully washed",
+              value: "Fully washed",
+            },
+            {
+              text: "Honey",
+              value: "Honey",
+            },
+            {
+              text: "Semi-washed",
+              value: "Semi-washed",
+            },
+            {
+              text: "Natural",
+              value: "Natural",
+            },
+          ],
+          onFilter: (value, record) => record.process.includes(value),
           render: (process) => <h1>{process}</h1>,
         },
         {

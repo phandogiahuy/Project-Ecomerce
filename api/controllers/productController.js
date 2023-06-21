@@ -55,7 +55,7 @@ class ProductController {
 
       if (qNew) {
         products = await Product.find().sort({ createdAt: -1 }).limit(1);
-      } else if (category) {
+      } else if (category && sort) {
         if (["ASC", "DESC"].includes(sort.toUpperCase())) {
           products = await Product.aggregate([
             {
@@ -94,6 +94,12 @@ class ProductController {
             .limit(8)
             .sort({ createdAt: -1 });
         }
+      } else if (category) {
+        products = await Product.find({
+          categories: {
+            $in: [category],
+          },
+        }).populate("reviews");
       } else if (qtitle) {
         products = await Product.find({ title: { $in: re } }).limit(4);
       } else if (req.query.pageSize) {

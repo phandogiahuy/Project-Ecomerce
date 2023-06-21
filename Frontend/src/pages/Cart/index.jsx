@@ -97,7 +97,7 @@ const Cart = () => {
     });
 
     return result;
-  }, [products.quanity]);
+  }, [products]);
 
   let ship = 0;
   if (priceTotal < 100) {
