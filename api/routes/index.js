@@ -4,6 +4,7 @@ import { discountRouter } from "./discount.js";
 import { momoRouter } from "./momo.js";
 import { orderRouter } from "./order.js";
 import { productRouter } from "./product.js";
+import { revenueRouter } from "./revenue.js";
 import { reviewRouter } from "./review.js";
 import { stripeRouter } from "./stripe.js";
 import { userRouter } from "./user.js";
@@ -18,4 +19,5 @@ export function Route(app) {
   app.use("/api/discount", discountRouter);
   app.use("/api/reviews", reviewRouter);
   app.use("/api/momo", momoRouter);
+  app.use("/api/revenue", revenueRouter);
 }

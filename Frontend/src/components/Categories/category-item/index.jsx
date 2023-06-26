@@ -18,7 +18,7 @@ const CategoriesItem = ({ item }) => {
             <Button
               style={{
                 display: "flex",
-                backgroundColor: "#add892",
+                backgroundColor: "#e8f3e0",
                 letterSpacing: "1px",
                 fontSize: "20px",
                 alignItems: "center",

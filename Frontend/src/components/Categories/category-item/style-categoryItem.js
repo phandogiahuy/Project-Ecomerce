@@ -18,4 +18,5 @@ export const Infor = styled.div`
 export const Title = styled.h1`
   font-weight: bolder;
   font-size: 40px;
+  font-family: "AvengeanceMightiestAvenger", sans-serif;
 `;

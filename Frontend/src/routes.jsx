@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import ErrorPage from "./pages/Error/defaut-error-page.jsx";
+import Favorite from "./pages/Favorite";
 import Home from "./pages/Home";
 import LoginProduct from "./pages/Login/Product";
 import OrderSuccesful from "./pages/OrderSuccessful";
@@ -14,6 +15,10 @@ const route = [
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/favorite",
+    element: <Favorite />,
   },
   {
     path: "/products/:cat",

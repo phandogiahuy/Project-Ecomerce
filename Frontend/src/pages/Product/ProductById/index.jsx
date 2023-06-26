@@ -58,7 +58,7 @@ const Product = () => {
   const [type, setType] = useState("Bean");
   const location = useLocation();
   const [first, setFirst] = useState(false);
-  const [quanity, setQuanity] = useState(1);
+  const [quantity, setQuanity] = useState(1);
   const [size, setSize] = useState(250);
   const [price, setPrice] = useState(0);
   const id = location.pathname.split("/")[2];
@@ -84,7 +84,7 @@ const Product = () => {
     }
   };
   const onAddToCartBtnClick = () => {
-    const totalItem = price * quanity;
+    const totalItem = price * quantity;
     if (!first) {
       dispatch(
         addProduct({
@@ -92,7 +92,7 @@ const Product = () => {
           price: Math.ceil(product.price[0] * (1 - product.sale / 100)),
           type,
           size,
-          quanity,
+          quantity,
           totalItem,
         })
       );
@@ -103,7 +103,7 @@ const Product = () => {
           price: Math.ceil(price * (1 - product.sale / 100)),
           type,
           size,
-          quanity,
+          quantity,
           totalItem,
         })
       );
@@ -208,7 +208,7 @@ const Product = () => {
           <AddContainer>
             <InputNumber
               min={1}
-              value={quanity}
+              value={quantity}
               size="medium"
               className="mb-[1px] mr-[10px]"
               onChange={onChangeQuanity}

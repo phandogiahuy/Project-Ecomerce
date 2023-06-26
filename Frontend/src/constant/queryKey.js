@@ -7,3 +7,4 @@ export const GET_SEARCH_PRODUCT = "searchQuery";
 export const GET_USER_ID = "getUserById";
 export const GET_COUPON = "getCoupon";
 export const GET_USER = "getUser";
+export const GET_REVENUE = "getRevenue";

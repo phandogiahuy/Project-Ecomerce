@@ -19,12 +19,14 @@ import Content from "../contentTransaction";
 import { useState } from "react";
 import { useUpdateOrder } from "../../hooks/Mutation/Order/useUpdateOrder";
 import { useDeleteOrder } from "../../hooks/Mutation/Order/useDeleteOrder";
+import { useRevenue } from "../../hooks/Mutation/Revenue/useRevenue";
 const token = localStorage.getItem("token");
 
 export default function WidgetLg({ orders }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [content, setContent] = useState();
   const { mutate } = useUpdateOrder();
+  const revenue = useRevenue();
   const [id, setId] = useState();
   const res = useDeleteOrder();
   const showModal = (order) => {
@@ -33,6 +35,7 @@ export default function WidgetLg({ orders }) {
   };
   const handleOk = () => {
     mutate({ status: "success", id });
+    revenue.mutate({ orders: content });
     setIsModalOpen(false);
   };
   const handleCancel = () => {
@@ -129,7 +132,7 @@ export default function WidgetLg({ orders }) {
               backgroundColor: "#4ddb1d",
               fontSize: "20px",
               width: "25%",
-              height: "20%",
+              height: "10%",
               padding: "10px",
               marginBottom: "10px",
             }}
@@ -139,17 +142,16 @@ export default function WidgetLg({ orders }) {
             Delete Success Transaction
           </Button>
           <Table bordered columns={columns} dataSource={orders} />
+          <Modal
+            title="Order"
+            open={isModalOpen}
+            onOk={handleOk}
+            onCancel={handleCancel}
+          >
+            <Content order={content} />
+          </Modal>
         </>
       )}
-
-      <Modal
-        title="Order"
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <Content order={content} />
-      </Modal>
     </div>
   );
 }

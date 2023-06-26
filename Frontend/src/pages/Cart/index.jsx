@@ -86,14 +86,14 @@ const Cart = () => {
     dispatch(
       updateProduct({
         products: item,
-        quanity: e,
+        quantity: e,
       })
     );
   };
   const priceTotal = useMemo(() => {
     let result = 0;
     products.forEach((item) => {
-      result += item.price * item.quanity;
+      result += item.price * item.quantity;
     });
 
     return result;
@@ -149,7 +149,7 @@ const Cart = () => {
             <MySteps step={0} />
           </Step>
         </Top>
-        <Middle>
+        <Middle className="h-[100vh] overflow-scroll overflow-x-hidden ">
           <Type>
             <TypeProduct>Product</TypeProduct>
             <Quanity>Quantity</Quanity>
@@ -169,7 +169,7 @@ const Cart = () => {
                 <ProductQuanity>
                   <InputNumber
                     min={1}
-                    value={item.quanity}
+                    value={item.quantity}
                     size="medium"
                     style={{ marginBottom: "1px", width: "60%" }}
                     onChange={(e) => handleChange(item, e)}
@@ -193,7 +193,7 @@ const Cart = () => {
                     }
                   />
                 </ProductQuanity>
-                <ProductPrice>{item.price * item.quanity}$</ProductPrice>
+                <ProductPrice>{item.price * item.quantity}$</ProductPrice>
               </ProductType>
             </Product>
           ))}

@@ -40,7 +40,7 @@ const CartContent = ({ products }) => {
   const priceTotal = useMemo(() => {
     const priceEveryItem = [];
     products.forEach((item) => {
-      priceEveryItem.push(item.price * item.quanity);
+      priceEveryItem.push(item.price * item.quantity);
     });
     let result = 0;
     priceEveryItem.forEach((i) => {
@@ -66,7 +66,7 @@ const CartContent = ({ products }) => {
                     dispatch(
                       removeProduct({
                         id: i.product._id,
-                        totalItem: i.price * i.quanity,
+                        totalItem: i.price * i.quantity,
                         type: i.type,
                         size: i.size,
                       })
@@ -84,7 +84,7 @@ const CartContent = ({ products }) => {
                 <Type>
                   {i.size}gr / {i.type}
                 </Type>
-                <Quanity>Quanity: {i.quanity} </Quanity>
+                <Quanity>Quanity: {i.quantity} </Quanity>
                 <Price> {i.price}</Price>
               </Content>
               <hr width="100%" align="center" />

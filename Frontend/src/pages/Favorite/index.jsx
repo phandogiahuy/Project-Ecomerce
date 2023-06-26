@@ -1,0 +1,65 @@
+import { ControlOutlined, CrownOutlined } from "@ant-design/icons";
+import { FloatButton, Skeleton } from "antd";
+import React from "react";
+
+import Announcement from "../../components/Annoucement";
+import Footer from "../../components/Footer/Footer";
+import Navbar from "../../components/NavBar";
+import RankedComponent from "../../components/Ranked";
+import { useGetRevenue } from "../../hooks/Queries/Revenue/useGetRevenue";
+import {
+  Container,
+  ContainerItemProduct,
+  ContentRank,
+  FavoriteCoffee,
+  Ranked,
+  Title,
+  TitleRanked,
+  Wrapper,
+} from "./style";
+
+const Favorite = () => {
+  const product = useGetRevenue();
+
+  return (
+    <Container>
+      <Announcement />
+      <Navbar />
+      <Ranked>
+        <Title>
+          <center className="ml-3 text-[50px] font-bold">
+            <CrownOutlined />
+            <FavoriteCoffee>Favorite Coffee</FavoriteCoffee>
+          </center>
+          <center className="p-1">
+            <ContentRank>
+              This is the five most favorable products in June, 2023
+            </ContentRank>
+          </center>
+        </Title>
+        <Wrapper>
+          <TitleRanked className="ml-3 font-bold ">
+            {" "}
+            <ControlOutlined /> Ranked
+          </TitleRanked>
+          <ContainerItemProduct>
+            {product.isLoading ? (
+              <div>
+                <Skeleton />
+              </div>
+            ) : (
+              product.data.map((item) => (
+                <RankedComponent product={item} key={item._id} />
+              ))
+            )}
+          </ContainerItemProduct>
+        </Wrapper>
+      </Ranked>
+      <FloatButton.BackTop />
+
+      <Footer />
+    </Container>
+  );
+};
+
+export default Favorite;

@@ -9,7 +9,7 @@ const ProductDetailCheckOut = ({ product }) => {
         <div className="text-base font-light">
           {product.type} / {product.size}g
         </div>
-        <div className="text-base font-light">quanity: {product.quanity}</div>
+        <div className="text-base font-light">quanity: {product.quantity}</div>
         <div className="text-base font-medium">{product.price}$</div>
       </div>
     </div>

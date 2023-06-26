@@ -12,13 +12,13 @@ import {
 import { ImageProduct, Infor, Total } from "./style";
 
 const Content = ({ order }) => {
-  console.log(order);
   let color;
   if (order.status === "success") {
     color = "#87d068";
   } else {
     color = "#f50";
   }
+
   return (
     <div>
       <Card hoverable title="Order Information" style={{ width: "100%" }}>
@@ -53,14 +53,14 @@ const Content = ({ order }) => {
                   <div style={{ width: "40%" }}>
                     <img
                       src={productItem.product.img}
-                      style={{ width: "120%" }}
+                      style={{ width: "120%", height: "100%" }}
                     />
                   </div>
                   <div
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      width: "50%",
+                      width: "40%",
                     }}
                   >
                     <h5 style={{ fontSize: "15px" }}>
@@ -75,28 +75,35 @@ const Content = ({ order }) => {
                   </div>
                   <div
                     style={{
-                      width: "10%",
+                      width: "20%",
+                      marginLeft: "10px",
                     }}
                   >
                     {productItem.size === 250 ? (
                       <h5 style={{ fontSize: "20px" }}>
-                        {productItem.product.price[0] *
-                          (1 - productItem.product.sale / 100) *
-                          productItem.quantity}
+                        {Math.ceil(
+                          productItem.product.price[0] *
+                            (1 - productItem.product.sale / 100) *
+                            productItem.quantity
+                        )}
                         $
                       </h5>
                     ) : productItem.size === 500 ? (
                       <h5 style={{ fontSize: "20px" }}>
-                        {productItem.product.price[1] *
-                          (1 - productItem.product.sale / 100) *
-                          productItem.quantity}
+                        {Math.ceil(
+                          productItem.product.price[1] *
+                            (1 - productItem.product.sale / 100) *
+                            productItem.quantity
+                        )}
                         $
                       </h5>
                     ) : (
                       <h5 style={{ fontSize: "20px" }}>
-                        {productItem.product.price[2] *
-                          (1 - productItem.product.sale / 100) *
-                          productItem.quantity}
+                        {Math.ceil(
+                          productItem.product.price[2] *
+                            (1 - productItem.product.sale / 100) *
+                            productItem.quantity
+                        )}
                         $
                       </h5>
                     )}

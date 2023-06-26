@@ -17,7 +17,7 @@ const cartSlice = createSlice({
           item.size === action.payload.size
       );
       if (existingItemIndex !== -1) {
-        state.products[existingItemIndex].quanity += action.payload.quanity;
+        state.products[existingItemIndex].quantity += action.payload.quantity;
       } else {
         state.products.push(action.payload);
       }
@@ -29,7 +29,7 @@ const cartSlice = createSlice({
           item.type === action.payload.products.type &&
           item.size === action.payload.products.size
       );
-      state.products[existingItemIndex].quanity = action.payload.quanity;
+      state.products[existingItemIndex].quantity = action.payload.quantity;
     },
     removeProduct: (state, action) => {
       const existingItemIndex = state.products.findIndex(
