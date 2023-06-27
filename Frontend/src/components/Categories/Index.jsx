@@ -16,12 +16,12 @@ const Categories = () => {
           <CategoriesItem item={item} key={item.id} />
         ))}
       </div>
-      <div className="relative mr-4 flex w-[50%] flex-col  ">
+      <div className="relative  flex w-[50%] flex-col ">
         <div>
           <Link to={`products/${cat}`}>
             <img
               src="/Categories/Phin.jpg"
-              className="  h-[267px] w-[100%]"
+              className="  h-[267px] w-[100%] rounded-sm"
               style={{ imageRendering: "pixelated" }}
             />
           </Link>
@@ -49,7 +49,7 @@ const Categories = () => {
         <div>
           <img
             src="/Categories/Ranked.jpg"
-            className="  h-[267px] w-[100%]"
+            className="  h-[267px] w-[100%] rounded-sm"
             style={{ imageRendering: "pixelated" }}
           />
           <div className="absolute left-[130px] top-[370px]">

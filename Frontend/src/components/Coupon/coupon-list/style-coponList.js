@@ -4,10 +4,11 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-content: space-around;
-  margin-top: 50px;
+  background-color: white;
   position: relative;
   width: 100%;
   overflow: hidden;
+  box-shadow: 6px 9px 101px -31px rgba(164, 213, 47, 0.37) inset;
 `;
 export const Title = styled.h1`
   font-weight: 700;

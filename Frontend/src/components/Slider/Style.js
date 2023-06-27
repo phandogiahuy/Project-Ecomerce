@@ -3,12 +3,10 @@ import styled from "styled-components";
 import { mobile } from "../../responsive";
 
 export const Container = styled.div`
-  padding: 10px;
   width: 100%;
-  height: 60vh;
-  ${mobile({ display: "none" })}
+  height: 542px;
+  ${mobile({ display: "none" })};
   display: flex;
-  margin-bottom: 180px;
 `;
 export const Slide = styled.div``;
 export const ImgContainer = styled.div``;

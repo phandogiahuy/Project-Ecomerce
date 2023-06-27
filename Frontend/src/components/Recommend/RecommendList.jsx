@@ -36,9 +36,10 @@ const RecommendList = (products) => {
             <Card
               hoverable
               style={{
-                maxWidth: 400,
-                minHeight: 500,
-                maxHeight: 420,
+                maxWidth: 365,
+                minHeight: 460,
+
+                marginLeft: "5px",
               }}
               cover={
                 <img
@@ -47,10 +48,10 @@ const RecommendList = (products) => {
                 />
               }
             >
-              <div className="  mt-[-5%] text-ellipsis font-semibold ">
+              <div className="  mt-[-5%] text-ellipsis text-[20px] font-semibold ">
                 {products.products.title}
               </div>
-              <div className="mt-[-1%] flex  text-base ">
+              <div className="mt-[-1%] flex  text-base  ">
                 <div className="   text-lg font-bold">
                   {Math.ceil(
                     products.products.price[0] *

@@ -6,7 +6,6 @@ export const Infor = styled.div`
   justify-content: center;
   cursor: pointer;
   margin-left: 10px;
-  margin-bottom: 7px;
   font-family: "g Guarantee", sans-serif;
 `;
 export const InforButton = styled.div`
@@ -20,7 +19,7 @@ export const InforButton = styled.div`
 export const Name = styled.h1`
   margin-left: 50px;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 15px;
 `;
 export const Image = styled.img`
   height: 100%;

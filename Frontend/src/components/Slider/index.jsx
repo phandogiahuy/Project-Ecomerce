@@ -21,7 +21,7 @@ const Slider = () => {
               <div style={contentStyle} className="flex">
                 <img
                   src={item.img}
-                  className=" h-[550px] w-[60%]  "
+                  className=" h-[550px] w-[60%] rounded-sm "
                   style={{ imageRendering: "pixelated" }}
                 />
                 <InforContainer>

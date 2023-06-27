@@ -40,15 +40,15 @@ const CommentComponent = ({ reviews, id, name }) => {
                 <Rate disabled defaultValue={totalRating} allowHalf />
                 <p>{reviews.length} Reviews</p>
               </div>
-              <div className="ml-[25%] mt-[1%]">
+              <div className=" ml-[20px] mt-[2%]">
                 <Space wrap>
                   {token ? (
                     <Button
                       style={{
                         display: "flex",
-                        backgroundColor: "#dcffc6",
+                        backgroundColor: "#eaf0ff",
                         letterSpacing: "1px",
-                        fontSize: "30px",
+                        fontSize: "24px",
                         alignItems: "center",
                         justifyContent: "center",
                         width: "200px",
@@ -62,12 +62,12 @@ const CommentComponent = ({ reviews, id, name }) => {
                     <Button
                       style={{
                         display: "flex",
-                        backgroundColor: "#dcffc6",
+                        backgroundColor: "#eaf0ff",
                         letterSpacing: "1px",
-                        fontSize: "30px",
+                        fontSize: "24px",
                         alignItems: "center",
                         justifyContent: "center",
-                        width: "200px",
+                        width: "250px",
                       }}
                       onClick={handleClickNavigate}
                     >
@@ -88,16 +88,16 @@ const CommentComponent = ({ reviews, id, name }) => {
             <CommentList review={review} key={review._id} />
           ))
         ) : (
-          <div className="ml-[50%]  ">
-            <UserOutlined className="text-[49px]" />
+          <div className=" flex flex-col items-center  ">
+            <UserOutlined className="text-[60px]" />
             <p className="">No review</p>
-            <div className="ml-[-20%] mt-[1%] p-2">
+            <div className=" mt-[1%] p-2">
               <Space wrap>
                 {token ? (
                   <Button
                     style={{
                       display: "flex",
-                      backgroundColor: "#dcffc6",
+                      backgroundColor: "#eaf0ff",
                       letterSpacing: "1px",
                       fontSize: "30px",
                       alignItems: "center",
@@ -113,13 +113,13 @@ const CommentComponent = ({ reviews, id, name }) => {
                   <Button
                     style={{
                       display: "flex",
-                      backgroundColor: "#dcffc6",
+                      backgroundColor: "#eaf0ff",
                       letterSpacing: "1px",
-                      fontSize: "30px",
+                      fontSize: "24px",
                       alignItems: "center",
                       justifyContent: "center",
                       width: "300px",
-                      marginLeft: "-50px",
+                      marginLeft: "80px",
                     }}
                     onClick={handleClickNavigate}
                   >

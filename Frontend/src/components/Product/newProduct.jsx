@@ -42,7 +42,7 @@ const Product = ({ item }) => {
           }}
           color="black"
         >
-          <Card style={{ width: 400, border: "none" }}>
+          <Card style={{ width: 330, border: "none" }}>
             <Link to={`/product/${item._id}`}>
               <Image src={item.img} />
             </Link>

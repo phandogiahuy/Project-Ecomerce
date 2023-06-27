@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div``;
 export const FilterContainer = styled.div`
   position: absolute;
-  top: 20%;
+  top: 40%;
   left: 75%;
   z-index: 1;
 `;

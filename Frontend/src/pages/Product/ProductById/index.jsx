@@ -11,7 +11,6 @@ import {
   Breadcrumb,
   Button,
   Collapse,
-  Divider,
   FloatButton,
   Image,
   InputNumber,
@@ -28,7 +27,6 @@ import AboutProduct from "../../../components/AboutProduct";
 import Announcement from "../../../components/Annoucement";
 import CommentComponent from "../../../components/Comment";
 import Footer from "../../../components/Footer/Footer";
-import Newsletter from "../../../components/Footer/Newsletter";
 // import Panel from "antd/es/collapse/Panel";
 import { Instruction } from "../../../components/Instruction";
 import Navbar from "../../../components/NavBar";
@@ -131,7 +129,7 @@ const Product = () => {
             title: <p>Product</p>,
           },
         ]}
-        className="ml-4 text-[30px]"
+        className="ml-4 mt-3 text-[30px]"
       />
       <Wrapper>
         <ImgContainer>
@@ -139,7 +137,8 @@ const Product = () => {
             style={{
               imageRendering: "pixelated",
             }}
-            width={550}
+            width={600}
+            height={630}
             src={product.img}
           ></Image>
         </ImgContainer>
@@ -233,14 +232,18 @@ const Product = () => {
           </AddContainer>
         </InforContainer>
       </Wrapper>
-      <Divider />
-      <div className=" flex w-[100%] p-5 ">
-        <div className="w-[50%]">
+
+      <div
+        className=" flex w-[100%]  p-5  "
+        style={{ backgroundColor: "#d8f1e3" }}
+      >
+        <div className="w-[36.5%] bg-slate-50 p-6">
           <ProductFeature>
             {/* <h1>Product Feature</h1>
              */}
             <Collapse
-              style={{ width: "100%", backgroundColor: "white" }}
+              style={{ width: "100%" }}
+              className=" bg-slate-50"
               // style={{ backgroundColor: "white" }}
               bordered={false}
               expandIcon={({ isActive }) => (
@@ -307,21 +310,20 @@ const Product = () => {
           </ProductFeature>
         </div>
 
-        <div className="flex w-[46%] flex-col items-center">
-          <h1 className="mt-[-3%] text-[50px] font-normal ">
+        <div className=" ml-2  w-[55%] flex-col items-center bg-slate-50 p-6">
+          <center className="mt-[-3%] text-[50px] font-normal ">
             <OneToOneOutlined /> About Our Coffee
-          </h1>
+          </center>
           <AboutProduct />
         </div>
       </div>
-      <Divider />
       <Recommend className="p-2">
         {product.categories && (
           <RecommendProduct products={product.categories[0]} />
         )}
       </Recommend>
 
-      <Newsletter />
+      {/* <Newsletter /> */}
       <Footer />
       <FloatButton.BackTop icon={<UpCircleFilled />} />
     </Container>
