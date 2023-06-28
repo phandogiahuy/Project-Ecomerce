@@ -34,7 +34,6 @@ export default function ProductList() {
   const cancel = (e) => {
     message.error("Product don't delete");
   };
-  console.log(res.data);
   const columns = [
     {
       title: "ID",

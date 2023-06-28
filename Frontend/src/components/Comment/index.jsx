@@ -8,7 +8,7 @@ import ReviewModal from "../Review";
 import CommentList from "./CommentList";
 
 const CommentComponent = ({ reviews, id, name }) => {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   const rate = [];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {

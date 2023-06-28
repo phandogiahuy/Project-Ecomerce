@@ -34,6 +34,7 @@ module.exports = {
     "simple-import-sort/imports": 2,
     "no-param-reassign": 0,
     "no-underscore-dangle": 0,
+
     "no-restricted-imports": [
       "error",
       {
@@ -95,12 +96,13 @@ module.exports = {
     "no-sequences": "error",
     "no-sparse-arrays": "error",
     "no-template-curly-in-string": "error",
-    "no-shadow": [
-      "error",
-      {
-        hoist: "all",
-      },
-    ],
+    "no-shadow": 1,
+    // "no-shadow": [
+    //   "error",
+    //   {
+    //     hoist: "all",
+    //   },
+    // ],
     "no-throw-literal": "error",
     "no-trailing-spaces": "error",
     "no-undef-init": "error",

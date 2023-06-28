@@ -33,7 +33,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     dispatch(clearCart());
     window.location.reload(false);
   };

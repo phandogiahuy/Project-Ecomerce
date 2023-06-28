@@ -1,14 +1,17 @@
+import { message } from "antd";
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useMutation } from "react-query";
 
-import { GET_DISCOUNT_CODE } from "../../../constant/queryKey";
-
-const getDiscount = async (code) => {
+const getDiscount = async ({ code }) => {
   const { data } = await axios.get(
     `http://localhost:3000/api/discount/find/${code}`
   );
   return data;
 };
-const useGetDiscountByCode = (code) =>
-  useQuery([GET_DISCOUNT_CODE, { code }], () => getDiscount(code));
+const useGetDiscountByCode = () =>
+  useMutation(getDiscount, {
+    onError(error) {
+      message.error(error.response.data.message);
+    },
+  });
 export { useGetDiscountByCode };

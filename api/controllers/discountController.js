@@ -23,6 +23,9 @@ class DiscountController {
   async get(req, res) {
     try {
       const discount = await Discount.find({ code: req.params.code });
+      if (!discount.length) {
+        res.status(500).json({ message: "Code Discount is Wrong" });
+      }
       res.status(200).json(discount);
     } catch (err) {
       res.status(500);

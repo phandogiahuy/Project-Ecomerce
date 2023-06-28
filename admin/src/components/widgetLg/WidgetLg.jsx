@@ -9,6 +9,8 @@ import {
   Modal,
   Table,
   Tag,
+  Popconfirm,
+  message,
 } from "antd";
 import {
   FrownTwoTone,
@@ -41,9 +43,17 @@ export default function WidgetLg({ orders }) {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  const confirm = () => {
+    message.success("You deleted product successfully");
+  };
+  const cancel = () => {
+    message.error("Product don't delete");
+  };
   const handleClickDelete = () => {
     res.mutate();
   };
+
   const columns = [
     {
       title: "ID",
@@ -126,21 +136,30 @@ export default function WidgetLg({ orders }) {
         </div>
       ) : (
         <>
-          <Button
-            size="larger"
-            style={{
-              backgroundColor: "#4ddb1d",
-              fontSize: "20px",
-              width: "25%",
-              height: "10%",
-              padding: "10px",
-              marginBottom: "10px",
-            }}
-            onClick={handleClickDelete}
-            icon={<MinusCircleOutlined />}
+          <Popconfirm
+            title="Delete product"
+            description="Are you sure to delete this order, please check carefully because of no return?"
+            onConfirm={confirm}
+            onCancel={cancel}
+            okText="Yes"
+            cancelText="No"
           >
-            Delete Success Transaction
-          </Button>
+            <Button
+              size="larger"
+              style={{
+                backgroundColor: "#4ddb1d",
+                fontSize: "20px",
+                width: "25%",
+                height: "50px",
+                padding: "10px",
+                marginBottom: "10px",
+              }}
+              onClick={handleClickDelete}
+              icon={<MinusCircleOutlined />}
+            >
+              Delete Success Transaction
+            </Button>
+          </Popconfirm>
           <Table bordered columns={columns} dataSource={orders} />
           <Modal
             title="Order"

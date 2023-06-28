@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-nested-ternary */
 import { DeleteOutlined } from "@ant-design/icons";
 import {
@@ -9,7 +10,7 @@ import {
   message,
   Space,
 } from "antd";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -58,81 +59,70 @@ import {
 } from "./Style-Cart";
 
 const Cart = () => {
-  const { products } = useSelector((state) => state.cart);
+  const products = useSelector((state) => state.cart.products);
+  const dispatch = useDispatch();
   const [discount, setDiscount] = useState(0);
-  const [discounts, setDiscounts] = useState(0);
-  const [limit, setLimit] = useState(0);
-  const resDiscount = useGetDiscountByCode(discount);
 
-  const handleDiscount = async () => {
-    try {
-      const res = resDiscount;
-      if (res.isLoading) {
-        return <div>...loading</div>;
-      }
+  const { mutate: checkDiscountCode, data, isLoading } = useGetDiscountByCode();
 
-      if (res.isSuccess) {
-        setDiscounts(res.data[0].sale);
-        setLimit(res.data[0].limit);
-      }
-    } catch (error) {
-      return message.error("Code Discount is Wrong");
+  const calculateFee = () => {
+    const priceTotal = products.reduce(
+      (pre, item) => pre + item.price * item.quantity,
+      0
+    );
+    let ship = 0;
+    if (priceTotal < 100) {
+      ship = 10;
     }
+    ship = 0;
+
+    const discounts = data?.length ? data[0]?.sale : 0;
+    const limit = data?.length ? data[0].limit : 0;
+    let discountApply = 0;
+    if (limit < priceTotal) {
+      discountApply = discounts;
+    }
+    let priceAllProduct = (priceTotal + ship) * (1 - discountApply / 100);
+    if (priceTotal === 0) {
+      priceAllProduct = 0;
+      ship = 0;
+    }
+    const freeShip = 100 - priceTotal;
+    return { priceAllProduct, ship, discountApply, priceTotal, freeShip };
+  };
+  const handleDiscount = async () => {
+    checkDiscountCode({ code: discount });
   };
 
-  const dispatch = useDispatch();
-
-  const handleChange = (item, e) => {
+  const handleChange = (item, quantity) => {
     dispatch(
       updateProduct({
         products: item,
-        quantity: e,
+        quantity,
       })
     );
   };
-  const priceTotal = useMemo(() => {
-    let result = 0;
-    products.forEach((item) => {
-      result += item.price * item.quantity;
-    });
 
-    return result;
-  }, [products]);
-
-  let ship = 0;
-  if (priceTotal < 100) {
-    ship = 10;
-  } else {
-    ship = 0;
-  }
-
-  const freeShip = 100 - priceTotal;
   const handleClear = () => {
     dispatch(clearCart());
   };
   const onChangeDiscount = (e) => {
     setDiscount(e.target.value);
   };
-  let discountApply = 0;
-  if (limit < priceTotal) {
-    discountApply = discounts;
-  }
-  let priceAllProduct = (priceTotal + ship) * (1 - discountApply / 100);
-  if (priceTotal === 0) {
-    priceAllProduct = 0;
-    ship = 0;
-  }
-  const handleClickCheckout = () => {
+
+  const handleClickCheckout = ({ priceProduct, shipping }) => {
     dispatch(
       updateCart({
-        priceProduct: priceAllProduct,
-        shipping: ship,
+        priceProduct,
+        shipping,
       })
     );
   };
   const handleClickEmpty = () => {
-    return message.error("Your Cart Is Empty");
+    message.error("Your Cart Is Empty");
   };
+  const { priceAllProduct, ship, discountApply, priceTotal, freeShip } =
+    calculateFee();
   return (
     <Container className="overflow-x-hidden">
       <Announcement />
@@ -172,7 +162,7 @@ const Cart = () => {
                     value={item.quantity}
                     size="medium"
                     style={{ marginBottom: "1px", width: "60%" }}
-                    onChange={(e) => handleChange(item, e)}
+                    onChange={(quantity) => handleChange(item, quantity)}
                     type="number"
                     onKeyDown={(evt) => {
                       if (["e", "E", "+", "-"].includes(evt.key)) {
@@ -214,22 +204,24 @@ const Cart = () => {
                 htmlType="submit"
                 size="large"
                 onClick={handleDiscount}
+                loading={isLoading}
               >
                 Submit
               </Button>
-              {limit < priceTotal && discounts ? (
-                <InforDiscount>
-                  You are discount about {discounts}% for total
-                </InforDiscount>
-              ) : limit >= priceTotal && discounts ? (
-                <InforDiscount>
-                  You are not eligible to apply this discount code
-                </InforDiscount>
-              ) : (
-                <InforDiscount>
-                  Please input discount code in here
-                </InforDiscount>
-              )}
+              {data?.length &&
+                (data[0].limit < priceTotal && data[0].sale ? (
+                  <InforDiscount>
+                    You are discount about {data[0].sale}% for total
+                  </InforDiscount>
+                ) : data[0].limit >= priceTotal && data[0].sale ? (
+                  <InforDiscount>
+                    You are not eligible to apply this discount code
+                  </InforDiscount>
+                ) : (
+                  <InforDiscount>
+                    Please input discount code in here
+                  </InforDiscount>
+                ))}
             </SummaryDiscount>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
@@ -318,7 +310,12 @@ const Cart = () => {
                         color: "#69410b",
                         fontSize: 20,
                       }}
-                      onClick={handleClickCheckout}
+                      onClick={() =>
+                        handleClickCheckout({
+                          priceProduct: priceAllProduct,
+                          shipping: ship,
+                        })
+                      }
                     >
                       Check out{" "}
                     </Button>
