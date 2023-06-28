@@ -1,7 +1,7 @@
 import { Cart } from "../models/Cart.js";
 import { Product } from "../models/Product.js";
 import { Review } from "../models/Review.js";
-class ReviewController {
+const reviewController =  {
   async create(req, res) {
     const newReview = new Review(req.body);
     try {
@@ -13,7 +13,7 @@ class ReviewController {
     } catch (err) {
       res.status(500).json(err);
     }
-  }
+  },
   //GET PRODUCT
   async showReview(req, res) {
     try {
@@ -32,4 +32,4 @@ class ReviewController {
     }
   }
 }
-export const reviewController = new ReviewController();
+export {reviewController} 
