@@ -7,7 +7,7 @@ import Footer from "../../components/Footer/Footer";
 import MySteps from "../../components/Steps";
 
 const OrderSuccesful = () => {
-  const { order } = useSelector((state) => state.order);
+  const order = useSelector((state) => state.order.order);
   return (
     <div>
       <div style={{ height: "120px", backgroundColor: "bisque" }}>

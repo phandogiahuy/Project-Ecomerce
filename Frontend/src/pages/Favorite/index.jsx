@@ -20,7 +20,18 @@ import {
 
 const Favorite = () => {
   const product = useGetRevenue();
-
+  const renderRanked = () => {
+    if (product.isLoading) {
+      return (
+        <div>
+          <Skeleton />
+        </div>
+      );
+    }
+    return product.data.map((item) => (
+      <RankedComponent product={item} key={item._id} />
+    ));
+  };
   return (
     <Container>
       <Announcement />
@@ -42,17 +53,7 @@ const Favorite = () => {
             {" "}
             <ControlOutlined /> Ranked
           </TitleRanked>
-          <ContainerItemProduct>
-            {product.isLoading ? (
-              <div>
-                <Skeleton />
-              </div>
-            ) : (
-              product.data.map((item) => (
-                <RankedComponent product={item} key={item._id} />
-              ))
-            )}
-          </ContainerItemProduct>
+          <ContainerItemProduct>{renderRanked()}</ContainerItemProduct>
         </Wrapper>
       </Ranked>
       <FloatButton.BackTop />

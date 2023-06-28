@@ -1,4 +1,4 @@
-import { Button, Form, Input, message } from "antd";
+import { Button, Form, Input } from "antd";
 
 import { useRegister } from "../../hooks/Mutation/useSetRegister";
 import { Container, Title, Wrapper } from "./Style-Register";
@@ -42,11 +42,11 @@ const Register = () => {
     const { username, email, password } = values;
     mutate({ username, email, password });
   };
-  const validateEmail = (_, value) => {
-    if (value || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
-      message.error("Invalid email format");
-    }
-  };
+  // const validateEmail = (_, value) => {
+  //   if (value || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+  //     message.error("Invalid email format");
+  //   }
+  // };
   return (
     <Container>
       <Wrapper>
@@ -87,7 +87,7 @@ const Register = () => {
                 type: "email",
                 message: "The input is not valid E-mail!",
               },
-              { validator: validateEmail },
+              // { validator: validateEmail },
               {
                 required: true,
                 message: "Please input your E-mail!",

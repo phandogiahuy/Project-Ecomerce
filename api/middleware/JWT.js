@@ -1,5 +1,6 @@
 import Jwt from "jsonwebtoken";
 import { User } from "../models/User.js";
+import { catchAsync } from "../utils/catchAsync.js";
 
 export const generateAccessToken = (user) => {
   return Jwt.sign(
@@ -11,22 +12,29 @@ export const generateAccessToken = (user) => {
   );
 };
 
-export const verifyToken = (req, res, next) => {
+export const verifyToken = catchAsync(async (req, res, next) => {
   const authHeader = req.headers.authorization;
-  if (authHeader) {
-    const token = authHeader.split(" ")[1];
-    Jwt.verify(token, process.env.JWT_KEY, async (err, payload) => {
-      if (err) {
-        return res.status(400).json("token not veryfy");
-      }
-      const user = await User.findById(payload.id);
-      req.user = user;
-      next();
-    });
-  } else {
-    res.status(400).json("Invalid token");
-  }
-};
+
+  const token = authHeader.split(" ")[1];
+  const payload = Jwt.verify(token + "asdas", process.env.JWT_KEY);
+  const user = await User.findById(payload.id);
+  req.user = user;
+  next();
+
+  // if (authHeader) {
+  //   const token = authHeader.split(" ")[1];
+  //     Jwt.verify(token, process.env.JWT_KEY, async (err, payload) => {
+  //     if (err) {
+  //       return res.status(400).json("token not veryfy");
+  //     }
+  //     const user = await User.findById(payload.id);
+  //     req.user = user;
+  //     next();
+  //   });
+  // } else {
+  //   res.status(400).json("Invalid token");
+  // }
+});
 
 export const verifyTokenAndAuthorization = (req, res, next) => {
   if (req.user.isAdmin) {

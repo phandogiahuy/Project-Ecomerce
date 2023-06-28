@@ -74,7 +74,6 @@ const Cart = () => {
     if (priceTotal < 100) {
       ship = 10;
     }
-    ship = 0;
 
     const discounts = data?.length ? data[0]?.sale : 0;
     const limit = data?.length ? data[0].limit : 0;
@@ -139,7 +138,7 @@ const Cart = () => {
             <MySteps step={0} />
           </Step>
         </Top>
-        <Middle className="h-[100vh] overflow-scroll overflow-x-hidden ">
+        <Middle className="h-fit overflow-scroll overflow-x-hidden ">
           <Type>
             <TypeProduct>Product</TypeProduct>
             <Quanity>Quantity</Quanity>

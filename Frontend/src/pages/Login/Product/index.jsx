@@ -5,12 +5,63 @@ import { Button, Form, Input } from "antd";
 import { useLoginPageProduct } from "../../../hooks/Mutation/useSetLogin";
 
 const LoginProduct = () => {
-  const { mutate, isLoading } = useLoginPageProduct();
+  const { mutate: login, isLoading } = useLoginPageProduct();
   const onFinishLogIn = async (values) => {
     const { email, password } = values;
-    mutate({ email, password });
+    login({ email, password });
   };
-
+  const renderForm = ({ component, ...itemProps }, i) => {
+    return (
+      <Form.Item {...itemProps} key={i}>
+        {component}
+      </Form.Item>
+    );
+  };
+  const arrayForm = [
+    {
+      name: "email",
+      rules: [
+        {
+          required: true,
+          message: "Please input your email!",
+        },
+      ],
+      component: (
+        <Input
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="Email"
+          type="email"
+        />
+      ),
+    },
+    {
+      name: "password",
+      rules: [
+        {
+          required: true,
+          message: "Please input your Password!",
+        },
+      ],
+      component: (
+        <Input
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          type="password"
+          placeholder="Password"
+        />
+      ),
+    },
+    {
+      component: (
+        <Button
+          type="primary"
+          htmlType="submit"
+          className="login-form-button w-[100%]"
+        >
+          {isLoading ? "Logging in..." : "Log in"}
+        </Button>
+      ),
+    },
+  ];
   return (
     <div>
       <div className="relative">
@@ -24,46 +75,7 @@ const LoginProduct = () => {
             className="login-form"
             onFinish={onFinishLogIn}
           >
-            <Form.Item
-              name="email"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your email!",
-                },
-              ]}
-            >
-              <Input
-                prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="Email"
-                type="email"
-              />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your Password!",
-                },
-              ]}
-            >
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                type="password"
-                placeholder="Password"
-              />
-            </Form.Item>
-
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button w-[100%]"
-              >
-                {isLoading ? "Logging in..." : "Log in"}
-              </Button>
-            </Form.Item>
+            {arrayForm.map(renderForm)}
           </Form>
         </div>
       </div>
