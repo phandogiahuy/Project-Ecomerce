@@ -20,7 +20,13 @@ const App = () => {
           <Topbar />
         </Header>
         <Layout>
-          <Sider style={{ backgroundColor: "white" }}>
+          <Sider
+            style={{
+              backgroundColor: "white",
+              marginTop: "20px",
+              marginLeft: "20px",
+            }}
+          >
             <Sidebar />
           </Sider>
           <Content>

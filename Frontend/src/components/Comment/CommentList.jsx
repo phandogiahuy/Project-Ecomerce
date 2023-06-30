@@ -12,7 +12,7 @@ const CommentList = ({ review }) => {
   return (
     <div className=" flex flex-col">
       <div className="flex items-center  space-x-3">
-        <h2 className="text-lg font-medium">{review.user}</h2>
+        <h2 className="text-lg font-medium">{review.username}</h2>
         <h3 className=" mt-1 text-xs text-gray-400">{formattedDate}</h3>
       </div>
       <Rate disabled defaultValue={review.rating} allowHalf />

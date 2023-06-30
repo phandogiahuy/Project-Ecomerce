@@ -1,6 +1,8 @@
 import { Revenue } from "../models/Revenue.js";
+import { catchAsync } from "../utils/catchAsync.js";
+import { reviewController } from "./reviewController.js";
 
-class RevenueController {
+const revenueController = {
   async create(req, res) {
     // products.products.forEach((product) => {
     //   id.push(product.product._id);
@@ -39,7 +41,7 @@ class RevenueController {
     });
     res.status(200).json("xong");
     //
-  }
+  },
 
   //
 
@@ -48,24 +50,18 @@ class RevenueController {
   // //GET ALL
 
   async showAllRevenue(req, res) {
-    try {
-      const revenues = await Revenue.find()
-        .populate("productId")
-        .limit(5)
-        .sort({ amount: -1 });
-      res.status(200).json(revenues);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
+    const revenues = await Revenue.find()
+      .populate("productId")
+      .limit(5)
+      .sort({ amount: -1 });
+  },
   //DELETE
   async deleteAll(req, res) {
-    try {
-      await Revenue.deleteMany();
-      res.status(200).json("revenue has been deleted...");
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
-}
-export const revenueController = new RevenueController();
+    await Revenue.deleteMany();
+    res.status(200).json("revenue has been deleted...");
+  },
+};
+Object.keys(revenueController).forEach((key) => {
+  revenueController[key] = catchAsync(revenueController[key]);
+});
+export { revenueController };

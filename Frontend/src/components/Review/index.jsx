@@ -10,14 +10,15 @@ const ReviewModal = ({ id, name, handleCancel }) => {
   //   return <Skeleton />;
   // }
 
-  const nameUser = localStorage.getItem("name");
+  const userId = localStorage.getItem("id");
+  const username = localStorage.getItem("name");
   const [form] = Form.useForm();
   const [rating, setRate] = useState(0);
   const { mutate } = useCreateReview(handleCancel);
 
   const handleFinsh = async (values) => {
     const { content } = values;
-    mutate({ content, rating, id, nameUser });
+    mutate({ content, rating, id, userId, username });
 
     // window.location.reload(false);
   };

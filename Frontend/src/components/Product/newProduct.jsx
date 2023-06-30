@@ -36,13 +36,21 @@ const Product = ({ item }) => {
           style={{
             zIndex: "1",
             marginRight: "100px",
-            marginTop: "50px",
+            marginTop: "80px",
             fontSize: "20px",
             color: "yellow",
           }}
           color="black"
         >
-          <Card style={{ width: 330, border: "none" }}>
+          <Card
+            style={{
+              width: 330,
+              border: "none",
+              boxShadow: "1px 2px 3px 4px rgba(20,20,20,0.4)",
+              marginTop: "20px",
+              marginBottom: "20px",
+            }}
+          >
             <Link to={`/product/${item._id}`}>
               <Image src={item.img} />
             </Link>
@@ -53,7 +61,7 @@ const Product = ({ item }) => {
               </div>
               <Name>{item.title}</Name>
               <PriceFirst>
-                {Math.ceil(item.price[0] * (1 - item.sale / 100))}$
+                {Math.round(item.price[0] * (1 - item.sale / 100))}$
                 <span className="text-slate-300 line-through">
                   {" "}
                   ({item.price[0]}$)

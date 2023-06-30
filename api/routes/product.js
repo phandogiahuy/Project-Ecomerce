@@ -8,3 +8,4 @@ productRouter.put("/:id", verifyTokenAndAdmin, productController.update);
 productRouter.delete("/:id", verifyTokenAndAdmin, productController.delete);
 productRouter.get("/find/:id", productController.showProduct);
 productRouter.get("/", productController.showAllProduct);
+productRouter.get("/comment", productController.showCommentProduct);

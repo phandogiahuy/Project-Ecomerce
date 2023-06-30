@@ -1,48 +1,39 @@
 import { Product } from "../models/Product.js";
 import { Review } from "../models/Review.js";
-class ProductController {
+import { catchAsync } from "../utils/catchAsync.js";
+const productController = {
   //create product
   async create(req, res) {
     const newProduct = new Product(req.body);
-    try {
-      const savedProduct = await newProduct.save();
-      res.status(200).json(savedProduct);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
+    const savedProduct = await newProduct.save();
+    res.status(200).json(savedProduct);
+  },
   async update(req, res) {
-    try {
-      const updatedProduct = await Product.findByIdAndUpdate(
-        req.params.id,
-        {
-          $set: req.body,
-        },
-        { new: true }
-      );
-      res.status(200).json(updatedProduct);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedProduct);
+  },
   //DELETE
   async delete(req, res) {
-    try {
-      await Product.findByIdAndDelete(req.params.id);
-      res.status(200).json("Product has been deleted...");
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json("Product has been deleted...");
+  },
   //GET PRODUCT
   async showProduct(req, res) {
-    try {
-      const product = await Product.findById(req.params.id).populate("reviews");
-      res.status(200).json(product);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
+    const product = await Product.findById(req.params.id).populate("reviews");
+    res.status(200).json(product);
+  },
+  async showCommentProduct(req, res) {
+    const product = await Product.find({
+      $expr: { $gt: [{ $size: "$reviews" }, 0] },
+    });
+    res.status(200).json(product);
+  },
 
   //GET ALL PRODUCTS
   async showAllProduct(req, res) {
@@ -50,87 +41,82 @@ class ProductController {
     const { category, sort } = req.query;
     const qtitle = req.query.title;
     const re = new RegExp(qtitle, "i");
-    try {
-      let products;
 
-      if (qNew) {
-        products = await Product.find().sort({ createdAt: -1 }).limit(1);
-      } else if (category && sort) {
-        if (["ASC", "DESC"].includes(sort.toUpperCase())) {
-          products = await Product.aggregate([
-            {
-              $addFields: {
-                currentPrice: {
-                  $multiply: [
-                    {
-                      $first: "$price",
-                    },
-                    {
-                      $subtract: [
-                        1,
-                        {
-                          $divide: ["$sale", 100],
-                        },
-                      ],
-                    },
-                  ],
-                },
+    let products;
+
+    if (qNew) {
+      products = await Product.find().sort({ createdAt: -1 }).limit(1);
+    } else if (category && sort) {
+      if (["ASC", "DESC"].includes(sort.toUpperCase())) {
+        products = await Product.aggregate([
+          {
+            $addFields: {
+              currentPrice: {
+                $multiply: [
+                  {
+                    $first: "$price",
+                  },
+                  {
+                    $subtract: [
+                      1,
+                      {
+                        $divide: ["$sale", 100],
+                      },
+                    ],
+                  },
+                ],
               },
             },
-            {
-              $sort: {
-                currentPrice: sort.toUpperCase() === "ASC" ? 1 : -1,
-              },
-            },
-            {
-              $limit: 8,
-            },
-          ]);
-        } else {
-          products = await Product.find({
-            categories: category,
-          })
-            .populate("reviews")
-            .limit(8)
-            .sort({ createdAt: -1 });
-        }
-      } else if (category) {
-        products = await Product.find({
-          categories: {
-            $in: [category],
           },
-        }).populate("reviews");
-      } else if (qtitle) {
-        products = await Product.find({ title: { $in: re } }).limit(4);
-      } else if (req.query.pageSize) {
-        const { pageSize = 10, page = 1 } = req.query;
-        const totalProducts = await Product.countDocuments({});
-        const pageCount = Math.ceil(totalProducts / pageSize);
-        products = await Product.find()
-          .populate("reviews")
-          .skip((page - 1) * pageSize)
-          .limit(pageSize);
-        return res.status(200).json({
-          data: products,
-          pagination: {
-            total: totalProducts,
-            pageCount,
-            pageSize: +pageSize,
-            page: +page,
+          {
+            $sort: {
+              currentPrice: sort.toUpperCase() === "ASC" ? 1 : -1,
+            },
           },
-        });
+          {
+            $limit: 8,
+          },
+        ]);
       } else {
-        products = await Product.find();
+        products = await Product.find({
+          categories: category,
+        })
+          .populate("reviews")
+          .limit(8)
+          .sort({ createdAt: -1 });
       }
-      res.status(200).json(products);
-    } catch (err) {
-      res.status(500).json(err);
+    } else if (category) {
+      products = await Product.find({
+        categories: {
+          $in: [category],
+        },
+      }).populate("reviews");
+    } else if (qtitle) {
+      products = await Product.find({ title: { $in: re } }).limit(4);
+    } else if (req.query.pageSize) {
+      const { pageSize = 10, page = 1 } = req.query;
+      const totalProducts = await Product.countDocuments({});
+      const pageCount = Math.ceil(totalProducts / pageSize);
+      products = await Product.find()
+        .populate("reviews")
+        .skip((page - 1) * pageSize)
+        .limit(pageSize);
+      return res.status(200).json({
+        data: products,
+        pagination: {
+          total: totalProducts,
+          pageCount,
+          pageSize: +pageSize,
+          page: +page,
+        },
+      });
+    } else {
+      products = await Product.find();
     }
-  }
-}
-export const productController = new ProductController();
-// { name: { $regex: 'acme.*corp', $options: 'i', $nin: [ 'acmeblahcorp' ] } }
-
-// {
-//   $in: [qtitle],
-// },
+    res.status(200).json(products);
+  },
+};
+Object.keys(productController).forEach((key) => {
+  productController[key] = catchAsync(productController[key]);
+});
+export { productController };

@@ -69,6 +69,7 @@ const Product = () => {
       </div>
     );
   }
+
   const product = res.data;
 
   const onSelectProductSizeChange = (e) => {
@@ -87,7 +88,7 @@ const Product = () => {
       dispatch(
         addProduct({
           product,
-          price: Math.ceil(product.price[0] * (1 - product.sale / 100)),
+          price: Math.round(product.price[0] * (1 - product.sale / 100)),
           type,
           size,
           quantity,
@@ -98,7 +99,7 @@ const Product = () => {
       dispatch(
         addProduct({
           product,
-          price: Math.ceil(price * (1 - product.sale / 100)),
+          price: Math.round(price * (1 - product.sale / 100)),
           type,
           size,
           quantity,
@@ -138,7 +139,6 @@ const Product = () => {
               imageRendering: "pixelated",
             }}
             width={600}
-            height={700}
             src={product.img}
           ></Image>
         </ImgContainer>
@@ -150,7 +150,7 @@ const Product = () => {
           {!first ? (
             <div>
               <Price>
-                {Math.ceil(product.price[0] * (1 - product.sale / 100))}$
+                {Math.round(product.price[0] * (1 - product.sale / 100))}$
               </Price>
               {product.sale > 0 && (
                 <>
@@ -158,7 +158,7 @@ const Product = () => {
                   <Sale>
                     Sale {product.sale}% (
                     {product.price[0] -
-                      Math.ceil(product.price[0] * (1 - product.sale / 100))}
+                      Math.round(product.price[0] * (1 - product.sale / 100))}
                     $)
                   </Sale>
                 </>
@@ -166,13 +166,13 @@ const Product = () => {
             </div>
           ) : (
             <div>
-              <Price>{Math.ceil(price * (1 - product.sale / 100))}$</Price>
+              <Price>{Math.round(price * (1 - product.sale / 100))}$</Price>
               {product.sale > 0 && (
                 <>
                   <PriceFirst>{price}$</PriceFirst>
                   <Sale>
                     Sale {product.sale}% (
-                    {price - Math.ceil(price * (1 - product.sale / 100))}$)
+                    {price - Math.round(price * (1 - product.sale / 100))}$)
                   </Sale>
                 </>
               )}

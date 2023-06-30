@@ -13,6 +13,7 @@ import DiscountList from "./pages/discount/DiscountList";
 import EditDiscount from "./pages/discount/EditDiscount";
 import NewDiscount from "./pages/discount/NewDiscount";
 import { ReactQueryDevtools } from "react-query/devtools";
+import Comment from "./pages/comment/Comment";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "/product/edit/:_id",
         element: <EditProduct />,
+      },
+      {
+        path: "/comment",
+        element: <Comment />,
       },
     ],
   },

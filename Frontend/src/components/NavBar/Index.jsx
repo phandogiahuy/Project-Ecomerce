@@ -33,7 +33,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
-    sessionStorage.removeItem("token");
+    localStorage.removeItem("token");
     dispatch(clearCart());
     window.location.reload(false);
   };
@@ -81,7 +81,7 @@ const Navbar = () => {
             </Popover>
           )}
           {user.data ? (
-            <MenuItem>{user.data.email}</MenuItem>
+            <MenuItem>{user.data.username}</MenuItem>
           ) : (
             <Popover
               content={<Login />}

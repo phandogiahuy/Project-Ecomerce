@@ -20,7 +20,7 @@ export const InforContainer = styled.div`
   margin-left: 20px;
   box-shadow: 1px 6px 26px -21px rgba(102, 93, 244, 0.5) inset;
   border-radius: 5px;
-  height: 620px;
+  height: 520px;
 `;
 export const Title = styled.h1`
   font-weight: 500;

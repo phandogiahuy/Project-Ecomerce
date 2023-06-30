@@ -4,10 +4,10 @@ import { useMutation, useQueryClient } from "react-query";
 import { GET_PRODUCT_ID } from "../../constant/queryKey";
 import { axiosInstance } from "../../Service-api/requestMethod";
 
-const postReview = async ({ id, nameUser, rating, content }) => {
+const postReview = async ({ id, userId, rating, content, username }) => {
   const { data } = await axiosInstance.post(
     `http://localhost:3000/api/reviews/${id}`,
-    { user: nameUser, rating, content }
+    { userId, username, rating, content }
   );
   return data;
 };

@@ -81,7 +81,7 @@ const Content = ({ order }) => {
                   >
                     {productItem.size === 250 ? (
                       <h5 style={{ fontSize: "20px" }}>
-                        {Math.ceil(
+                        {Math.round(
                           productItem.product.price[0] *
                             (1 - productItem.product.sale / 100) *
                             productItem.quantity
@@ -90,7 +90,7 @@ const Content = ({ order }) => {
                       </h5>
                     ) : productItem.size === 500 ? (
                       <h5 style={{ fontSize: "20px" }}>
-                        {Math.ceil(
+                        {Math.round(
                           productItem.product.price[1] *
                             (1 - productItem.product.sale / 100) *
                             productItem.quantity
@@ -99,7 +99,7 @@ const Content = ({ order }) => {
                       </h5>
                     ) : (
                       <h5 style={{ fontSize: "20px" }}>
-                        {Math.ceil(
+                        {Math.round(
                           productItem.product.price[2] *
                             (1 - productItem.product.sale / 100) *
                             productItem.quantity

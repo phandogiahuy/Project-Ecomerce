@@ -17,8 +17,9 @@ export const useLogin = () => {
   return useMutation(login, {
     onSuccess: (data) => {
       if (data.email) {
-        sessionStorage.setItem("token", data.accessToken);
-        sessionStorage.setItem("name", data.name);
+        localStorage.setItem("token", data.accessToken);
+        localStorage.setItem("id", data.id);
+        localStorage.setItem("name", data.username);
         queryClient.setQueryData([GET_USER], () => data);
         queryClient.invalidateQueries([GET_PRODUCT_ID]);
       }
@@ -35,8 +36,9 @@ export const useLoginPageProduct = () => {
   return useMutation(login, {
     onSuccess: (data) => {
       if (data.email) {
-        sessionStorage.setItem("token", data.accessToken);
-        sessionStorage.setItem("name", data.name);
+        localStorage.setItem("token", data.accessToken);
+        localStorage.setItem("id", data.id);
+        localStorage.setItem("name", data.username);
         queryClient.setQueryData([GET_USER], () => data);
       }
       navigate(-1);

@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 import { FormOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Card, Modal, Rate, Space } from "antd";
+import { Button, Card, Modal, Rate, Space, Tooltip } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,7 @@ import ReviewModal from "../Review";
 import CommentList from "./CommentList";
 
 const CommentComponent = ({ reviews, id, name }) => {
-  const token = sessionStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const rate = [];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -54,8 +54,11 @@ const CommentComponent = ({ reviews, id, name }) => {
                         width: "200px",
                       }}
                       onClick={showModal}
+                      disabled
                     >
-                      Review
+                      <Tooltip title="You reviewed this product">
+                        Review
+                      </Tooltip>
                       <FormOutlined />
                     </Button>
                   ) : (

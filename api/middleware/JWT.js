@@ -14,9 +14,8 @@ export const generateAccessToken = (user) => {
 
 export const verifyToken = catchAsync(async (req, res, next) => {
   const authHeader = req.headers.authorization;
-
   const token = authHeader.split(" ")[1];
-  const payload = Jwt.verify(token + "asdas", process.env.JWT_KEY);
+  const payload = Jwt.verify(token, process.env.JWT_KEY);
   const user = await User.findById(payload.id);
   req.user = user;
   next();
@@ -46,7 +45,7 @@ export const verifyTokenAndAuthorization = (req, res, next) => {
 
 export const verifyTokenAndAdmin = (req, res, next) => {
   verifyToken(req, res, () => {
-    if (req.user.isAdmin) {
+    if (req.user?.isAdmin) {
       next();
     } else {
       res.status(403).json("You are not alowed to do that!");

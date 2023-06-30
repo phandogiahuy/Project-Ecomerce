@@ -10,10 +10,10 @@ import Slider from "../../components/Slider";
 
 const Home = () => {
   return (
-    <div className="overflow-x-hidden bg-green-300">
+    <div className="overflow-x-hidden bg-green-200">
       <Announcement />
       <Navbar />
-      <div className="p-3">
+      <div className="">
         <Slider />
       </div>
       <Divider>

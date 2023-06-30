@@ -53,7 +53,7 @@ const RecommendList = (products) => {
               </div>
               <div className="mt-[-1%] flex  text-base  ">
                 <div className="   text-lg font-bold">
-                  {Math.ceil(
+                  {Math.round(
                     products.products.price[0] *
                       (1 - products.products.sale / 100)
                   )}

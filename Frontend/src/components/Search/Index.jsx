@@ -96,7 +96,9 @@ const SearchInput = () => {
                             fontWeight: "500",
                           }}
                         >
-                          {Math.ceil(result.price[0] * (1 - result.sale / 100))}
+                          {Math.round(
+                            result.price[0] * (1 - result.sale / 100)
+                          )}
                           $
                           <span className="text-slate-300 line-through">
                             ({result.price[0]}$)

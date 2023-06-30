@@ -1,35 +1,31 @@
 import { Cart } from "../models/Cart.js";
 import { Product } from "../models/Product.js";
 import { Review } from "../models/Review.js";
-const reviewController =  {
+import { catchAsync } from "../utils/catchAsync.js";
+const reviewController = {
   async create(req, res) {
     const newReview = new Review(req.body);
-    try {
-      const savedReview = await newReview.save();
-      const product = await Product.findByIdAndUpdate(req.params.productId, {
-        $push: { reviews: savedReview._id },
-      });
-      res.status(200).json(product);
-    } catch (err) {
-      res.status(500).json(err);
-    }
+    const savedReview = await newReview.save();
+    const product = await Product.findByIdAndUpdate(req.params.productId, {
+      $push: { reviews: savedReview._id },
+    });
+    res.status(200).json(product);
   },
   //GET PRODUCT
   async showReview(req, res) {
-    try {
-      const review = await Review.find();
-      res.status(200).json(review);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
+    const review = await Review.find();
+    res.status(200).json(review);
+  },
   async deleteAll(req, res) {
-    try {
-      const review = await Review.deleteMany();
-      res.status(200).json(review);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
-}
-export {reviewController} 
+    const review = await Review.deleteMany();
+    await Product.updateMany(
+      { $expr: { $gt: [{ $size: "$reviews" }, 0] } },
+      { $set: { reviews: [] } }
+    );
+    res.status(200).json(review);
+  },
+};
+Object.keys(reviewController).forEach((key) => {
+  reviewController[key] = catchAsync(reviewController[key]);
+});
+export { reviewController };

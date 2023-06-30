@@ -10,6 +10,7 @@ import {
   CrownTwoTone,
   SkinTwoTone,
   InfoCircleTwoTone,
+  EditTwoTone,
 } from "@ant-design/icons";
 import { useState } from "react";
 export default function Sidebar() {
@@ -67,6 +68,11 @@ export default function Sidebar() {
                     Discounts
                   </li>
                 </Link>
+                <Link to="/comment" className="link">
+                  <li className="sidebarListItem">
+                    <EditTwoTone /> Comments
+                  </li>
+                </Link>
                 <Button
                   className="sidebarListItem"
                   onClick={(e) => handleLogOut()}
@@ -74,7 +80,7 @@ export default function Sidebar() {
                   <InfoCircleTwoTone /> Sign out
                 </Button>
               </div>
-            )}
+            )}{" "}
           </ul>
         </div>
       </div>

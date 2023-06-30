@@ -1,60 +1,44 @@
 import { Cart } from "../models/Cart.js";
-class CartController {
+import { catchAsync } from "../utils/catchAsync.js";
+const cartController = {
   async create(req, res) {
     const newCart = new Cart(req.body);
 
-    try {
-      const savedCart = await newCart.save();
-      res.status(200).json(savedCart);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
+    const savedCart = await newCart.save();
+    res.status(200).json(savedCart);
+  },
 
   //UPDATE
   async update(req, res) {
-    try {
-      const updatedCart = await Cart.findByIdAndUpdate(
-        req.params.id,
-        {
-          $set: req.body,
-        },
-        { new: true }
-      );
-      res.status(200).json(updatedCart);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
+    const updatedCart = await Cart.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedCart);
+  },
 
   //DELETE
-  async delete(req, res) {
-    try {
-      await Cart.findByIdAndDelete(req.params.id);
-      res.status(200).json("Cart has been deleted...");
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
+  async delete(req, res, next) {
+    await Cart.findByIdAndDelete(req.params.id);
+    res.status(200).json("Cart has been deleted...");
+  },
 
   //GET USER CART
   async showCart(req, res) {
-    try {
-      const cart = await Cart.findOne({ userId: req.params.userId });
-      res.status(200).json(cart);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
+    const cart = await Cart.findOne({ userId: req.params.userId });
+    res.status(200).json(cart);
+  },
   // //GET ALL
 
   async showAllCart(req, res) {
-    try {
-      const carts = await Cart.find();
-      res.status(200).json(carts);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
-}
-export const cartController = new CartController();
+    const carts = await Cart.find();
+    res.status(200).json(carts);
+  },
+};
+Object.keys(cartController).forEach((key) => {
+  cartController[key] = catchAsync(cartController[key]);
+});
+export { cartController };

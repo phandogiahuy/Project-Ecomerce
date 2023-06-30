@@ -62,7 +62,7 @@ const Register = () => {
           scrollToFirstError
         >
           <Form.Item
-            name="nickname"
+            name="username"
             label="Nickname"
             tooltip="What do you want others to call you?"
             rules={[
