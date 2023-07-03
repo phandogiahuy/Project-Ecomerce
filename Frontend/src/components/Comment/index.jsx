@@ -1,9 +1,11 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-shadow */
 import { FormOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Card, Modal, Rate, Space, Tooltip } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useGetUser } from "../../hooks/Queries/User/useGetUser";
 import ReviewModal from "../Review";
 import CommentList from "./CommentList";
 
@@ -11,16 +13,20 @@ const CommentComponent = ({ reviews, id, name }) => {
   const token = localStorage.getItem("token");
   const rate = [];
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const user = useGetUser();
+  if (user.isLoading) {
+    <div>...</div>;
+  }
   const showModal = () => {
     setIsModalOpen(true);
   };
-
+  const userID = [];
   const handleCancel = () => {
     setIsModalOpen(false);
   };
   reviews.forEach((reviews) => rate.push(reviews.rating));
   const sumOfRatings = rate.reduce((acc, rate) => acc + rate, 0);
-
+  reviews.forEach((review) => userID.push(review.userId));
   // // Calculate the average rating
   const averageRating = sumOfRatings / rate.length;
   const navigate = useNavigate();
@@ -43,24 +49,42 @@ const CommentComponent = ({ reviews, id, name }) => {
               <div className=" ml-[20px] mt-[2%]">
                 <Space wrap>
                   {token ? (
-                    <Button
-                      style={{
-                        display: "flex",
-                        backgroundColor: "#eaf0ff",
-                        letterSpacing: "1px",
-                        fontSize: "24px",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        width: "200px",
-                      }}
-                      onClick={showModal}
-                      disabled
-                    >
-                      <Tooltip title="You reviewed this product">
+                    userID.includes(user.data._id) ? (
+                      <Button
+                        style={{
+                          display: "flex",
+                          backgroundColor: "#eaf0ff",
+                          letterSpacing: "1px",
+                          fontSize: "24px",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          width: "200px",
+                        }}
+                        onClick={showModal}
+                        disabled
+                      >
+                        <Tooltip title="You reviewed this product">
+                          Review
+                        </Tooltip>
+                        <FormOutlined />
+                      </Button>
+                    ) : (
+                      <Button
+                        style={{
+                          display: "flex",
+                          backgroundColor: "#eaf0ff",
+                          letterSpacing: "1px",
+                          fontSize: "24px",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          width: "200px",
+                        }}
+                        onClick={showModal}
+                      >
                         Review
-                      </Tooltip>
-                      <FormOutlined />
-                    </Button>
+                        <FormOutlined />
+                      </Button>
+                    )
                   ) : (
                     <Button
                       style={{

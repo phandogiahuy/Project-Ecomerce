@@ -27,6 +27,12 @@ export default function Comment() {
       render: (text, record, index) => index + 1,
     },
     {
+      title: "Name",
+      align: "center",
+      dataIndex: "title",
+      render: (title) => <h1>{title}</h1>,
+    },
+    {
       title: "Image",
       align: "center",
       dataIndex: "img",

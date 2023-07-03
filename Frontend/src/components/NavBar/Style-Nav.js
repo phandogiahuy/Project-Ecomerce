@@ -52,15 +52,13 @@ export const LogoImage = styled.img`
 export const MenuItem = styled.div`
   font-size: 20px;
   cursor: pointer;
-
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 export const SearchComponent = styled.p`
-  font-size: 25px;
+  font-size: 22px;
   cursor: pointer;
   color: midnightblue;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })};
-
   padding: 20px;
   margin-left: 20px;
 `;

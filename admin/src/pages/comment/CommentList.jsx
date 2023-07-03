@@ -26,7 +26,7 @@ const CommentList = ({ content }) => {
       {data.reviews.map((review) => (
         <div key={review._id}>
           <div style={{ display: "flex" }}>
-            <h2>{review.user}</h2>
+            <h2>{review.username}</h2>
             <Rate
               disabled
               defaultValue={review.rating}
