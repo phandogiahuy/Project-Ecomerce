@@ -49,7 +49,7 @@ const CommentComponent = ({ reviews, id, name }) => {
               <div className=" ml-[20px] mt-[2%]">
                 <Space wrap>
                   {token ? (
-                    userID.includes(user.data._id) ? (
+                    userID.includes(user?.data?._id) ? (
                       <Button
                         style={{
                           display: "flex",

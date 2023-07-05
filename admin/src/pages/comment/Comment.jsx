@@ -19,6 +19,8 @@ export default function Comment() {
   if (isLoading) {
     return <Skeleton active />;
   }
+  console.log(data);
+
   const columns = [
     {
       title: "ID",
@@ -81,7 +83,7 @@ export default function Comment() {
         </center>
       </Affix>
       <Table bordered columns={columns} dataSource={data} sticky />
-      <Modal title="Order" open={isModalOpen} onCancel={handleCancel}>
+      <Modal title="Product" open={isModalOpen} onCancel={handleCancel}>
         <CommentList content={content} />
       </Modal>
     </div>

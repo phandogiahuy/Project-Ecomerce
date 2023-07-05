@@ -15,7 +15,13 @@ import NewDiscount from "./pages/discount/NewDiscount";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Comment from "./pages/comment/Comment";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5,
+    },
+  },
+});
 const router = createBrowserRouter([
   {
     path: "/",

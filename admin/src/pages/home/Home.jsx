@@ -15,6 +15,7 @@ export default function Home() {
       </div>
     );
   }
+
   if (isError) {
     return (
       <h1 style={{ fontSize: "30px" }}>

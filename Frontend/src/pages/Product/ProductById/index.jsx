@@ -138,7 +138,7 @@ const Product = () => {
             style={{
               imageRendering: "pixelated",
             }}
-            width={600}
+            width={550}
             src={product.img}
           ></Image>
         </ImgContainer>

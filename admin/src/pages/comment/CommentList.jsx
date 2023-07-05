@@ -1,28 +1,21 @@
 import React from "react";
 import { useGetProductById } from "../../hooks/Queries/Product/useGetProductById";
-import {
-  Table,
-  Tag,
-  Space,
-  Button,
-  Skeleton,
-  Affix,
-  Image,
-  Modal,
-  Rate,
-  Divider,
-} from "antd";
+import { Skeleton, Rate, Divider } from "antd";
 
 const CommentList = ({ content }) => {
   const { isLoading, data } = useGetProductById(content);
 
   if (isLoading) {
-    <div>
-      <Skeleton />
-    </div>;
+    return (
+      <div>
+        <Skeleton />
+      </div>
+    );
   }
+
   return (
     <div>
+      <h3>{data.title}</h3>
       {data.reviews.map((review) => (
         <div key={review._id}>
           <div style={{ display: "flex" }}>

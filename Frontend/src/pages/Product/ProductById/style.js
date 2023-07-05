@@ -20,26 +20,26 @@ export const InforContainer = styled.div`
   margin-left: 20px;
   box-shadow: 1px 6px 26px -21px rgba(102, 93, 244, 0.5) inset;
   border-radius: 5px;
-  height: 520px;
+  height: 470px;
 `;
 export const Title = styled.h1`
   font-weight: 500;
-  font-size: 40px;
+  font-size: 35px;
   font-family: "Cantora One', sans-serif";
 `;
 export const Desc = styled.p`
   font-size: 15px;
   letter-spacing: 2px;
-  margin: 20px 0px;
+  margin: 10px 0px;
 `;
 export const Price = styled.span`
   font-weight: 400;
-  font-size: 45px;
+  font-size: 30px;
 
   color: #f62400;
 `;
 export const PriceFirst = styled.span`
-  font-size: 45px;
+  font-size: 30px;
   text-decoration: line-through;
   color: #afafaf;
   margin-left: 3%;
