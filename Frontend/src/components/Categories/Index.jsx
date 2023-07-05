@@ -9,6 +9,8 @@ import { ContainerCategories, Favorite, Phin } from "./style-category";
 
 const Categories = () => {
   const cat = "phin";
+  // const theme = useContext(themeContext);
+  // console.log(theme);
   return (
     <ContainerCategories>
       <div className="flex w-[50%] flex-col ">

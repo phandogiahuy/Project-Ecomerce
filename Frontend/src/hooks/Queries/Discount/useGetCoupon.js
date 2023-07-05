@@ -1,11 +1,30 @@
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useEffect, useReducer } from "react";
 
-import { GET_COUPON } from "../../../constant/queryKey";
-
-const getCoupon = async () => {
+export const getCoupon = async () => {
   const { data } = await axios.get(`http://localhost:3000/api/discount/`);
   return data;
 };
-const useGetCoupon = () => useQuery([GET_COUPON], getCoupon);
-export { useGetCoupon };
+// const useGetCoupon = () => useQuery([GET_COUPON], getCoupon);
+export const useQuery = (fn, deps) => {
+  const [state, setState] = useReducer(
+    (oldState, newState) => {
+      return { ...oldState, ...newState };
+    },
+    { isLoading: true, data: null, isError: null, error: null }
+  );
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setState({ isLoading: true });
+        const data = await fn();
+        setState({ isLoading: false, data });
+      } catch (error) {
+        setState({ isError: true, error, isLoading: false });
+      }
+    };
+    fetchData();
+  }, deps);
+  return state;
+};

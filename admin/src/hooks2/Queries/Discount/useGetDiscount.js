@@ -10,5 +10,4 @@ const getDiscount = async () => {
   return data;
 };
 const useGetDiscount = () => useQuery([GET_DISCOUNT], () => getDiscount());
-
 export { useGetDiscount };
