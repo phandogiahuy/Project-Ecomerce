@@ -10,6 +10,7 @@ import OrderSuccesful from "./pages/OrderSuccessful";
 import ProductList from "./pages/Product/ProductByCategories";
 import Product from "./pages/Product/ProductById";
 import Register from "./pages/Register/Register";
+import Test from "./context/ref";
 
 const route = [
   {
@@ -43,6 +44,10 @@ const route = [
   {
     path: "/cart/checkout",
     element: <Checkout />,
+  },
+  {
+    path: "/test",
+    element: <Test />,
   },
   {
     // path: "/cart/checkout/successful",

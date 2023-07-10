@@ -3,10 +3,10 @@ import { createContext, useContext, useState } from "react";
 const StateContext = createContext(null);
 export const useToDoContext = () => useContext(StateContext);
 export const StateContextProvider = ({ children }) => {
-  const [state, setState] = useState(null);
+  const [state, setState] = useState({});
 
   return (
-    <StateContext.Provider value={(state, setState)}>
+    <StateContext.Provider value={{ state, setState }}>
       {children}
     </StateContext.Provider>
   );

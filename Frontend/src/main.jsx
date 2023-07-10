@@ -8,7 +8,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 
-import Home from "./pages/Home";
+import { StateContextProvider } from "./context";
 import { store } from "./reduxToolkit/store";
 import { router } from "./routes";
 
@@ -22,11 +22,12 @@ const queryClient = new QueryClient({
 });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <Home />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  </Provider>
+  <StateContextProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </Provider>
+  </StateContextProvider>
 );
