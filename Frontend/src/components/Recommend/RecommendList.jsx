@@ -1,5 +1,5 @@
 import { Badge, Card, Rate } from "antd";
-import React, { useLayoutEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const RecommendList = (products) => {
@@ -10,7 +10,7 @@ const RecommendList = (products) => {
 
   // // Calculate the average rating
   const averageRating = sumOfRatings / rate.length;
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, [url]);
   // // Round the average rating to a specific decimal place (e.g., 1 decimal place)
