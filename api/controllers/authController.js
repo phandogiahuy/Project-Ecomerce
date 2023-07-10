@@ -26,21 +26,28 @@ const authController = {
   },
   //login account
   async login(req, res) {
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.email }).populate(
+      "order"
+    );
     if (!user) {
       return res.status(500).json("Email or password is wrong");
     } else {
-      const validPassword = bcrypt.compare(req.body.password, user.password);
+      const validPassword = await bcrypt.compare(
+        req.body.password,
+        user.password
+      );
       if (!validPassword) {
-        return res.status(200).json("Email or password is wrong");
+        return res.status(500).json("Email or password is wrong");
       } else {
         const accessToken = generateAccessToken(user);
         res.status(200).json({
           email: user.email,
           username: user.username,
           isAdmin: user.isAdmin,
+          password: req.body.password,
+          order: user.order,
           accessToken,
-          id: user._id,
+          _id: user._id,
         });
       }
     }

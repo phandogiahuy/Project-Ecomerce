@@ -14,7 +14,10 @@ export const Wrapper = styled.div`
   height: 130px;
   ${mobile({ padding: "10px" })}
 `;
-
+export const InforUser = styled.div`
+  font-size: 18px;
+  cursor: pointer;
+`;
 export const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
@@ -50,7 +53,7 @@ export const LogoImage = styled.img`
   width: 10%;
 `;
 export const MenuItem = styled.div`
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;

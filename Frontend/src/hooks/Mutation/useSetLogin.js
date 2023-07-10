@@ -18,7 +18,7 @@ export const useLogin = () => {
     onSuccess: (data) => {
       if (data.email) {
         localStorage.setItem("token", data.accessToken);
-        localStorage.setItem("id", data.id);
+        localStorage.setItem("id", data._id);
         localStorage.setItem("name", data.username);
         queryClient.setQueryData([GET_USER], () => data);
         queryClient.invalidateQueries([GET_PRODUCT_ID]);
@@ -37,13 +37,14 @@ export const useLoginPageProduct = () => {
     onSuccess: (data) => {
       if (data.email) {
         localStorage.setItem("token", data.accessToken);
-        localStorage.setItem("id", data.id);
+        localStorage.setItem("id", data._id);
         localStorage.setItem("name", data.username);
         queryClient.setQueryData([GET_USER], () => data);
       }
       navigate(-1);
     },
     onError: (e) => {
+      console.log(e);
       message.error(e.response.data);
     },
   });

@@ -32,6 +32,7 @@ const userController = {
     res.status(200).json(other);
   },
   async getMe(req, res) {
+    console.log(req.user.order);
     res.json(req.user);
   },
   //show all user

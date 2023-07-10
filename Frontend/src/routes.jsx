@@ -5,6 +5,10 @@ import Checkout from "./pages/Checkout";
 import ErrorPage from "./pages/Error/defaut-error-page.jsx";
 import Favorite from "./pages/Favorite";
 import Home from "./pages/Home";
+import InforUser from "./pages/InforUser";
+import HistoryUser from "./pages/InforUser/HistoryUser";
+import InfoUser from "./pages/InforUser/InfoUser";
+import OrderUser from "./pages/InforUser/OrderUser";
 import LoginProduct from "./pages/Login/Product";
 import OrderSuccesful from "./pages/OrderSuccessful";
 import ProductList from "./pages/Product/ProductByCategories";
@@ -43,6 +47,24 @@ const route = [
   {
     path: "/cart/checkout",
     element: <Checkout />,
+  },
+  {
+    path: "/user/:userId",
+    element: <InforUser />,
+    children: [
+      {
+        path: "order",
+        element: <OrderUser />,
+      },
+      {
+        path: "history",
+        element: <HistoryUser />,
+      },
+      {
+        path: "info",
+        element: <InfoUser />,
+      },
+    ],
   },
   {
     // path: "/cart/checkout/successful",

@@ -54,6 +54,7 @@ const revenueController = {
       .populate("productId")
       .limit(5)
       .sort({ amount: -1 });
+    res.status(200).json(revenues);
   },
   //DELETE
   async deleteAll(req, res) {

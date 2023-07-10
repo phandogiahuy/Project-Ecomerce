@@ -5,7 +5,7 @@ import {
 } from "@ant-design/icons";
 import { Badge, Popover } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useGetUser } from "../../hooks/Queries/User/useGetUser";
 import Login from "../../pages/Login";
@@ -16,6 +16,7 @@ import SearchInput from "../Search";
 import {
   Center,
   Container,
+  InforUser,
   Left,
   Logo,
   LogoImage,
@@ -29,7 +30,7 @@ const Navbar = () => {
   const products = useSelector((state) => state.cart.products);
   const total = useSelector((state) => state.cart.total);
   const user = useGetUser();
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
@@ -37,7 +38,9 @@ const Navbar = () => {
     dispatch(clearCart());
     window.location.reload(false);
   };
-
+  const handleClickInforUser = () => {
+    navigate(`/user/${user.data?._id}`);
+  };
   return (
     <Container>
       <Wrapper>
@@ -65,11 +68,16 @@ const Navbar = () => {
         </Link>
         <Right>
           {user.data ? (
-            <MenuItem onClick={handleLogOut}>
-              {" "}
-              <ExportOutlined />
-              Log out
-            </MenuItem>
+            <>
+              <MenuItem onClick={handleLogOut}>
+                {" "}
+                <ExportOutlined />
+                Log out
+              </MenuItem>
+              <InforUser onClick={handleClickInforUser}>
+                My Information
+              </InforUser>
+            </>
           ) : (
             <Popover
               content={<Register />}
