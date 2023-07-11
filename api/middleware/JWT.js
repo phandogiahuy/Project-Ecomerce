@@ -16,7 +16,7 @@ export const verifyToken = catchAsync(async (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader.split(" ")[1];
   const payload = Jwt.verify(token, process.env.JWT_KEY);
-  const user = await User.findById(payload.id);
+  const user = await User.findById(payload.id).populate("order");
   req.user = user;
   next();
 

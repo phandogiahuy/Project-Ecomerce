@@ -7,61 +7,52 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  padding: 1px 20px;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   background-color: aliceblue;
-  height: 130px;
+  height: 150px;
   ${mobile({ padding: "10px" })}
 `;
 export const InforUser = styled.div`
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
-`;
-export const Language = styled.span`
-  font-size: 14px;
-  cursor: pointer;
-  ${mobile({ display: "none" })}
 `;
 
 export const Left = styled.div`
-  flex: 1;
   display: flex;
   align-items: center;
+  flex: 1;
+  padding: 10px;
 `;
 export const Center = styled.div`
-  flex: 1;
-  margin-top: 5px;
-  margin-left: 90px;
+  flex: 2;
 `;
 export const Right = styled.div`
-  flex: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex: 1;
   ${mobile({ justifyContent: "center" })};
 `;
-export const Logo = styled.h1`
+export const Logo = styled.div`
   font-weight: bold;
-  font-size: 70px;
+  font-size: 90px;
   font-family: "Youth Action", sans-serif;
-  text-align: center;
   ${mobile({ fontSize: "20px", flex: 2 })}
   cursor: pointer;
 `;
 export const LogoImage = styled.img`
-  width: 10%;
+  width: 28%;
 `;
 export const MenuItem = styled.div`
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 export const SearchComponent = styled.p`
-  font-size: 22px;
+  font-size: 30px;
   cursor: pointer;
   color: midnightblue;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })};
-  padding: 20px;
-  margin-left: 20px;
 `;

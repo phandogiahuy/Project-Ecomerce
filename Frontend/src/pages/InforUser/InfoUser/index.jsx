@@ -13,7 +13,7 @@ const InfoUser = () => {
     mutate({
       username: values.username,
       email: values.email,
-      password: values.password,
+      password: values?.password || 0,
       id: user.data?._id,
     });
     // console.log({
@@ -39,8 +39,6 @@ const InfoUser = () => {
         initialValues={{
           username: user.data?.username,
           email: user.data?.email,
-          password: user.data?.password,
-          confirm: user.data?.password,
         }}
       >
         <Form.Item

@@ -7,12 +7,7 @@ import {
 import { userController } from "../controllers/userController.js";
 
 export const userRouter = Router();
-userRouter.put(
-  "/:id",
-  verifyToken,
-  verifyTokenAndAuthorization,
-  userController.update
-);
+userRouter.put("/:id", verifyToken, userController.update);
 userRouter.delete("/:id", verifyTokenAndAdmin, userController.delete);
 userRouter.get("/find/:id", userController.show);
 userRouter.get("/", verifyTokenAndAdmin, userController.showAll);

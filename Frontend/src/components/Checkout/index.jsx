@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useMoMo } from "../../hooks/Mutation/Momo/useMomo";
 import { useSetOrder } from "../../hooks/Mutation/Order/useSetOrder";
+import { useGetUser } from "../../hooks/Queries/User/useGetUser";
 import { showOrder } from "../../reduxToolkit/orderRedux";
 import ProductDetailCheckOut from "../ProductDetail";
 import MySteps from "../Steps";
@@ -12,15 +13,14 @@ import { InforProduct, InforUser } from "./style";
 const CheckoutComponent = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-
   const [payment, setPayment] = useState();
   const { products, pricetotal, shipping } = useSelector((state) => state.cart);
   const { mutate } = useSetOrder();
+  const user = useGetUser();
+  console.log(user.data?._id);
   const momo = useMoMo();
-
   const handleFinsh = async (values) => {
     const { name, phone, mail, address } = values;
-
     if (payment === "COD") {
       dispatch(
         showOrder({
@@ -33,6 +33,7 @@ const CheckoutComponent = () => {
           payment,
         })
       );
+      const id = user.data?._id || 0;
       mutate({
         name,
         phone,
@@ -42,6 +43,7 @@ const CheckoutComponent = () => {
         shipping,
         total: pricetotal,
         payment,
+        userId: id,
       });
     } else {
       dispatch(
@@ -75,7 +77,15 @@ const CheckoutComponent = () => {
       <div className=" flex w-[100%]  p-5">
         <InforUser>
           <h2>Order Information</h2>
-          <Form layout="vertical" form={form} onFinish={handleFinsh}>
+          <Form
+            layout="vertical"
+            form={form}
+            onFinish={handleFinsh}
+            initialValues={{
+              name: user.data?.username,
+              mail: user.data?.email,
+            }}
+          >
             <Space>
               <Form.Item
                 label="Name"

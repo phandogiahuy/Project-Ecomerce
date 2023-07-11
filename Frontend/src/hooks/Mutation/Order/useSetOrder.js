@@ -12,6 +12,7 @@ const order = async ({
   shipping,
   total,
   payment,
+  userId,
 }) => {
   const res = await axios.post("http://localhost:3000/api/order/", {
     name,
@@ -22,6 +23,7 @@ const order = async ({
     address,
     total,
     payment,
+    userId,
   });
   return res.data;
 };
