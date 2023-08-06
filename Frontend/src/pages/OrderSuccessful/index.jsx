@@ -1,13 +1,21 @@
 import { Card, Result } from "antd";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useQueryClient } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Footer from "../../components/Footer/Footer";
 import MySteps from "../../components/Steps";
+import { GET_USER } from "../../constant/queryKey";
+import { clearCart } from "../../reduxToolkit/cartRedux";
 
 const OrderSuccesful = () => {
   const order = useSelector((state) => state.order.order);
+  localStorage.removeItem("persist:root");
+  const dispatch = useDispatch();
+  dispatch(clearCart());
+  const query = useQueryClient();
+  query.invalidateQueries([GET_USER]);
   return (
     <div>
       <div style={{ height: "120px", backgroundColor: "bisque" }}>

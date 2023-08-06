@@ -22,6 +22,9 @@ import { useState } from "react";
 import { useUpdateOrder } from "../../hooks/Mutation/Order/useUpdateOrder";
 import { useDeleteOrder } from "../../hooks/Mutation/Order/useDeleteOrder";
 import { useRevenue } from "../../hooks/Mutation/Revenue/useRevenue";
+import { useMutation, useQueryClient } from "react-query";
+import { GET_ORDER } from "../../constant/queryKey";
+
 const token = localStorage.getItem("token");
 
 export default function WidgetLg({ orders }) {
@@ -29,8 +32,8 @@ export default function WidgetLg({ orders }) {
   const [content, setContent] = useState();
   const { mutate } = useUpdateOrder();
   const revenue = useRevenue();
-  const [id, setId] = useState();
   const res = useDeleteOrder();
+  const [id, setId] = useState();
   const showModal = (order) => {
     setContent(order);
     setIsModalOpen(true);
@@ -44,16 +47,12 @@ export default function WidgetLg({ orders }) {
     setIsModalOpen(false);
   };
 
-  const confirm = () => {
-    message.success("You deleted product successfully");
-  };
   const cancel = () => {
     message.error("Product don't delete");
   };
-  const handleClickDelete = () => {
-    res.mutate();
+  const handleClickDelete = async () => {
+    message.success("You deleted order successfully");
   };
-
   const columns = [
     {
       title: "ID",
@@ -139,7 +138,7 @@ export default function WidgetLg({ orders }) {
           <Popconfirm
             title="Delete product"
             description="Are you sure to delete this order, please check carefully because of no return?"
-            onConfirm={confirm}
+            onConfirm={handleClickDelete}
             onCancel={cancel}
             okText="Yes"
             cancelText="No"
@@ -154,7 +153,6 @@ export default function WidgetLg({ orders }) {
                 padding: "10px",
                 marginBottom: "10px",
               }}
-              onClick={handleClickDelete}
               icon={<MinusCircleOutlined />}
             >
               Delete Success Transaction

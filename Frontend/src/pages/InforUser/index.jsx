@@ -2,6 +2,7 @@ import { AccountBookOutlined } from "@ant-design/icons";
 import React, { useRef, useState } from "react";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 
+import Announcement from "../../components/Annoucement";
 import Navbar from "../../components/NavBar";
 import { useGetUser } from "../../hooks/Queries/User/useGetUser";
 import { Button, Detail, History, Infor, Nav, Order, Wrapper } from "./style";
@@ -16,30 +17,31 @@ const InforUser = () => {
   const [isOpen, setIsOpen] = useState(false);
   const clickOrder = () => {
     navigate(`order`);
-    click1.current.style.opacity = "1";
-    click2.current.style.opacity = "0.4";
-    click3.current.style.opacity = "1";
-    setIsOpen(true);
-  };
-  const clickHistory = () => {
-    navigate(`history`);
-    click1.current.style.opacity = "1";
+    click1.current.style.opacity = "0.4";
     click2.current.style.opacity = "1";
     click3.current.style.opacity = "0.4";
     setIsOpen(true);
   };
+  const clickHistory = () => {
+    navigate(`history`);
+    click1.current.style.opacity = "0.4";
+    click2.current.style.opacity = "0.4";
+    click3.current.style.opacity = "1";
+    setIsOpen(true);
+  };
   const clickInfor = () => {
     navigate(`info`);
-    click1.current.style.opacity = "0.4";
-    click2.current.style.opacity = "1";
-    click3.current.style.opacity = "1";
+    click1.current.style.opacity = "1";
+    click2.current.style.opacity = "0.4";
+    click3.current.style.opacity = "0.4";
     setIsOpen(true);
   };
   return (
     <>
+      <Announcement />
       <Navbar />
       <h2 className="p-5 text-6xl">My Information</h2>
-      <div className="flex p-6">
+      <div className="flex  p-6">
         <Nav>
           <Wrapper>
             <Infor>
@@ -64,8 +66,14 @@ const InforUser = () => {
             <Outlet />
           ) : (
             <div className="flex flex-col items-center  p-6">
-              <h1>Hello {user.data?.username}, welcome to The Coffee World</h1>
+              <h1>
+                Hello {user.data?.username}, Welcome to Dashboard of AromaDelute
+                ,
+              </h1>
               <AccountBookOutlined style={{ fontSize: "50px" }} />
+              <div className="mt-9">
+                <img src="/vite.png" width={150} />
+              </div>
             </div>
           )}
         </Detail>

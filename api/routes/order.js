@@ -17,6 +17,9 @@ orderRouter.get(
   orderController.showOrderUser
 );
 orderRouter.get("/", verifyTokenAndAdmin, orderController.showAllOrder);
+orderRouter.get("/success", orderController.showAllOrderSuccessful);
+orderRouter.get("/pending", orderController.showAllOrderPending);
+
 orderRouter.get(
   "/income",
   verifyTokenAndAdmin,

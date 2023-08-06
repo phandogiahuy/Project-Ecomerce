@@ -57,16 +57,14 @@ const Navbar = () => {
             </SearchComponent>
           </Popover>
         </Left>
-
-        <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-          <Center>
-            <Logo>
-              {" "}
-              <LogoImage src="/vite.png" />
-              AROMA deLute.
-            </Logo>
-          </Center>
-        </Link>
+        <Center>
+          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+            <div className=" mt-[-45px] flex items-end ">
+              <LogoImage src="/CatPoster.png" />
+              <Logo> AROMA deLute.</Logo>
+            </div>
+          </Link>
+        </Center>
         <Right>
           {user.data ? (
             <>

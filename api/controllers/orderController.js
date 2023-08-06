@@ -1,10 +1,16 @@
 import { Order } from "../models/Order.js";
+import { User } from "../models/User.js";
 import { catchAsync } from "../utils/catchAsync.js";
 const orderController = {
   async create(req, res) {
     const newOrder = new Order(req.body);
-
     const savedOrder = await newOrder.save();
+    if (req.body.userId != 0) {
+      await User.findByIdAndUpdate(req.body.userId, {
+        $push: { order: savedOrder._id },
+      });
+    }
+
     res.status(200).json(savedOrder);
   },
 
@@ -41,6 +47,14 @@ const orderController = {
 
   async showAllOrder(req, res) {
     const orders = await Order.find();
+    res.status(200).json(orders);
+  },
+  async showAllOrderSuccessful(req, res) {
+    const orders = await Order.find({ status: "success" });
+    res.status(200).json(orders);
+  },
+  async showAllOrderPending(req, res) {
+    const orders = await Order.find({ status: "pending" });
     res.status(200).json(orders);
   },
 

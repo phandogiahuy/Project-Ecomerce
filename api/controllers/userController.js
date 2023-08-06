@@ -5,10 +5,13 @@ import { catchAsync } from "../utils/catchAsync.js";
 const userController = {
   //update user
   async update(req, res) {
-    if (req.body.password) {
+    if (req.body.password != 0) {
       const salt = await bcrypt.genSalt(10);
-
       req.body.password = await bcrypt.hash(req.body.password, salt);
+    } else {
+      console.log(req.body);
+      delete req.body.password;
+      console.log(req.body);
     }
 
     await User.findByIdAndUpdate(
@@ -32,7 +35,6 @@ const userController = {
     res.status(200).json(other);
   },
   async getMe(req, res) {
-    console.log(req.user.order);
     res.json(req.user);
   },
   //show all user
