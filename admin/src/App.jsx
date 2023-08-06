@@ -30,7 +30,7 @@ const App = () => {
             <Sidebar />
           </Sider>
           <Content>
-            <Outlet />{" "}
+            <Outlet />
           </Content>
         </Layout>
       </Layout>

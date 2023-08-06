@@ -37,6 +37,7 @@ const Navbar = () => {
     localStorage.removeItem("token");
     dispatch(clearCart());
     window.location.reload(false);
+    navigate("/");
   };
   const handleClickInforUser = () => {
     navigate(`/user/${user.data?._id}`);
