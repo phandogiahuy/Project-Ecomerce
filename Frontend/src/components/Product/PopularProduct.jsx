@@ -74,7 +74,7 @@ const PopularProduct = ({ cat, sort }) => {
           md: 24,
           lg: 32,
         }}
-        style={{ marginTop: 5, marginRight: "5px", marginLeft: "5px" }}
+        style={{ marginTop: 5, marginRight: "5px", marginLeft: "100px" }}
       >
         {cat && getProductByCat.data.length > 0
           ? getProductByCat.data.map((item) => (

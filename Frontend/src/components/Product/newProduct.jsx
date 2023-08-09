@@ -4,6 +4,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import {
+  ButtonOrder,
+  ButtonSpan,
   Image,
   Infor,
   InforButton,
@@ -72,23 +74,9 @@ const Product = ({ item }) => {
                 <Space wrap>
                   <Link to={`/product/${item._id}`}>
                     <InforButton>
-                      <Button
-                        className="buttonBuy"
-                        ghost
-                        type="primary"
-                        icon={<ShoppingOutlined />}
-                        style={{
-                          fontSize: "15px",
-                          cursor: "pointer",
-                          display: "flex",
-                          alignItems: "center",
-                          color: "#1C2F7F",
-                          border: "#38498f solid 2px",
-                          fontFamily: "g Guarantee', sans-serif",
-                        }}
-                      >
-                        ORDER NOW
-                      </Button>
+                      <ButtonOrder>
+                        <ButtonSpan>Order now</ButtonSpan>
+                      </ButtonOrder>
                     </InforButton>
                   </Link>
                 </Space>
@@ -113,23 +101,9 @@ const Product = ({ item }) => {
               <Space wrap>
                 <Link to={`/product/${item._id}`}>
                   <InforButton>
-                    <Button
-                      className="buttonBuy"
-                      ghost
-                      type="primary"
-                      icon={<ShoppingOutlined />}
-                      style={{
-                        fontSize: "15px",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        color: "#1C2F7F",
-                        border: "#38498f solid 2px",
-                        fontFamily: "g Guarantee', sans-serif",
-                      }}
-                    >
-                      ORDER NOW
-                    </Button>
+                    <ButtonOrder>
+                      <ButtonSpan>Order now</ButtonSpan>
+                    </ButtonOrder>
                   </InforButton>
                 </Link>
               </Space>
@@ -142,3 +116,4 @@ const Product = ({ item }) => {
 };
 
 export default Product;
+// icon={<ShoppingOutlined />}

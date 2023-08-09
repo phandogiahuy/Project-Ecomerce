@@ -17,10 +17,10 @@ export const Title = styled.h1`
   margin-left: 50px;
 `;
 export const Wrapper = styled.div`
-  width: 225%;
+  width: 160%;
   padding: 10px;
   display: flex;
-  transform: translateX(${(props) => props.slideIndex * -100}vw);
+  transform: translateX(${(props) => props.slideIndex * -98}vw);
   transition: all 1.5s ease-out;
 `;
 export const Arrow = styled.div`

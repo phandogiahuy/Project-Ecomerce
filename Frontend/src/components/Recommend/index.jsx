@@ -18,7 +18,7 @@ const RecommendProduct = ({ products }) => {
     <div style={{ position: "relative" }}>
       <h1>Related Products</h1>
       <Wrapper>
-        {res.data.slice(0, 4).map((product) => (
+        {res.data.slice(0, 5).map((product) => (
           <RecommendList products={product} key={product._id} />
         ))}
       </Wrapper>

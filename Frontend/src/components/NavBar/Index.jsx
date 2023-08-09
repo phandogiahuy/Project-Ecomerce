@@ -1,4 +1,5 @@
 import {
+  BookOutlined,
   ExportOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
@@ -21,6 +22,7 @@ import {
   Logo,
   LogoImage,
   MenuItem,
+  RecommendProduct,
   Right,
   SearchComponent,
   Wrapper,
@@ -56,6 +58,10 @@ const Navbar = () => {
               Search <SearchOutlined />
             </SearchComponent>
           </Popover>
+          <RecommendProduct>
+            <BookOutlined />
+            Select Product
+          </RecommendProduct>
         </Left>
         <Center>
           <Link to="/" style={{ textDecoration: "none", color: "black" }}>

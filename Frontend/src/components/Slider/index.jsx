@@ -14,7 +14,7 @@ const contentStyle = {
 const Slider = () => {
   return (
     <Container>
-      <div className=" w-[50%]">
+      <div className=" w-[55%]">
         <Carousel autoplay effect="fade">
           {sliderItems.map((item) => (
             <Slide key={item.id}>

@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: aliceblue;
-  height: 150px;
+  height: 100px;
   ${mobile({ padding: "10px" })}
 `;
 export const InforUser = styled.div`
@@ -27,26 +27,29 @@ export const Left = styled.div`
 `;
 export const Center = styled.div`
   flex: 2;
+  margin-left: 20px;
 `;
 export const Right = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex: 1;
+  color: midnightblue;
   ${mobile({ justifyContent: "center" })};
 `;
 export const Logo = styled.div`
   font-weight: bold;
-  font-size: 90px;
+  font-size: 100px;
   font-family: "Youth Action", sans-serif;
   ${mobile({ fontSize: "20px", flex: 2 })}
   cursor: pointer;
 `;
 export const LogoImage = styled.img`
-  width: 28%;
+  width: 18%;
 `;
 export const MenuItem = styled.div`
-  font-size: 20px;
+  font-size: 30px;
+
   cursor: pointer;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
@@ -55,4 +58,12 @@ export const SearchComponent = styled.p`
   cursor: pointer;
   color: midnightblue;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })};
+`;
+
+export const RecommendProduct = styled.div`
+  font-size: 30px;
+  cursor: pointer;
+  color: midnightblue;
+  ${mobile({ fontSize: "12px", marginLeft: "10px" })};
+  margin-left: 100px;
 `;

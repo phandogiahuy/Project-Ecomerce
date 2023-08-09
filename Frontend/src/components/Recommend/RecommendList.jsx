@@ -38,7 +38,6 @@ const RecommendList = (products) => {
               style={{
                 maxWidth: 365,
                 minHeight: 460,
-
                 marginLeft: "5px",
               }}
               cover={
