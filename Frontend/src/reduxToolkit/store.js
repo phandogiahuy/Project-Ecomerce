@@ -1,4 +1,4 @@
-import { combineReducers,configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
   FLUSH,
   PAUSE,
@@ -13,6 +13,7 @@ import storage from "redux-persist/lib/storage";
 
 import cartReducer from "./cartRedux";
 import orderRedux from "./orderRedux";
+import recommendRedux from "./recommendRedux";
 
 const persistConfig = {
   key: "root",
@@ -20,7 +21,11 @@ const persistConfig = {
   storage,
 };
 
-const rootReducer = combineReducers({ cart: cartReducer, order: orderRedux });
+const rootReducer = combineReducers({
+  cart: cartReducer,
+  order: orderRedux,
+  recommend: recommendRedux,
+});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -40,10 +40,10 @@ const EditProduct = () => {
   }
   const handleFinsh = async (values) => {
     const price = [];
-    price.push(form.getFieldValue("price250"));
-    price.push(form.getFieldValue("price500"));
-    price.push(form.getFieldValue("price1000"));
-
+    price.push(values.price250);
+    price.push(values.price500);
+    price.push(values.price1000);
+    console.log(values);
     if (change) {
       const imageRef = ref(storage, `images/${v4() + images.name}`);
       const snap = await uploadBytes(imageRef, images);
@@ -152,26 +152,14 @@ const EditProduct = () => {
       <Form.Item
         name="price250"
         label="Price for 250 gram"
-        rules={[
-          { required: true, message: "Please enter a price" },
-          {
-            min: 0,
-            message: "Price must be a positive number",
-          },
-        ]}
+        rules={[{ required: true, message: "Please enter a price" }]}
       >
         <Input placeholder="Enter price for 250 gram" type="number" min={0} />
       </Form.Item>
       <Form.Item
         name="price500"
         label="Price for 500 gram"
-        rules={[
-          { required: true, message: "Please enter a price" },
-          {
-            min: 0,
-            message: "Price must be a positive number",
-          },
-        ]}
+        rules={[{ required: true, message: "Please enter a price" }]}
       >
         <Input placeholder="Enter price for 500 gram" type="number" min={0} />
       </Form.Item>
@@ -179,13 +167,7 @@ const EditProduct = () => {
       <Form.Item
         name="price1000"
         label="Price for 1000 gram"
-        rules={[
-          { required: true, message: "Please enter a price" },
-          {
-            min: 0,
-            message: "Price must be a positive number",
-          },
-        ]}
+        rules={[{ required: true, message: "Please enter a price" }]}
       >
         <Input placeholder="Enter price for 250 gram" type="number" min={0} />
       </Form.Item>

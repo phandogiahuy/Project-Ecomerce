@@ -15,13 +15,13 @@ export const Wrapper = styled.div`
 `;
 
 export const InforContainer = styled.div`
-  margin-top: 20%;
+  margin-top: 15%;
   width: 100%;
   padding: 5px;
 `;
 export const Title = styled.h1`
   font-family: "Chicle", sans-serif;
-  font-size: 75px;
+  font-size: 70px;
   color: #a33636;
 `;
 export const Desc = styled.p`

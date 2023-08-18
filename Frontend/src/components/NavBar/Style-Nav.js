@@ -15,13 +15,16 @@ export const Wrapper = styled.div`
   ${mobile({ padding: "10px" })}
 `;
 export const InforUser = styled.div`
-  font-size: 20px;
   cursor: pointer;
+  font-size: 25px;
+  color: midnightblue;
+  margin: 0 10px;
 `;
 
 export const Left = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-around;
   flex: 1;
   padding: 10px;
 `;
@@ -31,7 +34,7 @@ export const Center = styled.div`
 `;
 export const Right = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   flex: 1;
   color: midnightblue;
@@ -48,20 +51,20 @@ export const LogoImage = styled.img`
   width: 18%;
 `;
 export const MenuItem = styled.div`
-  font-size: 30px;
+  font-size: 25px;
 
   cursor: pointer;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 export const SearchComponent = styled.p`
-  font-size: 30px;
+  font-size: 25px;
   cursor: pointer;
   color: midnightblue;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })};
 `;
 
 export const RecommendProduct = styled.div`
-  font-size: 30px;
+  font-size: 25px;
   cursor: pointer;
   color: midnightblue;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })};

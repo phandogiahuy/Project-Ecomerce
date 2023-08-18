@@ -10,20 +10,35 @@ const OrderListUser = ({ data }) => {
   const month = parts[1];
   const day = parts[2];
   // Create a new date string in the desired format
+  console.log(data);
+  let color;
   const convertedDate = `${day}-${month}-${year}`;
+  if (data.status === "pending") {
+    color = "black";
+  } else {
+    color = "blue";
+  }
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <div className="w-[15%] font-mono">{convertedDate}</div>
-        <div className="flex w-[70%] flex-col">
-          {data.products.map((item) => (
-            <ProductListOrder item={item} />
-          ))}
+      {(data.status === "pending" || data.status === "accepted") && (
+        <div>
+          <div
+            className="flex items-center justify-between"
+            style={{ color: color }}
+          >
+            <div className="w-[15%] font-mono">{convertedDate}</div>
+            <div className="flex w-[70%] flex-col">
+              {data.products.map((item) => (
+                <ProductListOrder item={item} />
+              ))}
+            </div>
+            <div className="w-[10%] font-mono">{data.total}$</div>
+            <div className="w-[10%] font-mono">{data.status}</div>
+          </div>
+
+          <Divider />
         </div>
-        <div className="w-[10%] font-mono">{data.total}$</div>
-        <div className="w-[10%] font-mono">{data.status}</div>
-      </div>
-      <Divider />
+      )}
     </div>
   );
 };

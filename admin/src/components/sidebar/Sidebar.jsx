@@ -33,11 +33,6 @@ export default function Sidebar() {
                 Home
               </li>
             </Link>
-            <li className="sidebarListItem">
-              {" "}
-              <FundTwoTone />
-              Analytics
-            </li>
           </ul>
         </div>
         <div className="sidebarMenu">

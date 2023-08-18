@@ -17,57 +17,31 @@ const CheckoutComponent = () => {
   const { products, pricetotal, shipping } = useSelector((state) => state.cart);
   const { mutate } = useSetOrder();
   const user = useGetUser();
-  console.log(user.data?._id);
-  const momo = useMoMo();
   const handleFinsh = async (values) => {
     const { name, phone, mail, address } = values;
-    if (payment === "COD") {
-      dispatch(
-        showOrder({
-          name,
-          phone,
-          mail,
-          address,
-          products,
-          total: pricetotal,
-          payment,
-        })
-      );
-      const id = user.data?._id || 0;
-      mutate({
+    dispatch(
+      showOrder({
         name,
         phone,
         mail,
         address,
         products,
-        shipping,
         total: pricetotal,
         payment,
-        userId: id,
-      });
-    } else {
-      dispatch(
-        showOrder({
-          name,
-          phone,
-          mail,
-          address,
-          products,
-          total: pricetotal,
-          payment,
-        })
-      );
-      momo.mutate({
-        name,
-        phone,
-        mail,
-        address,
-        products,
-        shipping,
-        total: pricetotal,
-        payment,
-      });
-    }
+      })
+    );
+    const id = user.data?._id || 0;
+    mutate({
+      name,
+      phone,
+      mail,
+      address,
+      products,
+      shipping,
+      total: pricetotal,
+      payment,
+      userId: id,
+    });
   };
 
   return (
@@ -142,10 +116,27 @@ const CheckoutComponent = () => {
                   value={"Banking"}
                   onChange={(e) => setPayment(e.target.value)}
                 >
-                  <h2>BANKING (Momo)</h2>
+                  <h2>BANKING</h2>
                 </Radio>
               </Space>
             </Radio.Group>
+
+            {payment === "Banking" && (
+              <div className="flex flex-col ">
+                <p>
+                  <strong style={{ fontWeight: 700 }}>Bank: </strong>
+                  Vietcombank CN HCM
+                </p>
+                <p>
+                  <strong style={{ fontWeight: 700 }}>ACCOUNT NUMBER: </strong>
+                  079200014638
+                </p>
+                <p>
+                  <strong style={{ fontWeight: 700 }}>CONTENT: </strong> NAME +
+                  PHONE
+                </p>
+              </div>
+            )}
           </div>
         </InforUser>
         <InforProduct>

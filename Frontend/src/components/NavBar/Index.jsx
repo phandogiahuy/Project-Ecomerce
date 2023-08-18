@@ -4,7 +4,7 @@ import {
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
-import { Badge, Popover } from "antd";
+import { Badge, Modal, Popover } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -27,6 +27,8 @@ import {
   SearchComponent,
   Wrapper,
 } from "./style-nav";
+import { useState } from "react";
+import Chatbot from "../Chatbot";
 
 const Navbar = () => {
   const products = useSelector((state) => state.cart.products);
@@ -34,7 +36,16 @@ const Navbar = () => {
   const user = useGetUser();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   const handleLogOut = () => {
     localStorage.removeItem("token");
     dispatch(clearCart());
@@ -44,6 +55,7 @@ const Navbar = () => {
   const handleClickInforUser = () => {
     navigate(`/user/${user.data?._id}`);
   };
+
   return (
     <Container>
       <Wrapper>
@@ -58,7 +70,7 @@ const Navbar = () => {
               Search <SearchOutlined />
             </SearchComponent>
           </Popover>
-          <RecommendProduct>
+          <RecommendProduct onClick={showModal}>
             <BookOutlined />
             Select Product
           </RecommendProduct>
@@ -79,7 +91,7 @@ const Navbar = () => {
                 <ExportOutlined />
                 Log out
               </MenuItem>
-              <InforUser onClick={handleClickInforUser}>
+              <InforUser onClick={handleClickInforUser} >
                 My Information
               </InforUser>
             </>
@@ -119,6 +131,15 @@ const Navbar = () => {
           </MenuItem>
         </Right>
       </Wrapper>
+
+      <Modal
+        title="Product Recommendation Chatbot"
+        open={isModalOpen}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <Chatbot />
+      </Modal>
     </Container>
   );
 };

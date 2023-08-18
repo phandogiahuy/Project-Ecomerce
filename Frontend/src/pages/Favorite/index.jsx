@@ -44,7 +44,7 @@ const Favorite = () => {
           </center>
           <center className="p-1">
             <ContentRank>
-              This is the five most favorable products in June, 2023
+              This is the five most favorable products in 2023
             </ContentRank>
           </center>
         </Title>

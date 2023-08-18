@@ -34,7 +34,53 @@ const productController = {
     });
     res.status(200).json(product);
   },
+  //RECOMMEND PRODUCT
+  async recommendProduct(req, res) {
+    const product = await Product.find();
+    const { flavor, process, place } = req.body.selections;
+    const matchingProducts = [];
 
+    product.forEach((product) => {
+      let matchCount = 0;
+
+      if (product.flavor === flavor) {
+        matchCount++;
+      }
+      if (product.process === process) {
+        matchCount++;
+      }
+      if (product.place === place) {
+        matchCount++;
+      }
+      if (matchCount > 0) {
+        matchingProducts.push({ ...product, matchCount });
+      }
+    });
+
+    matchingProducts.sort((a, b) => b.matchCount - a.matchCount);
+    res.status(200).json(matchingProducts);
+  },
+
+  //GET ALL PRODUCT
+  async getAllProduct(req, res) {
+    const flavor = [];
+    const place = [];
+    const process = [];
+    const product = await Product.find();
+    for (const i in product) {
+      if (!flavor.includes(product[i].flavor)) {
+        flavor.push(product[i].flavor);
+      }
+      if (!place.includes(product[i].place)) {
+        place.push(product[i].place);
+      }
+      if (!process.includes(product[i].process)) {
+        process.push(product[i].process);
+      }
+    }
+    const feature = { flavor, place, process };
+    res.status(200).json(feature);
+  },
   //GET ALL PRODUCTS
   async showAllProduct(req, res) {
     const qNew = req.query.new;

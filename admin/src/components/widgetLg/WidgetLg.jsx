@@ -24,6 +24,7 @@ import { useDeleteOrder } from "../../hooks/Mutation/Order/useDeleteOrder";
 import { useRevenue } from "../../hooks/Mutation/Revenue/useRevenue";
 import { useMutation, useQueryClient } from "react-query";
 import { GET_ORDER } from "../../constant/queryKey";
+import { useDeleteOrderById } from "../../hooks/Mutation/Order/useDeleteOrderById";
 
 const token = localStorage.getItem("token");
 
@@ -39,16 +40,17 @@ export default function WidgetLg({ orders }) {
     setIsModalOpen(true);
   };
   const handleOk = () => {
-    mutate({ status: "success", id });
-    revenue.mutate({ orders: content });
+    mutate({ status: "accepted", id });
+
+    // revenue.mutate({ orders: content });
     setIsModalOpen(false);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
+  const orderDelete = useDeleteOrderById();
   const cancel = () => {
-    message.error("Product don't delete");
+    message.error("Order don't delete");
   };
   const handleClickDelete = async () => {
     message.success("You deleted order successfully");
@@ -99,6 +101,8 @@ export default function WidgetLg({ orders }) {
         let color;
         if (status === "success") {
           color = "#87d068";
+        } else if (status === "accepted") {
+          color = "#304527";
         } else {
           color = "#f50";
         }
@@ -111,20 +115,53 @@ export default function WidgetLg({ orders }) {
       dataIndex: "",
       render: (order) => {
         return (
-          <Button
-            type="primary"
-            onClick={() => {
-              setId(order._id);
-              showModal(order);
-            }}
-          >
-            Show Transaction
-          </Button>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button
+              type="primary"
+              onClick={() => {
+                setId(order._id);
+                showModal(order);
+              }}
+              style={{ marginRight: "20px" }}
+            >
+              Show Transaction
+            </Button>
+            {order.status === "pending" && (
+              <Popconfirm
+                title="Delete product"
+                description="Are you sure to delete this order, It cannot return"
+                onConfirm={() => handleDelete(order._id)}
+                onCancel={cancel}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="primary" style={{ backgroundColor: " #9b4f88" }}>
+                  Deleted
+                </Button>
+              </Popconfirm>
+            )}
+            {order.status === "accepted" && (
+              <Button
+                type="primary"
+                style={{ backgroundColor: " #9b4f88" }}
+                onClick={() => {
+                  handleFinish(order._id);
+                }}
+              >
+                Finished
+              </Button>
+            )}
+          </div>
         );
       },
     },
   ];
-
+  const handleDelete = async (_id) => {
+    orderDelete.mutate(_id);
+  };
+  const handleFinish = async (id) => {
+    mutate({ status: "success", id });
+  };
   return (
     <div style={{ flex: 1, padding: "5px" }}>
       <h1>Transaction</h1>

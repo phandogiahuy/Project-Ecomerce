@@ -37,6 +37,11 @@ const orderController = {
     res.status(200).json("Order has been deleted...");
   },
 
+  async deleteId(req, res) {
+    await Order.findByIdAndDelete(req.params.id);
+    res.status(200).json("Order has been deleted...");
+  },
+
   //GET USER ORDERS
   async showOrderUser(req, res) {
     const orders = await Order.find({ userId: req.params.userId });
@@ -60,38 +65,38 @@ const orderController = {
 
   // GET MONTHLY INCOME
 
-  async showIncomeMonthly(req, res) {
-    const productId = req.query.pid;
-    const date = new Date();
-    const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
-    const previousMonth = new Date(
-      new Date().setMonth(lastMonth.getMonth() - 1)
-    );
+  // async showIncomeMonthly(req, res) {
+  //   const productId = req.query.pid;
+  //   const date = new Date();
+  //   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
+  //   const previousMonth = new Date(
+  //     new Date().setMonth(lastMonth.getMonth() - 1)
+  //   );
 
-    const income = await Order.aggregate([
-      {
-        $match: {
-          createdAt: { $gte: previousMonth },
-          ...(productId && {
-            products: { $elemMatch: { productId } },
-          }),
-        },
-      },
-      {
-        $project: {
-          month: { $month: "$createdAt" },
-          sales: "$amount",
-        },
-      },
-      {
-        $group: {
-          _id: "$month",
-          total: { $sum: "$sales" },
-        },
-      },
-    ]);
-    res.status(200).json(income);
-  },
+  //   const income = await Order.aggregate([
+  //     {
+  //       $match: {
+  //         createdAt: { $gte: previousMonth },
+  //         ...(productId && {
+  //           products: { $elemMatch: { productId } },
+  //         }),
+  //       },
+  //     },
+  //     {
+  //       $project: {
+  //         month: { $month: "$createdAt" },
+  //         sales: "$amount",
+  //       },
+  //     },
+  //     {
+  //       $group: {
+  //         _id: "$month",
+  //         total: { $sum: "$sales" },
+  //       },
+  //     },
+  //   ]);
+  //   res.status(200).json(income);
+  // },
 };
 Object.keys(orderController).forEach((key) => {
   orderController[key] = catchAsync(orderController[key]);

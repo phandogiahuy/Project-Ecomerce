@@ -6,7 +6,14 @@ import OrderListUser from "./OrderListUser";
 import { Content, Header } from "./style";
 
 const OrderUser = () => {
-  const { data } = useGetUser();
+  const { data, isLoading } = useGetUser();
+  if (isLoading) {
+    return (
+      <div>
+        <Skeleton />
+      </div>
+    );
+  }
   return (
     <div>
       <div className="flex flex-col ">

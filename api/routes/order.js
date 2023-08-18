@@ -9,6 +9,7 @@ import {
 export const orderRouter = Router();
 orderRouter.post("/", orderController.create);
 orderRouter.put("/:id", verifyTokenAndAdmin, orderController.update);
+orderRouter.delete("/:id", orderController.deleteId);
 orderRouter.delete("/", orderController.deleteAll);
 orderRouter.delete("/success", verifyTokenAndAdmin, orderController.delete);
 orderRouter.get(
@@ -20,8 +21,8 @@ orderRouter.get("/", verifyTokenAndAdmin, orderController.showAllOrder);
 orderRouter.get("/success", orderController.showAllOrderSuccessful);
 orderRouter.get("/pending", orderController.showAllOrderPending);
 
-orderRouter.get(
-  "/income",
-  verifyTokenAndAdmin,
-  orderController.showIncomeMonthly
-);
+// orderRouter.get(
+//   "/income",
+//   verifyTokenAndAdmin,
+//   orderController.showIncomeMonthly
+// );

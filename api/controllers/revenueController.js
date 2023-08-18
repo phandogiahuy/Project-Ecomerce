@@ -2,6 +2,7 @@ import { Revenue } from "../models/Revenue.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import { reviewController } from "./reviewController.js";
 
+//check rank
 const revenueController = {
   async create(req, res) {
     // products.products.forEach((product) => {
