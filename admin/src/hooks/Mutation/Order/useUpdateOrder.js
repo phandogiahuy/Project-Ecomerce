@@ -6,7 +6,7 @@ import { AxiosInstance } from "../../../service-api/requestMethods";
 import { GET_ORDER } from "../../../constant/queryKey";
 const update = async ({ status, id }) => {
   const { data } = await AxiosInstance.put(
-    `http://localhost:3000/api/order/${id}`,
+    `https://ecommercecoffee.onrender.com/api/order/${id}`,
     { status }
   );
 

@@ -4,7 +4,9 @@ import { GET_ORDER } from "../../../../constant/queryKey";
 import { AxiosInstance } from "../../../../service-api/requestMethods";
 
 const getOrder = async () => {
-  const { data } = await AxiosInstance.get(`http://localhost:3000/api/order/`);
+  const { data } = await AxiosInstance.get(
+    `https://ecommercecoffee.onrender.com/api/order/`
+  );
   return data;
 };
 const useGetOrder = () => useQuery([GET_ORDER], () => getOrder());

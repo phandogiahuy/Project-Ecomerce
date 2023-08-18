@@ -15,7 +15,7 @@ const momoController = {
       payload: JSON.stringify(body),
     });
     if (searchParams) searchParams = `?${searchParams}`;
-    const redirectUrl = `http://localhost:5173/cart/checkout/successful/${searchParams}`;
+    const redirectUrl = `localhost:5173/cart/checkout/successful/${searchParams}`;
     const ipnUrl = "https://callback.url/notify";
 
     const amount = Math.round(body.total * 23000);

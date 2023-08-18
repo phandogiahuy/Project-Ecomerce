@@ -5,7 +5,7 @@ import { GET_DISCOUNT_ID } from "../../../constant/queryKey";
 import { AxiosInstance } from "../../../service-api/requestMethods";
 const edit = async ({ values, id }) => {
   const { data } = await AxiosInstance.put(
-    `http://localhost:3000/api/discount/${id}`,
+    `https://ecommercecoffee.onrender.com/api/discount/${id}`,
     { ...values }
   );
 

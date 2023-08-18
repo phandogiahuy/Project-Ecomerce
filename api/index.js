@@ -19,7 +19,7 @@ mongoose
   .then(() => {
     console.log("Successful");
     app.listen(port, () => {
-      console.log(`http://localhost:${port}/api`);
+      console.log(`localhost:${port}/api`);
     });
   })
   .catch(() => console.log("Fail"));
