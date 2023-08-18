@@ -3,9 +3,7 @@ import { message } from "antd";
 import { GET_DISCOUNT } from "../../../constant/queryKey";
 import { AxiosInstance } from "../../../service-api/requestMethods";
 const deleteDiscountById = async (id) => {
-  const res = await AxiosInstance.delete(
-    `https://ecommercecoffee.onrender.com/api/discount/${id}`
-  );
+  const res = await AxiosInstance.delete(`localhost:3000/api/discount/${id}`);
   return res.data;
 };
 const useDeleteDiscount = () => {

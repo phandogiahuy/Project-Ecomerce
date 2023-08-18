@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "https://ecommercecoffee.onrender.com/api/";
+const BASE_URL = "localhost:3000/api/";
 
 export const AxiosInstance = axios.create({
   baseURL: BASE_URL,

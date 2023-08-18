@@ -5,9 +5,7 @@ import { GET_USER, GET_USER_ID } from "../../../constant/queryKey";
 import { AxiosInstance } from "../../../service-api/requestMethods";
 
 const deleteUserById = async (id) => {
-  const res = await AxiosInstance.delete(
-    `https://ecommercecoffee.onrender.com/api/user/${id}`
-  );
+  const res = await AxiosInstance.delete(`localhost:3000/api/user/${id}`);
   return res.data;
 };
 const useDeleteUser = () => {

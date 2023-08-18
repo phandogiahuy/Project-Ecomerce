@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 
 const getUserById = async (id) => {
   const { data } = await AxiosInstance.get(
-    `https://ecommercecoffee.onrender.com/api/user/find/${id}`
+    `localhost:3000/api/user/find/${id}`
   );
   return data;
 };

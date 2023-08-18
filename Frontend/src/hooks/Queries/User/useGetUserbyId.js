@@ -4,9 +4,7 @@ import { useQuery } from "react-query";
 import { GET_USER_ID } from "../../../constant/queryKey";
 
 const getUserById = async (id) => {
-  const { data } = await axios.get(
-    `https://ecommercecoffee.onrender.com/api/user/find/${id}`
-  );
+  const { data } = await axios.get(`localhost:3000/api/user/find/${id}`);
   return data;
 };
 const useGetUsertById = (id) =>

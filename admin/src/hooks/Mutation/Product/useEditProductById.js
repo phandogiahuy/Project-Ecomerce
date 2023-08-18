@@ -5,10 +5,9 @@ import { message } from "antd";
 import { AxiosInstance } from "../../../service-api/requestMethods";
 import { GET_PRODUCT_ID } from "../../../constant/queryKey";
 const edit = async ({ productData, id }) => {
-  const { data } = await AxiosInstance.put(
-    `https://ecommercecoffee.onrender.com/api/product/${id}`,
-    { ...productData }
-  );
+  const { data } = await AxiosInstance.put(`localhost:3000/api/product/${id}`, {
+    ...productData,
+  });
 
   return data;
 };

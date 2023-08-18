@@ -3,9 +3,7 @@ import { useQuery } from "react-query";
 import { GET_DISCOUNT_ID } from "../../../constant/queryKey";
 import { AxiosInstance } from "../../../service-api/requestMethods";
 const getDiscountById = async (id) => {
-  const { data } = await AxiosInstance.get(
-    `https://ecommercecoffee.onrender.com/api/discount/${id}`
-  );
+  const { data } = await AxiosInstance.get(`localhost:3000/api/discount/${id}`);
   return data;
 };
 const useDiscountById = (id) =>

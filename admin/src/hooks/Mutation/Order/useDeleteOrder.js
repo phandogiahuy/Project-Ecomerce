@@ -5,7 +5,7 @@ import { AxiosInstance } from "../../../service-api/requestMethods";
 import { GET_ORDER } from "../../../constant/queryKey";
 const deleteSuccess = async () => {
   const { data } = await AxiosInstance.delete(
-    `https://ecommercecoffee.onrender.com/api/order/success`
+    `localhost:3000/api/order/success`
   );
 
   return data;

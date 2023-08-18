@@ -11,19 +11,16 @@ const getUrlMoMo = async ({
   total,
   payment,
 }) => {
-  const { data } = await axios.post(
-    "https://ecommercecoffee.onrender.com/api/momo",
-    {
-      name,
-      phone,
-      mail,
-      address,
-      products,
-      shipping,
-      total,
-      payment,
-    }
-  );
+  const { data } = await axios.post("localhost:3000/api/momo", {
+    name,
+    phone,
+    mail,
+    address,
+    products,
+    shipping,
+    total,
+    payment,
+  });
   return data;
 };
 

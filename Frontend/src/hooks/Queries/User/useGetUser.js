@@ -4,9 +4,7 @@ import { GET_USER } from "../../../constant/queryKey";
 import { axiosInstance } from "../../../Service-api/requestMethod";
 
 const getUser = async () => {
-  const { data } = await axiosInstance.get(
-    `https://ecommercecoffee.onrender.com/api/user/me`
-  );
+  const { data } = await axiosInstance.get(`localhost:3000/api/user/me`);
   return data;
 };
 const useGetUser = () => useQuery([GET_USER], getUser, {});

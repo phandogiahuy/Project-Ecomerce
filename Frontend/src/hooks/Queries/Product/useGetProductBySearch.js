@@ -5,7 +5,7 @@ import { GET_SEARCH_PRODUCT } from "../../../constant/queryKey";
 
 const searchQuery = async (debouncedQuery) => {
   const { data } = await axios.get(
-    `https://ecommercecoffee.onrender.com/api/product?title=${debouncedQuery}`
+    `localhost:3000/api/product?title=${debouncedQuery}`
   );
   return data;
 };
