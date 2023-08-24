@@ -5,7 +5,9 @@ import { AxiosInstance } from "../../../service-api/requestMethods";
 import { GET_PRODUCTS } from "../../../constant/queryKey";
 
 const deleteProductById = async (id) => {
-  const res = await AxiosInstance.delete(`localhost:3000/api/product/${id}`);
+  const res = await AxiosInstance.delete(
+    `http://localhost:3000/api/product/${id}`
+  );
   return res.data;
 };
 const useDeleteProduct = () => {

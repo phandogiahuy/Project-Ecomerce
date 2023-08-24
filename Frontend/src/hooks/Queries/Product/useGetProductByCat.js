@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { GET_PRODUCT_CAT } from "../../../constant/queryKey";
 
 const getProductByCat = async (cat, sort) => {
-  const { data } = await axios.get(`localhost:3000/api/product`, {
+  const { data } = await axios.get(`http://localhost:3000/api/product`, {
     params: {
       category: cat,
       sort,

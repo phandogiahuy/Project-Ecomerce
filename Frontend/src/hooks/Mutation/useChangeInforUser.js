@@ -5,7 +5,7 @@ import { GET_USER } from "../../constant/queryKey";
 import { axiosInstance } from "../../Service-api/requestMethod";
 
 const change = async ({ username, email, password, id }) => {
-  const res = await axiosInstance.put(`localhost:3000/api/user/${id}`, {
+  const res = await axiosInstance.put(`http://localhost:3000/api/user/${id}`, {
     username,
     email,
     password,

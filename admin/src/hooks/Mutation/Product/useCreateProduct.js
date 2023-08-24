@@ -5,13 +5,16 @@ import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { AxiosInstance } from "../../../service-api/requestMethods";
 const postProducts = async ({ title, categories, desc, price, img }) => {
-  const { data } = await AxiosInstance.post(`localhost:3000/api/product/`, {
-    title,
-    categories,
-    desc,
-    price,
-    img,
-  });
+  const { data } = await AxiosInstance.post(
+    `http://localhost:3000/api/product/`,
+    {
+      title,
+      categories,
+      desc,
+      price,
+      img,
+    }
+  );
   return data;
 };
 const useCreateProducts = () => {

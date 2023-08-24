@@ -11,7 +11,7 @@ const getUrlMoMo = async ({
   total,
   payment,
 }) => {
-  const { data } = await axios.post("localhost:3000/api/momo", {
+  const { data } = await axios.post("http://localhost:3000/api/momo", {
     name,
     phone,
     mail,

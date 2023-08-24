@@ -42,6 +42,7 @@ const CheckoutComponent = () => {
       payment,
       userId: id,
     });
+    
   };
 
   return (

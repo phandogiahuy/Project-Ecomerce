@@ -1,15 +1,57 @@
+import { transporter } from "../middleware/transporterMail.js";
 import { Order } from "../models/Order.js";
 import { User } from "../models/User.js";
 import { catchAsync } from "../utils/catchAsync.js";
 const orderController = {
   async create(req, res) {
     const newOrder = new Order(req.body);
+    // console.log(req.body);
     const savedOrder = await newOrder.save();
     if (req.body.userId != 0) {
       await User.findByIdAndUpdate(req.body.userId, {
         $push: { order: savedOrder._id },
       });
     }
+    const product = [];
+    const productDetail = [];
+    req.body.products.forEach((item) => product.push(item));
+    product.forEach((item) => productDetail.push(item.product.title));
+    const orderDetail = {
+      product,
+      productDetail,
+      name: req.body.name,
+      phone: req.body.phone,
+      mail: req.body.mail,
+      shipping: req.body.shipping,
+      address: req.body.address,
+      total: req.body.total,
+      payment: req.body.payment,
+    };
+    const mailOptions = {
+      from: "Aroma Delute Coffee",
+      to: req.body.mail, // Use the user's provided email
+      subject: "Order Confirmation Aroma Coffee",
+      html: `<h1>Order Confirmation</h1>
+      <h2>Order Details</h2>
+      <ul>
+        ${orderDetail.productDetail
+          .map(
+            (item, index) =>
+              `<li><b>${item} - ${orderDetail.product[index].quantity} pack - ${orderDetail.product[index].price}$</b>  </li>`
+          )
+          .join("")}
+      </ul>
+      <p><b>Shipping:</b> ${orderDetail.shipping}$</p>
+      <p><b>Total Amount:</b> ${orderDetail.total}$</p>
+      <h2>Customer Information</h2>
+      <p><b>Name:</b> ${orderDetail.name}</p>
+      <p><b>Email:</b> ${orderDetail.mail}</p>
+      <p><b>Payment:</b> ${orderDetail.payment}</p>
+      <p><b>Address:</b> ${orderDetail.address}</p>
+      <h3>Thank you for your order on Aroma Website!</h3>
+      `,
+    };
+    await transporter.sendMail(mailOptions);
 
     res.status(200).json(savedOrder);
   },

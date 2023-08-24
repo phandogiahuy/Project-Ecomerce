@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 
 const getProductById = async (id) => {
   const { data } = await AxiosInstance.get(
-    `localhost:3000/api/product/find/${id}`
+    `http://localhost:3000/api/product/find/${id}`
   );
   return data;
 };

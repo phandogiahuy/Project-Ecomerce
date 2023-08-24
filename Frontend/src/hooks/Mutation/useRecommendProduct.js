@@ -6,9 +6,12 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { showProduct } from "../../reduxToolkit/recommendRedux";
 const postProducts = async (selections) => {
-  const { data } = await axios.post(`localhost:3000/api/product/recommend`, {
-    selections,
-  });
+  const { data } = await axios.post(
+    `http://localhost:3000/api/product/recommend`,
+    {
+      selections,
+    }
+  );
   return data;
 };
 const useRecommendProduct = () => {

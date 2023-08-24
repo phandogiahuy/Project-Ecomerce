@@ -14,7 +14,7 @@ const order = async ({
   payment,
   userId,
 }) => {
-  const res = await axios.post("localhost:3000/api/order/", {
+  const res = await axios.post("http://localhost:3000/api/order/", {
     name,
     phone,
     mail,
@@ -34,7 +34,7 @@ export const useSetOrder = () => {
     onSuccess: () => {
       message.success("You ordered successfully");
       // navigate(`/cart/checkout/successful?data=${JSON.stringify(data)}`);
-      navigate(`/cart/checkout/successful/`);
+      // navigate(`/cart/checkout/successful/`);
     },
     onError: (e) => {
       message.error(e.response.data);
