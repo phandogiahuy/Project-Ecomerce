@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx}",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "rollup": "rollup -c"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
@@ -30,10 +31,12 @@
     "react-router-dom": "^6.10.0",
     "react-stripe-checkout": "^2.6.3",
     "redux-persist": "^6.0.0",
+    "rollup": "^3.28.1",
     "styled-components": "^5.3.9",
     "use-debounce": "^9.0.4"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.1",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "^3.0.0",
