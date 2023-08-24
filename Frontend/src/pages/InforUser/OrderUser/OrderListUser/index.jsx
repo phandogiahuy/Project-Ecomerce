@@ -1,7 +1,7 @@
 import { Divider } from "antd";
 import React from "react";
 
-import ProductListOrder from "./ProductListOrder";
+import ProductListOrder from "./ProductListOrder/Index";
 
 const OrderListUser = ({ data }) => {
   const inputDate = data.createdAt.slice(0, 10);

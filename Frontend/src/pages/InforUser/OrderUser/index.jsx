@@ -2,7 +2,7 @@ import { Empty } from "antd";
 import React from "react";
 
 import { useGetUser } from "../../../hooks/Queries/User/useGetUser";
-import OrderListUser from "./OrderListUser";
+import OrderListUser from "./OrderListUser/Index";
 import { Content, Header } from "./style";
 
 const OrderUser = () => {

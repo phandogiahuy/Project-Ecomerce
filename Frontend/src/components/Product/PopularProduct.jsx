@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import { useGetProductByCat } from "../../hooks/Queries/Product/useGetProductByCat";
 import { useGetProducts } from "../../hooks/Queries/Product/useGetProducts";
-import Product from "./newProduct";
+import Product from "./NewProduct";
 import { Container } from "./style-popularProduct";
 
 const PopularProduct = ({ cat, sort }) => {

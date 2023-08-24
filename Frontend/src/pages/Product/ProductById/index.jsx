@@ -32,7 +32,7 @@ import Footer from "../../../components/Footer/Footer";
 import { Instruction } from "../../../components/Instruction/Index";
 import Navbar from "../../../components/NavBar";
 import ProductInfor from "../../../components/ProductFeature/Index";
-import RecommendProduct from "../../../components/Recommend";
+import RecommendProduct from "../../../components/Recommend/Index";
 import { useGetProductById } from "../../../hooks/Queries/Product/useGetProductById";
 import { addProduct } from "../../../reduxToolkit/cartRedux";
 import {

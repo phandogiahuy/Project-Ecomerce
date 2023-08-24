@@ -1,6 +1,6 @@
 import { Divider } from "antd";
 import React from "react";
-import ProductListOrder from "../../OrderUser/OrderListUser/ProductListOrder";
+import ProductListOrder from "../../OrderUser/OrderListUser/ProductListOrder/Index";
 
 const OrderSuccess = ({ data }) => {
   const inputDate = data.createdAt.slice(0, 10);
