@@ -2,7 +2,7 @@ import { AccountBookOutlined } from "@ant-design/icons";
 import React, { useRef, useState } from "react";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 
-import Announcement from "../../components/Annoucement/Index";
+import Announcement from "../../components/Annoucement";
 import Navbar from "../../components/NavBar";
 import { useGetUser } from "../../hooks/Queries/User/useGetUser";
 import { Button, Detail, History, Infor, Nav, Order, Wrapper } from "./style";

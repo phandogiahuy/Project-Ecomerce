@@ -2,10 +2,10 @@ import { ControlOutlined, CrownOutlined } from "@ant-design/icons";
 import { FloatButton, Skeleton } from "antd";
 import React from "react";
 
-import Announcement from "../../components/Annoucement/Index";
+import Announcement from "../../components/Annoucement";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/NavBar";
-import RankedComponent from "../../components/Ranked/Index";
+import RankedComponent from "../../components/Ranked";
 import { useGetRevenue } from "../../hooks/Queries/Revenue/useGetRevenue";
 import {
   Container,

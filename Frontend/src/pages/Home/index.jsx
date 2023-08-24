@@ -1,12 +1,12 @@
 import { Affix, Divider, FloatButton } from "antd";
 import React from "react";
 
-import Announcement from "../../components/Annoucement/Index";
+import Announcement from "../../components/Annoucement";
 import ListCoupon from "../../components/Coupon/coupon-list";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/NavBar";
 import PopularProduct from "../../components/Product/PopularProduct";
-import Slider from "../../components/Slider/Index";
+import Slider from "../../components/Slider";
 
 const Home = () => {
   return (

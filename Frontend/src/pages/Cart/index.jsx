@@ -14,10 +14,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import Announcement from "../../components/Annoucement/Index";
+import Announcement from "../../components/Annoucement";
 import Footer from "../../components/Footer/Footer";
 import Newsletter from "../../components/Footer/Newsletter";
-import MySteps from "../../components/Steps/Index";
+import MySteps from "../../components/Steps";
 import { useGetDiscountByCode } from "../../hooks/Queries/Discount/useGetDiscounByCode";
 import {
   clearCart,
