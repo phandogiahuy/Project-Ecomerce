@@ -1,4 +1,4 @@
-import { Divider, FloatButton } from "antd";
+import { Affix, Divider, FloatButton } from "antd";
 import React from "react";
 
 import Announcement from "../../components/Annoucement";
@@ -11,8 +11,10 @@ import Slider from "../../components/Slider";
 const Home = () => {
   return (
     <div className="overflow-x-hidden bg-green-200">
-      <Announcement />
-      <Navbar />
+      <Affix>
+        <Announcement />
+        <Navbar />
+      </Affix>
       <div className="">
         <Slider />
       </div>

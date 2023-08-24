@@ -1,5 +1,5 @@
 import { UpCircleFilled } from "@ant-design/icons";
-import { FloatButton, Select } from "antd";
+import { Affix, FloatButton, Select } from "antd";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -25,8 +25,10 @@ const ProductList = () => {
 
   return (
     <Container className="overflow-x-hidden">
-      <Announcement />
-      <Navbar />
+      <Affix>
+        <Announcement />
+        <Navbar />
+      </Affix>
       <div className="bg-blue-200 p-4">
         <FilterContainer>
           <Filter>

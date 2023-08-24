@@ -8,6 +8,7 @@ import {
   UpCircleFilled,
 } from "@ant-design/icons";
 import {
+  Affix,
   Breadcrumb,
   Button,
   Collapse,
@@ -114,8 +115,10 @@ const Product = () => {
 
   return (
     <Container className="overflow-x-hidden">
-      <Announcement />
-      <Navbar />
+      <Affix>
+        <Announcement />
+        <Navbar />
+      </Affix>
       <Breadcrumb
         items={[
           {
