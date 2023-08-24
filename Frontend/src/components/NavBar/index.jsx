@@ -5,6 +5,7 @@ import {
   ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { Badge, Modal, Popover } from "antd";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -13,6 +14,7 @@ import Login from "../../pages/Login";
 import Register from "../../pages/Register";
 import { clearCart } from "../../reduxToolkit/cartRedux";
 import CartContent from "../Cart";
+import Chatbot from "../Chatbot";
 import SearchInput from "../Search";
 import {
   Center,
@@ -26,9 +28,7 @@ import {
   Right,
   SearchComponent,
   Wrapper,
-} from "./style-nav";
-import { useState } from "react";
-import Chatbot from "../Chatbot";
+} from "./style";
 
 const Navbar = () => {
   const products = useSelector((state) => state.cart.products);

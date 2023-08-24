@@ -1,7 +1,7 @@
 import { Button, Form, Input } from "antd";
 
 import { useRegister } from "../../hooks/Mutation/useSetRegister";
-import { Container, Title, Wrapper } from "./Style-Register";
+import { Container, Title, Wrapper } from "./style";
 
 const tailFormItemLayout = {
   wrapperCol: {

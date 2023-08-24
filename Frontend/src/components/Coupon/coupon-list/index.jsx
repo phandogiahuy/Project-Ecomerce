@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import { useGetCoupon } from "../../../hooks/Queries/Discount/useGetCoupon";
 import Coupon from "../index";
-import { Arrow, Container, Title, Wrapper } from "./style-coponList";
+import { Arrow, Container, Title, Wrapper } from "./style";
 
 const ListCoupon = () => {
   const [slideIndex, setSlideIndex] = useState(0);

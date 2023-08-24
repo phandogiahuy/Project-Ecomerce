@@ -20,7 +20,7 @@ import {
   Top,
   Total,
   Type,
-} from "./style-cartContent";
+} from "./style";
 
 const CartContent = ({ products }) => {
   const dispatch = useDispatch();

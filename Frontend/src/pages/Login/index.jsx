@@ -3,7 +3,7 @@ import { Button, Form, Input } from "antd";
 
 // import { login } from "../reduxToolkit/callAPI";
 import { useLogin } from "../../hooks/Mutation/useSetLogin";
-import { Container } from "./style-login";
+import { Container } from "./style";
 
 const Login = () => {
   const { mutate, isLoading } = useLogin();

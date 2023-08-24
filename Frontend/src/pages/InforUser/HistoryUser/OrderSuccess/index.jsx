@@ -9,7 +9,7 @@ const OrderSuccess = ({ data }) => {
   const month = parts[1];
   const day = parts[2];
   // Create a new date string in the desired format
-  console.log(data);
+ 
   let color;
   const convertedDate = `${day}-${month}-${year}`;
 

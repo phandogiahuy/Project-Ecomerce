@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useGetProductBySearch } from "../../hooks/Queries/Product/useGetProductBySearch";
-import { ContainerSearch, InforSearch } from "./style-search";
+import { ContainerSearch, InforSearch } from "./style";
 
 const SearchInput = () => {
   const [searchQuery, setSearchQuery] = useState("");

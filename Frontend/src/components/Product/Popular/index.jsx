@@ -4,10 +4,10 @@ import { Breadcrumb, Pagination, Row, Skeleton } from "antd";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { useGetProductByCat } from "../../hooks/Queries/Product/useGetProductByCat";
-import { useGetProducts } from "../../hooks/Queries/Product/useGetProducts";
-import Product from "./NewProduct";
-import { Container } from "./style-popularProduct";
+import { useGetProductByCat } from "../../../hooks/Queries/Product/useGetProductByCat";
+import { useGetProducts } from "../../../hooks/Queries/Product/useGetProducts";
+import Product from "../New";
+import { Container } from "./style";
 
 const PopularProduct = ({ cat, sort }) => {
   // const queryClient = useQueryClient();

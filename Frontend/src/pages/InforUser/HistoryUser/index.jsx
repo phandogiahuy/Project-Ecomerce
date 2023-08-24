@@ -1,9 +1,9 @@
-import React from "react";
-import { useGetOrder } from "../../../../../admin/src/hooks/Queries/User/Order/useGetOrder";
-import { Content, Header } from "./style";
-import { useGetOrderSuccess } from "../../../hooks/Queries/Order/useGetOrderSuccess";
 import { Empty, Skeleton } from "antd";
+import React from "react";
+
+import { useGetOrderSuccess } from "../../../hooks/Queries/Order/useGetOrderSuccess";
 import OrderSuccess from "./OrderSuccess";
+import { Content, Header } from "./style";
 
 const HistoryUser = () => {
   const { data, isLoading } = useGetOrderSuccess();

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useGetUser } from "../../hooks/Queries/User/useGetUser";
 import ReviewModal from "../Review";
-import CommentList from "./CommentList";
+import CommentList from "./ListComment";
 
 const CommentComponent = ({ reviews, id, name }) => {
   const token = localStorage.getItem("token");

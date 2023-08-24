@@ -15,8 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Announcement from "../../components/Annoucement";
-import Footer from "../../components/Footer/Footer";
-import Newsletter from "../../components/Footer/Newsletter";
+import Footer from "../../components/Footer";
+import Newsletter from "../../components/Footer/Letter";
 import MySteps from "../../components/Steps";
 import { useGetDiscountByCode } from "../../hooks/Queries/Discount/useGetDiscounByCode";
 import {
@@ -56,7 +56,7 @@ import {
   TypeItem,
   TypeProduct,
   Wrapper,
-} from "./Style-Cart";
+} from "./style";
 
 const Cart = () => {
   const products = useSelector((state) => state.cart.products);

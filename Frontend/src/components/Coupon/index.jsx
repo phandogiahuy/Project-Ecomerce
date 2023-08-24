@@ -6,7 +6,7 @@ import {
   ContainerCard,
   ContainerFooter,
   Discount,
-} from "./style-coupon";
+} from "./style";
 
 const Coupon = ({ data }) => {
   const handleClickCoupon = () => {

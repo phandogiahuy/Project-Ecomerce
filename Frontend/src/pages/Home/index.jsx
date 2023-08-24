@@ -3,9 +3,9 @@ import React from "react";
 
 import Announcement from "../../components/Annoucement";
 import ListCoupon from "../../components/Coupon/coupon-list";
-import Footer from "../../components/Footer/Footer";
+import Footer from "../../components/Footer";
 import Navbar from "../../components/NavBar";
-import PopularProduct from "../../components/Product/PopularProduct";
+import PopularProduct from "../../components/Product/Popular";
 import Slider from "../../components/Slider";
 
 const Home = () => {

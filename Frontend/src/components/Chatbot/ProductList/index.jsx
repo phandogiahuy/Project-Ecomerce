@@ -1,6 +1,6 @@
 import React from "react";
 import { StyledProductList } from "./style";
-import { ProductCard } from "./Card/ProductCard";
+import { ProductCard } from "./Card";
 
 const ProductList = ({ products }) => {
   return (

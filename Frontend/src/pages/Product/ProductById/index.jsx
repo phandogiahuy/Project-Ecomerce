@@ -27,7 +27,7 @@ import { Link, useLocation } from "react-router-dom";
 import AboutProduct from "../../../components/AboutProduct";
 import Announcement from "../../../components/Annoucement";
 import CommentComponent from "../../../components/Comment";
-import Footer from "../../../components/Footer/Footer";
+import Footer from "../../../components/Footer";
 // import Panel from "antd/es/collapse/Panel";
 import { Instruction } from "../../../components/Instruction";
 import Navbar from "../../../components/NavBar";

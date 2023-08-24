@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import { categories } from "../../data";
 import CategoriesItem from "./category-item";
-import { ContainerCategories, Favorite, Phin } from "./style-category";
+import { ContainerCategories, Favorite, Phin } from "./style";
 
 const Categories = () => {
   const cat = "phin";
