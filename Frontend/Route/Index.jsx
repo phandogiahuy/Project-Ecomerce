@@ -1,19 +1,19 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Cart from "./pages/Cart/Index";
-import ErrorPage from "./pages/Error/Index.jsx";
-import Favorite from "./pages/Favorite/Index";
-import Home from "./pages/Home/Index";
-import InforUser from "./pages/InforUser/Index";
-import HistoryUser from "./pages/InforUser/HistoryUser/Index";
-import InfoUser from "./pages/InforUser/InfoUser/Index";
-import OrderUser from "./pages/InforUser/OrderUser/Index";
-import LoginProduct from "./pages/Login/Product/Index";
-import OrderSuccesful from "./pages/OrderSuccessful/Index";
-import ProductList from "./pages/Product/ProductByCategories/Index";
-import Product from "./pages/Product/ProductById/Index";
-import Register from "./pages/Register/Index";
-import Checkout from "./pages/Checkout";
+import Cart from "../src/pages/Cart/Index";
+import ErrorPage from "../src/pages/Error/Index.jsx";
+import Favorite from "../src/pages/Favorite/Index";
+import Home from "../src/pages/Home/Index";
+import InforUser from "../src/pages/InforUser/Index";
+import HistoryUser from "../src/pages/InforUser/HistoryUser/Index";
+import InfoUser from "../src/pages/InforUser/InfoUser/Index";
+import OrderUser from "../src/pages/InforUser/OrderUser/Index";
+import LoginProduct from "../src/pages/Login/Product/Index";
+import OrderSuccesful from "../src/pages/OrderSuccessful/Index";
+import ProductList from "../src/pages/Product/ProductByCategories/Index";
+import Product from "../src/pages/Product/ProductById/Index";
+import Register from "../src/pages/Register/Index";
+import Checkout from "../src/pages/Checkout";
 
 const route = [
   {
