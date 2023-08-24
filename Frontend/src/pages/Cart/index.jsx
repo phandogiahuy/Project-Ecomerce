@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import Announcement from "../../components/Annoucement/Index";
 import Footer from "../../components/Footer/Footer";
 import Newsletter from "../../components/Footer/Newsletter";
-import MySteps from "../../components/Steps";
+import MySteps from "../../components/Steps/Index";
 import { useGetDiscountByCode } from "../../hooks/Queries/Discount/useGetDiscounByCode";
 import {
   clearCart,

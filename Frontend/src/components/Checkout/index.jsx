@@ -6,8 +6,8 @@ import { useMoMo } from "../../hooks/Mutation/Momo/useMomo";
 import { useSetOrder } from "../../hooks/Mutation/Order/useSetOrder";
 import { useGetUser } from "../../hooks/Queries/User/useGetUser";
 import { showOrder } from "../../reduxToolkit/orderRedux";
-import ProductDetailCheckOut from "../ProductDetail";
-import MySteps from "../Steps";
+import ProductDetailCheckOut from "../ProductDetail/Index";
+import MySteps from "../Steps/Index";
 import { InforProduct, InforUser } from "./style";
 
 const CheckoutComponent = () => {
@@ -42,7 +42,6 @@ const CheckoutComponent = () => {
       payment,
       userId: id,
     });
-    
   };
 
   return (

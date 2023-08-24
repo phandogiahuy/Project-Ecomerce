@@ -1,18 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Cart from "./pages/Cart";
+import Cart from "./pages/Cart/Index";
 import Checkout from "./pages/Checkout";
 import ErrorPage from "./pages/Error/defaut-error-page.jsx";
-import Favorite from "./pages/Favorite";
-import Home from "./pages/Home";
-import InforUser from "./pages/InforUser";
-import HistoryUser from "./pages/InforUser/HistoryUser";
-import InfoUser from "./pages/InforUser/InfoUser";
+import Favorite from "./pages/Favorite/Index";
+import Home from "./pages/Home/Index";
+import InforUser from "./pages/InforUser/Index";
+import HistoryUser from "./pages/InforUser/HistoryUser/Index";
+import InfoUser from "./pages/InforUser/InfoUser/Index";
 import OrderUser from "./pages/InforUser/OrderUser";
-import LoginProduct from "./pages/Login/Product";
+import LoginProduct from "./pages/Login/Product/Index";
 import OrderSuccesful from "./pages/OrderSuccessful";
-import ProductList from "./pages/Product/ProductByCategories";
-import Product from "./pages/Product/ProductById";
+import ProductList from "./pages/Product/ProductByCategories/Index";
+import Product from "./pages/Product/ProductById/Index";
 import Register from "./pages/Register/Register";
 
 const route = [

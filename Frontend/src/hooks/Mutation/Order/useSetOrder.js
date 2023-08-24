@@ -34,7 +34,7 @@ export const useSetOrder = () => {
     onSuccess: () => {
       message.success("You ordered successfully");
       // navigate(`/cart/checkout/successful?data=${JSON.stringify(data)}`);
-      // navigate(`/cart/checkout/successful/`);
+      navigate(`/cart/checkout/successful/`);
     },
     onError: (e) => {
       message.error(e.response.data);

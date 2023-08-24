@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useGetUser } from "../../hooks/Queries/User/useGetUser";
-import Login from "../../pages/Login";
+import Login from "../../pages/Login/Index";
 import Register from "../../pages/Register/Register";
 import { clearCart } from "../../reduxToolkit/cartRedux";
 import CartContent from "../Cart";
@@ -28,7 +28,7 @@ import {
   Wrapper,
 } from "./style-nav";
 import { useState } from "react";
-import Chatbot from "../Chatbot";
+import Chatbot from "../Chatbot/Index";
 
 const Navbar = () => {
   const products = useSelector((state) => state.cart.products);

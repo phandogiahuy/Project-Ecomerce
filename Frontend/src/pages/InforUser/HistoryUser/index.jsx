@@ -3,7 +3,7 @@ import { useGetOrder } from "../../../../../admin/src/hooks/Queries/User/Order/u
 import { Content, Header } from "./style";
 import { useGetOrderSuccess } from "../../../hooks/Queries/Order/useGetOrderSuccess";
 import { Empty, Skeleton } from "antd";
-import OrderSuccess from "./OrderSuccess";
+import OrderSuccess from "./OrderSuccess/Index";
 
 const HistoryUser = () => {
   const { data, isLoading } = useGetOrderSuccess();

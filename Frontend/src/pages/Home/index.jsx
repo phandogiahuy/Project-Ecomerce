@@ -6,7 +6,7 @@ import ListCoupon from "../../components/Coupon/coupon-list";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/NavBar";
 import PopularProduct from "../../components/Product/PopularProduct";
-import Slider from "../../components/Slider";
+import Slider from "../../components/Slider/Index";
 
 const Home = () => {
   return (

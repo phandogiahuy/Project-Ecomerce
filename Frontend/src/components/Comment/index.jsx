@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useGetUser } from "../../hooks/Queries/User/useGetUser";
-import ReviewModal from "../Review";
+import ReviewModal from "../Review/Index";
 import CommentList from "./CommentList";
 
 const CommentComponent = ({ reviews, id, name }) => {

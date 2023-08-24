@@ -24,14 +24,14 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
-import AboutProduct from "../../../components/AboutProduct";
+import AboutProduct from "../../../components/AboutProduct/Index";
 import Announcement from "../../../components/Annoucement/Index";
-import CommentComponent from "../../../components/Comment";
+import CommentComponent from "../../../components/Comment/Index";
 import Footer from "../../../components/Footer/Footer";
 // import Panel from "antd/es/collapse/Panel";
-import { Instruction } from "../../../components/Instruction";
+import { Instruction } from "../../../components/Instruction/Index";
 import Navbar from "../../../components/NavBar";
-import ProductInfor from "../../../components/ProductFeature";
+import ProductInfor from "../../../components/ProductFeature/Index";
 import RecommendProduct from "../../../components/Recommend";
 import { useGetProductById } from "../../../hooks/Queries/Product/useGetProductById";
 import { addProduct } from "../../../reduxToolkit/cartRedux";

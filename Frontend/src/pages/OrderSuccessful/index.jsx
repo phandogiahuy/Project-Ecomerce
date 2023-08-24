@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Footer from "../../components/Footer/Footer";
-import MySteps from "../../components/Steps";
+import MySteps from "../../components/Steps/Index";
 import { GET_USER } from "../../constant/queryKey";
 import { clearCart } from "../../reduxToolkit/cartRedux";
 
