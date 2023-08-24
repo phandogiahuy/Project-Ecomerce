@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useGetUser } from "../../hooks/Queries/User/useGetUser";
 import Login from "../../pages/Login/Index";
-import Register from "../../pages/Register/Register";
+import Register from "../../pages/Register/Index";
 import { clearCart } from "../../reduxToolkit/cartRedux";
 import CartContent from "../Cart";
 import SearchInput from "../Search";
@@ -91,7 +91,7 @@ const Navbar = () => {
                 <ExportOutlined />
                 Log out
               </MenuItem>
-              <InforUser onClick={handleClickInforUser} >
+              <InforUser onClick={handleClickInforUser}>
                 My Information
               </InforUser>
             </>
