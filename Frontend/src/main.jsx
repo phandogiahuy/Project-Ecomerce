@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 
 import { store } from "./reduxToolkit/store";
-import { router } from "./routes";
+import { router } from "./Index";
 
 const queryClient = new QueryClient({
   defaultOptions: {

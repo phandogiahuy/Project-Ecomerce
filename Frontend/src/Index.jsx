@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import Cart from "./pages/Cart/Index";
-import Checkout from "./pages/Checkout/Index";
 import ErrorPage from "./pages/Error/Index.jsx";
 import Favorite from "./pages/Favorite/Index";
 import Home from "./pages/Home/Index";
@@ -14,6 +13,7 @@ import OrderSuccesful from "./pages/OrderSuccessful/Index";
 import ProductList from "./pages/Product/ProductByCategories/Index";
 import Product from "./pages/Product/ProductById/Index";
 import Register from "./pages/Register/Index";
+import Checkout from "./pages/Checkout";
 
 const route = [
   {
