@@ -14,7 +14,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import Announcement from "../../components/Annoucement";
+import Announcement from "../../components/Annoucement/Index";
 import Footer from "../../components/Footer/Footer";
 import Newsletter from "../../components/Footer/Newsletter";
 import MySteps from "../../components/Steps";

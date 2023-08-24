@@ -2,7 +2,7 @@ import { ControlOutlined, CrownOutlined } from "@ant-design/icons";
 import { FloatButton, Skeleton } from "antd";
 import React from "react";
 
-import Announcement from "../../components/Annoucement";
+import Announcement from "../../components/Annoucement/Index";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/NavBar";
 import RankedComponent from "../../components/Ranked";

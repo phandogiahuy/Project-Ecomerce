@@ -2,7 +2,7 @@ import React from "react";
 
 import CheckoutComponent from "../../components/Checkout";
 import Footer from "../../components/Footer/Footer";
-import Announcement from "../../components/Annoucement";
+import Announcement from "../../components/Annoucement/Index";
 
 const Checkout = () => {
   return (

@@ -25,7 +25,7 @@ import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 import AboutProduct from "../../../components/AboutProduct";
-import Announcement from "../../../components/Annoucement";
+import Announcement from "../../../components/Annoucement/Index";
 import CommentComponent from "../../../components/Comment";
 import Footer from "../../../components/Footer/Footer";
 // import Panel from "antd/es/collapse/Panel";

@@ -3,7 +3,7 @@ import { Affix, FloatButton, Select } from "antd";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
-import Announcement from "../../../components/Annoucement";
+import Announcement from "../../../components/Annoucement/Index";
 import Footer from "../../../components/Footer/Footer";
 import Navbar from "../../../components/NavBar";
 import PopularProduct from "../../../components/Product/PopularProduct";
