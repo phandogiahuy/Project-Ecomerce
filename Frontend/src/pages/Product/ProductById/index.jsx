@@ -112,7 +112,6 @@ const Product = () => {
   const onChangeQuanity = (e) => {
     setQuanity(e);
   };
-
   return (
     <Container className="overflow-x-hidden">
       <Affix>
@@ -328,7 +327,10 @@ const Product = () => {
 
       {/* <Newsletter /> */}
       <Footer />
-      <FloatButton.BackTop icon={<UpCircleFilled />} />
+      <FloatButton.BackTop
+        icon={<UpCircleFilled />}
+        style={{ marginBottom: "5%" }}
+      />
     </Container>
   );
 };

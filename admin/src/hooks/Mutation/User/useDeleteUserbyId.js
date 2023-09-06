@@ -6,7 +6,7 @@ import { AxiosInstance } from "../../../service-api/requestMethods";
 
 const deleteUserById = async (id) => {
   const res = await AxiosInstance.delete(
-    `http://localhost:3000/api/user/${id}`
+    `https://ecommercecafe.onrender.com/api/user/${id}`
   );
   return res.data;
 };

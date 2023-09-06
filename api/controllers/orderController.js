@@ -70,6 +70,7 @@ const orderController = {
 
   //DELETE
   async delete(req, res) {
+    console.log(req);
     await Order.deleteMany({ status: "success" });
     res.status(200).json("Order has been deleted with type success");
   },

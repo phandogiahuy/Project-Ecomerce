@@ -56,7 +56,7 @@ const Favorite = () => {
           <ContainerItemProduct>{renderRanked()}</ContainerItemProduct>
         </Wrapper>
       </Ranked>
-      <FloatButton.BackTop />
+      <FloatButton.BackTop style={{ marginBottom: "5%" }} />
 
       <Footer />
     </Container>

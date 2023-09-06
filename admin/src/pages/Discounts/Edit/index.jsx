@@ -1,14 +1,28 @@
-import { Form, Input, Button, Upload, Select, Space } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { Form, Input, Button, Upload, Select, Skeleton } from "antd";
 
-import { useCreateDiscount } from "../../hooks/Mutation/Discount/useCreateDiscount";
+import { EditFilled, PlusOutlined } from "@ant-design/icons";
 
-const NewDiscount = () => {
+import { useParams } from "react-router-dom";
+import { useEditDiscountById } from "../../../hooks/Mutation/Discount/useEditDiscountById";
+import { useDiscountById } from "../../../hooks/Queries/Discount/useGetDiscountById";
+
+const EditDiscount = () => {
+  let { _id } = useParams();
   const [form] = Form.useForm();
+  const { mutate } = useEditDiscountById(_id);
 
-  const { mutate } = useCreateDiscount();
+  const res = useDiscountById(_id);
+
+  if (res.isLoading) {
+    return (
+      <div>
+        <Skeleton />
+      </div>
+    );
+  }
   const handleFinsh = async (values) => {
-    mutate({ ...values });
+    console.log(values);
+    mutate({ values, id: _id });
   };
 
   return (
@@ -17,6 +31,11 @@ const NewDiscount = () => {
       layout="vertical"
       onFinish={handleFinsh}
       style={{ width: "50%", padding: "30px" }}
+      initialValues={{
+        code: res.data.code,
+        sale: res.data.sale,
+        limit: res.data.limit,
+      }}
     >
       <Form.Item
         name="code"
@@ -43,11 +62,11 @@ const NewDiscount = () => {
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          <PlusOutlined /> Update Discount
+          <EditFilled /> Update Discount
         </Button>
       </Form.Item>
     </Form>
   );
 };
 
-export default NewDiscount;
+export default EditDiscount;

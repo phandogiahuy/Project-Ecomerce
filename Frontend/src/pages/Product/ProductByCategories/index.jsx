@@ -67,7 +67,7 @@ const ProductList = () => {
       <div className="bg-blue-200 p-3">
         <Footer />
       </div>
-      <FloatButton.BackTop icon={<UpCircleFilled />} />
+      <FloatButton.BackTop icon={<UpCircleFilled />} style={{ marginBottom: "5%" }} />
     </Container>
   );
 };

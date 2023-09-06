@@ -30,7 +30,7 @@ const Home = () => {
       <div className="p-3">
         <Footer />
       </div>
-      <FloatButton.BackTop />
+      <FloatButton.BackTop style={{ marginBottom: "5%" }}/>
       {/* <FlashScreen /> */}
     </div>
   );

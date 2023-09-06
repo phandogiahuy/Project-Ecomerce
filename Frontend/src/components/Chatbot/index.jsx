@@ -44,7 +44,7 @@ const Chatbot = () => {
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     const message = `${option}`;
-    appendMessage("Chatbot", `${botQuestion}`);
+    appendMessage("AromaCoffee ", `${botQuestion}`);
     setCurrentFeatureIndex(currentFeatureIndex + 1);
     appendMessage("User", message);
 
@@ -77,7 +77,7 @@ const Chatbot = () => {
     setCompleted(false);
     setChatLog([]);
     setRecommendation("");
-    setBotQuestion(`What's your preferred ${features[0]}?`);
+    setBotQuestion(` What's your preferred ${features[0]}?`);
     history.current = [];
   };
   const rollback = () => {
@@ -85,7 +85,7 @@ const Chatbot = () => {
     if (currentFeatureIndex > 0) {
       setCurrentFeatureIndex(currentFeatureIndex - 1);
       setBotQuestion(
-        `What's your preferred ${features[currentFeatureIndex - 1]}?`
+        ` What's your preferred ${features[currentFeatureIndex - 1]}?`
       );
       setChatLog((prevLog) => prevLog.slice(0, -2)); // Remove last two entries (user and bot messages)
     }
@@ -94,7 +94,9 @@ const Chatbot = () => {
   };
   useEffect(() => {
     const handle = () => {
-      setBotQuestion(`What's your preferred ${features[currentFeatureIndex]}?`);
+      setBotQuestion(
+        ` What's your preferred ${features[currentFeatureIndex]}?`
+      );
     };
     handle();
   }, [currentFeatureIndex, completed]);
@@ -118,18 +120,19 @@ const Chatbot = () => {
 
   return (
     <div>
-      <h1>Product Recommendation Chatbot</h1>
+      <h1>Product Recommendation</h1>
       <ChatContainer>
         <ChatLog>
           {chatLog.map((item, index) => (
             <div key={index}>
-              <span style={{ fontWeight: 600 }}>{item.user}:</span>{" "}
+              <span style={{ fontWeight: 600 }}>{item.user}: </span>{" "}
               {item.message}
             </div>
           ))}
           {!botQuestion.includes("undefined") && (
             <div style={{ display: "flex" }}>
-              <span style={{ fontWeight: 600 }}>Chatbot:</span> {botQuestion}
+              <span style={{ fontWeight: 600 }}>AromaCoffee: &nbsp; </span>
+              {botQuestion}
             </div>
           )}
           {botQuestion && !completed && (
@@ -155,7 +158,7 @@ const Chatbot = () => {
             </div>
           )}
         </ChatLog>
-        <Heading>Product Recommendation Chatbot</Heading>
+        <Heading>Product Recommendation</Heading>
         {completed && recommendation && (
           <RecommendationSection>
             <h2>Recommendation:</h2>

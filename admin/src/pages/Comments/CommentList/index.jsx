@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetProductById } from "../../hooks/Queries/Product/useGetProductById";
+import { useGetProductById } from "../../../hooks/Queries/Product/useGetProductById";
 import { Skeleton, Rate, Divider } from "antd";
 
 const CommentList = ({ content }) => {

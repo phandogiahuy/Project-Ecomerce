@@ -133,7 +133,7 @@ const Navbar = () => {
       </Wrapper>
 
       <Modal
-        title="Product Recommendation Chatbot"
+        title="Product Recommendation"
         open={isModalOpen}
         onCancel={handleCancel}
         footer={null}

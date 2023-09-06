@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { showProduct } from "../../reduxToolkit/recommendRedux";
 const postProducts = async (selections) => {
   const { data } = await axios.post(
-    `http://localhost:3000/api/product/recommend`,
+    `https://ecommercecafe.onrender.com/api/product/recommend`,
     {
       selections,
     }

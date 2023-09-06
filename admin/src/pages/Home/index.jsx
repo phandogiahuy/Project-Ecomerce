@@ -1,6 +1,6 @@
 import "./home.css";
-import WidgetLg from "../../components/widgetLg/WidgetLg";
-import { FeaturedInfo } from "../../components/featuredInfo";
+import WidgetLg from "../../components/Widget";
+import { FeaturedInfo } from "../../components/Feature";
 import { useGetOrder } from "../../hooks/Queries/User/Order/useGetOrder";
 import { FrownTwoTone } from "@ant-design/icons";
 import { Skeleton, Spin } from "antd";

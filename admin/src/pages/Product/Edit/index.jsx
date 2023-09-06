@@ -9,15 +9,15 @@ import {
   InputNumber,
   message,
 } from "antd";
-import { storage } from "../../service-api/firebase";
+import { storage } from "../../../service-api/firebase";
 import { EditFilled, PlusOutlined } from "@ant-design/icons";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import { useParams } from "react-router-dom";
-import { useEditProductById } from "../../hooks/Mutation/Product/useEditProductById";
-import { useGetProductById } from "../../hooks/Queries/Product/useGetProductById";
+import { useEditProductById } from "../../../hooks/Mutation/Product/useEditProductById";
+import { useGetProductById } from "../../../hooks/Queries/Product/useGetProductById";
 import { useQueryClient } from "react-query";
-import { GET_PRODUCT_ID } from "../../constant/queryKey";
+import { GET_PRODUCT_ID } from "../../../constant/queryKey";
 
 const options = [{ value: "phin" }, { value: "espresso" }, { value: "sale" }];
 

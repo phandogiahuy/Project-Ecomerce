@@ -17,7 +17,7 @@ import {
   MinusCircleOutlined,
   PlusCircleTwoTone,
 } from "@ant-design/icons";
-import Content from "../contentTransaction";
+import Content from "../Transaction";
 import { useState } from "react";
 import { useUpdateOrder } from "../../hooks/Mutation/Order/useUpdateOrder";
 import { useDeleteOrder } from "../../hooks/Mutation/Order/useDeleteOrder";
@@ -29,8 +29,9 @@ import { useDeleteOrderById } from "../../hooks/Mutation/Order/useDeleteOrderByI
 const token = localStorage.getItem("token");
 
 export default function WidgetLg({ orders }) {
+  const [filteredOrders, setFilteredOrders] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [content, setContent] = useState();
+  const [content, setContent] = useState("");
   const { mutate } = useUpdateOrder();
   const revenue = useRevenue();
   const res = useDeleteOrder();
@@ -41,8 +42,8 @@ export default function WidgetLg({ orders }) {
   };
   const handleOk = () => {
     mutate({ status: "accepted", id });
-
     // revenue.mutate({ orders: content });
+    // setFilteredOrders([]);
     setIsModalOpen(false);
   };
   const handleCancel = () => {
@@ -53,7 +54,11 @@ export default function WidgetLg({ orders }) {
     message.error("Order don't delete");
   };
   const handleClickDelete = async () => {
-    message.success("You deleted order successfully");
+    const notSuccessOrders = orders.filter(
+      (order) => order.status != "success"
+    );
+    setFilteredOrders(notSuccessOrders); // Update the filteredOrders state
+    message.success("You filter order successfully");
   };
   const columns = [
     {
@@ -126,20 +131,7 @@ export default function WidgetLg({ orders }) {
             >
               Show Transaction
             </Button>
-            {order.status === "pending" && (
-              <Popconfirm
-                title="Delete product"
-                description="Are you sure to delete this order, It cannot return"
-                onConfirm={() => handleDelete(order._id)}
-                onCancel={cancel}
-                okText="Yes"
-                cancelText="No"
-              >
-                <Button type="primary" style={{ backgroundColor: " #9b4f88" }}>
-                  Deleted
-                </Button>
-              </Popconfirm>
-            )}
+
             {order.status === "accepted" && (
               <Button
                 type="primary"
@@ -151,6 +143,24 @@ export default function WidgetLg({ orders }) {
                 Finished
               </Button>
             )}
+            {order.status === "pending" ||
+              (order.status === "accepted" && (
+                <Popconfirm
+                  title="Delete product"
+                  description="Are you sure to delete this order, It cannot return"
+                  onConfirm={() => handleDelete(order._id)}
+                  onCancel={cancel}
+                  okText="Yes"
+                  cancelText="No"
+                >
+                  <Button
+                    type="primary"
+                    style={{ backgroundColor: " #ff4d4f", marginLeft: "40px" }}
+                  >
+                    Deleted
+                  </Button>
+                </Popconfirm>
+              ))}
           </div>
         );
       },
@@ -162,11 +172,12 @@ export default function WidgetLg({ orders }) {
   const handleFinish = async (id) => {
     mutate({ status: "success", id });
   };
+  const ordersToDisplay = filteredOrders.length > 0 ? filteredOrders : orders;
   return (
     <div style={{ flex: 1, padding: "5px" }}>
       <h1>Transaction</h1>
 
-      {orders.length == 0 ? (
+      {ordersToDisplay.length == 0 ? (
         <div>
           <Empty />
         </div>
@@ -174,38 +185,48 @@ export default function WidgetLg({ orders }) {
         <>
           <Popconfirm
             title="Delete product"
-            description="Are you sure to delete this order, please check carefully because of no return?"
+            description="Are you sure to filter orders, please check carefully because of no return?"
             onConfirm={handleClickDelete}
             onCancel={cancel}
             okText="Yes"
             cancelText="No"
-          >
-            <Button
-              size="larger"
-              style={{
-                backgroundColor: "#4ddb1d",
-                fontSize: "20px",
-                width: "25%",
-                height: "50px",
-                padding: "10px",
-                marginBottom: "10px",
-              }}
-              icon={<MinusCircleOutlined />}
+          ></Popconfirm>
+          <Table bordered columns={columns} dataSource={ordersToDisplay} />
+          {content.status != "success" ? (
+            <Modal
+              title="Order"
+              open={isModalOpen}
+              onCancel={handleCancel}
+              onOk={handleOk}
             >
-              Delete Success Transaction
-            </Button>
-          </Popconfirm>
-          <Table bordered columns={columns} dataSource={orders} />
-          <Modal
-            title="Order"
-            open={isModalOpen}
-            onOk={handleOk}
-            onCancel={handleCancel}
-          >
-            <Content order={content} />
-          </Modal>
+              <Content order={content} />
+            </Modal>
+          ) : (
+            <Modal
+              title="Order"
+              open={isModalOpen}
+              onCancel={handleCancel}
+              onOk={handleCancel}
+            >
+              <Content order={content} />
+            </Modal>
+          )}
         </>
       )}
     </div>
   );
 }
+//  <Button
+// size="larger"
+// style={{
+//   backgroundColor: "#4ddb1d",
+//   fontSize: "20px",
+//   width: "25%",
+//   height: "50px",
+//   padding: "10px",
+//   marginBottom: "10px",
+// }}
+// icon={<MinusCircleOutlined />}
+// >
+// Filter Success Transaction
+// </Button>
