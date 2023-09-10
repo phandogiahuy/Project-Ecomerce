@@ -14,8 +14,8 @@ export const InforButton = styled.div`
 `;
 export const Name = styled.h1`
   margin-left: 50px;
-  font-weight: 500;
-  font-size: 15px;
+  font-weight: 600;
+  font-size: 14px;
 `;
 export const Image = styled.img`
   height: 100%;

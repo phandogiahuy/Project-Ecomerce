@@ -46,7 +46,9 @@ const Product = ({ item }) => {
         >
           <Card
             style={{
-              width: 330,
+              width: "110%",
+              maxWidth: "400px",
+              maxHeight: "600px",
               border: "none",
               boxShadow: "1px 2px 3px 4px rgba(20,20,20,0.4)",
               marginTop: "20px",

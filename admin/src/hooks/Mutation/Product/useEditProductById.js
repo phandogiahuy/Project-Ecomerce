@@ -6,7 +6,7 @@ import { AxiosInstance } from "../../../service-api/requestMethods";
 import { GET_PRODUCTS, GET_PRODUCT_ID } from "../../../constant/queryKey";
 const edit = async ({ productData, id }) => {
   const { data } = await AxiosInstance.put(
-    `https://ecommercecafe.onrender.com/api/product/${id}`,
+    `http://localhost:3000/api/product/${id}`,
     {
       ...productData,
     }

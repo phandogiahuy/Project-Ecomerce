@@ -36,7 +36,7 @@ const RecommendList = (products) => {
             <Card
               hoverable
               style={{
-                maxWidth: 365,
+                minWidth: 365,
                 minHeight: 460,
                 marginLeft: "5px",
               }}

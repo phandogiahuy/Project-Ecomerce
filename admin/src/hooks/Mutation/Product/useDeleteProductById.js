@@ -6,7 +6,7 @@ import { GET_PRODUCTS } from "../../../constant/queryKey";
 
 const deleteProductById = async (id) => {
   const res = await AxiosInstance.delete(
-    `https://ecommercecafe.onrender.com/api/product/${id}`
+    `http://localhost:3000/api/product/${id}`
   );
   return res.data;
 };

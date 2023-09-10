@@ -4,15 +4,12 @@ import { useQuery } from "react-query";
 import { GET_PRODUCTS } from "../../../constant/queryKey";
 
 const getProducts = async ({ pageSize, page }) => {
-  const { data } = await axios.get(
-    `https://ecommercecafe.onrender.com/api/product`,
-    {
-      params: {
-        pageSize,
-        page,
-      },
-    }
-  );
+  const { data } = await axios.get(`http://localhost:3000/api/product`, {
+    params: {
+      pageSize,
+      page,
+    },
+  });
   return data;
 };
 const useGetProducts = ({ pageSize, page }) =>

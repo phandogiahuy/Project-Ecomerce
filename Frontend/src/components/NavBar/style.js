@@ -27,10 +27,12 @@ export const Left = styled.div`
   justify-content: space-around;
   flex: 1;
   padding: 10px;
+  min-width: 390px;
 `;
 export const Center = styled.div`
   flex: 2;
   margin-left: 20px;
+  display: flex;
 `;
 export const Right = styled.div`
   display: flex;

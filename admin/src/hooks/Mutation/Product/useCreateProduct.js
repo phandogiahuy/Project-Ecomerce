@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { AxiosInstance } from "../../../service-api/requestMethods";
 const postProducts = async ({ title, categories, desc, price, img }) => {
   const { data } = await AxiosInstance.post(
-    `https://ecommercecafe.onrender.com/api/product/`,
+    `http://localhost:3000/api/product/`,
     {
       title,
       categories,

@@ -10,6 +10,7 @@ export const STT = styled.div`
   font-size: 40px;
   width: 10%;
   font-family: "Chicken Butt", sans-serif;
+  min-width: 12%;
 `;
 
 export const Infor = styled.div`
@@ -18,6 +19,7 @@ export const Infor = styled.div`
   justify-content: space-around;
   width: 50%;
   margin-top: 10px;
+  margin-left: 15px;
 `;
 
 export const Name = styled.h2`

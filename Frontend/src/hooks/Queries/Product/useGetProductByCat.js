@@ -4,15 +4,12 @@ import { useQuery } from "react-query";
 import { GET_PRODUCT_CAT } from "../../../constant/queryKey";
 
 const getProductByCat = async (cat, sort) => {
-  const { data } = await axios.get(
-    `https://ecommercecafe.onrender.com/api/product`,
-    {
-      params: {
-        category: cat,
-        sort,
-      },
-    }
-  );
+  const { data } = await axios.get(`http://localhost:3000/api/product`, {
+    params: {
+      category: cat,
+      sort,
+    },
+  });
 
   return data;
 };
