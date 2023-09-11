@@ -46,9 +46,8 @@ const Product = ({ item }) => {
         >
           <Card
             style={{
-              width: "110%",
-              maxWidth: "400px",
-              maxHeight: "600px",
+              minWidth: "400px",
+              minHeight: "580px",
               border: "none",
               boxShadow: "1px 2px 3px 4px rgba(20,20,20,0.4)",
               marginTop: "20px",
@@ -87,7 +86,16 @@ const Product = ({ item }) => {
           </Card>
         </Badge>
       ) : (
-        <Card style={{ width: 400, border: "none" }}>
+        <Card
+          style={{
+            minWidth: "400px",
+            minHeight: "580px",
+            border: "none",
+            boxShadow: "1px 2px 3px 4px rgba(20,20,20,0.4)",
+            marginTop: "20px",
+            marginBottom: "20px",
+          }}
+        >
           <Link to={`/product/${item._id}`}>
             <Image src={item.img} />
           </Link>

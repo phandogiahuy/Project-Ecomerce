@@ -28,7 +28,8 @@ export default function ProductList() {
 
   const res = useGetProducts();
 
-  const confirm = (e) => {
+  const confirm = (_id) => {
+    handleDelete(_id);
     message.success("You deleted product successfully");
   };
   const cancel = (e) => {
@@ -199,7 +200,7 @@ export default function ProductList() {
           <Popconfirm
             title="Delete product"
             description="Are you sure to delete this product?"
-            onConfirm={confirm}
+            onConfirm={() => confirm(_id)}
             onCancel={cancel}
             okText="Yes"
             cancelText="No"
@@ -207,7 +208,6 @@ export default function ProductList() {
             <Button
               icon={<DeleteTwoTone />}
               style={{ backgroundColor: "#a8ffc8" }}
-              onClick={() => handleDelete(_id)}
             >
               Delete
             </Button>

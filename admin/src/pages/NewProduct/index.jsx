@@ -19,7 +19,7 @@ const options = [{ value: "phin" }, { value: "espresso" }, { value: "sale" }];
 const NewProduct = () => {
   const [form] = Form.useForm();
   const [images, setImage] = useState(null);
-  const [sale, setSale] = useState();
+  const [sale, setSale] = useState([]);
   const handleImageUpload = (info) => {
     setImage(info.file.originFileObj);
   };
@@ -32,16 +32,18 @@ const NewProduct = () => {
     const imageRef = ref(storage, `images/${v4() + images.name}`);
     const snap = await uploadBytes(imageRef, images);
     const img = await getDownloadURL(snap.ref);
-    const { title, categories, desc, sale } = values;
+    const { title, categories, desc, process, flavor, place, sale } = values;
     const productData = {
       title,
       categories,
       desc,
+      process,
+      flavor,
+      place,
       sale,
       price,
       img,
     };
-    console.log(img);
     mutate(productData);
   };
   const handleValueSale = (e) => {
@@ -49,6 +51,18 @@ const NewProduct = () => {
       message.error("Value of sale is bigger than 50%");
     }
   };
+  const handleChange = (e) => {
+    if (sale.includes(e)) {
+      // If it's selected, create a new array without the option
+      const updatedOptions = [...sale];
+      updatedOptions.splice(sale.indexOf(e), 1);
+      setSale(updatedOptions);
+    } else {
+      // If it's not selected, create a new array with the option
+      setSale([...sale, e]);
+    }
+  };
+  const lastArray = sale[sale.length - 1]; // Get the last array
   return (
     <Form
       form={form}
@@ -74,10 +88,10 @@ const NewProduct = () => {
           showArrow
           style={{ width: "100%" }}
           options={options}
-          onChange={(e) => setSale(e)}
+          onChange={handleChange}
         />
       </Form.Item>
-      {sale == "sale" && (
+      {lastArray?.includes("sale") && (
         <Form.Item
           name="sale"
           label="Sale"
@@ -97,6 +111,27 @@ const NewProduct = () => {
         rules={[{ required: true, message: "Please enter a description" }]}
       >
         <Input.TextArea placeholder="Enter description" />
+      </Form.Item>
+      <Form.Item
+        name="process"
+        label="Process"
+        rules={[{ required: true, message: "Please enter a process" }]}
+      >
+        <Input.TextArea placeholder="Enter process" />
+      </Form.Item>
+      <Form.Item
+        name="place"
+        label="Place"
+        rules={[{ required: true, message: "Please enter a place" }]}
+      >
+        <Input.TextArea placeholder="Enter place" />
+      </Form.Item>
+      <Form.Item
+        name="flavor"
+        label="Flavor"
+        rules={[{ required: true, message: "Please enter a flavor" }]}
+      >
+        <Input.TextArea placeholder="Enter flavor" />
       </Form.Item>
       <Form.Item
         name="price250"
