@@ -14,17 +14,20 @@ const order = async ({
   payment,
   userId,
 }) => {
-  const res = await axios.post("http://localhost:3000/api/order/", {
-    name,
-    phone,
-    mail,
-    products,
-    shipping,
-    address,
-    total,
-    payment,
-    userId,
-  });
+  const res = await axios.post(
+    "https://ecommercecafe.onrender.com/api/order/",
+    {
+      name,
+      phone,
+      mail,
+      products,
+      shipping,
+      address,
+      total,
+      payment,
+      userId,
+    }
+  );
   return res.data;
 };
 

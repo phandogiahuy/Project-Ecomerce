@@ -6,7 +6,7 @@ import { axiosInstance } from "../../Service-api/requestMethod";
 
 const postReview = async ({ id, userId, rating, content, username }) => {
   const { data } = await axiosInstance.post(
-    `http://localhost:3000/api/reviews/${id}`,
+    `https://ecommercecafe.onrender.com/api/reviews/${id}`,
     { userId, username, rating, content }
   );
   return data;
