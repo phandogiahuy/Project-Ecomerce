@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { medium } from "../../../responsive";
 
 export const Infor = styled.div`
   display: flex;
@@ -13,10 +14,13 @@ export const InforButton = styled.div`
   transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 `;
 export const Name = styled.h1`
-  margin-left: 50px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 1.2em;
+  max-height: 1em;
+  margin-bottom: 2em;
+  ${medium({ marginBottom: "3em" })}
 `;
+
 export const Image = styled.img`
   height: 100%;
   width: 100%;
@@ -51,7 +55,7 @@ export const Price = styled.div`
 
 export const PriceFirst = styled.div`
   font-weight: 700;
-  font-size: 30px;
+  font-size: 1.3rem;
   font-family: "AOK Buenos Aires", sans-serif;
 `;
 export const Title = styled.div`
@@ -71,7 +75,7 @@ export const ButtonOrder = styled.button`
   display: inline-block;
   letter-spacing: 0.05rem;
   font-weight: 700;
-  font-size: 17px;
+  font-size: 1.2em;
   border-radius: 500px;
   overflow: hidden;
   background: #66ff66;

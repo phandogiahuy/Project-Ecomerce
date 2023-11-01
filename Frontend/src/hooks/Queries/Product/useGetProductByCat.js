@@ -5,7 +5,7 @@ import { GET_PRODUCT_CAT } from "../../../constant/queryKey";
 
 const getProductByCat = async (cat, sort) => {
   const { data } = await axios.get(
-    `https://ecommercecafe.onrender.com/api/product`,
+    `http://localhost:3000/api/product`,
     {
       params: {
         category: cat,

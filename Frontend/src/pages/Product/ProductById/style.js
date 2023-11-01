@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { medium } from "../../../responsive";
 
 export const Container = styled.div``;
 export const Wrapper = styled.div`
@@ -31,6 +32,7 @@ export const Desc = styled.p`
   font-size: 20px;
   letter-spacing: 2px;
   margin: 10px 0px;
+  ${medium({ fontSize: "15px" })}
 `;
 export const Price = styled.span`
   font-weight: 400;

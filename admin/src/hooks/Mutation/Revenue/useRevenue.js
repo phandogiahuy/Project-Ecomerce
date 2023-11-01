@@ -4,7 +4,7 @@ import { message } from "antd";
 import { AxiosInstance } from "../../../service-api/requestMethods";
 const postRevenue = async ({ orders }) => {
   const { data } = await AxiosInstance.post(
-    `https://ecommercecafe.onrender.com/api/revenue/`,
+    `http://localhost:3000/api/revenue/`,
     {
       orders,
     }

@@ -4,10 +4,11 @@ import React from "react";
 import { useGetOrderSuccess } from "../../../hooks/Queries/Order/useGetOrderSuccess";
 import OrderSuccess from "./OrderSuccess";
 import { Content, Header } from "./style";
+import { useGetUser } from "../../../hooks/Queries/User/useGetUser";
 
 const HistoryUser = () => {
-  const { data, isLoading } = useGetOrderSuccess();
-
+  const dataUser = useGetUser();
+  const { data, isLoading } = useGetOrderSuccess(dataUser.data._id);
   if (isLoading) {
     return (
       <div>

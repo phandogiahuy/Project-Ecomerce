@@ -5,7 +5,7 @@ import { GET_PRODUCTS_COMMENT } from "../../../constant/queryKey";
 
 const getProducts = async () => {
   const { data } = await axios.get(
-    `https://ecommercecafe.onrender.com/api/product/comment`
+    `http://localhost:3000/api/product/comment`
   );
   return data;
 };

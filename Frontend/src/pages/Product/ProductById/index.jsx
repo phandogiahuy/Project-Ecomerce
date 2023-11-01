@@ -139,6 +139,7 @@ const Product = () => {
           <Image
             style={{
               imageRendering: "pixelated",
+              minHeight:"700px"
             }}
             width={650}
             src={product.img}

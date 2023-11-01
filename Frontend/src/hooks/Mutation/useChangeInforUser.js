@@ -6,7 +6,7 @@ import { axiosInstance } from "../../Service-api/requestMethod";
 
 const change = async ({ username, email, password, id }) => {
   const res = await axiosInstance.put(
-    `https://ecommercecafe.onrender.com/api/user/${id}`,
+    `http://localhost:3000/api/user/${id}`,
     {
       username,
       email,

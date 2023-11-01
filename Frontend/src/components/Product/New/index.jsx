@@ -27,7 +27,7 @@ const Product = ({ item }) => {
   return (
     <Col
       className="gutter-row"
-      md={{ span: 6 }}
+      md={{ span: 8 }}
       sm={{ span: 12 }}
       xs={{ span: 24 }}
       lg={{ span: 6 }}
@@ -46,12 +46,13 @@ const Product = ({ item }) => {
         >
           <Card
             style={{
-              minWidth: "400px",
-              minHeight: "580px",
+              minWidth: "10rem",
+              maxHeight: "50em",
+              minHeight:"30em",
               border: "none",
               boxShadow: "1px 2px 3px 4px rgba(20,20,20,0.4)",
-              marginTop: "20px",
-              marginBottom: "20px",
+              marginTop: "2rem",
+              marginBottom: "2rem",
             }}
           >
             <Link to={`/product/${item._id}`}>
@@ -88,19 +89,20 @@ const Product = ({ item }) => {
       ) : (
         <Card
           style={{
-            minWidth: "400px",
-            minHeight: "580px",
+            minWidth: "10rem",
+            maxHeight: "50em",
+            minHeight:"30em",
             border: "none",
             boxShadow: "1px 2px 3px 4px rgba(20,20,20,0.4)",
-            marginTop: "20px",
-            marginBottom: "20px",
+            marginTop: "2rem",
+            marginBottom: "2rem",
           }}
         >
           <Link to={`/product/${item._id}`}>
             <Image src={item.img} />
           </Link>
           <Title>
-            <div>
+            <div >
               <Rate disabled value={totalRating} allowHalf />(
               {item.reviews.length} reviews)
             </div>

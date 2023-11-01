@@ -1,4 +1,4 @@
-import { Empty } from "antd";
+import { Empty, Skeleton } from "antd";
 import React from "react";
 
 import { useGetUser } from "../../../hooks/Queries/User/useGetUser";

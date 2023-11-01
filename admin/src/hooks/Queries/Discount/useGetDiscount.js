@@ -5,7 +5,7 @@ import { AxiosInstance } from "../../../service-api/requestMethods";
 
 const getDiscount = async () => {
   const { data } = await AxiosInstance.get(
-    `https://ecommercecafe.onrender.com/api/discount/`
+    `http://localhost:3000/api/discount/`
   );
   return data;
 };

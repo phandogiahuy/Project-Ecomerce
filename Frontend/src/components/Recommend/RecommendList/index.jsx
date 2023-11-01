@@ -36,8 +36,8 @@ const RecommendList = (products) => {
             <Card
               hoverable
               style={{
-                minWidth: 365,
-                minHeight: 460,
+                minWidth: "20rem",
+                minHeight: "28rem",
                 marginLeft: "5px",
               }}
               cover={
@@ -47,10 +47,10 @@ const RecommendList = (products) => {
                 />
               }
             >
-              <div className="  mt-[-5%] text-ellipsis text-[20px] font-semibold ">
+              <div className="  mt-[-5%] text-ellipsis text-[18px] font-semibold ">
                 {products.products.title}
               </div>
-              <div className="mt-[-1%] flex  text-base  ">
+              <div className="mt-[2%] flex  text-base  ">
                 <div className="   text-lg font-bold">
                   {Math.round(
                     products.products.price[0] *

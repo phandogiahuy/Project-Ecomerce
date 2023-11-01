@@ -23,7 +23,7 @@ const InforUser = () => {
     setIsOpen(true);
   };
   const clickHistory = () => {
-    navigate(`history`);
+    navigate(`history/`);
     click1.current.style.opacity = "0.4";
     click2.current.style.opacity = "0.4";
     click3.current.style.opacity = "1";

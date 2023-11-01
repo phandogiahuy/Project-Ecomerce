@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { transporter } from "../middleware/transporterMail.js";
 import { Order } from "../models/Order.js";
 import { User } from "../models/User.js";
@@ -98,7 +99,10 @@ const orderController = {
     res.status(200).json(orders);
   },
   async showAllOrderSuccessful(req, res) {
-    const orders = await Order.find({ status: "success" });
+    const id = req.params.id
+    console.log(id)
+    const orders = await Order.find({userId:id,status:"success"})
+    console.log(orders)
     res.status(200).json(orders);
   },
   async showAllOrderPending(req, res) {

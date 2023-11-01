@@ -6,7 +6,7 @@ import { AxiosInstance } from "../../../service-api/requestMethods";
 const edit = async ({ values, id }) => {
   console.log(values, id);
   const { data } = await AxiosInstance.put(
-    `https://ecommercecafe.onrender.com/api/discount/${id}`,
+    `http://localhost:3000/api/discount/${id}`,
     { ...values }
   );
 
