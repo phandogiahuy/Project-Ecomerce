@@ -21,13 +21,13 @@ const Categories = () => {
           <Link to={`products/${cat}`}>
             <img
               src="/Categories/Phin.jpg"
-              className="  h-[267px] w-[100%] rounded-sm"
+              className="  h-[266px] w-[98%] rounded-sm"
               style={{ imageRendering: "pixelated" }}
             />
           </Link>
-          <div className="absolute left-[130px] top-[80px]">
+          <div className="absolute left-[7em] top-[80px]">
             <Phin className="ml-2 text-[50px] font-bold">PHIN</Phin>
-            <Space wrap>
+            <Space wrap >
               <Link to={`products/phin`}>
                 <Button
                   style={{
@@ -49,11 +49,11 @@ const Categories = () => {
         <div>
           <img
             src="/Categories/Ranked.jpg"
-            className="  h-[267px] w-[100%] rounded-sm"
+            className="  h-[266px] w-[98%] rounded-sm"
             style={{ imageRendering: "pixelated" }}
           />
-          <div className="absolute left-[130px] top-[370px]">
-            <Favorite className="ml-[-20px] text-[40px] font-bold">
+          <div className="absolute left-[7em] top-[370px] ">
+            <Favorite className="ml-[-1em] text-[40px] font-bold">
               FAVORITE{" "}
             </Favorite>
             <Space wrap>

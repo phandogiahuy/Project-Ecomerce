@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { small } from "../../responsive";
 
 export const ContainerCategories = styled.div`
   display: flex;

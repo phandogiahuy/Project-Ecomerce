@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { medium, mobile } from "../../responsive";
+import { medium, mobile, small } from "../../responsive";
 
 export const Container = styled.div`
   ${mobile({ height: "50px" })};
@@ -49,6 +49,7 @@ export const Logo = styled.div`
   ${mobile({ fontSize: "20px", flex: 2 })}
   cursor: pointer;
   ${medium({ fontSize: "92px" })}
+  ${small({ fontSize: "81.8px" })}
 `;
 export const LogoImage = styled.img`
   width: 18%;

@@ -16,10 +16,17 @@ export const large = (props) => {
 };
 export const medium = (props) => {
   return css`
-    @media  (min-width: 1024px) and (max-width:1366px) {
+    @media  (min-width: 1280px) and (max-width:1366px) {
       ${props}
     }
   `;
 };
 
+export const small = (props) => {
+  return css`
+    @media  (min-width: 1024px) and (max-width:1280px) {
+      ${props}
+    }
+  `;
+};
 
