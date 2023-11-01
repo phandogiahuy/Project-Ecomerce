@@ -4,7 +4,7 @@ import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 const register = async ({ username, email, password }) => {
-  const res = await axios.post(`http://localhost:3000/api/auth/register/`, {
+  const res = await axios.post(`https://ecommercecafe.onrender.com/api/auth/register/`, {
     username,
     email,
     password,

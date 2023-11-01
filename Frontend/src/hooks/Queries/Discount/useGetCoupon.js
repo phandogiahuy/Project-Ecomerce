@@ -5,7 +5,7 @@ import { GET_COUPON } from "../../../constant/queryKey";
 
 const getCoupon = async () => {
   const { data } = await axios.get(
-    `http://localhost:3000/api/discount/`
+    `https://ecommercecafe.onrender.com/api/discount/`
   );
   return data;
 };

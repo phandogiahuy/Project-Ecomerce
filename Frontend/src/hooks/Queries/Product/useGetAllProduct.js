@@ -5,7 +5,7 @@ import { GET_ALL_PRODUCT } from "../../../constant/queryKey";
 
 const getProducts = async () => {
   const { data } = await axios.get(
-    `http://localhost:3000/api/product/all`
+    `https://ecommercecafe.onrender.com/api/product/all`
   );
   return data;
 };

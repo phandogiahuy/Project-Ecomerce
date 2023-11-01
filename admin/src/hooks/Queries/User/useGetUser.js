@@ -5,7 +5,7 @@ import { AxiosInstance } from "../../../service-api/requestMethods";
 
 const getUser = async () => {
   const { data } = await AxiosInstance.get(
-    `http://localhost:3000/api/user/`
+    `https://ecommercecafe.onrender.com/api/user/`
   );
   return data;
 };

@@ -16,7 +16,7 @@ const postProducts = async ({
   img,
 }) => {
   const { data } = await AxiosInstance.post(
-    `http://localhost:3000/api/product/`,
+    `https://ecommercecafe.onrender.com/api/product/`,
     {
       title,
       categories,
